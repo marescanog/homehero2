@@ -26,12 +26,12 @@ require_once dirname(__FILE__).'/../components/head-meta.php';
         <ul class="d-flex flex-column">
             <a href="" class="mt-2">Marvie Gasataya</a>
             <a href="" class="mt-2">Wayne Dayata</a>
-            <a href="" class="mt-2">Ixia Tan</a>
+            <a href="./Ixia.php" class="mt-2">Ixia Tan</a>
             <a href="" class="mt-2">Ivana Leonado</a>
         </ul>
     </div>
 
-    <h1>ixia</h1>
+    
 
 
 
