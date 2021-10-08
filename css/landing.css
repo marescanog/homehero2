@@ -1,0 +1,45 @@
+.jumbotron-card{
+    position:absolute;
+    bottom:0;
+    width: 90%;
+    height: 70%;
+}
+
+.jumbotron-card-body{
+    margin: auto;
+    margin-top: 30%;
+    margin-bottom: 10%;
+    max-width:496px;
+}
+
+.jumbotron{
+    max-height:100vh; background-color:#FFFFFF; overflow:hidden
+}
+
+.jumbotron-h1{
+    max-width:496px;
+    font-size: 1.5rem;
+}
+
+@media only screen and (min-width: 992px) {
+    .jumbotron-card{
+        position:static;
+        width: auto;
+        height: 85%;
+    }
+
+    .jumbotron-card-body{
+        max-width: 30rem;
+        margin-bottom: 5em !important;
+    }
+
+    .jumbotron{
+        height:100vh;
+    }
+
+    .jumbotron-h1{
+        font-size: 2.5rem;
+    }
+
+
+}

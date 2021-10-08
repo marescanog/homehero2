@@ -1,0 +1,87 @@
+.navbar-custom{
+    background-color: #FFFFFF;
+}
+
+.hr-yellow{
+    border-top: 3px solid #FCEBBF;
+}
+
+.custom-a {
+    font-family: "Nunito", sans-serif;
+    font-weight: 800;
+}
+
+.nav-container{
+    width:100%;
+}
+
+.btn-warning{
+    text-shadow: 0 0 3px rgba(0,0,0,0.25);
+}
+
+#header-logo-desktop{
+    display: none;
+}
+
+#header-btn-desktop{
+    display: none;
+}
+
+#header-logo-mobile{
+    display: inline-block;
+}
+
+#header-btn-mobile{
+    display: inline-block;
+}
+
+#header-mobile-container{
+    display: inline-block;
+}
+
+#header-menu-links{
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+
+@media only screen and (min-width: 992px) {
+    #header-logo-desktop{
+        display: inline-block;
+    }
+    #header-btn-desktop{
+        display: inline-block;
+        height: 40px;
+        width: 120px;
+        margin: auto;
+    }
+
+    #header-desktop-content{
+        width: 90%;
+        margin: auto;
+        max-width: 1536px;
+    }
+
+    #header-logo-mobile{
+        display: none;
+    }
+
+    #header-btn-mobile{
+        display: none;
+    }
+
+    #header-mobile-container{
+        display: none;
+    }
+    
+    #header-menu-links{
+        display: flex;
+        width: auto;
+        text-align: left;
+    }
+
+    .nav-container{
+        width:90%;
+    }
+}

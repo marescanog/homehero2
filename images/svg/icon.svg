@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="25.154" height="23.229" viewBox="0 0 25.154 23.229">
+  <g id="HomeHero_Logo_Dark" data-name="HomeHero Logo Dark" transform="translate(-15.296 -12.382)">
+    <path id="Union_4" data-name="Union 4" d="M5,11.546C4.932,11,4.859,10.3,4.786,9.571A16.729,16.729,0,0,0,0,11.676l3.805-8.4A2.1,2.1,0,0,1,5.9,1.837.918.918,0,1,1,6.822.918a.918.918,0,0,1-.918.918A2.1,2.1,0,0,1,8,3.28l3.673,8.265A16.083,16.083,0,0,0,7.01,9.563c-.056.7-.116,1.387-.174,1.983-.262,2.624-.525,3.8-.919,3.8S5.261,13.776,5,11.546Z" transform="translate(21.904 17.025)" fill="none" stroke="#fff" stroke-width="2" opacity="0.8"/>
+    <path id="Path_264" data-name="Path 264" d="M61,66.84l3.8-8.4a2.248,2.248,0,0,1,4.2,0l3.674,8.265s-3.28-2.1-5.773-2.1S61,66.84,61,66.84Z" transform="translate(-39.096 -38.138)" fill="#fc0" stroke="#fc0" stroke-width="1"/>
+    <g id="Group_427" data-name="Group 427" transform="translate(22.835 17.025)">
+      <circle id="Ellipse_273" data-name="Ellipse 273" cx="0.918" cy="0.918" r="0.918" transform="translate(4.054 0)" fill="#fff" stroke="#707070" stroke-miterlimit="10" stroke-width="1"/>
+      <path id="Path_265" data-name="Path 265" d="M75.172,59.443A2.177,2.177,0,0,0,73.033,58a2.1,2.1,0,0,0-2.1,1.443L68.1,66.108s0,.013.013,0l3.385-5.34h.013c.026.236.394,4.644.656,6.809.262,2.23.525,3.8.918,3.8s.656-1.181.918-3.8c.249-2.545.512-6.7.525-6.94h.013l3.516,5.733h.013Z" transform="translate(-68.1 -56.032)" fill="#fff" stroke="#707070" stroke-miterlimit="10" stroke-width="1"/>
+    </g>
+    <g id="Group_428" data-name="Group 428" transform="translate(16 13.031)">
+      <path id="Path_266" data-name="Path 266" d="M16,22.948l.748.905,11.06-9.131L39,23.984l.748-.905L27.808,13.2Z" transform="translate(-16 -13.2)" fill="#fc0" stroke="#fc0" stroke-width="1"/>
+      <path id="Path_267" data-name="Path 267" d="M59.474,110.529a1.216,1.216,0,0,1-1.266,1.155H45.061a1.216,1.216,0,0,1-1.266-1.155V102.5H42.5v8.029a2.461,2.461,0,0,0,2.561,2.335H58.209a2.461,2.461,0,0,0,2.561-2.335V102.5H59.474Z" transform="translate(-39.902 -90.784)" fill="#fc0" stroke="#fc0" stroke-width="1"/>
+    </g>
+  </g>
+</svg>
