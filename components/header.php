@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top w-100 p-0">
         <d class="flex flex-column w-100 pt-3 pt-lg-0">
         <div class="d-flex justify-content-between px-3 nav-container" id="header-mobile-container">
-            <a class="navbar-brand custom-a" href="#">
+            <a class="navbar-brand custom-a" href="<?php echo $level;?>/i2ndex.php">
                     <img src="<?php echo $level;?>/images/logo/HH_Logo_Mobile.svg" class="rounded mr-2" alt="Home Hero Logo" id="header-logo-mobile">
             </a>
             <div>
@@ -14,14 +14,14 @@
         </div>
 
         <div class="d-flex justify-content-between px-3 py-0 nav-container" id="header-desktop-content">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="<?php echo $level;?>/">
                 <img src="<?php echo $level;?>/images/logo/HH_Logo_Light.svg" class="rounded mr-2" alt="Home Hero Logo" id="header-logo-desktop">
             </a>
             <div id="header-menu-links">
                 <div class="collapse navbar-collapse pr-3" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item pr-lg-5">
-                            <a class="nav-link custom-a" href="#">FIND WORK</a>
+                            <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Registration.php">FIND WORK</a>
                         </li>
                         <li class="nav-item pr-lg-5">
                             <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Help.php">HELP</a>
