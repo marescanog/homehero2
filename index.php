@@ -44,13 +44,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                 </div>
             </div>
         </div>
-        <!-- <h1 class="display-4">Hello, world!</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-        <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-        </p> -->
+
     </div>
 
     <div style="min-height:540px; background-color:#E4E4E4; z-index:200">
@@ -65,6 +59,24 @@ require_once dirname(__FILE__).'/components/head-meta.php';
 <?php require_once dirname(__FILE__).'/components/foot-meta.php'; ?>
 <!-- Custom JS Scripts Below -->
     <script>
+        var buttonDesktop = document.getElementById("header-btn-desktop");
+        var buttonMobile = document.getElementById("header-btn-mobile");
+
+        buttonDesktop.addEventListener("click", ()=>{
+            Swal.fire({
+                title: "Not Available",
+                confirmButtonText: 'Close',
+                html: "<img src='./images/svg/construction_icon.svg' style='height:100px; width:100px;'class='rounded mr-2 mb-3' alt='...'> <p>This feature is under construction. Please check back again later!</>"
+            })
+        });
+
+        buttonMobile.addEventListener("click", ()=>{
+            Swal.fire({
+                title: "Not Available",
+                confirmButtonText: 'Close',
+                html: "<img src='./images/construction_icon.svg' style='height:100px; width:100px;'class='rounded mr-2 mb-3' alt='...'> <p>This feature is under construction. Please check back again later!</>"
+            })
+        });
 
     </script>
 </body>

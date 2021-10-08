@@ -16,9 +16,12 @@ require_once dirname(__FILE__).'/../components/head-meta.php';
     <div style="<?php echo $hasHeader ?? ""; ?>">
     <!-- === Your Custom Page Content Goes Here below here === -->
 
-    <h1>
-        Registration
-    </h1>
+    <div class="container">
+        <h1>
+            Worker Registration
+        </h1>
+    </div>
+
 
 
      
