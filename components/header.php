@@ -24,7 +24,7 @@
                             <a class="nav-link custom-a" href="#">FIND WORK</a>
                         </li>
                         <li class="nav-item pr-lg-5">
-                            <a class="nav-link custom-a" href="#">HELP</a>
+                            <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Help.php">HELP</a>
                         </li>
                         <li class="nav-item pr-lg-5">
                             <a class="nav-link custom-a" href="#">SIGN-UP</a>
