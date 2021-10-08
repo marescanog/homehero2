@@ -20,13 +20,7 @@ require_once dirname(__FILE__).'/../components/head-meta.php';
         Registration
     </h1>
 
-    <h2>The Developers</h2>
-    <ul>
-        <a href="">Marvie Gasataya</a>
-        <a href="">Wayne Dayata</a>
-        <a href="">Ixia Tan</a>
-        <a href="">Ivana Leonado</a>
-    </ul>
+
      
     
 
