@@ -16,8 +16,8 @@ require_once dirname(__FILE__).'/../components/head-meta.php';
     <div style="<?php echo $hasHeader ?? ""; ?>">
     <!-- === Your Custom Page Content Goes Here below here === -->
 
-    <h1>Marvie</h1>
-    
+
+    <h1>Wayne</h1>
 
 
 
