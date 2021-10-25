@@ -115,9 +115,55 @@ require_once dirname(__FILE__).'/components/head-meta.php';
     <!-- =============================================== -->
     <!-- HOW IT WORKS -->
     <!-- =============================================== -->
-    <div style="min-height:540px; background-color:#FFFFFF; z-index:200">
-        <div class="container pt-5">
-             <h6>How it works</h6>
+    <div class="feature-point-container">
+        <div class="container featured-point_content-wrapper">
+            <div class="container pt-5">
+                <h2 class="gray-font feature-point-headline text-center">How it works</h2>
+                <div class="row d-flex justify-content-around mt-5 mb-5 mb-lg-0">
+
+
+                    <!-- Feature 1 -->
+                    <div class="col col-lg-3 d-flex flex-column align-items-center pb-5">
+                        <div>
+                            <?php
+                                include dirname(__FILE__).'/images/pages/landing/post_tasks.svg'; 
+                            ?>
+                        </div>
+                        <div>
+                            <h4 class="gray-font text-center">Post Tasks</h4>
+                            <p>Delegate projects that need to be done by posting your needs</p>
+                        </div>
+                    </div>
+
+                    
+                    <!-- Feature 1 -->
+                    <div class="col col-lg-3 d-flex flex-column align-items-center">
+                        <div>
+                            <?php
+                                include dirname(__FILE__).'/images/pages/landing/review_offers.svg'; 
+                            ?>
+                        </div>
+                        <div>
+                            <h4 class="gray-font text-center">Review Offers</h4>
+                            <p>Check offers and hire the right hero for your tasks</p>
+                        </div>
+                    </div>
+
+                    
+                    <!-- Feature 1 -->
+                    <div class="col col-lg-3 d-flex flex-column align-items-center">
+                        <div >
+                            <img src="./images/pages/landing/taxi-surfing.png" alt="" class="img-fluid feature-max-img">
+                        </div>
+                        <div>
+                            <h4 class="gray-font text-center">Task Done!</h4>
+                            <p>Sit back and relax as your homehero gets the task done for you!</p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
         </div>
     </div>
 
