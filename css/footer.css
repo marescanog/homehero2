@@ -1,0 +1,32 @@
+.bg-dark-gray{
+    background-color: #707070;
+}
+
+.text-smaller{
+    font-size: x-small;
+}
+
+.text-small{
+    font-size: small;
+}
+
+.footer-heading{
+    font-family: "Nunito";
+}
+
+hr.foot-hr{
+    border-top: 1px dotted #A9A9A9;
+}
+
+.footer-a{
+    font-size: small;
+}
+
+
+@media only screen and (min-width: 992px) {
+    #footer-desktop-content{
+        width: 90%;
+        margin: auto;
+        max-width: 1536px;
+    }
+}

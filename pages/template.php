@@ -5,6 +5,7 @@ require_once dirname(__FILE__).'/../components/head-meta.php';
 
 ?>
 <!-- === Link your custom CSS pages below here ===-->
+<link rel="stylesheet" href="../css/footer.css">
 
 <!-- === Link your custom CSS  pages above here ===-->
 </head>
@@ -20,13 +21,13 @@ require_once dirname(__FILE__).'/../components/head-meta.php';
     
 
 
-
-
-
-
     <!-- === Your Custom Page Content Goes Here above here === -->
+    <!-- footer -->
+    <?php 
+    require_once dirname(__FILE__).'/../components/footer.php'; 
+    ?>
     </div>
-<?php require_once dirname(__FILE__).'/../components/foot-meta.php'; ?>
+    <?php require_once dirname(__FILE__).'/../components/foot-meta.php'; ?>
 <!-- Custom JS Scripts Below -->
     <script>
 

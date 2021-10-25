@@ -6,6 +6,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
 ?>
 <!-- Add your custom CSS below -->
 <link rel="stylesheet" href="./css/landing.css">
+<link rel="stylesheet" href="./css/footer.css">
 <!-- Add your custom CSS above -->
 </head>
  <body>  
@@ -194,6 +195,9 @@ require_once dirname(__FILE__).'/components/head-meta.php';
         </div>
     </div>
 
+<?php 
+    require_once dirname(__FILE__).'/./components/footer.php'; 
+?>
 
 
 
