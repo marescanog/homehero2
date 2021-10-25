@@ -1,3 +1,17 @@
+.txt-semi{
+    font-weight: 700;
+}
+
+/*==========================================*/
+/*              JUMBOTRON STYLES            */
+/*==========================================*/
+
+.jumbotron-container{
+    width:100% ;
+    margin: auto ; 
+    height:100% ;
+}
+
 .jumbotron-card{
     position:absolute;
     bottom:0;
@@ -21,6 +35,14 @@
     font-size: 1.5rem;
 }
 
+img.jumbotron-img{
+    max-height: 90%;  
+    width: auto;
+    margin-top:auto;
+}
+
+
+
 @media only screen and (min-width: 992px) {
     .jumbotron-card{
         position:static;
@@ -43,3 +65,39 @@
 
 
 }
+
+
+/*==========================================*/
+/*          POPULAR POSTINGS STYLES         */
+/*==========================================*/
+
+// .pop-post_container{
+//     min-height:540px; 
+//     background-color:#E4E4E4;  
+//     display: flex;
+// }
+
+// .pop-post_content-wrapper{
+//     padding: 3em 0 3em 0;
+//     background-color:#E4E4E4;  
+// }
+
+
+
+@media only screen and (min-width: 992px) {
+    .pop-post_content-wrapper{
+        padding: 4.5em 0 4.5em 0;
+    }
+}
+
+
+
+
+
+/*==========================================*/
+/*          POPULAR POSTINGS STYLES         */
+/*==========================================*/
+
+@media only screen and (min-width: 992px) {
+}
+
