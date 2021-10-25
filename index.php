@@ -16,11 +16,14 @@ require_once dirname(__FILE__).'/components/head-meta.php';
     <div style="<?php echo $hasHeader ?? ""; ?>">
     <!-- === Your Custom Page Content Goes Here below here === -->
 
+    <!-- =============================================== -->
+    <!-- JUMBOTRON -->
+    <!-- =============================================== -->
     <div class="jumbotron py-0 mb-auto d-flex flex-end">
-        <div class="d-lg-flex flex-lg-row-reverse justify-content-center" style="width:100%;margin: auto; height:100%;">
+        <div class="d-lg-flex flex-lg-row-reverse justify-content-center jumbotron-container">
             <div class="d-flex">
                 <div class="mx-auto m-lg-0 d-flex flex-end justify-content-center">
-                    <img src="./images/pages/landing/Jumbotron_Image.jpg" alt="" class="img-fluid" style="max-height: 90%;  width: auto; margin-top:auto">
+                    <img src="./images/pages/landing/Jumbotron_Image.jpg" alt="" class="img-fluid jumbotron-img" >
                 </div>
             </div>
 
@@ -47,11 +50,105 @@ require_once dirname(__FILE__).'/components/head-meta.php';
 
     </div>
 
-    <div style="min-height:540px; background-color:#E4E4E4; z-index:200">
-        <div class="container pt-5">
-             <h6>Popular Postings in your area</h6>
+    <!-- =============================================== -->
+    <!-- POPULAR POSTINGS IN YOUR AREA -->
+    <!-- =============================================== -->
+    <div class="pop-post_container">
+        <div class="container pop-post_content-wrapper">
+
+            <div>
+                <h4 class="txt-semi">Popular Postings in your area</h4>
+
+                <div class="row pop-post-desktop">
+                    <?php
+                        require_once dirname(__FILE__).'/mock-data/pop_post.php'; 
+                        foreach ($popularPosts as &$post) {
+                    ?>
+                    <div class="col col-lg-4">
+                    <?php
+                    include dirname(__FILE__).'/components/cards/pop-post-card.php'; 
+                    ?>
+                    </div>
+                    <?php
+                        }
+                    ?>
+                </div>
+
+                <div class="pop-post-mobile">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <?php
+                                $echoActive = false;
+                                require_once dirname(__FILE__).'/mock-data/pop_post.php'; 
+                                foreach ($popularPosts as &$post) {
+                            ?>
+                                <div class="carousel-item <?php echo !$echoActive ? " active" : "";?>">
+                            <?php
+                            include dirname(__FILE__).'/components/cards/pop-post-card.php'; 
+                            ?>
+                            </div>
+                            <?php
+                                $echoActive = true;
+                                }
+                            ?>
+                        </div>
+        
+                    </div>
+                    </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>  
+                </div>
+
+            </div>
+
         </div>
     </div>
+
+
+    <!-- =============================================== -->
+    <!-- HOW IT WORKS -->
+    <!-- =============================================== -->
+    <div style="min-height:540px; background-color:#FFFFFF; z-index:200">
+        <div class="container pt-5">
+             <h6>How it works</h6>
+        </div>
+    </div>
+
+    <!-- =============================================== -->
+    <!-- TESTIMONY -->
+    <!-- =============================================== -->
+    <div style="min-height:540px; background-color:#E4E4E4; z-index:200">
+        <div class="container pt-5">
+             <h6>Testimony</h6>
+        </div>
+    </div>
+
+    <!-- =============================================== -->
+    <!-- FEATURED HEROES-->
+    <!-- =============================================== -->
+    <div style="min-height:540px; background-color:#FFFFFF; z-index:200">
+        <div class="container pt-5">
+             <h6>Featured Heroes</h6>
+        </div>
+    </div>
+
+    <!-- =============================================== -->
+    <!-- CTA BOTTOM  -->
+    <!-- =============================================== -->
+    <div style="min-height:540px; background-color:#E4E4E4; z-index:200">
+        <div class="container pt-5">
+             <h6>ready to get your needs solved?</h6>
+        </div>
+    </div>
+
+
 
 
     <!-- === Your Custom Page Content Goes Here above here === -->
