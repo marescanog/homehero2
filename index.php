@@ -16,6 +16,9 @@ require_once dirname(__FILE__).'/components/head-meta.php';
     <div style="<?php echo $hasHeader ?? ""; ?>">
     <!-- === Your Custom Page Content Goes Here below here === -->
 
+    <!-- =============================================== -->
+    <!-- JUMBOTRON -->
+    <!-- =============================================== -->
     <div class="jumbotron py-0 mb-auto d-flex flex-end">
         <div class="d-lg-flex flex-lg-row-reverse justify-content-center jumbotron-container">
             <div class="d-flex">
@@ -47,71 +50,98 @@ require_once dirname(__FILE__).'/components/head-meta.php';
 
     </div>
 
+    <!-- =============================================== -->
+    <!-- POPULAR POSTINGS IN YOUR AREA -->
+    <!-- =============================================== -->
     <div class="pop-post_container">
         <div class="container pop-post_content-wrapper">
-            <h4 class="txt-semi">Popular Postings in your area</h4>
 
-            <div id="carouselExampleControls" class="carousel slide"  data-interval="false" data-ride="carousel" data-pause="hover">
-            <div class="carousel-inner">
-                <div class="carousel-item d-flex active">
-                    <div class="card">
-                        <div class="card-body">
-                            This is some text within a card body.
-                        </div>
+            <div>
+                <h4 class="txt-semi">Popular Postings in your area</h4>
+
+                <div class="row pop-post-desktop">
+                    <?php
+                        require_once dirname(__FILE__).'/mock-data/pop_post.php'; 
+                        foreach ($popularPosts as &$post) {
+                    ?>
+                    <div class="col col-lg-4">
+                    <?php
+                    include dirname(__FILE__).'/components/cards/pop-post-card.php'; 
+                    ?>
                     </div>
-                    <div class="card">
-                        <div class="card-body">
-                            This is some text within a card body.
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            This is some text within a card body.
-                        </div>
-                    </div>
+                    <?php
+                        }
+                    ?>
                 </div>
-                <div class="carousel-item">
-                    <div style="background-color:#0000FF; width: 100%; height: 100%">
-                            d
+
+                <div class="pop-post-mobile">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <?php
+                                $echoActive = false;
+                                require_once dirname(__FILE__).'/mock-data/pop_post.php'; 
+                                foreach ($popularPosts as &$post) {
+                            ?>
+                                <div class="carousel-item <?php echo !$echoActive ? " active" : "";?>">
+                            <?php
+                            include dirname(__FILE__).'/components/cards/pop-post-card.php'; 
+                            ?>
+                            </div>
+                            <?php
+                                $echoActive = true;
+                                }
+                            ?>
+                        </div>
+        
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <div style="background-color:#0000FF; width: 100%; height: 100%">
-                            d
                     </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>  
                 </div>
+
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-            </div>
+
         </div>
-
     </div>
 
+
+    <!-- =============================================== -->
+    <!-- HOW IT WORKS -->
+    <!-- =============================================== -->
     <div style="min-height:540px; background-color:#FFFFFF; z-index:200">
         <div class="container pt-5">
              <h6>How it works</h6>
         </div>
     </div>
 
+    <!-- =============================================== -->
+    <!-- TESTIMONY -->
+    <!-- =============================================== -->
     <div style="min-height:540px; background-color:#E4E4E4; z-index:200">
         <div class="container pt-5">
              <h6>Testimony</h6>
         </div>
     </div>
 
+    <!-- =============================================== -->
+    <!-- FEATURED HEROES-->
+    <!-- =============================================== -->
     <div style="min-height:540px; background-color:#FFFFFF; z-index:200">
         <div class="container pt-5">
              <h6>Featured Heroes</h6>
         </div>
     </div>
 
+    <!-- =============================================== -->
+    <!-- CTA BOTTOM  -->
+    <!-- =============================================== -->
     <div style="min-height:540px; background-color:#E4E4E4; z-index:200">
         <div class="container pt-5">
              <h6>ready to get your needs solved?</h6>
@@ -119,7 +149,6 @@ require_once dirname(__FILE__).'/components/head-meta.php';
     </div>
 
 
-    
 
 
     <!-- === Your Custom Page Content Goes Here above here === -->
