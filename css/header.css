@@ -1,3 +1,7 @@
+.header{
+    margin-top: 20px;
+}
+
 .navbar-custom{
     background-color: #FFFFFF;
 }
@@ -45,6 +49,9 @@
     text-align: center;
 }
 
+.main-container{
+    min-width: 335px;
+}
 
 @media only screen and (min-width: 992px) {
     #header-logo-desktop{
@@ -83,5 +90,9 @@
 
     .nav-container{
         width:90%;
+    }
+
+    .header{
+        margin-top: 76.3px;
     }
 }
