@@ -9,12 +9,12 @@ require_once dirname(__FILE__).'/components/head-meta.php';
 <link rel="stylesheet" href="./css/footer.css">
 <!-- Add your custom CSS above -->
 </head>
- <body>  
+ <body class="container-fluid m-0 p-0 main-container">  
     <!-- Add your Header NavBar here-->
     <?php 
         require_once dirname(__FILE__).'/components/header.php'; 
     ?>
-    <div style="<?php echo $hasHeader ?? ""; ?>">
+    <div class="<?php echo $hasHeader ?? ''; ?>">
     <!-- === Your Custom Page Content Goes Here below here === -->
 
     <!-- =============================================== -->
@@ -22,13 +22,13 @@ require_once dirname(__FILE__).'/components/head-meta.php';
     <!-- =============================================== -->
     <div class="jumbotron py-0 mb-auto d-flex flex-end">
         <div class="d-lg-flex flex-lg-row-reverse justify-content-center jumbotron-container">
-            <div class="d-flex">
+            <div class="d-flex jumbotron-img-container">
                 <div class="mx-auto m-lg-0 d-flex flex-end justify-content-center">
                     <img src="./images/pages/landing/Jumbotron_Image.jpg" alt="" class="img-fluid jumbotron-img" >
                 </div>
             </div>
 
-            <div class="jumbotron-card d-lg-flex" > 
+            <div class="jumbotron-card " > 
                 <div class="card w-lg-75 ml-lg-auto mt-lg-auto mr-lg-3 mb-lg-5 jumbotron-card-body">
                     <div class="card-body shadow-sm">
                         <div class="d-flex ">
@@ -95,7 +95,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                         </div>
         
                     </div>
-                    </div>
+                    <!-- </div>
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
@@ -104,7 +104,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="sr-only">Next</span>
                         </a>
-                    </div>  
+                    </div>   -->
                 </div>
 
             </div>
@@ -171,9 +171,17 @@ require_once dirname(__FILE__).'/components/head-meta.php';
     <!-- =============================================== -->
     <!-- TESTIMONY -->
     <!-- =============================================== -->
-    <div style="min-height:540px; background-color:#E4E4E4; z-index:200">
-        <div class="container pt-5">
-             <h6>Testimony</h6>
+    <div class="testimony-container">
+        <div class="container-fluid pt-0" class="testimony-wrapper">
+             <div class="testimony-body">
+                <div class="testimony-image-wrapper">
+                    <!-- <img src="./images/pages/landing/customer-testimonial.jpg" class="img-fluid" alt="a happy homeowner using the homehero app"> -->
+                    <!-- a -->
+                </div>
+                <div class="testimony-statement-wrapper">
+                    
+                </div>
+             </div>
         </div>
     </div>
 
