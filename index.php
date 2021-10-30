@@ -37,34 +37,51 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                                 <p class="nav-item nav-link" id="nav-work-tab" data-toggle="tab" href="#nav-work" role="tab" aria-controls="nav-work" aria-selected="false">Find Work</p>
                             </div>
                         </nav>
-                        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                        <div class="tab-content pt-1 pb-2 py-lg-3 px-3 px-sm-0" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-hire" role="tabpanel" aria-labelledby="nav-hire-tab">
-                                <view>
-                                    <h1 class="jumbotron-h1">
-                                        Find a Hero to help improve your home.
-                                    </h1>
+        
+                                <h1 class="jumbotron-h1 mt-lg-3">
+                                    Find a Hero to help improve your home.
+                                </h1>
 
-                                </view>
+                                <form class="jum-form rounded d-flex flex-sm-row flex-column mt-sm-5 mt-0">
+                                    <div class="jumb-form-input-container">
+                                        <input type="text" class="form-control-plaintext flex-1" id="staticEmail" placeholder="What do you need help with?">
+                                    </div>
+                                    <div class="cust-select-container">
+                                        <div class="d-flex align-items-center">
+                                            <div class="vert-line"></div>
+                                            <svg class="city-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#F2AE00"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                                        </div>
+                                        <select class="custom-select">
+                                            <option value="" disabled selected>City</option>
+                                            <option value="1">Bantayan</option>
+                                            <option value="2">Carcar</option>
+                                            <option value="3">Metro Cebu</option>
+                                            <option value="4">Daanbantayan</option>
+                                            <option value="5">Danao</option>
+                                            <option value="6">Lapu-lapu</option>
+                                            <option value="7">Liloan</option>
+                                            <option value="8">Mandaue</option>
+                                            <option value="9">Minglanilla</option>
+                                            <option value="10">Naga</option>
+                                            <option value="11">Talisay</option>
+                                            <option value="12">Toledo</option>
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-warning text-white m-0 h-100 jmb-form-btn">
+                                        SEARCH
+                                    </button>
+                                </form>
+                            
                             </div>
+
                             <div class="tab-pane fade" id="nav-work" role="tabpanel" aria-labelledby="nav-work-tab">
                                 <h1 class="jumbotron-h1">
                                     Find clients and grow your income.
                                 </h1>
                             </div>
-                    </div>
-                        <!-- <div class="d-flex ">
-                            <div>
-                                <h5 class="card-title">Hire a Hero</h5>
-                            </div>
-                            <div>
-                                <h5 class="card-title">Find Work</h5>
-                            </div>
                         </div>
-
-                        <h1 class="jumbotron-h1">
-                            Find a Hero to help improve your hire
-                        </h1>
-                        <a href="#" class="btn btn-warning text-light"><b>GET STARTED</b></a> -->
                     </div>
                 </div>
             </div>
