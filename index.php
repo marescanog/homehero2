@@ -23,15 +23,36 @@ require_once dirname(__FILE__).'/components/head-meta.php';
     <div class="jumbotron py-0 mb-auto d-flex flex-end">
         <div class="d-lg-flex flex-lg-row-reverse justify-content-center jumbotron-container">
             <div class="d-flex jumbotron-img-container">
-                <div class="mx-auto m-lg-0 d-flex flex-end justify-content-center">
+                <div class="mx-auto m-lg-0 d-flex justify-content-center">
                     <img src="./images/pages/landing/Jumbotron_Image.jpg" alt="" class="img-fluid jumbotron-img" >
                 </div>
             </div>
 
-            <div class="jumbotron-card " > 
-                <div class="card w-lg-75 ml-lg-auto mt-lg-auto mr-lg-3 mb-lg-5 jumbotron-card-body">
-                    <div class="card-body shadow-sm">
-                        <div class="d-flex ">
+            <div class="jumbotron-card" > 
+                <div class="card w-lg-75 ml-lg-auto mr-lg-3 mb-lg-5 jumbotron-card-body">
+                    <div  id="tabs" class="card-body">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <p class="nav-item nav-link active " id="nav-hire-tab" data-toggle="tab" href="#nav-hire" role="tab" aria-controls="nav-hire" aria-selected="true">Hire a Hero</p>
+                                <p class="nav-item nav-link" id="nav-work-tab" data-toggle="tab" href="#nav-work" role="tab" aria-controls="nav-work" aria-selected="false">Find Work</p>
+                            </div>
+                        </nav>
+                        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-hire" role="tabpanel" aria-labelledby="nav-hire-tab">
+                                <view>
+                                    <h1 class="jumbotron-h1">
+                                        Find a Hero to help improve your home.
+                                    </h1>
+
+                                </view>
+                            </div>
+                            <div class="tab-pane fade" id="nav-work" role="tabpanel" aria-labelledby="nav-work-tab">
+                                <h1 class="jumbotron-h1">
+                                    Find clients and grow your income.
+                                </h1>
+                            </div>
+                    </div>
+                        <!-- <div class="d-flex ">
                             <div>
                                 <h5 class="card-title">Hire a Hero</h5>
                             </div>
@@ -41,9 +62,9 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                         </div>
 
                         <h1 class="jumbotron-h1">
-                            Find a Hero to help improve your home
+                            Find a Hero to help improve your hire
                         </h1>
-                        <a href="#" class="btn btn-warning text-light"><b>GET STARTED</b></a>
+                        <a href="#" class="btn btn-warning text-light"><b>GET STARTED</b></a> -->
                     </div>
                 </div>
             </div>
@@ -158,7 +179,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                         </div>
                         <div>
                             <h4 class="gray-font text-center">Task Done!</h4>
-                            <p>Sit back and relax as your homehero gets the task done for you!</p>
+                            <p>Sit back and relax as your hirehero gets the task done for you!</p>
                         </div>
                     </div>
 
@@ -175,7 +196,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
         <div class="container-fluid pt-0" class="testimony-wrapper">
              <div class="testimony-body">
                 <div class="testimony-image-wrapper">
-                    <!-- <img src="./images/pages/landing/customer-testimonial.jpg" class="img-fluid" alt="a happy homeowner using the homehero app"> -->
+                    <!-- <img src="./images/pages/landing/customer-testimonial.jpg" class="img-fluid" alt="a happy hireowner using the hirehero app"> -->
                     <!-- a -->
                 </div>
                 <div class="testimony-statement-wrapper">
