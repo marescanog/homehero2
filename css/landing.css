@@ -34,14 +34,15 @@
 
 .jumbotron-card-body{
     margin: auto;
-    margin-bottom: 10%;
+    margin-bottom: 15%;
     max-width:496px;
     box-shadow: 0px 3px 8px rgba(0,0,0,0.2);
 }
 
 .jumbotron-h1{
     max-width:496px;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
+    text-align: center;
 }
 
 img.jumbotron-img{
@@ -75,7 +76,7 @@ img.jumbotron-img{
 
     .jumbotron-card-body{
         max-width: 30rem;
-        margin-bottom: 5em !important;
+        margin-bottom: 10em !important;
         box-shadow: 0px 3px 8px rgba(0,0,0,0.35);
     }
 
@@ -87,11 +88,136 @@ img.jumbotron-img{
 
     .jumbotron-h1{
         font-size: 2.5rem;
+        text-align: left;
     }
 
 
 }
 
+/*==========================================*/
+/*          JUMBOTRON CARD TABS           */
+/*==========================================*/
+
+#tabs{
+	background: #FFFF;
+    min-height: 200px;
+    padding: 0rem;
+}
+
+#tabs h1{
+    color: #707070;
+}
+
+#tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #F2AE00 !important;
+    background-color: transparent;
+    border-color: transparent transparent #FFFF;
+    border-bottom: 4px solid #F2AE00 !important;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Nunito";
+}
+
+#tabs .nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    color: #707070;
+    font-size: 20px;
+    font-family: "Nunito";
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #F2AE00;
+}
+
+.nav-tabs :hover{
+    cursor: pointer;
+}
+
+
+@media only screen and (min-width: 992px) {
+
+    #tabs{
+        padding: 1.25rem;
+     }
+}
+
+/*==========================================*/
+/*          JUMBOTRON FORM STYLES           */
+/*==========================================*/
+
+.jum-form{
+    border: 1px solid #CCCCCC;
+    padding: 0;
+}
+
+.cust-select-container{
+    flex:1;
+    display: flex;
+    align-items: center;
+}
+
+.custom-select{
+    border: 1px solid transparent;
+    padding-left: 1;
+    background: transparent !important;
+    padding-right: 0;
+    padding-left: 0;
+    width: 100%;
+}
+
+.jumb-form-input-container{
+    flex:1.5;
+    padding-left: 8px
+}
+
+.jumb-form-input-container :focus{
+    outline: none;
+    border-bottom: 2px solid #F2AE00;
+    margin-right: 15px;
+}
+
+.jmb-form-btn{
+    font-weight: 900;
+    font-family: "Nunito";
+    border-radius: 0 0 0 0;
+ }
+
+ .cust-select-container :focus{
+    outline: none;
+    border-color: transparent;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0), 0 0 8px rgba(255, 0, 0, 0);
+    border-bottom: 2px solid #F2AE00;
+    margin-right: 15px;
+ }
+
+
+
+@media only screen and (min-width: 992px) {
+
+    .jum-form{
+        border: 1px solid #CCCCCC;
+        padding: 0;
+        height: 3.25em;
+        align-items: center;
+    }
+
+    .jmb-form-btn{
+       border-radius: 0 5px 5px 0;
+       margin: 0;
+    }
+
+    .vert-line{
+        border-left:1px solid #CCCCCC;
+        height:30px
+    }
+
+    .city-icon{
+        margin-left: 8px;
+        margin-right: 4px;
+    }
+}
 
 /*==========================================*/
 /*          POPULAR POSTINGS STYLES         */
@@ -235,51 +361,3 @@ img.jumbotron-img{
 }
 
 
-/*==========================================*/
-/*          JUMBOTRON CARD TABS           */
-/*==========================================*/
-
-#tabs{
-	background: #FFFF;
-    min-height: 200px;
-    padding: 0rem;
-}
-
-#tabs h1{
-    color: #707070;
-}
-
-#tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-    color: #F2AE00 !important;
-    background-color: transparent;
-    border-color: transparent transparent #FFFF;
-    border-bottom: 4px solid #F2AE00 !important;
-    font-size: 20px;
-    font-weight: bold;
-    font-family: "Nunito";
-}
-
-#tabs .nav-tabs .nav-link {
-    border: 1px solid transparent;
-    border-top-left-radius: .25rem;
-    border-top-right-radius: .25rem;
-    color: #707070;
-    font-size: 20px;
-    font-family: "Nunito";
-}
-
-.nav-tabs {
-    border-bottom: 1px solid #F2AE00;
-}
-
-.nav-tabs :hover{
-    cursor: pointer;
-}
-
-
-@media only screen and (min-width: 992px) {
-
-    #tabs{
-        padding: 1.25rem;
-     }
-}

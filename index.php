@@ -20,7 +20,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
     <!-- =============================================== -->
     <!-- JUMBOTRON -->
     <!-- =============================================== -->
-    <div class="jumbotron py-0 mb-auto d-flex flex-end">
+    <div class="jumbotron py-0 mb-auto d-flex justify-content-center flex-lg-end">
         <div class="d-lg-flex flex-lg-row-reverse justify-content-center jumbotron-container">
             <div class="d-flex jumbotron-img-container">
                 <div class="mx-auto m-lg-0 d-flex justify-content-center">
@@ -37,34 +37,24 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                                 <p class="nav-item nav-link" id="nav-work-tab" data-toggle="tab" href="#nav-work" role="tab" aria-controls="nav-work" aria-selected="false">Find Work</p>
                             </div>
                         </nav>
-                        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                        <div class="tab-content pt-1 pb-2 py-lg-3 px-3 px-sm-0" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-hire" role="tabpanel" aria-labelledby="nav-hire-tab">
-                                <view>
-                                    <h1 class="jumbotron-h1">
-                                        Find a Hero to help improve your home.
-                                    </h1>
-
-                                </view>
+                                <h1 class="jumbotron-h1 mt-lg-3">
+                                    Find a Hero to help improve your home.
+                                </h1>
+                                <?php include './components/forms/jumbo_card_form.php';?>
                             </div>
+
                             <div class="tab-pane fade" id="nav-work" role="tabpanel" aria-labelledby="nav-work-tab">
-                                <h1 class="jumbotron-h1">
+                                <h1 class="jumbotron-h1 mt-lg-3">
                                     Find clients and grow your income.
                                 </h1>
-                            </div>
-                    </div>
-                        <!-- <div class="d-flex ">
-                            <div>
-                                <h5 class="card-title">Hire a Hero</h5>
-                            </div>
-                            <div>
-                                <h5 class="card-title">Find Work</h5>
+                                <?php 
+                                $jumb_placeholder = "What is your occupation?";
+                                $jumb_button_text = "REGISTER";
+                                include './components/forms/jumbo_card_form.php';?>
                             </div>
                         </div>
-
-                        <h1 class="jumbotron-h1">
-                            Find a Hero to help improve your hire
-                        </h1>
-                        <a href="#" class="btn btn-warning text-light"><b>GET STARTED</b></a> -->
                     </div>
                 </div>
             </div>
