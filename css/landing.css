@@ -6,6 +6,32 @@
     color: #707070;
 }
 
+ @media only screen and (min-width: 992px) {
+     .card-input::-webkit-input-placeholder {
+        font-size: 25px;
+     }
+     
+     .card-input:-moz-placeholder { /* Firefox 18- */
+           font-size: 25px;
+     }
+     
+     .card-input::-moz-placeholder {  /* Firefox 19+ */
+           font-size: 25px;
+     }
+     
+     /* Overriding styles */
+     
+     .card-input::-webkit-input-placeholder {
+        font-size: 13px!important;
+     }
+     
+     .card-input:-moz-placeholder { /* Firefox 18- */
+           font-size: 13px!important;
+     }
+     .card-input::-moz-placeholder {  /* Firefox 19+ */
+           font-size: 13px!important;
+     }
+ }
 
 /*==========================================*/
 /*              JUMBOTRON STYLES            */
@@ -311,40 +337,49 @@ img.jumbotron-img{
 /*==========================================*/
 
 .testimony-container{
-    min-height:540px; 
     background-color:#E4E4E4; 
-    z-index:200; 
-    display: flex
-}
-
-.testimony-wrapper{
-    height: 100vh;
-    // background-color: #FF0000;
-    justify-content: center;
-    align-items: center;
-}
-
-.testimony-image-wrapper{
     display: flex;
-    flex:1;
-    // background-color: #00FF00;
+    flex: 1
 }
 
-.testimony-statement-wrapper{
-        flex:1;
-        // background-color: #0000FF;
+.testimony-header{
+    font-size: 1.5rem;
 }
 
+.testimony-spacing{
+    margin:1em;
+}
+
+@media only screen and (min-width: 768px) {
+    .testim-wrap{
+        max-width: 650px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
 
 @media only screen and (min-width: 992px) {
-    .testimony-container{
-       height:540px; 
+    .testimony-statement-container{
+        padding: 2.5em;
     }
 
-    .testimony-body{
-        // background-color: #FF0000;
-        display: flex;
-        max-width: 30rem;
+    .testimony-header{
+        font-size: 2rem;
+    }
+
+    .btn-testimony{
+        padding-right: 1.5em;
+        padding-left: 1.5em;
+        font-weight: 900;
+        font-family: "Nunito";
+    }
+
+    .testimony-text{
+        font-size: 1.375rem;
+    }
+
+    .testim-wrap{
+        max-width: none;
     }
 }
 

@@ -1,6 +1,6 @@
-<form class="jum-form rounded d-flex flex-sm-row flex-column mt-sm-5 mt-0">
+<form class="jum-form rounded d-flex  flex-column flex-lg-row mt-0 mt-md-3 mt-lg-5">
     <div class="jumb-form-input-container">
-        <input type="text" class="form-control-plaintext flex-1" id="staticEmail" placeholder="<?php echo isset($jumb_placeholder) ? $jumb_placeholder : "What do you need help with?"?>">
+        <input type="text" class="form-control-plaintext flex-1 card-input" id="staticEmail" placeholder="<?php echo isset($jumb_placeholder) ? $jumb_placeholder : "What do you need help with?"?>">
     </div>
     <div class="cust-select-container">
         <div class="d-flex align-items-center">

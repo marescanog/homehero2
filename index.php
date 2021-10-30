@@ -37,9 +37,9 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                                 <p class="nav-item nav-link" id="nav-work-tab" data-toggle="tab" href="#nav-work" role="tab" aria-controls="nav-work" aria-selected="false">Find Work</p>
                             </div>
                         </nav>
-                        <div class="tab-content pt-1 pb-2 py-lg-3 px-3 px-sm-0" id="nav-tabContent">
+                        <div class="tab-content pt-1 pb-2 px-2  px-lg-3" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-hire" role="tabpanel" aria-labelledby="nav-hire-tab">
-                                <h1 class="jumbotron-h1 mt-lg-3">
+                                <h1 class="jumbotron-h1 mt-lg-3 mt-0 mt-md-3 mt-lg-0">
                                     Find a Hero to help improve your home.
                                 </h1>
                                 <?php include './components/forms/jumbo_card_form.php';?>
@@ -183,16 +183,21 @@ require_once dirname(__FILE__).'/components/head-meta.php';
     <!-- TESTIMONY -->
     <!-- =============================================== -->
     <div class="testimony-container">
-        <div class="container-fluid pt-0" class="testimony-wrapper">
-             <div class="testimony-body">
-                <div class="testimony-image-wrapper">
-                    <!-- <img src="./images/pages/landing/customer-testimonial.jpg" class="img-fluid" alt="a happy hireowner using the hirehero app"> -->
-                    <!-- a -->
+        <div class="row mx-lg-5 testim-wrap" >
+            <col-12 class="col-12 col-lg-6 flex-1 justify-content-center align-items-center">
+                <img src="./images/pages/landing/customer-testimonial.jpg" class="img-fluid" alt="a happy homeowner using the homehero app" >
+            </col-12>
+            <col-12 class="col-12 col-lg-6 testimony-statement-container">
+                <div class="m-3 m-lg-0 d-flex flex-column">
+                    <h3 class="testimony-header">HomeHero allows me to have more time to spend with my family. I can focus on important matters.</h3>
+                    <p class="testimony-text mt-1 mt-lg-3">As a busy owner, I often don't have time to clean the house or look for a carpenter. HomeHero connects me to a worker instantly.</p>
+                    <div class="mt-1 mt-lg-3">
+                        <button class="btn btn-warning text-white btn-testimony btn-lg">
+                            SIGN UP
+                        </button>
+                    </div>
                 </div>
-                <div class="testimony-statement-wrapper">
-                    
-                </div>
-             </div>
+            </col-12>
         </div>
     </div>
 
