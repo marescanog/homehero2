@@ -34,7 +34,7 @@
 
 .jumbotron-card-body{
     margin: auto;
-    margin-bottom: 10%;
+    margin-bottom: 15%;
     max-width:496px;
     box-shadow: 0px 3px 8px rgba(0,0,0,0.2);
 }
@@ -76,7 +76,7 @@ img.jumbotron-img{
 
     .jumbotron-card-body{
         max-width: 30rem;
-        margin-bottom: 5em !important;
+        margin-bottom: 10em !important;
         box-shadow: 0px 3px 8px rgba(0,0,0,0.35);
     }
 
@@ -199,13 +199,13 @@ img.jumbotron-img{
     .jum-form{
         border: 1px solid #CCCCCC;
         padding: 0;
-        height: 3em;
+        height: 3.25em;
         align-items: center;
     }
 
     .jmb-form-btn{
        border-radius: 0 5px 5px 0;
-       margin: 0
+       margin: 0;
     }
 
     .vert-line{
