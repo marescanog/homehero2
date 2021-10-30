@@ -15,6 +15,7 @@
     overflow:hidden;
     // background-color: blue;
     min-height: 550px;
+    padding: 0 !important;
 }
 
 .jumbotron-container{
@@ -35,15 +36,16 @@
     margin: auto;
     margin-bottom: 10%;
     max-width:496px;
+    box-shadow: 0px 3px 8px rgba(0,0,0,0.2);
 }
 
 .jumbotron-h1{
     max-width:496px;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 img.jumbotron-img{
-    max-height: 90%;  
+    max-height: 100%;  
     width: auto;
     margin-top:auto;
 }
@@ -56,6 +58,16 @@ img.jumbotron-img{
 
 
 @media only screen and (min-width: 992px) {
+    .jumbotron{
+        padding: 0rem 2rem 0 2rem!important;
+    }
+
+    img.jumbotron-img{
+        max-height: 90%;  
+        width: auto;
+        margin-top:auto;
+    }
+
     .jumbotron-card{
         position:static;
         width: auto;
@@ -64,6 +76,7 @@ img.jumbotron-img{
     .jumbotron-card-body{
         max-width: 30rem;
         margin-bottom: 5em !important;
+        box-shadow: 0px 3px 8px rgba(0,0,0,0.35);
     }
 
     .jumbotron-container{
@@ -104,6 +117,10 @@ img.jumbotron-img{
     border-radius: 1em;
 }
 
+.card{
+    min-height: 200px;
+}
+
 
 @media only screen and (min-width: 992px) {
     .pop-post_content-wrapper{
@@ -119,6 +136,11 @@ img.jumbotron-img{
 
     .pop-post-mobile{
         display: none;
+    }
+
+    .card{
+        min-height: 350px;
+        min-width: 500px;
     }
 }
 
@@ -212,3 +234,52 @@ img.jumbotron-img{
 
 }
 
+
+/*==========================================*/
+/*          JUMBOTRON CARD TABS           */
+/*==========================================*/
+
+#tabs{
+	background: #FFFF;
+    min-height: 200px;
+    padding: 0rem;
+}
+
+#tabs h1{
+    color: #707070;
+}
+
+#tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #F2AE00 !important;
+    background-color: transparent;
+    border-color: transparent transparent #FFFF;
+    border-bottom: 4px solid #F2AE00 !important;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Nunito";
+}
+
+#tabs .nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    color: #707070;
+    font-size: 20px;
+    font-family: "Nunito";
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #F2AE00;
+}
+
+.nav-tabs :hover{
+    cursor: pointer;
+}
+
+
+@media only screen and (min-width: 992px) {
+
+    #tabs{
+        padding: 1.25rem;
+     }
+}
