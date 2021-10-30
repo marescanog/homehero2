@@ -342,11 +342,45 @@ img.jumbotron-img{
     flex: 1
 }
 
+.testimony-header{
+    font-size: 1.5rem;
+}
 
+.testimony-spacing{
+    margin:1em;
+}
 
+@media only screen and (min-width: 768px) {
+    .testim-wrap{
+        max-width: 650px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
 
 @media only screen and (min-width: 992px) {
+    .testimony-statement-container{
+        padding: 2.5em;
+    }
 
+    .testimony-header{
+        font-size: 2rem;
+    }
+
+    .btn-testimony{
+        padding-right: 1.5em;
+        padding-left: 1.5em;
+        font-weight: 900;
+        font-family: "Nunito";
+    }
+
+    .testimony-text{
+        font-size: 1.375rem;
+    }
+
+    .testim-wrap{
+        max-width: none;
+    }
 }
 
 
