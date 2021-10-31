@@ -387,6 +387,64 @@ img.jumbotron-img{
 
 
 /*==========================================*/
+/*             FEATURED HEROES              */
+/*==========================================*/
+
+.featured-heroes{
+    min-height:540px; 
+    background-color:#FFFFFF;
+    // background-color:#00FFFF;
+}
+
+.feature-wrap{
+    max-width: 1300px;
+    margin-right: auto;
+    margin-left: auto;
+    // background-color:#FF00FF;
+}
+
+.feature-row{
+    // background-color:#FFFF00;
+}
+
+.featured-header{
+    font-size: 1.75em;
+    margin-left: 0.5em;
+}
+
+.feature-card{
+    // background-color: turquoise;
+    // border:1px solid #CCCCCC;
+    box-shadow: 0px 3px 12px rgba(0,0,0,0.16);
+    min-height: 435px;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-bottom: 1.25em;
+    flex: 1;
+    height: 100%;
+}
+
+
+
+hr.card-hr {
+    border-top: 1px solid #9FAEAE;
+}
+
+@media only screen and (min-width: 992px) {
+    .featured-header{
+        font-size: 2em;
+    }
+
+    .feature-card{
+        max-width: 381px;
+        margin-left: none;
+        margin-right: none;
+        margin-bottom: none;
+    }
+}
+
+
+/*==========================================*/
 /*          POPULAR POSTINGS STYLES         */
 /*==========================================*/
 
