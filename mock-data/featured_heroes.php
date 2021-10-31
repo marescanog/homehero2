@@ -2,8 +2,7 @@
     $data_featured = array(
         array(
             "id"=>"0", 
-            "name"=>"Herald Chiu", 
-            "rating"=>"4.75", 
+            "name"=>"Jeremy Myers", 
             "projects_completed"=>"63",
             "skills"=> array(
                 array("name"=>"Plumbing", "rate_type"=>"daily", "price"=>"300"),
@@ -17,7 +16,6 @@
         array(
             "id"=>"1", 
             "name"=>"Joseph Santos", 
-            "rating"=>"4", 
             "projects_completed"=>"19",
             "skills"=> array(
                 array("name"=>"Gadget Repair", "rate_type"=>"project", "price"=>"450"),
@@ -32,7 +30,6 @@
         array(
             "id"=>"2", 
             "name"=>"Erik Manalastas", 
-            "rating"=>"64", 
             "projects_completed"=>"124",
             "skills"=> array(
                 array("name"=>"Carpentry", "rate_type"=>"day", "price"=>"450")
