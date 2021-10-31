@@ -102,6 +102,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                             <?php
                                 $echoActive = true;
                                 }
+                                $echoActive = null;
                             ?>
                         </div>
         
@@ -204,9 +205,70 @@ require_once dirname(__FILE__).'/components/head-meta.php';
     <!-- =============================================== -->
     <!-- FEATURED HEROES-->
     <!-- =============================================== -->
-    <div style="min-height:540px; background-color:#FFFFFF; z-index:200">
-        <div class="container pt-5">
-             <h6>Featured Heroes</h6>
+    <div class="featured-heroes">
+        <div class="feature-wrap pt-5 pb-2 mb-5">
+             <h2 class="featured-header gray-font pb-3">Featured Heroes</h2>
+             <div class="row">
+                <div class="col-12 col-lg-4">
+                    <div class="feature-card rounded">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <div>
+                                    <img src="./images/pages/landing/ProfilePic1.jpg" alt="profile picture" class="rounded">
+                                </div>
+                                <div class="ml-3">
+                                    <h5>Herald Chiu</h5>
+                                    <?php 
+                                        $rating = 4.75;
+                                        $hasRatings = true;
+                                        include './components/UX/ratingsDisplay.php';
+                                    ?>
+                                    <p>O 63 projects completed</p>
+                                </div>
+                            </div>
+                            <hr class="m-0 mt-1 mb-2 card-hr"/>
+                            <div>
+                                <h6>Skills</h6>
+                                <div>
+                                    <div>
+                                        <span>Plumbing</span>
+                                        <span>P300/day</span>
+                                    </div>
+                                    <div>
+                                        <span>Plumbing</span>
+                                        <span>P300/day</span>
+                                    </div>
+                                    <div>
+                                        <span>Plumbing</span>
+                                        <span>P300/day</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="m-0 mt-1 mb-2 card-hr"/>
+                            <div>
+                                <h6>About Me</h6>
+                                <div>
+                                    <p>I am a TESDA certified pipe installer and I also have experience in other plumbing repairs such as fixing leaks... <span>Read More</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="feature-card rounded">
+                        <div class="card-body">
+                            This is some text within a card body.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="feature-card rounded">
+                        <div class="card-body">
+                            This is some text within a card body.
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
