@@ -246,9 +246,39 @@ require_once dirname(__FILE__).'/components/head-meta.php';
     <!-- =============================================== -->
     <!-- CTA BOTTOM  -->
     <!-- =============================================== -->
-    <div style="min-height:540px; background-color:#E4E4E4; z-index:200">
-        <div class="container pt-5">
-             <h6>ready to get your needs solved?</h6>
+    <div class="CTA-container pb-5 pb-lg-0">
+        <div class="container CTA-wrapper pt-5 ">
+             <h2 class="text-center gray-font my-4">Ready to get your needs solved?</h2>
+             <div class="container CTA-box-container">
+                 <div class="row">
+                     <div class="col-12 col-lg-6 CTA-box CTA-box-white ">
+                         <div class="CTA-box-content-container mb-lg-3 mt-lg-3">
+                            <div>
+                                <img class="img-fluid" src="./images/pages/landing/CTABottomHomeowner.jpg" alt="Homeowner using the Homehero app">
+                            </div>
+                            <div class="CTA-button-container">
+                                <button class="btn btn-warning btn-lg text-white w-100">
+                                    Sign Up
+                                </button>
+                                <p>Get your FREE online account and start looking for a Hero to help with your home.</p>
+                            </div>
+                         </div>
+                     </div>
+                     <div class="col-12 col-lg-6 CTA-box CTA-box-offwhite">
+                        <div class="CTA-box-content-container mb-lg-3 mt-lg-3">
+                            <div>
+                                <img class="img-fluid" src="./images/pages/landing/CTABottomWorker.jpg" alt="Worker using the Homehero app">
+                            </div>
+                            <div class="CTA-button-container">
+                                <button class="btn btn-warning btn-lg text-white w-100">
+                                    Become a HomeHero
+                                </button>
+                                <p>Register as a HomeHero and easily be able to find and connect to clients.</p>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+             </div>
         </div>
     </div>
 

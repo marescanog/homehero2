@@ -445,6 +445,72 @@ hr.card-hr {
 
 
 /*==========================================*/
+/*                CTA Bottom               */
+/*==========================================*/
+.CTA-container{
+    min-height:540px; 
+    background-color:#E4E4E4;
+}
+
+.CTA-wrapper{
+    // background-color: turquoise;
+    height: 100%;
+    margin-bottom: 2em;
+}
+
+.CTA-box-container{
+    background-color: violet;
+    // background-color: white;
+}
+
+.CTA-box{
+    border: 1px solid #707070;
+}
+
+.CTA-box-white{
+    background-color: #FFFFFF;
+}
+
+.CTA-box-offwhite{
+    background-color: #FBF9EC;
+}
+.CTA-box-content-container{
+    width: 300px; 
+    margin-left: auto; 
+    margin-right: auto
+}
+.btn-CTA-bottom{
+    width: 1005;
+}
+
+.CTA-button-container{
+    width: 300px
+}
+
+
+
+@media only screen and (min-width: 992px) {
+    .CTA-container{
+        height:768px; 
+    }
+
+    .CTA-box-container{
+        // height: 531px;
+        width: 900px;
+        // background-color: violet;
+        // background-color: white;
+    }
+
+    .CTA-box{
+        border: 1px solid #707070;
+        min-height: 531px;
+        width: 900px;
+    }
+
+}
+
+
+/*==========================================*/
 /*          POPULAR POSTINGS STYLES         */
 /*==========================================*/
 
