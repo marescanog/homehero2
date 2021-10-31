@@ -44,5 +44,8 @@
     $rating = null;
 ?>
 </div>
-<script src="<?php echo "$level/js/UX/ratingsDisplay.js";?>"></script>
+<?php 
+    echo isset($script_ratingsDeclared) ? "" :"<script src='$level/js/UX/ratingsDisplay.js'></script>";
+    $script_ratingsDeclared = true;
+?>
 

@@ -208,66 +208,37 @@ require_once dirname(__FILE__).'/components/head-meta.php';
     <div class="featured-heroes">
         <div class="feature-wrap pt-5 pb-2 mb-5">
              <h2 class="featured-header gray-font pb-3">Featured Heroes</h2>
-             <div class="row">
-                <div class="col-12 col-lg-4">
-                    <div class="feature-card rounded">
-                        <div class="card-body">
-                            <div class="d-flex">
-                                <div>
-                                    <img src="./images/pages/landing/ProfilePic1.jpg" alt="profile picture" class="rounded">
-                                </div>
-                                <div class="ml-3">
-                                    <h5>Herald Chiu</h5>
-                                    <?php 
-                                        $rating = 4.75;
-                                        $hasRatings = true;
-                                        include './components/UX/ratingsDisplay.php';
-                                    ?>
-                                    <p>O 63 projects completed</p>
-                                </div>
-                            </div>
-                            <hr class="m-0 mt-1 mb-2 card-hr"/>
-                            <div>
-                                <h6>Skills</h6>
-                                <div>
-                                    <div>
-                                        <span>Plumbing</span>
-                                        <span>P300/day</span>
-                                    </div>
-                                    <div>
-                                        <span>Plumbing</span>
-                                        <span>P300/day</span>
-                                    </div>
-                                    <div>
-                                        <span>Plumbing</span>
-                                        <span>P300/day</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr class="m-0 mt-1 mb-2 card-hr"/>
-                            <div>
-                                <h6>About Me</h6>
-                                <div>
-                                    <p>I am a TESDA certified pipe installer and I also have experience in other plumbing repairs such as fixing leaks... <span>Read More</span></p>
-                                </div>
-                            </div>
+             <div class="row feature-row">
+                <?php 
+                    include "./mock-data/featured_heroes.php";
+                    $feature_name = "";
+                    if(isset($data_featured) && count($data_featured)> 0){
+                        for($ndx_f = 0; $ndx_f < 3; $ndx_f++){
+                            $feature_name = $data_featured[$ndx_f]["name"];
+                            $feature_picture = $data_featured[$ndx_f]["profile_picture"];
+                            $feature_projects_completed = $data_featured[$ndx_f]["projects_completed"];
+                            $rating = $data_featured[$ndx_f]["rating"];
+                            $hasRatings = $data_featured[$ndx_f]["hasRatings"];
+                            $feature_skill_list = $data_featured[$ndx_f]["skills"];
+                            $feature_description = $data_featured[$ndx_f]["Description"];
+                            $ndx_person_ndx = $ndx_f;
+                ?>
+                        <div class="col-12 col-lg-4">
+                            <?php
+                                include "./components/cards/featured-hero-card.php";
+                            ?>
                         </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-4">
-                    <div class="feature-card rounded">
-                        <div class="card-body">
-                            This is some text within a card body.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-4">
-                    <div class="feature-card rounded">
-                        <div class="card-body">
-                            This is some text within a card body.
-                        </div>
-                    </div>
-                </div>
+                    <?php } } else {
+                        echo "<p>No data available</p>";
+                    }
+                        $feature_name = null;
+                        $feature_picture = null;
+                        $feature_projects_completed = null;
+                        $rating = null;
+                        $hasRatings = null;
+                        $feature_skill_list = null;
+                        $feature_description = null;
+                    ?>
             </div>
         </div>
     </div>
