@@ -19,7 +19,7 @@
         <h5 style="font-family: Segoe UI;
                 font-style: normal;
                 font-weight: bold;
-                font-size: 18px;
+                font-size: git 18px;
                 line-height: 24px;
                 color: #707070;
         ">Verify SMS</h5>
