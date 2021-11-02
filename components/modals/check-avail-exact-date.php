@@ -1,63 +1,65 @@
 <!-- 
-    Merged some contents such as ids and other properties
-    To be inserted:
-        Links for terms and conditions, privacy policy, login, and worker registration anchors
+    Theres a conflict for the custom select (applied in the city select) that removes the borders but this issue
+    should no longer be seen in the actual page where this will be applied
+
+    Things to be added:
+        onSubmit event, JS code to reflect date and time chosen
 -->
 
 <div class="modal-content">
     <div class="modal-header">
-        <div class="mx-auto" style="width: auto;">
-            <img src='./images/logo/HH_Logo_Light.svg'>
+
+        <div class="mx-auto text-center">
+            <h4 class="mt-2 font-weight-bold" style="color:#707070">Check availability</h4>
+            <p class="m-0">When would you like to start your project?</p>
         </div>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin: -1rem -1rem -1rem 0;">
+        <button type="button" class="close position-absolute" data-dismiss="modal" aria-label="Close" style="margin: -1rem 0; right:0">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="modal-body">
-        <h5 style="font-family: Segoe UI;
-                font-style: normal;
-                font-weight: bold;
-                font-size: 18px;
-                line-height: 24px;
-                color: #707070;
-        ">Homeowner Sign-Up</h5>
-        <form id="registerForm" type="POST" onSubmit="registerHandler(event)" name="modalForm" class="m-4">
-            <div class="d-flex">
-                <div class="form-group w-100 mr-2">
-                    <input type="text" class="form-control" id="RU_firstName" name="first_name" placeholder="First Name" autocomplete required maxlength="50">
+    <div class="modal-body col-sm-7 mx-auto">
+        <form id="checkAvailExactDateForm" type="POST" onSubmit="" name="modalForm">
+            <div class="my-md-5">
+                <h5 class="font-weight-bold text-center" style="color:#707070">Exact Date</h5>
+                <p class="text-center">
+                    Scheduled for:
+                    <span id="selectedDate">Nov 3</span>,
+                    <span id="selectedTime">8:00 AM</span>
+                </p>
+                <div class="form-group">
+                    <input type="date" class="form-control mb-2" id="date" name="date">
+
+                    <input type="time" class="form-control mb-2" id="time" name="time" min="08:00" max="21:00" step="1800" value="08:00"> <!-- step 30 minutes -->
+                    <p class="mt-1" style="font-size:0.8em;">
+                        or choose an <a href="" data-toggle="modal" onclick="loadModal('check-avail-est-date')">estimated date</a>
+                    </p>
                 </div>
-                <div class="form-group w-100 ml-2">
-                    <input type="text" class="form-control" id="RU_lastName" name="last_name" placeholder="Last Name" autocomplete required maxlength="50">
-                </div>
             </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="RU_phone" name="phone_number" placeholder="Mobile number (09XXXXXXXXX)" autocomplete required maxlength="15">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" id="RU_password" name="password" placeholder="Enter password" autocomplete required maxlength="50">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" id="RU_confirmPassword" name="confirm_password" placeholder="Re-enter password" autocomplete required maxlength="50">
-            </div>
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="agree" required>
-                <label class="form-check-label" for="agree" style="font-size:0.8em;">I agree to HomeHero's <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</label>
-            </div>
+
+
+            <p class="mt-1 text-center" style="font-size:0.8em;">
+                *Choose an estimated or exact date to see if this HomeHero is available to work for you.
+            </p>
             <button type="submit" class="btn btn-warning text-white font-weight-bold w-100 mb-3">
-                <span id="RU-submit-btn-txt">CREATE ACCOUNT</span>
+                <span id="RU-submit-btn-txt">SELECT AND CONTINUE</span>
                 <div id="RU-submit-btn-load" class="d-none">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     <span class="sr-only">Loading...</span>
                 </div>
             </button>
-            
-            <div class="text-center" style="font-size:0.8em;">
-                <p>
-                    Already have an account? <a href="#">Login</a>
-                    </br>
-                    Looking for work? <a href="#">Register</a> at the worker's portal.
-                </p>
-            </div>
+
         </form>
     </div>
 </div>
+
+<!-- Script to set default date to tomorrow -->
+<script>
+    var tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+    var tomday = tomorrow.getDate();
+    var tommonth = tomorrow.getMonth() + 1;
+    var tomyear = tomorrow.getFullYear();
+    if (tomday < 10) tomday = '0' + tomday;
+    if (tommonth < 10) tommonth = '0' + tommonth;
+    tomorrow = tomyear + '-' + tommonth + '-' + tomday;
+    document.getElementById('date').setAttribute('value', tomorrow);
+</script>

@@ -31,6 +31,7 @@ checkAvailEstDate.addEventListener("click", ()=>{
     loadModal("check-avail-est-date");
 });
 
+
 checkAvailExactDate.addEventListener("click", ()=>{
     loadModal("check-avail-exact-date");
 });
@@ -133,7 +134,7 @@ const registerHandler =(e)=>{
             console.log(response.responseJSON)
             Swal.fire({
                 title:'Error!',
-                text: 'Feilds must not be empty',
+                text: 'Fields must not be empty',
                 icon: 'error',
                 confirmButtonText: 'Close'
             })

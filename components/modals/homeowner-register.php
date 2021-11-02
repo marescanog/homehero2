@@ -14,13 +14,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <h5 style="font-family: Segoe UI;
-                font-style: normal;
-                font-weight: bold;
-                font-size: 18px;
-                line-height: 24px;
-                color: #707070;
-        ">Homeowner Sign-Up</h5>
+        <h5 class="font-weight-bold" style="color: #707070;">Homeowner Sign-Up</h5>
         <form id="registerForm" type="POST" onSubmit="registerHandler(event)" name="modalForm" class="m-4">
             <div class="d-flex">
                 <div class="form-group w-100 mr-2">

@@ -1,64 +1,89 @@
 <!-- 
-    Merged some contents such as ids and other properties
-    To be inserted:
-        Links for terms and conditions, privacy policy, login, and worker registration anchors
+    Theres a conflict for the custom select (applied in the city select) that removes the borders but this issue
+    should no longer be seen in the actual page where this will be applied
+
+    Things to be added:
+        onSubmit event, JS code to toggle enabled state of the dropdown for specific time
 -->
 
 <div class="modal-content">
     <div class="modal-header">
-        <div class="mx-auto" style="width: auto;">
-            <h5>Check availability</h5>
-            <p>When would you like to start your project?</p>
+
+        <div class="mx-auto text-center">
+            <h4 class="mt-2 font-weight-bold" style="color:#707070">Check availability</h4>
+            <p class="m-0">When would you like to start your project?</p>
         </div>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin: -1rem -1rem -1rem 0;">
+        <button type="button" class="close position-absolute" data-dismiss="modal" aria-label="Close" style="margin: -1rem 0; right:0">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="modal-body">
-        <h5 style="font-family: Segoe UI;
-                font-style: normal;
-                font-weight: bold;
-                font-size: 18px;
-                line-height: 24px;
-                color: #707070;
-        ">Homeowner Sign-Up</h5>
-        <form id="registerForm" type="POST" onSubmit="registerHandler(event)" name="modalForm" class="m-4">
-            <div class="d-flex">
-                <div class="form-group w-100 mr-2">
-                    <input type="date" class="form-control" id="RU_firstName" name="first_name" placeholder="Select date"  required >
+    <div class="modal-body col-sm-7 mx-auto">
+        <form id="checkAvailEstDateForm" type="POST" onSubmit="" name="modalForm">
+            <h5 class="font-weight-bold text-center" style="color:#707070">Estimated Date</h5>
+            <div class="form-group">
+                <select name="est-date" class="custom-select">
+                    <option value="3d">Within three days</option>
+                    <option value="7d">Within one week</option>
+                    <option value="14d">Within two weeks</option>
+                </select>
+                <p class="my-1" style="font-size:0.8em;">
+                    or choose a <a href="" data-toggle="modal" onclick="loadModal('check-avail-exact-date')">specific date</a>
+                </p>
+            </div>
+            <div class="form-group">
+                <h5 class="font-weight-bold text-center" style="color:#707070">Time Preference</h5>
+                <div class="form-check ml-3">
+                    <label>
+                        <input class="form-check-input" type="checkbox" name="est-time" value="morning">
+                        Morning (8am - 12pm)
+                    </label>
                 </div>
-                <div class="form-group w-100 ml-2">
-                    <input type="text" class="form-control" id="RU_lastName" name="last_name" placeholder="Last Name" autocomplete required maxlength="50">
+                <div class="form-check ml-3">
+                    <label>
+                        <input class="form-check-input" type="checkbox" name="est-time" value="afternoon">
+                        Afternoon (12pm - 5pm)
+                    </label>
                 </div>
+                <div class="form-check ml-3">
+                    <label>
+                        <input class="form-check-input" type="checkbox" name="est-time" value="evening">
+                        Evening (5pm - 9:30pm)
+                    </label>
+                </div>
+
+                <p class="text-center mt-2 mb-2" style="font-size:0.8em;">
+                    Or choose a specific time
+                </p>
+                <!-- to be enabled only when none of the three checkboxes are checked and disabled otherwise -->
+                <select name="other-time" class="custom-select">
+                    <option value="0">I'm flexible</option>
+                    <option value="8">8:00-9:00am</option>
+                    <option value="9">9:00-10:00am</option>
+                    <option value="10">10:00-11:00am</option>
+                    <option value="11">11:00am-12:00am</option>
+                    <option value="12">12:00-1:00pm</option>
+                    <option value="13">1:00-2:00pm</option>
+                    <option value="14">2:00-3:00pm</option>
+                    <option value="15">3:00-4:00pm</option>
+                    <option value="16">4:00-5:00pm</option>
+                    <option value="17">5:00-6:00pm</option>
+                    <option value="18">6:00-7:00pm</option>
+                    <option value="19">7:00-8:00pm</option>
+                    <option value="20">8:00-9:30pm</option>
+                </select>
             </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="RU_phone" name="phone_number" placeholder="Mobile number (09XXXXXXXXX)" autocomplete required maxlength="15">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" id="RU_password" name="password" placeholder="Enter password" autocomplete required maxlength="50">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" id="RU_confirmPassword" name="confirm_password" placeholder="Re-enter password" autocomplete required maxlength="50">
-            </div>
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="agree" required>
-                <label class="form-check-label" for="agree" style="font-size:0.8em;">I agree to HomeHero's <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</label>
-            </div>
+
+            <p class="mt-1 text-center" style="font-size:0.8em;">
+                *Choose an estimated or exact date to see if this HomeHero is available to work for you.
+            </p>
             <button type="submit" class="btn btn-warning text-white font-weight-bold w-100 mb-3">
-                <span id="RU-submit-btn-txt">CREATE ACCOUNT</span>
+                <span id="RU-submit-btn-txt">SELECT AND CONTINUE</span>
                 <div id="RU-submit-btn-load" class="d-none">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     <span class="sr-only">Loading...</span>
                 </div>
             </button>
-            
-            <div class="text-center" style="font-size:0.8em;">
-                <p>
-                    Already have an account? <a href="#">Login</a>
-                    </br>
-                    Looking for work? <a href="#">Register</a> at the worker's portal.
-                </p>
-            </div>
+
         </form>
     </div>
 </div>
