@@ -3,7 +3,7 @@ var buttonDesktop = document.getElementById("header-btn-desktop");
 var buttonMobile = document.getElementById("header-btn-mobile");
 var signUpHeaderLink = document.getElementById("RU-signup");
 var modal = document.getElementById("modal");
-var SMSVerification = document.getElementById("sms-verification");
+// var SMSVerification = document.getElementById("sms-verification");
 
 // Set events for elements
 buttonDesktop.addEventListener("click", ()=>{
@@ -26,9 +26,9 @@ signUpHeaderLink.addEventListener("click", ()=>{
     loadModal("signup");
 });
 
-SMSVerification.addEventListener("click", ()=>{
-    loadModal("sms-verification");
-});
+// SMSVerification.addEventListener("click", ()=>{
+//     // loadModal("sms-verification");
+// });
 
 
 // Private functions
@@ -51,8 +51,6 @@ $("#RU-close-btn").click((modalType) => {
     $("#test").load("./components/modals/empty.php");
 });
 
-
-
 const registerHandler =(e)=>{
     e.preventDefault();
 
@@ -72,7 +70,6 @@ const registerHandler =(e)=>{
     for (var i = 0, len = elements.length; i < len; ++i) {
         elements[i].readOnly = true;
     }
-
 
     // Convert Form Data to Object
     let formData = new FormData(myForm);
