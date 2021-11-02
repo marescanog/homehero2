@@ -27,7 +27,7 @@
                             <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Help.php">HELP</a>
                         </li>
                         <li class="nav-item pr-lg-5">
-                            <a class="nav-link custom-a" href="#">SIGN-UP</a>
+                            <a id="RU-signup" class="nav-link custom-a" type="button" data-toggle="modal" data-target="#modal">SIGN-UP</a>
                         </li>
                     </ul>
                 </div>
