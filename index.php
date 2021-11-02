@@ -282,13 +282,6 @@ require_once dirname(__FILE__).'/components/head-meta.php';
         </div>
     </div>
 
-    <div class="container">
-        <button id="sms-verification" type="button" data-toggle="modal" data-target="modal" class="btn btn-primary">
-            SMS Verification modal
-        </button>
-    </div>
-
-
     <!-- =============================================== -->
     <!--                    MODAL                        -->
     <!-- =============================================== -->
