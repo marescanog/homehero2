@@ -41,7 +41,7 @@ checkAvailExactDate.addEventListener("click", ()=>{
 
 const loadModal = (modalType) => {
     const modalTypes = {
-        "signup" : "./components/modals/test-modal-register.php",
+        "signup" : "./components/modals/homeowner-register.php",
         "error" : "./components/modals/error.php" ,
         "check-avail-est-date" : "./components/modals/check-avail-est-date.php" ,
         "check-avail-exact-date" : "./components/modals/check-avail-exact-date.php" 
