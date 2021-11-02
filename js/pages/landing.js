@@ -3,6 +3,8 @@ var buttonDesktop = document.getElementById("header-btn-desktop");
 var buttonMobile = document.getElementById("header-btn-mobile");
 var signUpHeaderLink = document.getElementById("RU-signup");
 var modal = document.getElementById("modal");
+var checkAvailEstDate = document.getElementById("check-avail-est-date");
+var checkAvailExactDate = document.getElementById("check-avail-exact-date");
 
 // Set events for elements
 buttonDesktop.addEventListener("click", ()=>{
@@ -25,13 +27,23 @@ signUpHeaderLink.addEventListener("click", ()=>{
     loadModal("signup");
 });
 
+checkAvailEstDate.addEventListener("click", ()=>{
+    loadModal("check-avail-est-date");
+});
+
+checkAvailExactDate.addEventListener("click", ()=>{
+    loadModal("check-avail-exact-date");
+});
+
 
 // Private functions
 
 const loadModal = (modalType) => {
     const modalTypes = {
         "signup" : "./components/modals/test-modal-register.php",
-        "error" : "./components/modals/error.php" 
+        "error" : "./components/modals/error.php" ,
+        "check-avail-est-date" : "./components/modals/check-avail-est-date.php" ,
+        "check-avail-exact-date" : "./components/modals/check-avail-exact-date.php" 
     }
 
     if(modalTypes.hasOwnProperty(modalType)){

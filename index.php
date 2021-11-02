@@ -282,6 +282,12 @@ require_once dirname(__FILE__).'/components/head-meta.php';
         </div>
     </div>
 
+    <div class="container">
+        <button id="check-avail-est-date" class="btn btn-primary">
+            
+        </button>
+    </div>
+
 
     <!-- =============================================== -->
     <!--                    MODAL                        -->
