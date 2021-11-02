@@ -3,12 +3,8 @@ var buttonDesktop = document.getElementById("header-btn-desktop");
 var buttonMobile = document.getElementById("header-btn-mobile");
 var signUpHeaderLink = document.getElementById("RU-signup");
 var modal = document.getElementById("modal");
-<<<<<<< HEAD
 var checkAvailEstDate = document.getElementById("check-avail-est-date");
 var checkAvailExactDate = document.getElementById("check-avail-exact-date");
-=======
-// var SMSVerification = document.getElementById("sms-verification");
->>>>>>> master
 
 // Set events for elements
 buttonDesktop.addEventListener("click", ()=>{
@@ -31,7 +27,6 @@ signUpHeaderLink.addEventListener("click", ()=>{
     loadModal("signup");
 });
 
-<<<<<<< HEAD
 checkAvailEstDate.addEventListener("click", ()=>{
     loadModal("check-avail-est-date");
 });
@@ -39,27 +34,16 @@ checkAvailEstDate.addEventListener("click", ()=>{
 checkAvailExactDate.addEventListener("click", ()=>{
     loadModal("check-avail-exact-date");
 });
-=======
-// SMSVerification.addEventListener("click", ()=>{
-//     // loadModal("sms-verification");
-// });
->>>>>>> master
 
 
 // Private functions
 
 const loadModal = (modalType) => {
     const modalTypes = {
-<<<<<<< HEAD
         "signup" : "./components/modals/test-modal-register.php",
         "error" : "./components/modals/error.php" ,
         "check-avail-est-date" : "./components/modals/check-avail-est-date.php" ,
         "check-avail-exact-date" : "./components/modals/check-avail-exact-date.php" 
-=======
-        "signup" : "./components/modals/homeowner-register.php",
-        "error" : "./components/modals/error.php" ,
-        "sms-verification" : "./components/modals/sms-verification.php"
->>>>>>> master
     }
 
     if(modalTypes.hasOwnProperty(modalType)){
