@@ -35,7 +35,7 @@ SMSVerification.addEventListener("click", ()=>{
 
 const loadModal = (modalType) => {
     const modalTypes = {
-        "signup" : "./components/modals/test-modal-register.php",
+        "signup" : "./components/modals/homeowner-register.php",
         "error" : "./components/modals/error.php" ,
         "sms-verification" : "./components/modals/sms-verification.php"
     }
