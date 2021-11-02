@@ -257,7 +257,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                                 <img class="img-fluid" src="./images/pages/landing/CTABottomHomeowner.jpg" alt="Homeowner using the Homehero app">
                             </div>
                             <div class="CTA-button-container">
-                                <button class="btn btn-warning btn-lg text-white w-100">
+                                <button class="btn btn-warning btn-lg text-white font-weight-bold w-100 mb-2">
                                     Sign Up
                                 </button>
                                 <p>Get your FREE online account and start looking for a Hero to help with your home.</p>
@@ -270,7 +270,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                                 <img class="img-fluid" src="./images/pages/landing/CTABottomWorker.jpg" alt="Worker using the Homehero app">
                             </div>
                             <div class="CTA-button-container">
-                                <button class="btn btn-warning btn-lg text-white w-100">
+                                <button class="btn btn-warning btn-lg text-white font-weight-bold w-100 mb-2"">
                                     Become a HomeHero
                                 </button>
                                 <p>Register as a HomeHero and easily be able to find and connect to clients.</p>
@@ -282,6 +282,17 @@ require_once dirname(__FILE__).'/components/head-meta.php';
         </div>
     </div>
 
+    <!-- Temporary buttons for modals -->
+    <div class="container">
+        <button id="check-avail-est-date" class="btn btn-primary" data-toggle="modal" data-target="#modal">
+            Chech availability - estimated date modal
+        </button>
+        <button id="check-avail-exact-date" class="btn btn-primary" data-toggle="modal" data-target="#modal">
+            Chech availability - exact date modal
+        </button>
+    </div>
+
+
     <!-- =============================================== -->
     <!--                    MODAL                        -->
     <!-- =============================================== -->
@@ -291,7 +302,8 @@ require_once dirname(__FILE__).'/components/head-meta.php';
 
             ?>
         </div>
-      </div>
+    </div>
+      
 
 <?php 
     require_once dirname(__FILE__).'/./components/footer.php'; 
