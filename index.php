@@ -282,17 +282,6 @@ require_once dirname(__FILE__).'/components/head-meta.php';
         </div>
     </div>
 
-    <!-- Temporary buttons for modals -->
-    <div class="container">
-        <button id="check-avail-est-date" class="btn btn-primary" data-toggle="modal" data-target="#modal">
-            Chech availability - estimated date modal
-        </button>
-        <button id="check-avail-exact-date" class="btn btn-primary" data-toggle="modal" data-target="#modal">
-            Chech availability - exact date modal
-        </button>
-    </div>
-
-
     <!-- =============================================== -->
     <!--                    MODAL                        -->
     <!-- =============================================== -->

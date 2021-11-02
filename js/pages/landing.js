@@ -3,8 +3,6 @@ var buttonDesktop = document.getElementById("header-btn-desktop");
 var buttonMobile = document.getElementById("header-btn-mobile");
 var signUpHeaderLink = document.getElementById("RU-signup");
 var modal = document.getElementById("modal");
-var checkAvailEstDate = document.getElementById("check-avail-est-date");
-var checkAvailExactDate = document.getElementById("check-avail-exact-date");
 
 // Set events for elements
 buttonDesktop.addEventListener("click", ()=>{
@@ -25,15 +23,6 @@ buttonMobile.addEventListener("click", ()=>{
 
 signUpHeaderLink.addEventListener("click", ()=>{
     loadModal("signup");
-});
-
-checkAvailEstDate.addEventListener("click", ()=>{
-    loadModal("check-avail-est-date");
-});
-
-
-checkAvailExactDate.addEventListener("click", ()=>{
-    loadModal("check-avail-exact-date");
 });
 
 
