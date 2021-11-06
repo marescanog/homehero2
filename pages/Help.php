@@ -27,7 +27,7 @@ require_once dirname(__FILE__).'/../components/head-meta.php';
             <a href="wayne.php" class="mt-2">Wayne Dayata</a>
             <a href="./marvie.php" class="mt-2">Marvie Gasataya</a>
             <a href="./Ixia.php" class="mt-2">Ixia Tan</a>
-            <a href="" class="mt-2">Ivana Leonado</a>
+            <a href="./Ivana.php" class="mt-2">Ivana Leonado</a>
         </ul>
     </div>
 
