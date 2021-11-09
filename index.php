@@ -50,17 +50,22 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                                 <h1 class="jumbotron-h1 mt-lg-3 mt-0 mt-md-3 mt-lg-0">
                                     Find a Hero to help improve your home.
                                 </h1>
-                                <?php include './components/forms/jumbo_card_form.php';?>
+                                <div class="mt-0 mt-md-3 mt-lg-5">
+                                    <?php include './components/forms/jumbo_card_form.php';?>
+                                </div>
+                                
                             </div>
 
                             <div class="tab-pane fade" id="nav-work" role="tabpanel" aria-labelledby="nav-work-tab">
                                 <h1 class="jumbotron-h1 mt-lg-3">
                                     Find clients and grow your income.
                                 </h1>
-                                <?php 
-                                $jumb_placeholder = "What is your occupation?";
-                                $jumb_button_text = "REGISTER";
-                                include './components/forms/jumbo_card_form.php';?>
+                                <div class="mt-0 mt-md-3 mt-lg-5">
+                                    <?php 
+                                    $jumb_placeholder = "What is your occupation?";
+                                    $jumb_button_text = "REGISTER";
+                                    include './components/forms/jumbo_card_form.php';?>
+                                 </div>
                             </div>
                         </div>
                     </div>

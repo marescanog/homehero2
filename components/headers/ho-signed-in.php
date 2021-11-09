@@ -5,11 +5,22 @@
             <a class="navbar-brand custom-a" href="<?php echo $level;?>/i2ndex.php">
                     <img src="<?php echo $level;?>/images/logo/HH_Logo_Mobile.svg" class="rounded mr-2" alt="Home Hero Logo" id="header-logo-mobile">
             </a>
-            <div>
+            <div class="d-flex">
                 <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <button class="btn btn-warning text-light" id="header-btn-mobile"><b>LOG-IN</b></button>
+                <div id="header-btn-mobile" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex justify-content-center align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="circle mr-1 p-1">UN</div>
+                    User's Name
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">logout</a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -18,20 +29,31 @@
                 <img src="<?php echo $level;?>/images/logo/HH_Logo_Light.svg" class="rounded mr-2" alt="Home Hero Logo" id="header-logo-desktop">
             </a>
             <div id="header-menu-links">
-                <div class="collapse navbar-collapse pr-3" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
+                <div class="collapse navbar-collapse pr-3 " id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto align-items-center">
                         <li class="nav-item pr-lg-5">
-                            <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Registration.php">FIND WORK</a>
+                            <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Registration.php">BROWSE</a>
                         </li>
                         <li class="nav-item pr-lg-5">
-                            <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Help.php">HELP</a>
+                            <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Help.php">PROJECTS</a>
                         </li>
                         <li class="nav-item pr-lg-5">
-                            <a id="RU-signup" class="nav-link custom-a" type="button" data-toggle="modal" data-target="#modal">SIGN-UP</a>
+                            <a id="RU-signup" class="nav-link custom-a" type="button" data-toggle="modal" data-target="#modal">INBOX</a>
+                        </li>
+                        <li id="header-btn-desktop" class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex justify-content-center align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="circle mr-3 p-2">UN</div>
+                            User's Name
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">logout</a>
+                            </div>
                         </li>
                     </ul>
                 </div>
-                <button class="btn btn-warning text-light" id="header-btn-desktop"><b>LOG-IN</b></button>
             </div>
         </div>
 
