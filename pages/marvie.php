@@ -20,7 +20,39 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     <div class="container">
         <h1>marvie</h1>
 
+        <div class="container">
+            <h3>Testing UI links</h3>
+            <h2>Home Owner</h2>
+            <ul>
+                <li><a href="./homeowner/home.php">Home</a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+            </ul>
+            <h2>Worker</h2>
+            <ul>
+                <li><a href="./worker/home.php">Home</a></li>
+                <li><a href="./worker/landing.php">Landing</a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+            </ul>
+            <h2>Support</h2>
+            <ul>
+                <li><a href="./support/home.php">Home</a> </li>
+                <li><a href="./support/index.php">Signup</a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+            </ul>
+        </div>
+
+
         <h3>testing get request</h3>
+        <button class="btn btn-secondary my-2">
+            TEST
+        </button>
         <div class="container">
             <div id="users">
                 <div class="spinner-border" role="status">
@@ -36,6 +68,46 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <!-- Custom JS Scripts Below -->
     <script>
+    var buttonDesktop = document.getElementById("header-btn-desktop");
+
+    // Set events for elements
+    buttonDesktop.addEventListener("click", ()=>{
+        $.ajax({
+        type: 'GET',
+        url: 'http://localhost/slim3homeheroapi/public/create-guest',
+        success: response => {
+            // convert response to javascript object
+            let data = JSON.parse(response);
+
+            // access the javascript object's data which is under "response"
+            // The datatype for this is an array
+            let arr = data.response.data;
+
+            // create an empty object
+            let obj = {};
+
+            // Convert the array into a javascript object
+             arr.forEach((value, key) => {
+                 let newObj = {
+                    id : value['0'],
+                    type: value['1'],
+                    status: value['2'],
+                    fname: value['3'],
+                    lname: value['4'],
+                    phone: value['5'],
+                    pass: value['6']
+                 }
+                 obj[key] = newObj;
+             });
+
+            $('#users').load("../components/cards/a.php", obj)
+        },
+        error: response => {
+            $('#users').load("../components/cards/b.php")
+        }
+    });
+
+    });
 
     $.ajax({
         type: 'GET',
