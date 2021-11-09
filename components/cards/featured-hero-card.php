@@ -1,4 +1,4 @@
-<div class="feature-card rounded">
+<div class="feature-card rounded ">
     <div class="card-body">
         <div class="d-flex" style="background-color:'#FF0000'">
             <div>
