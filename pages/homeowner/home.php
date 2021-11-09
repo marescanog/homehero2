@@ -12,13 +12,13 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
  <body class="container-fluid m-0 p-0 main-container">  
     <!-- Add your Header NavBar here-->
     <?php 
-        require_once dirname(__FILE__)."/$level/components/header.php"; 
+        require_once dirname(__FILE__)."/$level/components/headers/ho-signed-in.php"; 
     ?>
     <div class="<?php echo $hasHeader ?? ""; ?>">
     <!-- === Your Custom Page Content Goes Here below here === -->
 
 
-    <h1>Home Owner Home</h1>
+    <h1>Home Owner dsfdHome</h1>
 
     
 
