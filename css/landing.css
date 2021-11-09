@@ -433,6 +433,14 @@ hr.card-hr {
     border-top: 1px solid #9FAEAE;
 }
 
+.w-cap{
+    max-width: 375px;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 @media only screen and (min-width: 992px) {
     .featured-header{
         font-size: 2em;
@@ -443,6 +451,14 @@ hr.card-hr {
         margin-left: none;
         margin-right: none;
         margin-bottom: none;
+    }
+
+    .w-cap{
+        max-width: 1200px;
+        padding-left: 1em;
+        padding-right: 1em;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
