@@ -141,61 +141,39 @@ require_once dirname(__FILE__).'/components/head-meta.php';
             <div class="container pt-5">
                 <h2 class="gray-font feature-point-headline text-center">How it works</h2>
 
-                <!-- <div class="row bg-primary">
-                    <div class="col-12 col-lg-4">s
-                        <div>
-                            <?php
-                                // include dirname(__FILE__).'/images/pages/landing/post_tasks.svg'; 
-                            ?>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-4">s
-                        <div>
-                            <?php
-                                // include dirname(__FILE__).'/images/pages/landing/review_offers.svg'; 
-                            ?>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-4">s
-                        <div >
-                            <img src="./images/pages/landing/taxi-surfing.png" alt="" class="img-fluid feature-max-img">
-                        </div>
-                    </div>
-                </div> -->
-
-                <!-- <div class="row d-flex justify-content-around mt-5 mb-5 mb-lg-0"> -->
+                <div class="row d-flex justify-content-around mt-5 mb-5 mb-lg-0"> 
 
 
                     <!-- Feature 1 -->
-                    <!-- <div class="col col-lg-3 d-flex flex-column align-items-center pb-5">
+                    <div class="col col-lg-3 d-flex flex-column align-items-center pb-5">
                         <div>
                             <?php
-                                // include dirname(__FILE__).'/images/pages/landing/post_tasks.svg'; 
+                                include dirname(__FILE__).'/images/pages/landing/post_tasks.svg'; 
                             ?>
                         </div>
                         <div>
                             <h4 class="gray-font text-center">Post Tasks</h4>
                             <p>Delegate projects that need to be done by posting your needs</p>
                         </div>
-                    </div> -->
+                    </div> 
 
                     
-                    <!-- Feature 1 -->
-                    <!-- <div class="col col-lg-3 d-flex flex-column align-items-center">
+                    <!-- Feature 2 -->
+                     <div class="col col-lg-3 d-flex flex-column align-items-center">
                         <div>
                             <?php
-                                // include dirname(__FILE__).'/images/pages/landing/review_offers.svg'; 
+                                include dirname(__FILE__).'/images/pages/landing/review_offers.svg'; 
                             ?>
                         </div>
                         <div>
                             <h4 class="gray-font text-center">Review Offers</h4>
                             <p>Check offers and hire the right hero for your tasks</p>
                         </div>
-                    </div> -->
+                    </div> 
 
                     
                     <!-- Feature 1 -->
-                    <!-- <div class="col col-lg-3 d-flex flex-column align-items-center">
+                    <div class="col col-lg-3 d-flex flex-column align-items-center">
                         <div >
                             <img src="./images/pages/landing/taxi-surfing.png" alt="" class="img-fluid feature-max-img">
                         </div>
@@ -203,7 +181,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                             <h4 class="gray-font text-center">Task Done!</h4>
                             <p>Sit back and relax as your hirehero gets the task done for you!</p>
                         </div>
-                    </div> -->
+                    </div> 
 
 
                 <!-- </div> -->
