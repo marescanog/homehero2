@@ -21,14 +21,22 @@ require_once dirname(__FILE__).'/components/head-meta.php';
     <!-- JUMBOTRON -->
     <!-- =============================================== -->
     <div class="jumbotron py-0 mb-auto d-flex justify-content-center flex-lg-end">
-        <div class="d-lg-flex flex-lg-row-reverse justify-content-center jumbotron-container">
-            <div class="d-flex jumbotron-img-container">
+        <div class="d-lg-flex flex-lg-row-reverse justify-content-center jumbotron-container row">
+            <div class="d-flex jumbotron-img-container col-12 col-lg-6 mt-auto">
                 <div class="mx-auto m-lg-0 d-flex justify-content-center">
-                    <img src="./images/pages/landing/Jumbotron_Image.jpg" alt="" class="img-fluid jumbotron-img" >
+                    <img src="./images/pages/landing/Jumbotron_Image.jpg" 
+                         srcset="./images/pages/landing/Jumbotron_Image.jpg 594w, 
+                                 ./images/pages/landing/jumbo-320.jpg 320w,
+                                 ./images/pages/landing/jumbo-280.jpg 280w"
+                         sizes="(max-width: 280px) 280w, 
+                                (max-width: 320px) 320w
+                                594w"
+                         alt="A homehero worker holding a drill" 
+                         class="img-fluid jumbotron-img" >
                 </div>
             </div>
 
-            <div class="jumbotron-card" > 
+            <div class="jumbotron-card mt-5 pt-5 col-12 col-lg-6" > 
                 <div class="card w-lg-75 ml-lg-auto mr-lg-3 mb-lg-5 jumbotron-card-body">
                     <div  id="tabs" class="card-body">
                         <nav>
@@ -132,39 +140,62 @@ require_once dirname(__FILE__).'/components/head-meta.php';
         <div class="container featured-point_content-wrapper">
             <div class="container pt-5">
                 <h2 class="gray-font feature-point-headline text-center">How it works</h2>
-                <div class="row d-flex justify-content-around mt-5 mb-5 mb-lg-0">
+
+                <!-- <div class="row bg-primary">
+                    <div class="col-12 col-lg-4">s
+                        <div>
+                            <?php
+                                // include dirname(__FILE__).'/images/pages/landing/post_tasks.svg'; 
+                            ?>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4">s
+                        <div>
+                            <?php
+                                // include dirname(__FILE__).'/images/pages/landing/review_offers.svg'; 
+                            ?>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4">s
+                        <div >
+                            <img src="./images/pages/landing/taxi-surfing.png" alt="" class="img-fluid feature-max-img">
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- <div class="row d-flex justify-content-around mt-5 mb-5 mb-lg-0"> -->
 
 
                     <!-- Feature 1 -->
-                    <div class="col col-lg-3 d-flex flex-column align-items-center pb-5">
+                    <!-- <div class="col col-lg-3 d-flex flex-column align-items-center pb-5">
                         <div>
                             <?php
-                                include dirname(__FILE__).'/images/pages/landing/post_tasks.svg'; 
+                                // include dirname(__FILE__).'/images/pages/landing/post_tasks.svg'; 
                             ?>
                         </div>
                         <div>
                             <h4 class="gray-font text-center">Post Tasks</h4>
                             <p>Delegate projects that need to be done by posting your needs</p>
                         </div>
-                    </div>
+                    </div> -->
 
                     
                     <!-- Feature 1 -->
-                    <div class="col col-lg-3 d-flex flex-column align-items-center">
+                    <!-- <div class="col col-lg-3 d-flex flex-column align-items-center">
                         <div>
                             <?php
-                                include dirname(__FILE__).'/images/pages/landing/review_offers.svg'; 
+                                // include dirname(__FILE__).'/images/pages/landing/review_offers.svg'; 
                             ?>
                         </div>
                         <div>
                             <h4 class="gray-font text-center">Review Offers</h4>
                             <p>Check offers and hire the right hero for your tasks</p>
                         </div>
-                    </div>
+                    </div> -->
 
                     
                     <!-- Feature 1 -->
-                    <div class="col col-lg-3 d-flex flex-column align-items-center">
+                    <!-- <div class="col col-lg-3 d-flex flex-column align-items-center">
                         <div >
                             <img src="./images/pages/landing/taxi-surfing.png" alt="" class="img-fluid feature-max-img">
                         </div>
@@ -172,10 +203,10 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                             <h4 class="gray-font text-center">Task Done!</h4>
                             <p>Sit back and relax as your hirehero gets the task done for you!</p>
                         </div>
-                    </div>
+                    </div> -->
 
 
-                </div>
+                <!-- </div> -->
             </div>
         </div>
     </div>
@@ -183,7 +214,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
     <!-- =============================================== -->
     <!-- TESTIMONY -->
     <!-- =============================================== -->
-    <div class="testimony-container">
+    <!-- <div class="testimony-container">
         <div class="row mx-lg-5 testim-wrap" >
             <col-12 class="col-12 col-lg-6 flex-1 justify-content-center align-items-center">
                 <img src="./images/pages/landing/customer-testimonial.jpg" class="img-fluid" alt="a happy homeowner using the homehero app" >
@@ -200,48 +231,49 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                 </div>
             </col-12>
         </div>
-    </div>
+    </div> -->
 
     <!-- =============================================== -->
     <!-- FEATURED HEROES-->
     <!-- =============================================== -->
-    <div class="featured-heroes">
+    <!-- <div class="featured-heroes">
         <div class="feature-wrap pt-5 pb-2 mb-5">
              <h2 class="featured-header gray-font pb-3">Featured Heroes</h2>
-             <div class="row feature-row">
+             <div class="row feature-row"> -->
                 <?php 
-                    include "./mock-data/featured_heroes.php";
-                    $feature_name = "";
-                    if(isset($data_featured) && count($data_featured)> 0){
-                        for($ndx_f = 0; $ndx_f < 3; $ndx_f++){
-                            $feature_name = $data_featured[$ndx_f]["name"];
-                            $feature_picture = $data_featured[$ndx_f]["profile_picture"];
-                            $feature_projects_completed = $data_featured[$ndx_f]["projects_completed"];
-                            $rating = $data_featured[$ndx_f]["rating"];
-                            $hasRatings = $data_featured[$ndx_f]["hasRatings"];
-                            $feature_skill_list = $data_featured[$ndx_f]["skills"];
-                            $feature_description = $data_featured[$ndx_f]["Description"];
-                            $ndx_person_ndx = $ndx_f;
+                    // include "./mock-data/featured_heroes.php";
+                    // $feature_name = "";
+                    // if(isset($data_featured) && count($data_featured)> 0){
+                    //     for($ndx_f = 0; $ndx_f < 3; $ndx_f++){
+                    //         $feature_name = $data_featured[$ndx_f]["name"];
+                    //         $feature_picture = $data_featured[$ndx_f]["profile_picture"];
+                    //         $feature_projects_completed = $data_featured[$ndx_f]["projects_completed"];
+                    //         $rating = $data_featured[$ndx_f]["rating"];
+                    //         $hasRatings = $data_featured[$ndx_f]["hasRatings"];
+                    //         $feature_skill_list = $data_featured[$ndx_f]["skills"];
+                    //         $feature_description = $data_featured[$ndx_f]["Description"];
+                    //         $ndx_person_ndx = $ndx_f;
                 ?>
-                        <div class="col-12 col-lg-4">
+                        <!-- <div class="col-12 col-lg-4"> -->
                             <?php
-                                include "./components/cards/featured-hero-card.php";
+                                // include "./components/cards/featured-hero-card.php";
                             ?>
-                        </div>
-                    <?php } } else {
-                        echo "<p>No data available</p>";
-                    }
-                        $feature_name = null;
-                        $feature_picture = null;
-                        $feature_projects_completed = null;
-                        $rating = null;
-                        $hasRatings = null;
-                        $feature_skill_list = null;
-                        $feature_description = null;
+                        <!-- </div> -->
+                    <?php 
+                    // } } else {
+                    //     echo "<p>No data available</p>";
+                    // }
+                    //     $feature_name = null;
+                    //     $feature_picture = null;
+                    //     $feature_projects_completed = null;
+                    //     $rating = null;
+                    //     $hasRatings = null;
+                    //     $feature_skill_list = null;
+                    //     $feature_description = null;
                     ?>
-            </div>
+            <!-- </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- =============================================== -->
     <!-- CTA BOTTOM  -->
