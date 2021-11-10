@@ -50,7 +50,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
 
         <h3>testing get request</h3>
-        <button class="btn btn-secondary my-2">
+        <button id="tester"class="btn btn-secondary my-2">
             TEST
         </button>
         <div class="container">
@@ -68,45 +68,21 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <!-- Custom JS Scripts Below -->
     <script>
-    var buttonDesktop = document.getElementById("header-btn-desktop");
+    var tester = document.getElementById("tester");
 
     // Set events for elements
-    buttonDesktop.addEventListener("click", ()=>{
-        $.ajax({
-        type: 'GET',
-        url: 'http://localhost/slim3homeheroapi/public/create-guest',
-        success: response => {
-            // convert response to javascript object
-            let data = JSON.parse(response);
-
-            // access the javascript object's data which is under "response"
-            // The datatype for this is an array
-            let arr = data.response.data;
-
-            // create an empty object
-            let obj = {};
-
-            // Convert the array into a javascript object
-             arr.forEach((value, key) => {
-                 let newObj = {
-                    id : value['0'],
-                    type: value['1'],
-                    status: value['2'],
-                    fname: value['3'],
-                    lname: value['4'],
-                    phone: value['5'],
-                    pass: value['6']
-                 }
-                 obj[key] = newObj;
-             });
-
-            $('#users').load("../components/cards/a.php", obj)
-        },
-        error: response => {
-            $('#users').load("../components/cards/b.php")
-        }
-    });
-
+    tester.addEventListener("click", ()=>{
+        console.log("click")
+            let data = $.ajax({
+            type: 'GET',
+            url: 'http://localhost/slim3homeheroapi/public/create-guest',
+            success: response => {
+                console.log(response)
+            }, 
+            error:  response => {
+                console.log(response)
+            }
+        });
     });
 
     $.ajax({
