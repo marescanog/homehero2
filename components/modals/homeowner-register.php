@@ -2,12 +2,18 @@
     Merged some contents such as ids and other properties
     To be inserted:
         Links for terms and conditions, privacy policy, login, and worker registration anchors
--->
 
+    Additional Note: Since this modal will be used in different pages with different 
+        folder addresses, Include a php call out of level.
+        Validation will now be manual JS since we will base it on form submisstion.
+ -->
+<?php 
+    $level = isset($_POST['level']) ? $_POST['level'] : '.';
+?>
 <div class="modal-content">
     <div class="modal-header">
         <div class="mx-auto" style="width: auto;">
-            <img src='./images/logo/HH_Logo_Light.svg'>
+            <img src="<?php echo $level?>/images/logo/HH_Logo_Light.svg">
         </div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin: -1rem -1rem -1rem 0;">
             <span aria-hidden="true">&times;</span>
@@ -37,7 +43,7 @@
                 <input type="checkbox" class="form-check-input" id="agree" required>
                 <label class="form-check-label" for="agree" style="font-size:0.8em;">I agree to HomeHero's <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</label>
             </div>
-            <button id="RU-submit-btn" type="submit" class="btn btn-warning text-white font-weight-bold w-100 mb-3">
+            <button id="RU-submit-btn" type="button" class="btn btn-warning text-white font-weight-bold w-100 mb-3">
                 <span id="RU-submit-btn-txt">CREATE ACCOUNT</span>
                 <div id="RU-submit-btn-load" class="d-none">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

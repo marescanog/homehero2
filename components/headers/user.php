@@ -41,4 +41,5 @@
         </div>
     </div>
 </nav>
+<script src="<?php echo $level;?>/js/components/loadModal.js"></script>
 <script src="<?php echo $level;?>/js/components/headers/user.js"></script>

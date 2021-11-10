@@ -6,3 +6,14 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Custom JS -->
 <script src="<?php echo $level;?>/js/main.js"></script>
+
+<!-- =============================================== -->
+<!--                    MODAL                        -->
+<!-- =============================================== -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div id="modal-contents" class="modal-dialog modal-dialog-centered" role="document">
+        <?php
+
+        ?>
+    </div>
+</div>

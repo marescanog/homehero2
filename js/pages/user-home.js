@@ -9,11 +9,11 @@ $(document).ready(()=>{
 
     button.addEventListener("click", ()=>{
         console.log("button has been clicked");  
-        const modalTypes = {
-        "login" : "../../components/modals/temp-enter-address.php",
-        "error" : "../../components/modals/error.php" 
-        }
-        loadModal("login", modalTypes);
+        // const modalTypes = {
+        // "login" : "../../components/modals/temp-enter-address.php",
+        // "error" : "../../components/modals/error.php" 
+        // }
+        // loadModal("login", modalTypes);
     });
 })
 

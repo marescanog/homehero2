@@ -62,3 +62,6 @@
         </div>
         </d>
     </nav>
+    <script src="<?php echo $level;?>/js/components/loadModal.js"></script>
+    <script src="<?php echo $level;?>/js/components/headers/user-signedin.js"></script>
+

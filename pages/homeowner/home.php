@@ -46,16 +46,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <?php   require_once dirname(__FILE__)."/$level/components/sections/featured-heroes.php"; ?>
 
 
-<!-- =============================================== -->
-<!--                    MODAL                        -->
-<!-- =============================================== -->
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <div id="modal-contents" class="modal-dialog modal-dialog-centered" role="document">
-        <?php
 
-        ?>
-    </div>
-</div>
 
 
 
@@ -81,7 +72,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     </div>
 <?php require_once dirname(__FILE__)."/$level/components/foot-meta.php"; ?>
 <!-- Custom JS Scripts Below -->
-    <script src="../../js/components/loadModal.js"></script>
+    <script src="<?php echo $level;?>/js/components/loadModal.js"></script>
     <script src="../../js/pages/user-home.js"></script>
     <script>
 

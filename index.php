@@ -198,17 +198,6 @@ require_once dirname(__FILE__).'/components/head-meta.php';
              </div>
         </div>
     </div>
-
-    <!-- =============================================== -->
-    <!--                    MODAL                        -->
-    <!-- =============================================== -->
-    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-        <div id="modal-contents" class="modal-dialog modal-dialog-centered" role="document">
-            <?php
-
-            ?>
-        </div>
-    </div>
       
 
 <?php 
@@ -221,6 +210,6 @@ require_once dirname(__FILE__).'/components/head-meta.php';
     </div>
 <?php require_once dirname(__FILE__).'/components/foot-meta.php'; ?>
 <!-- Custom JS Scripts Below -->
-    <script src="./js/pages/landing.js"></script>
+    <!-- <script src="./js/pages/landing.js"></script> -->
 </body>
 </html>
