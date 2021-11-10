@@ -1,10 +1,9 @@
 <?php 
 $level =".";
-
 require_once dirname(__FILE__).'/components/head-meta.php'; 
-
 ?>
 <!-- Add your custom CSS below -->
+<link rel="stylesheet" href="./css/headers/user.css">
 <link rel="stylesheet" href="./css/landing.css">
 <link rel="stylesheet" href="./css/footer.css">
 <!-- Add your custom CSS above -->
@@ -12,7 +11,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
  <body class="container-fluid m-0 p-0 main-container">  
     <!-- Add your Header NavBar here-->
     <?php 
-        require_once dirname(__FILE__).'/components/header.php'; 
+        require_once dirname(__FILE__).'/components/headers/user.php'; 
     ?>
     <div class="<?php echo $hasHeader ?? ''; ?>">
     <!-- === Your Custom Page Content Goes Here below here === -->
