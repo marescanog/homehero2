@@ -78,7 +78,7 @@ $(document).ready(()=>{
         console.log("click")
             let data = $.ajax({
             type: 'GET',
-            url: 'http://localhost/slim3homeheroapi/public/create-guest',
+            url: 'https://slim3api.herokuapp.com/create-guest',
             success: response => {
                 console.log(response)
             }, 
@@ -91,7 +91,7 @@ $(document).ready(()=>{
     const loadData = () => {
         $.ajax({
             type: 'GET',
-            url: 'http://localhost/slim3homeheroapi/public/create-guest',
+            url: 'https://slim3api.herokuapp.com/create-guest',
             success: response => {
                 // convert response to javascript object
                 let data = JSON.parse(response);
