@@ -9,12 +9,12 @@
 
                 <div class="row pop-post-desktop">
                     <?php
-                        require_once dirname(__FILE__).'/mock-data/pop_post.php'; 
+                        require_once dirname(__FILE__)."/../../mock-data/pop_post.php"; 
                         foreach ($popularPosts as &$post) {
                     ?>
                     <div class="col col-lg-4">
                     <?php
-                    include dirname(__FILE__).'/components/cards/pop-post-card.php'; 
+                    include dirname(__FILE__)."/../../components/cards/pop-post-card.php"; 
                     ?>
                     </div>
                     <?php
@@ -27,12 +27,12 @@
                         <div class="carousel-inner">
                             <?php
                                 $echoActive = false;
-                                require_once dirname(__FILE__).'/mock-data/pop_post.php'; 
+                                require_once dirname(__FILE__)."/../../mock-data/pop_post.php"; 
                                 foreach ($popularPosts as &$post) {
                             ?>
                                 <div class="carousel-item <?php echo !$echoActive ? " active" : "";?>">
                             <?php
-                            include dirname(__FILE__).'/components/cards/pop-post-card.php'; 
+                            include dirname(__FILE__)."/../../components/cards/pop-post-card.php"; 
                             ?>
                             </div>
                             <?php

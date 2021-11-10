@@ -75,7 +75,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
     </div>
 
     <!-- Popular Posting -->
-    <?php   //require_once dirname(__FILE__).'/components/headers/user.php'; ?>
+    <?php   require_once dirname(__FILE__).'/components/sections/popular-posting.php'; ?>
 
     <!-- =============================================== -->
     <!-- HOW IT WORKS -->
@@ -128,7 +128,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                     </div> 
 
 
-                <!-- </div> -->
+                </div>
             </div>
         </div>
     </div>
@@ -201,7 +201,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
             <!-- </div> -->
         </div>
     </div> 
-
+ 
     <!-- =============================================== -->
     <!-- CTA BOTTOM  -->
     <!-- =============================================== -->
