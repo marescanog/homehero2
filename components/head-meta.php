@@ -15,4 +15,5 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- Custom JS -->
     <script src="<?php echo $level;?>/js/helper/appendStyleSheet.js"></script>
+    <script src="<?php echo $level;?>/js/helper/globals.js"></script>
    
