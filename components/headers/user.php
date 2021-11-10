@@ -41,6 +41,4 @@
         </div>
     </div>
 </nav>
-<script src="<?php echo $level;?>/js/helper/appendStyleSheet.js"></script>
-<script src="<?php echo $level;?>/js/helper/StyleSheetValidator.js"></script>
 <script src="<?php echo $level;?>/js/components/headers/user.js"></script>
