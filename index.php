@@ -1,10 +1,9 @@
 <?php 
 $level =".";
-
 require_once dirname(__FILE__).'/components/head-meta.php'; 
-
 ?>
 <!-- Add your custom CSS below -->
+<link rel="stylesheet" href="./css/headers/user.css">
 <link rel="stylesheet" href="./css/landing.css">
 <link rel="stylesheet" href="./css/footer.css">
 <!-- Add your custom CSS above -->
@@ -12,7 +11,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
  <body class="container-fluid m-0 p-0 main-container">  
     <!-- Add your Header NavBar here-->
     <?php 
-        require_once dirname(__FILE__).'/components/header.php'; 
+        require_once dirname(__FILE__).'/components/headers/user.php'; 
     ?>
     <div class="<?php echo $hasHeader ?? ''; ?>">
     <!-- === Your Custom Page Content Goes Here below here === -->
@@ -50,17 +49,22 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                                 <h1 class="jumbotron-h1 mt-lg-3 mt-0 mt-md-3 mt-lg-0">
                                     Find a Hero to help improve your home.
                                 </h1>
-                                <?php include './components/forms/jumbo_card_form.php';?>
+                                <div class="mt-0 mt-md-3 mt-lg-5">
+                                    <?php include './components/forms/jumbo_card_form.php';?>
+                                </div>
+                                
                             </div>
 
                             <div class="tab-pane fade" id="nav-work" role="tabpanel" aria-labelledby="nav-work-tab">
                                 <h1 class="jumbotron-h1 mt-lg-3">
                                     Find clients and grow your income.
                                 </h1>
-                                <?php 
-                                $jumb_placeholder = "What is your occupation?";
-                                $jumb_button_text = "REGISTER";
-                                include './components/forms/jumbo_card_form.php';?>
+                                <div class="mt-0 mt-md-3 mt-lg-5">
+                                    <?php 
+                                    $jumb_placeholder = "What is your occupation?";
+                                    $jumb_button_text = "REGISTER";
+                                    include './components/forms/jumbo_card_form.php';?>
+                                 </div>
                             </div>
                         </div>
                     </div>
@@ -70,68 +74,8 @@ require_once dirname(__FILE__).'/components/head-meta.php';
 
     </div>
 
-    <!-- =============================================== -->
-    <!-- POPULAR POSTINGS IN YOUR AREA -->
-    <!-- =============================================== -->
-    <div class="pop-post_container">
-        <div class="container pop-post_content-wrapper">
-
-            <div>
-                <h4 class="txt-semi">Popular Postings in your area</h4>
-
-                <div class="row pop-post-desktop">
-                    <?php
-                        require_once dirname(__FILE__).'/mock-data/pop_post.php'; 
-                        foreach ($popularPosts as &$post) {
-                    ?>
-                    <div class="col col-lg-4">
-                    <?php
-                    include dirname(__FILE__).'/components/cards/pop-post-card.php'; 
-                    ?>
-                    </div>
-                    <?php
-                        }
-                    ?>
-                </div>
-
-                <div class="pop-post-mobile">
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <?php
-                                $echoActive = false;
-                                require_once dirname(__FILE__).'/mock-data/pop_post.php'; 
-                                foreach ($popularPosts as &$post) {
-                            ?>
-                                <div class="carousel-item <?php echo !$echoActive ? " active" : "";?>">
-                            <?php
-                            include dirname(__FILE__).'/components/cards/pop-post-card.php'; 
-                            ?>
-                            </div>
-                            <?php
-                                $echoActive = true;
-                                }
-                                $echoActive = null;
-                            ?>
-                        </div>
-        
-                    </div>
-                    <!-- </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>   -->
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
+    <!-- Popular Posting -->
+    <?php   require_once dirname(__FILE__).'/components/sections/popular-posting.php'; ?>
 
     <!-- =============================================== -->
     <!-- HOW IT WORKS -->
@@ -184,7 +128,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                     </div> 
 
 
-                <!-- </div> -->
+                </div>
             </div>
         </div>
     </div>
@@ -211,53 +155,11 @@ require_once dirname(__FILE__).'/components/head-meta.php';
         </div>
     </div> -->
 
-    <!-- =============================================== -->
-    <!-- FEATURED HEROES-->
-    <!-- =============================================== -->
-  <div class="featured-heroes">
-        <div class="feature-wrap pt-5 pb-2 mb-5">
-             <h2 class="featured-header gray-font pb-3">Featured Heroes</h2>
-              <!-- <div class="row feature-row"> -->
+    <!-- Testimony -->
+    <?php   require_once dirname(__FILE__).'/components/sections/featured-heroes.php'; ?>
 
-            <div class="row w-cap">
-
-
-                <?php 
-                    include "./mock-data/featured_heroes.php";
-                    $feature_name = "";
-                    if(isset($data_featured) && count($data_featured)> 0){
-                        for($ndx_f = 0; $ndx_f < 3; $ndx_f++){
-                            $feature_name = $data_featured[$ndx_f]["name"];
-                            $feature_picture = $data_featured[$ndx_f]["profile_picture"];
-                            $feature_projects_completed = $data_featured[$ndx_f]["projects_completed"];
-                            $rating = $data_featured[$ndx_f]["rating"];
-                            $hasRatings = $data_featured[$ndx_f]["hasRatings"];
-                            $feature_skill_list = $data_featured[$ndx_f]["skills"];
-                            $feature_description = $data_featured[$ndx_f]["Description"];
-                            $ndx_person_ndx = $ndx_f;
-                ?>
-                        <div class="col-12 col-lg-4 my-2">
-                            <?php
-                                include "./components/cards/featured-hero-card.php";
-                            ?>
-                        </div>
-                    <?php 
-                    } } else {
-                        echo "<p>No data available</p>";
-                    }
-                        $feature_name = null;
-                        $feature_picture = null;
-                        $feature_projects_completed = null;
-                        $rating = null;
-                        $hasRatings = null;
-                        $feature_skill_list = null;
-                        $feature_description = null;
-                    ?>
-            </div>
-            <!-- </div> -->
-        </div>
-    </div> 
-
+   
+ 
     <!-- =============================================== -->
     <!-- CTA BOTTOM  -->
     <!-- =============================================== -->
@@ -296,17 +198,6 @@ require_once dirname(__FILE__).'/components/head-meta.php';
              </div>
         </div>
     </div>
-
-    <!-- =============================================== -->
-    <!--                    MODAL                        -->
-    <!-- =============================================== -->
-    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-        <div id="modal-contents" class="modal-dialog modal-dialog-centered" role="document">
-            <?php
-
-            ?>
-        </div>
-    </div>
       
 
 <?php 
@@ -319,6 +210,6 @@ require_once dirname(__FILE__).'/components/head-meta.php';
     </div>
 <?php require_once dirname(__FILE__).'/components/foot-meta.php'; ?>
 <!-- Custom JS Scripts Below -->
-    <script src="./js/pages/landing.js"></script>
+    <!-- <script src="./js/pages/landing.js"></script> -->
 </body>
 </html>

@@ -1,6 +1,6 @@
 <!-- CARD -->
     <div class="">
-        <img src="<?php echo $post[0];?>" class="img-fluid cust-card" alt="Post 1">
+        <img src="<?php echo $level.$post[0];?>" class="img-fluid cust-card" alt="Post 1">
     </div>
     <div class="pl-3">
         <h5 class="mt-2 gray-font"><b><?php echo $post[1];?></b></h5>

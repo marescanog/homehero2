@@ -1,4 +1,6 @@
-<form class="jum-form rounded d-flex  flex-column flex-lg-row mt-0 mt-md-3 mt-lg-5">
+<form <?php echo isset($jumb_id) ? "id='form-".$jumb_id."'" : ""?> class="jum-form rounded d-flex  flex-column flex-lg-row"
+
+>
     <div class="jumb-form-input-container">
         <input type="text" class="form-control-plaintext flex-1 card-input" placeholder="<?php echo isset($jumb_placeholder) ? $jumb_placeholder : "What do you need help with?"?>">
     </div>
@@ -23,7 +25,10 @@
             <option value="12">Toledo</option>
         </select>
     </div>
-    <button class="btn btn-warning text-white m-0 h-100 jmb-form-btn border-0">
+    <button <?php echo isset($jumb_id) ? "id='button-".$jumb_id."'" : ""?> 
+        class="btn btn-warning text-white m-0 h-100 jmb-form-btn border-0"
+        type="button" data-toggle="modal" data-target="#modal"
+        >
     <?php echo isset($jumb_button_text) ? $jumb_button_text : "SEARCH"?>
     </button>
 </form>
