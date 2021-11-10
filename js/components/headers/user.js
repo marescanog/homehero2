@@ -70,7 +70,8 @@ $( document ).ready(()=>{
             success : function(response) {
                 var res = JSON.parse(response);
                 console.log(response);
-    
+                let message = res.response.message;
+         
                 // Enable and hide loading
                 RUSignupSubmitButton.removeAttribute("disabled");
                 RUSignupSubmitTxt.innerHTML = "Register"
@@ -85,7 +86,7 @@ $( document ).ready(()=>{
     
                 Swal.fire({
                     title: res["success"] ? 'Success!': 'Error!',
-                    text: res["success"].message,
+                    text: message,
                     icon: res["success"] ? 'success': 'error',
                     confirmButtonText: 'Close'
                 }).then(result => {
@@ -97,7 +98,7 @@ $( document ).ready(()=>{
                 })
             },
             error: function (response) {
-    
+                var message = JSON.stringify(response.responseJSON.response.message);
                 // Enable and hide loading
                 RUSignupSubmitButton.removeAttribute("disabled");
                 RUSignupSubmitTxt.innerHTML = "Register"
@@ -113,7 +114,7 @@ $( document ).ready(()=>{
                 console.log(response.responseJSON)
                 Swal.fire({
                     title:'Error!',
-                    text: 'Fields must not be empty',
+                    text: message,
                     icon: 'error',
                     confirmButtonText: 'Close'
                 })
