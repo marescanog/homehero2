@@ -4,37 +4,59 @@
 appendStyleSheet("/css/headers/user.css");
 
 $( document ).ready(()=>{
-    var buttonDesktop = document.getElementById("header-btn-desktop");
-    var buttonMobile = document.getElementById("header-btn-mobile");
-    var signUpHeaderLink = document.getElementById("RU-signup");
+    const buttonDesktop = document.getElementById("header-btn-desktop");
+    const buttonMobile = document.getElementById("header-btn-mobile");
+    const signUpHeaderLink = document.getElementById("RU-signup");
     // var modal = document.getElementById("modal");
+
 
     // Set events for elements
     buttonDesktop.addEventListener("click", ()=>{
-        Swal.fire({
-            title: "Not Available",
-            confirmButtonText: 'Close',
-            html: "<img src='./images/svg/construction_icon.svg' style='height:100px; width:100px;'class='rounded mr-2 mb-3' alt='...'> <p>This feature is under construction. Please check back again later!</>"
-        })
+        loadModal("tempLogin",modalTypes,submitLoginHandler,getDocumentLevel());
+        // Swal.fire({
+        //     title: "Not Available",
+        //     confirmButtonText: 'Close',
+        //     html: "<img src='./images/svg/construction_icon.svg' style='height:100px; width:100px;'class='rounded mr-2 mb-3' alt='...'> <p>This feature is under construction. Please check back again later!</>"
+        // })
     });
 
     buttonMobile.addEventListener("click", ()=>{
-        Swal.fire({
-            title: "Not Available",
-            confirmButtonText: 'Close',
-            html: "<img src='./images/construction_icon.svg' style='height:100px; width:100px;'class='rounded mr-2 mb-3' alt='...'> <p>This feature is under construction. Please check back again later!</>"
-        })
+        loadModal("tempLogin",modalTypes,submitLoginHandler,getDocumentLevel());
+        // Swal.fire({
+        //     title: "Not Available",
+        //     confirmButtonText: 'Close',
+        //     html: "<img src='./images/construction_icon.svg' style='height:100px; width:100px;'class='rounded mr-2 mb-3' alt='...'> <p>This feature is under construction. Please check back again later!</>"
+        // })
     });
 
     signUpHeaderLink.addEventListener("click", ()=>{
         loadModal("signup", modalTypes, submitSignUpModalhandler, getDocumentLevel());
     });
 
+    const submitLoginHandler = () => {
+        const button = document.getElementById("login-modal-submit");
+        button.addEventListener("click", ()=>{
+            login();
+        })
+    }
+
     const submitSignUpModalhandler = () => {
         var signUpSubmitButton = document.getElementById("RU-submit-btn");
         signUpSubmitButton.addEventListener("click", ()=>{
             registerHandler();
         });
+    }
+
+    const login = () =>{
+        Swal.fire({
+            title: "success",
+            icon: "success",
+            text: "You have sucessfully logged in as a user!",
+            confirmButtonText: "close"
+        }).then(()=>{
+            // perform closing code wuch as cleaning form, reactivating form, closing the modal etc.
+            $('#modal').modal('hide');
+        })
     }
 
     const registerHandler =(e)=>{

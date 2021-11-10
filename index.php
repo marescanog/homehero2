@@ -50,7 +50,11 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                                     Find a Hero to help improve your home.
                                 </h1>
                                 <div class="mt-0 mt-md-3 mt-lg-5">
-                                    <?php include './components/forms/jumbo_card_form.php';?>
+                                    <?php 
+                                        $jumb_id = "jumbo-search";
+                                        include './components/forms/jumbo_card_form.php';
+                                        $jumb_id = null;
+                                    ?>
                                 </div>
                                 
                             </div>
@@ -61,9 +65,12 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                                 </h1>
                                 <div class="mt-0 mt-md-3 mt-lg-5">
                                     <?php 
+                                    $jumb_id = "jumbo-register";
                                     $jumb_placeholder = "What is your occupation?";
                                     $jumb_button_text = "REGISTER";
-                                    include './components/forms/jumbo_card_form.php';?>
+                                    include './components/forms/jumbo_card_form.php';
+                                    $jumb_id=null;
+                                    ?>
                                  </div>
                             </div>
                         </div>
@@ -210,6 +217,6 @@ require_once dirname(__FILE__).'/components/head-meta.php';
     </div>
 <?php require_once dirname(__FILE__).'/components/foot-meta.php'; ?>
 <!-- Custom JS Scripts Below -->
-    <!-- <script src="./js/pages/landing.js"></script> -->
+    <script src="./js/pages/landing.js"></script>
 </body>
 </html>
