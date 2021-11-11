@@ -7,6 +7,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <!-- === Link your custom CSS pages below here ===-->
 <link rel="stylesheet" href="../../css/headers/support.css">
 <link rel="stylesheet" href="../../css/headers/support-side-nav.css">
+<link rel="stylesheet" href="../../css/support-table.css">
 <script src="https://kit.fontawesome.com/d10ff4ba99.js" crossorigin="anonymous"></script>
 <!-- === Link your custom CSS  pages above here ===-->
 </head>

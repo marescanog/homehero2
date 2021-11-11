@@ -7,6 +7,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <!-- === Link your custom CSS pages below here ===-->
 <link rel="stylesheet" href="../../css/headers/support.css">
 <link rel="stylesheet" href="../../css/headers/support-side-nav.css">
+<link rel="stylesheet" href="../../css/support-table.css">
 <script src="https://kit.fontawesome.com/d10ff4ba99.js" crossorigin="anonymous"></script>
 <!-- === Link your custom CSS  pages above here ===-->
 </head>
@@ -46,7 +47,11 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
     <!-- Tab Header -->
     <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-ongoing" role="tabpanel" aria-labelledby="nav-ongoing-tab">Ongoing...</div>
+        <div class="tab-pane fade show active" id="nav-ongoing" role="tabpanel" aria-labelledby="nav-ongoing-tab">
+            <?php 
+                include "$level/components/UX/support-table.php";
+            ?>
+        </div>
 
         <div class="tab-pane fade" id="nav-completed" role="tabpanel" aria-labelledby="nav-completed-tab">Completed...</div>
 
