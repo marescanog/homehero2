@@ -12,11 +12,11 @@ $( document ).ready(()=>{
 
     // Set events for elements
     buttonDesktop.addEventListener("click", ()=>{
-        loadModal("tempLogin",modalTypes,submitLoginHandler,getDocumentLevel());
+        loadModal("user-login",modalTypes,submitLoginHandler,getDocumentLevel());
     });
 
     buttonMobile.addEventListener("click", ()=>{
-        loadModal("tempLogin",modalTypes,submitLoginHandler,getDocumentLevel());
+        loadModal("user-login",modalTypes,submitLoginHandler,getDocumentLevel());
     });
 
     signUpHeaderLink.addEventListener("click", ()=>{
@@ -90,7 +90,7 @@ $( document ).ready(()=>{
 
                     $.ajax({
                         type : 'POST',
-                        url : './auth/user-auth.php',
+                        url : getDocumentLevel()+'/auth/user-auth.php',
                         data : data,
                         success : function(response) {
                             var res = JSON.parse(response);
@@ -105,7 +105,7 @@ $( document ).ready(()=>{
                                     icon: 'success',
                                     confirmButtonText: 'Continue'
                                 }).then(result => {
-                                    window.location = './pages/homeowner/home.php'
+                                    window.location = getDocumentLevel()+'/pages/homeowner/home.php'
                                 })
                             } else {
                                 Swal.fire({
