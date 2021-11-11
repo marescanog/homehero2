@@ -1,0 +1,60 @@
+.card-body{
+    border-radius: 10px;
+}
+
+.card{
+    border-radius: 10px;
+}
+
+.card-icon{
+    transform: scale(4,4) translateX(0.35rem) translateY(0.15rem);
+    vertical-align: center;
+    width: 1.1em;
+    height: auto;
+    // background-color: yellow;
+}
+
+.cont-icon{
+    width: 4.5em;
+    height: 3em;
+    // background-color: rebeccapurple;
+}
+
+.cont-value{
+    font-family: 'Nunito';
+    font-weight: bold;
+    font-size: 3.5rem;
+    color: white;
+}
+
+.card-header-format{
+    font-family: 'Nunito';
+    font-weight: 900;
+    margin-top: -0.5em;
+    font-size: 1.3rem;
+    color: white;
+}
+
+.purple{
+    background-color: #995E9C;
+}
+
+.blue{
+    background-color: #0073CB;
+}
+
+.green{
+    background-color: #65CB00;
+}
+
+.purple-icon{
+    color: #704773;
+}
+
+.blue-icon{
+    color: #0A4B7C;
+}
+
+.green-icon{
+    color: #468D00;
+}
