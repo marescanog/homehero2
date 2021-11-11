@@ -33,6 +33,7 @@
     color: #333;
     margin-left: 1.5em;
     font-family: 'Nunito';
+    font-weight: 400;
   }
   
   .sidebar .nav-link .feather {
@@ -43,7 +44,7 @@
   .sidebar .nav-link.active {
     color: #F27900;
     background-color: #FFF29F;
-    font-weight: bold;
+    font-weight: 900 !important;
   }
   
   .sidebar .nav-link:hover .feather,

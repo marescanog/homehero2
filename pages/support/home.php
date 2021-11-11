@@ -7,6 +7,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <!-- === Link your custom CSS pages below here ===-->
 <link rel="stylesheet" href="../../css/headers/support.css">
 <link rel="stylesheet" href="../../css/headers/support-side-nav.css">
+<link rel="stylesheet" href="../../css/pages/support/sup-home.css">
 <script src="https://kit.fontawesome.com/d10ff4ba99.js" crossorigin="anonymous"></script>
 <!-- === Link your custom CSS  pages above here ===-->
 </head>
@@ -23,8 +24,15 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         require_once dirname(__FILE__)."/$level/components/headers/support-side-nav.php"; 
     ?>
 
-    
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+    </div>
 
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">Anouncements</h1> 
+    </div>
+</main>
 
 
 
