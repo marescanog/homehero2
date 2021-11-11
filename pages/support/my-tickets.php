@@ -28,6 +28,34 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         <h1 class="h2">My Tickets</h1>
     </div>
 
+    <!-- Tab Header -->
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-ongoing-tab" data-toggle="tab" href="#nav-ongoing" role="tab" aria-controls="nav-ongoing" aria-selected="true">Ongoing</a>
+
+            <a class="nav-item nav-link" id="nav-completed-tab" data-toggle="tab" href="#nav-completed" role="tab" aria-controls="nav-completed" aria-selected="false">Completed</a>
+            
+            <a class="nav-item nav-link" id="nav-escalations-tab" data-toggle="tab" href="#nav-escalations" role="tab" aria-controls="nav-escalations" aria-selected="false">Escalations</a>
+
+            <a class="nav-item nav-link" id="nav-transferred-tab" data-toggle="tab" href="#nav-transferred" role="tab" aria-controls="nav-transferred" aria-selected="false">Transferred</a>
+
+            <a class="nav-item nav-link" id="nav-stale-tab" data-toggle="tab" href="#nav-stale" role="tab" aria-controls="nav-stale" aria-selected="false">Stale</a>
+        </div>
+    </nav>
+
+
+    <!-- Tab Header -->
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-ongoing" role="tabpanel" aria-labelledby="nav-ongoing-tab">Ongoing...</div>
+
+        <div class="tab-pane fade" id="nav-completed" role="tabpanel" aria-labelledby="nav-completed-tab">Completed...</div>
+
+        <div class="tab-pane fade" id="nav-escalations" role="tabpanel" aria-labelledby="nav-escalations-tab">Escalations...</div>
+
+        <div class="tab-pane fade" id="nav-transferred" role="tabpanel" aria-labelledby="nav-transferred-tab">Transferred...</div>
+
+        <div class="tab-pane fade" id="nav-stale" role="tabpanel" aria-labelledby="nav-stale-tab">Stale...</div>
+    </div>
 
 </main>
 
