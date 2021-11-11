@@ -8,31 +8,31 @@
           <div class="sidebar-sticky d-flex flex-column">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link <?php echo $current_side_tab == $tabs[0] ? 'active' : '';?>" href="#">
+                <a class="nav-link <?php echo $current_side_tab == $tabs[0] ? 'active' : '';?>" href="./home.php">
                   <i class="fas fa-external-link-square-alt icons"></i>
                   Dashboard  <?php echo $current_side_tab == $tabs[0] ? "<span class='sr-only'>(current)</span>" : '';?>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <?php echo $current_side_tab == $tabs[1] ? 'active' : '';?>" href="#">
+                <a class="nav-link <?php echo $current_side_tab == $tabs[1] ? 'active' : '';?>" href="./my-tickets.php">
                   <i class="fas fa-clipboard-check icons"></i>
                   My Tickets <?php echo $current_side_tab == $tabs[1] ? "<span class='sr-only'>(current)</span>" : '';?>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <?php echo $current_side_tab == $tabs[2] ? 'active' : '';?>" href="#">
+                <a class="nav-link <?php echo $current_side_tab == $tabs[2] ? 'active' : '';?>" href="./all-tickets.php">
                     <i class="fas fa-clipboard-list icons"></i>
                   All Tickets <?php echo $current_side_tab == $tabs[2] ? "<span class='sr-only'>(current)</span>" : '';?>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <?php echo $current_side_tab == $tabs[3] ? 'active' : '';?>" href="#">
+                <a class="nav-link <?php echo $current_side_tab == $tabs[3] ? 'active' : '';?>" href="./messages.php">
                     <i class="fas fa-envelope-open-text icons"></i>
                   Messages <?php echo $current_side_tab == $tabs[3] ? "<span class='sr-only'>(current)</span>" : '';?>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <?php echo $current_side_tab == $tabs[4] ? 'active' : '';?>" href="#">
+                <a class="nav-link <?php echo $current_side_tab == $tabs[4] ? 'active' : '';?>" href="./account-settings.php">
                     <i class="fas fa-cog icons"></i>
                   Account Settings <?php echo $current_side_tab == $tabs[4] ? "<span class='sr-only'>(current)</span>" : '';?>
                 </a>
