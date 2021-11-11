@@ -1,4 +1,11 @@
 <?php 
+
+session_start();
+if(isset($_SESSION["token"])){
+    header("Location: ./pages/homeowner/home.php");
+    exit();
+}
+
 $level =".";
 require_once dirname(__FILE__).'/components/head-meta.php'; 
 ?>
