@@ -79,10 +79,9 @@ $( document ).ready(()=>{
                     elements[i].readOnly = false;
                 }
 
-                console.log(response.success);
-                console.log(response.response.data);
-                // document.getElementById('test').value = response.response.data;
-                // document.getElementById('signinForm').submit();
+                // console.log(response.success);
+                // console.log(response.response.data);
+
                 if(response.success){
                     let data = {};
                     data['token'] = response.response.data;
@@ -93,7 +92,7 @@ $( document ).ready(()=>{
                         data : data,
                         success : function(response) {
                             var res = JSON.parse(response);
-                            console.log(res)
+                            // console.log(res)
                             if(res["status"] == 200){
                                 myForm.reset();
                                 $('#modal').modal('hide');
@@ -155,7 +154,7 @@ $( document ).ready(()=>{
                     elements[i].readOnly = false;
                 }
     
-                console.log(response.responseJSON)
+                // console.log(response.responseJSON)
                 Swal.fire({
                     title:'Error!',
                     text: message,
@@ -199,7 +198,7 @@ $( document ).ready(()=>{
             data : data,
             success : function(response) {
                 var res = JSON.parse(response);
-                console.log(response);
+                // console.log(response);
                 let message = res.response.message;
          
                 // Enable and hide loading
@@ -241,7 +240,7 @@ $( document ).ready(()=>{
                     elements[i].readOnly = false;
                 }
     
-                console.log(response.responseJSON)
+                // console.log(response.responseJSON)
                 Swal.fire({
                     title:'Error!',
                     text: message,
