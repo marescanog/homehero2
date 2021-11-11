@@ -1,0 +1,48 @@
+.showing-x-text{
+    font-size: small;
+    font-weight: bold;
+    color: #A9A9A9
+}
+
+.override-input-group{
+    background-color: transparent;
+    border-right: 0;
+    cursor: pointer;
+}
+
+.override-input{
+    border-left: 0;
+}
+
+.min-height{
+    min-height: 70vh;
+}
+
+.show-entries-height{
+    max-height: 2.4em;
+}
+
+.btn-table{
+    width: 90%;
+}
+
+.Resolved{
+    background-color: #0073CB;
+    border-color: #0A4B7C;
+}
+
+.Ongoing{
+    background-color: #65CB00;
+    border-color: #468D00;
+}
+
+.New{
+    background-color: #704773;
+    border-color: #704773;
+}
+
+.Gray{
+    background-color: #A9A9A9;
+    border-color: #707070;
+}
+
