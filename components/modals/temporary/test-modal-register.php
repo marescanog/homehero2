@@ -26,7 +26,7 @@
         </div>
         <div class="modal-footer">
             <button id="RU-close-btn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button id="RU-submit-btn" type="submit" class="btn btn-primary">
+            <button id="RU-submit-btn" type="button" class="btn btn-primary">
                 <span id="RU-submit-btn-txt">Register</span>
                 <div id="RU-submit-btn-load" class="d-none">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

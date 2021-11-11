@@ -1,6 +1,7 @@
 <?php 
 
 $level ="..";
+
 require_once dirname(__FILE__).'/../components/head-meta.php'; 
 
 ?>
@@ -17,9 +18,8 @@ require_once dirname(__FILE__).'/../components/head-meta.php';
     <!-- === Your Custom Page Content Goes Here below here === -->
     <h1>Ivana</h1>
 
-$(document).ready(()=>
-)
-    
+
+
 
 
 
@@ -31,7 +31,9 @@ $(document).ready(()=>
 <?php require_once dirname(__FILE__).'/../components/foot-meta.php'; ?>
 <!-- Custom JS Scripts Below -->
     <script>
-let date_add
+
+  let date_add
+  $(document).ready(()=>{})
 
 
     </script>

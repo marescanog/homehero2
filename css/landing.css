@@ -49,13 +49,13 @@
     margin-top: auto ; 
     // background-color: red;
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;        max-width: 30rem;
 }
 
 .jumbotron-card{
-    position:absolute;
-    width: 90%;
+    width: 95%;
     // background-color: yellow;
 }
 
@@ -85,7 +85,9 @@ img.jumbotron-img{
 
 
 
+
 @media only screen and (min-width: 992px) {
+
     .jumbotron{
         padding: 0rem 2rem 0 2rem!important;
     }
@@ -110,7 +112,7 @@ img.jumbotron-img{
     .jumbotron-container{
         width: 100%;
         height: 100%;
- 
+        max-width: 1200px !important;
     }
 
     .jumbotron-h1{
@@ -404,9 +406,9 @@ img.jumbotron-img{
     // background-color:#FF00FF;
 }
 
-.feature-row{
+//.feature-row{
     // background-color:#FFFF00;
-}
+//}
 
 .featured-header{
     font-size: 1.75em;
@@ -431,6 +433,14 @@ hr.card-hr {
     border-top: 1px solid #9FAEAE;
 }
 
+.w-cap{
+    max-width: 375px;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 @media only screen and (min-width: 992px) {
     .featured-header{
         font-size: 2em;
@@ -441,6 +451,14 @@ hr.card-hr {
         margin-left: none;
         margin-right: none;
         margin-bottom: none;
+    }
+
+    .w-cap{
+        max-width: 1200px;
+        padding-left: 1em;
+        padding-right: 1em;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
