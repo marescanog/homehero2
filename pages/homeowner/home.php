@@ -1,6 +1,16 @@
 <?php 
 
+session_start();
+if(!isset($_SESSION["token"])){
+    header("Location: ../../");
+    exit();
+}
+
 $level ="../../";
+$fistName = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest";
+$initials = isset($_SESSION["initials"]) ? $_SESSION["initials"] : "GU";
+
+
 require_once dirname(__FILE__)."/$level/components/head-meta.php"; 
 
 ?>
@@ -21,7 +31,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <div class="container-fluid m-0 p-0 vh-100 bgc-lightgray">
     <div class="container h-100 d-flex">
         <div class="my-auto mx-auto">
-            <h2 class="mb-3">Welcome Back, UserName</h2>
+            <h2 class="mb-3">Welcome Back, <?php echo $fistName;?></h2>
             <h2 class="mb-3"><span class="text-warning">Find a Hero</span> to help improve your home</h2>
             <div class="card shadow">
                 <div class="card-body">

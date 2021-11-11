@@ -9,7 +9,7 @@
         <div class="modal-body">
             
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" onSubmit="consoleLog(event)">Submit</button>
+            <button id="enterAddressButton" type="button" class="btn btn-secondary" >Submit</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
     </form>

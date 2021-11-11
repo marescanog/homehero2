@@ -10,7 +10,7 @@
                 <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <button class="btn btn-warning text-light" id="header-btn-mobile"><b>LOG-IN</b></button>
+                <button class="btn btn-warning text-light" id="header-btn-mobile" data-toggle="modal" data-target="#modal"><b>LOG-IN</b></button>
             </div>
         </div>
         <!-- DESKTOP HEADER -->
@@ -32,7 +32,7 @@
                         </li>
                     </ul>
                 </div>
-                <button class="btn btn-warning text-light" id="header-btn-desktop"><b>LOG-IN</b></button>
+                <button class="btn btn-warning text-light" id="header-btn-desktop" data-toggle="modal" data-target="#modal"><b>LOG-IN</b></button>
             </div>
         </div>
         <!-- BOTTOM YELLOW LINE DECOR -->

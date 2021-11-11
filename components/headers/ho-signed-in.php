@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top w-100 p-0">
         <d class="flex flex-column w-100 pt-3 pt-lg-0">
         <div class="d-flex justify-content-between px-3 nav-container" id="header-mobile-container">
-            <a class="navbar-brand custom-a" href="<?php echo $level;?>/i2ndex.php">
+            <a class="navbar-brand custom-a" href="<?php echo $level;?>/index.php">
                     <img src="<?php echo $level;?>/images/logo/HH_Logo_Mobile.svg" class="rounded mr-2" alt="Home Hero Logo" id="header-logo-mobile">
             </a>
             <div class="d-flex">
@@ -11,14 +11,14 @@
                 </button>
                 <div id="header-btn-mobile" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle d-flex justify-content-center align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="circle mr-1 p-1">UN</div>
-                    User's Name
+                        <div class="circle mr-1 p-1"><?php echo $initials; ?></div>
+                        <?php echo $fistName;?>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="">Action</a>
+                    <a class="dropdown-item" href="">Another action</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">logout</a>
+                    <a id="logout-link-mobile" class="dropdown-item" >logout</a>
                     </div>
                 </div>
             </div>
@@ -32,24 +32,27 @@
                 <div class="collapse navbar-collapse pr-3 " id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto align-items-center">
                         <li class="nav-item pr-lg-5">
-                            <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Registration.php">BROWSE</a>
+                            <!-- <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Registration.php">BROWSE</a> -->
+                            <a class="nav-link custom-a" href="">BROWSE</a>
                         </li>
                         <li class="nav-item pr-lg-5">
-                            <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Help.php">PROJECTS</a>
+                            <!-- <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Help.php">PROJECTS</a> -->
+                            <a class="nav-link custom-a" href="">PROJECTS</a>
                         </li>
                         <li class="nav-item pr-lg-5">
-                            <a id="RU-signup" class="nav-link custom-a" type="button" data-toggle="modal" data-target="#modal">INBOX</a>
+                            <!-- <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Help.php">PROJECTS</a> -->
+                            <a class="nav-link custom-a" href="">INBOX</a>
                         </li>
                         <li id="header-btn-desktop" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex justify-content-center align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="circle mr-3 p-2">UN</div>
-                            User's Name
+                                <div class="circle mr-3 p-2"><?php echo $initials; ?></div>
+                                <?php echo $fistName;?>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Action</a>
                             <a class="dropdown-item" href="#">Another action</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">logout</a>
+                            <a id="logout-link-desktop" class="dropdown-item" >logout</a>
                             </div>
                         </li>
                     </ul>

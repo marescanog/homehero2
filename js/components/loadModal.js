@@ -4,7 +4,9 @@ const modalTypes = {
     "error" : getDocumentLevel()+"/components/modals/error.php" ,
     "check-avail-est-date" : getDocumentLevel()+"/components/modals/check-avail-est-date.php" ,
     "check-avail-exact-date" : getDocumentLevel()+"components/modals/check-avail-exact-date.php",
-    "tempAddr" : getDocumentLevel()+"/components/modals/temp-enter-address.php", 
+    "tempAddr" : getDocumentLevel()+"/components/modals/temporary/temp-enter-address.php", 
+    "tempRegister": getDocumentLevel()+"/components/modals/temporary/test-modal-register.php",
+    "tempLogin": getDocumentLevel()+"/components/modals/temporary/temp-login.php"
 }
 
 // This function loads the
