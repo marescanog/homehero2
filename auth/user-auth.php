@@ -8,8 +8,14 @@
     // Check if token is generated
     $token = isset($_POST['token']) ? $_POST['token'] : null;
 
+    $firstName = isset($_POST['first_name']) ? $_POST['first_name'] : null;
+    $initials = isset($_POST['initials']) ? $_POST['initials'] : null;
+
+
     if($token != null){
         $_SESSION['token'] = $token;
+        $_SESSION['first_name'] = $firstName ;
+        $_SESSION['initials'] = $initials;
         $retVal = "Received token";
         $status = 200;
     } else {

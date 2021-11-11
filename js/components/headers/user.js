@@ -84,7 +84,9 @@ $( document ).ready(()=>{
 
                 if(response.success){
                     let data = {};
-                    data['token'] = response.response.data;
+                    data['token'] = response.response.data.token;
+                    data['first_name'] = response.response.data.first_name;
+                    data['initials'] = response.response.data.initials;
 
                     $.ajax({
                         type : 'POST',
@@ -116,24 +118,6 @@ $( document ).ready(()=>{
                         }
                     });
                 }
-
-                // Swal.fire({
-                //     title: response.success ? 'Success!': 'Error!',
-                //     text: 'Login Successful!',
-                //     icon: response.success ? 'success': 'error',
-                //     confirmButtonText: 'Close'
-                // }).then(result => {
-                //     if(response.success){
-                //         var data = {}
-                //         data['token'] = response.response.data;
-
-                //         $('#redirect').load('./components/auth/user-auth.php', data, ()=>{
-                //             //  Reset Form, Close Modal & Redirect User
-                //             myForm.reset();
-                //             $('#modal').modal('hide');
-                //         })  
-                //     }
-                // })
             },
             error: function (response) {
                 console.log(response.responseJSON.response);
