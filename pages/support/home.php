@@ -6,10 +6,11 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 ?>
 <!-- === Link your custom CSS pages below here ===-->
 <link rel="stylesheet" href="../../css/headers/support.css">
-
+<link rel="stylesheet" href="../../css/headers/support-side-nav.css">
+<script src="https://kit.fontawesome.com/d10ff4ba99.js" crossorigin="anonymous"></script>
 <!-- === Link your custom CSS  pages above here ===-->
 </head>
- <body class="container-fluid m-0 p-0 main-container">  
+ <body class="container-fluid m-0 p-0">  
     <!-- Add your Header NavBar here-->
     <?php 
         require_once dirname(__FILE__)."/$level/components/headers/support.php"; 
@@ -17,8 +18,10 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     <div class="<?php echo $hasHeader ?? ""; ?>">
     <!-- === Your Custom Page Content Goes Here below here === -->
 
-
-    <h1>Support Home</h1>
+    <?php
+        $current_side_tab = "Dashboard";
+        require_once dirname(__FILE__)."/$level/components/headers/support-side-nav.php"; 
+    ?>
 
     
 
