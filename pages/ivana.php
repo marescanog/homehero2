@@ -1,25 +1,26 @@
 <?php 
 
 $level ="..";
-
-require_once dirname(__FILE__).'/../components/head-meta.php'; 
+require_once dirname(__FILE__)."/$level/components/head-meta.php"; 
 
 ?>
 <!-- === Link your custom CSS pages below here ===-->
+<link rel="stylesheet" href="../css/headers/user.css">
 
 <!-- === Link your custom CSS  pages above here ===-->
 </head>
- <body>  
+ <body class="container-fluid m-0 p-0 main-container">  
     <!-- Add your Header NavBar here-->
     <?php 
-        require_once dirname(__FILE__).'/../components/header.php'; 
+        require_once dirname(__FILE__)."/$level/components/headers/user.php"; 
     ?>
-    <div style="<?php echo $hasHeader ?? ""; ?>">
+    <div class="<?php echo $hasHeader ?? ""; ?>">
     <!-- === Your Custom Page Content Goes Here below here === -->
+
+
     <h1>Ivana</h1>
 
-
-
+    
 
 
 
@@ -31,10 +32,6 @@ require_once dirname(__FILE__).'/../components/head-meta.php';
 <?php require_once dirname(__FILE__).'/../components/foot-meta.php'; ?>
 <!-- Custom JS Scripts Below -->
     <script>
-
-  let date_add
-  $(document).ready(()=>{})
-
 
     </script>
 </body>
