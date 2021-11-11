@@ -28,6 +28,32 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         <h1 class="h2">Messages</h1>
     </div>
 
+    <!-- Tab Header -->
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="true">All</a>
+
+            <a class="nav-item nav-link" id="nav-Active-tab" data-toggle="tab" href="#nav-Active" role="tab" aria-controls="nav-Active" aria-selected="false">Active</a>
+            
+            <a class="nav-item nav-link" id="nav-Bookmarked-tab" data-toggle="tab" href="#nav-Bookmarked" role="tab" aria-controls="nav-Bookmarked" aria-selected="false">Bookmarked</a>
+
+            <a class="nav-item nav-link" id="nav-Archived-tab" data-toggle="tab" href="#nav-Archived" role="tab" aria-controls="nav-Archived" aria-selected="false">Archived</a>
+
+        </div>
+    </nav>
+
+
+    <!-- Tab Header -->
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-All" role="tabpanel" aria-labelledby="nav-All-tab">All...</div>
+
+        <div class="tab-pane fade" id="nav-Active" role="tabpanel" aria-labelledby="nav-Active-tab">Active...</div>
+
+        <div class="tab-pane fade" id="nav-Bookmarked" role="tabpanel" aria-labelledby="nav-Bookmarked-tab">Bookmarked...</div>
+
+        <div class="tab-pane fade" id="nav-Archived" role="tabpanel" aria-labelledby="nav-Archived-tab">Archived...</div>
+
+    </div>
 
 </main>
 
