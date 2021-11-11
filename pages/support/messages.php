@@ -46,13 +46,53 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
     <!-- Tab Header -->
     <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-All" role="tabpanel" aria-labelledby="nav-All-tab">All...</div>
+        <div class="tab-pane fade show active" id="nav-All" role="tabpanel" aria-labelledby="nav-All-tab">
+            <?php
+                $tableName = "all";
+                $basicSearchId = "allSearch";
+                include "$level/components/UX/support-table.php";
 
-        <div class="tab-pane fade" id="nav-Active" role="tabpanel" aria-labelledby="nav-Active-tab">Active...</div>
+                // Reset Values after to prepare for the next iteration
+                $tableName = null;
+                $basicSearchId = null;
+            ?>
+        </div>
 
-        <div class="tab-pane fade" id="nav-Bookmarked" role="tabpanel" aria-labelledby="nav-Bookmarked-tab">Bookmarked...</div>
+        <div class="tab-pane fade" id="nav-Active" role="tabpanel" aria-labelledby="nav-Active-tab">
+            <?php
+                $tableName = "active";
+                $basicSearchId = "activeSearch";
+                include "$level/components/UX/support-table.php";
 
-        <div class="tab-pane fade" id="nav-Archived" role="tabpanel" aria-labelledby="nav-Archived-tab">Archived...</div>
+                // Reset Values after to prepare for the next iteration
+                $tableName = null;
+                $basicSearchId = null;
+            ?>
+        </div>
+
+        <div class="tab-pane fade" id="nav-Bookmarked" role="tabpanel" aria-labelledby="nav-Bookmarked-tab">
+            <?php
+                $tableName = "bookmarked";
+                $basicSearchId = "bookmarkedSearch";
+                include "$level/components/UX/support-table.php";
+
+                // Reset Values after to prepare for the next iteration
+                $tableName = null;
+                $basicSearchId = null;
+            ?>
+        </div>
+
+        <div class="tab-pane fade" id="nav-Archived" role="tabpanel" aria-labelledby="nav-Archived-tab">
+            <?php
+                $tableName = "archived";
+                $basicSearchId = "archivedSearch";
+                include "$level/components/UX/support-table.php";
+
+                // Reset Values after to prepare for the next iteration
+                $tableName = null;
+                $basicSearchId = null;
+            ?>
+        </div>
 
     </div>
 

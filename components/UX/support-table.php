@@ -12,12 +12,6 @@
     $tableHeaderLabels = isset($tableHeaderLabels) ? $tableHeaderLabels : 
     ["Ticket No.", "Type", "Status", "Assigned Agent", "Last Updated", "Date Assigned", "Date Created"];
 
-    $tableRows = [
-        ["REG-001", "Registration", "Ongoing", "Ashley Miles", "09/12/2021", "09/12/2021", "09/12/2021", "1"],
-        ["DIS-002", "Dispute", "New", "Jim Day", "09/12/2021", "09/12/2021", "09/12/2021", "2"],
-        ["REG-003", "Registration", "Resolved", "Ashley Miles", "09/12/2021", "09/12/2021", "09/12/2021", "3"],
-    ];
-
     $tableRows = isset($tableRows) ? $tableRows : [];
 
     $statusButton = isset($statusButton) ? $statusButton : 3;

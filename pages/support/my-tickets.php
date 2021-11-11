@@ -49,17 +49,88 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-ongoing" role="tabpanel" aria-labelledby="nav-ongoing-tab">
             <?php 
+/* Note:
+ Required Variables to Declare: 
+    $tableName -> The name of your table
+    $basicSearchId -> The button ID for your search bar element
+    $totalRecords -> total number of records returned by the query
+    $EntriesDisplayed -> total number of entries displayed
+    $tableHeaderLabels = the table headers you want to display, default is ["Ticket No.", "Type", "Status", "Assigned Agent", "Last Updated", "Date Assigned", "Date Created"]
+    $tableRows = the table data you want to display
+    Example data format for header above is:
+    $tableRows = [
+        ["REG-001", "Registration", "Ongoing", "Ashley Miles", "09/12/2021", "09/12/2021", "09/12/2021", "1"],
+        ["DIS-002", "Dispute", "New", "Jim Day", "09/12/2021", "09/12/2021", "09/12/2021", "2"],
+        ["REG-003", "Registration", "Resolved", "Ashley Miles", "09/12/2021", "09/12/2021", "09/12/2021", "3"],
+    ];
+    $statusButton = the number of the column where a button will be; default is 3
+*/
+                $tableName = "Ongoing";
+                $basicSearchId = "ongoingSearch";
                 include "$level/components/UX/support-table.php";
+
+                // Reset Values after to prepare for the next iteration
+                $tableName = null;
+                $basicSearchId = null;
             ?>
         </div>
 
-        <div class="tab-pane fade" id="nav-completed" role="tabpanel" aria-labelledby="nav-completed-tab">Completed...</div>
 
-        <div class="tab-pane fade" id="nav-escalations" role="tabpanel" aria-labelledby="nav-escalations-tab">Escalations...</div>
 
-        <div class="tab-pane fade" id="nav-transferred" role="tabpanel" aria-labelledby="nav-transferred-tab">Transferred...</div>
+        <div class="tab-pane fade" id="nav-completed" role="tabpanel" aria-labelledby="nav-completed-tab">
+            <?php
+                $tableName = "completed";
+                $basicSearchId = "completedSearch";
+                include "$level/components/UX/support-table.php";
 
-        <div class="tab-pane fade" id="nav-stale" role="tabpanel" aria-labelledby="nav-stale-tab">Stale...</div>
+                // Reset Values after to prepare for the next iteration
+                $tableName = null;
+                $basicSearchId = null;
+            
+            ?>
+        </div>
+
+
+
+        <div class="tab-pane fade" id="nav-escalations" role="tabpanel" aria-labelledby="nav-escalations-tab">
+            <?php
+                $tableName = "escalations";
+                $basicSearchId = "escalationsSearch";
+                include "$level/components/UX/support-table.php";
+
+                // Reset Values after to prepare for the next iteration
+                $tableName = null;
+                $basicSearchId = null;
+            ?>
+        </div>
+
+
+
+        <div class="tab-pane fade" id="nav-transferred" role="tabpanel" aria-labelledby="nav-transferred-tab">
+            <?php
+                $tableName = "transferred";
+                $basicSearchId = "transferredSearch";
+                include "$level/components/UX/support-table.php";
+
+                // Reset Values after to prepare for the next iteration
+                $tableName = null;
+                $basicSearchId = null;
+            ?>
+        </div>
+
+
+
+        <div class="tab-pane fade" id="nav-stale" role="tabpanel" aria-labelledby="nav-stale-tab">
+            <?php
+                $tableName = "stale";
+                $basicSearchId = "staleSearch";
+                include "$level/components/UX/support-table.php";
+
+                // Reset Values after to prepare for the next iteration
+                $tableName = null;
+                $basicSearchId = null;
+            ?>
+        </div>
     </div>
 
 </main>
