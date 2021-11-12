@@ -183,7 +183,7 @@ $( document ).ready(()=>{
             success : function(response) {
                 var res = JSON.parse(response);
                 // console.log(response);
-                let message = res.response.message;
+                let message = res["response"];
          
                 // Enable and hide loading
                 RUSignupSubmitButton.removeAttribute("disabled");
@@ -215,8 +215,8 @@ $( document ).ready(()=>{
                 // Enable and hide loading
                 RUSignupSubmitButton.removeAttribute("disabled");
                 RUSignupSubmitTxt.innerHTML = "Register"
-             buttonLoadSpinner.removeAttribute("class");
-             buttonLoadSpinner.setAttribute("class", "d-none");
+                buttonLoadSpinner.removeAttribute("class");
+                buttonLoadSpinner.setAttribute("class", "d-none");
                 myForm.style.opacity = "1";
     
                 var elements = myForm.elements;
