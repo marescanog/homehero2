@@ -178,7 +178,7 @@ $( document ).ready(()=>{
         // Send Post Request to API
         $.ajax({
             type : 'POST',
-            url : 'https://slim3api.herokuapp.com/user/register',
+            url : 'https://slim3api.herokuapp.com/auth/user-registration',
             data : data,
             success : function(response) {
                 var res = JSON.parse(response);
