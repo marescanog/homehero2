@@ -20,7 +20,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <?php echo $current_side_tab == $tabs[2] ? 'active' : '';?>" href="./all-tickets.php">
+                <a class="nav-link <?php echo $current_side_tab == $tabs[2] ? 'active' : '';?>" href="./all-Tickets.php">
                     <i class="fas fa-clipboard-list icons"></i>
                   All Tickets <?php echo $current_side_tab == $tabs[2] ? "<span class='sr-only'>(current)</span>" : '';?>
                 </a>
