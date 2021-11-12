@@ -178,12 +178,12 @@ $( document ).ready(()=>{
         // Send Post Request to API
         $.ajax({
             type : 'POST',
-            url : 'https://slim3api.herokuapp.com/user/register',
+            url : 'https://slim3api.herokuapp.com/auth/user-registration',
             data : data,
             success : function(response) {
                 var res = JSON.parse(response);
                 // console.log(response);
-                let message = res.response.message;
+                let message = res["response"];
          
                 // Enable and hide loading
                 RUSignupSubmitButton.removeAttribute("disabled");
@@ -215,8 +215,8 @@ $( document ).ready(()=>{
                 // Enable and hide loading
                 RUSignupSubmitButton.removeAttribute("disabled");
                 RUSignupSubmitTxt.innerHTML = "Register"
-             buttonLoadSpinner.removeAttribute("class");
-             buttonLoadSpinner.setAttribute("class", "d-none");
+                buttonLoadSpinner.removeAttribute("class");
+                buttonLoadSpinner.setAttribute("class", "d-none");
                 myForm.style.opacity = "1";
     
                 var elements = myForm.elements;
