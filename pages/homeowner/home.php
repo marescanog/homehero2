@@ -1,10 +1,10 @@
 <?php 
 
-session_start();
-if(!isset($_SESSION["token"])){
-    header("Location: ../../");
-    exit();
-}
+// session_start();
+// if(!isset($_SESSION["token"])){
+//     header("Location: ../../");
+//     exit();
+// }
 
 $level ="../../";
 $fistName = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest";
@@ -16,7 +16,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 ?>
 <!-- === Link your custom CSS pages below here ===-->
 <link rel="stylesheet" href="../../css/headers/header-homeowner.css">
-<link rel="stylesheet" href="../../css/homeowner-home.css">
+<link rel="stylesheet" href="../../css/pages/homeowner/homeowner-home.css">
 <link rel="stylesheet" href="../../css/footer.css">
 <!-- === Link your custom CSS  pages above here ===-->
 </head>
