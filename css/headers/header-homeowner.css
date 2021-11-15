@@ -50,7 +50,7 @@
 }
 
 .main-container{
-    min-width: 335px;
+    min-width: 280px;
 }
 
 .circle{
@@ -62,6 +62,7 @@
     #header-logo-desktop{
         display: inline-block;
     }
+
     #header-btn-desktop{
         display: flex;
         height: 40px;
@@ -70,9 +71,9 @@
     }
 
     #header-desktop-content{
-        width: 90%;
+        // width: 90%;
         margin: auto;
-        max-width: 1536px;
+        // max-width: 1536px;
     }
 
     #header-logo-mobile{

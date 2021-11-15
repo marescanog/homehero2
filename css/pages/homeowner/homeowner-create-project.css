@@ -14,10 +14,18 @@
     min-height: 32em;
 }
 
+.c-max{
+    max-width: 280px;
+}
+
 @media only screen and (min-width: 992px) {
 
     .min-height{
         min-height: 43em;
+    }
+
+    .c-max{
+        max-width: 1200px;
     }
     
 }
@@ -31,6 +39,20 @@
     background-color: blue;
 }
 
+.img-container{
+    max-width:280px;
+}
+
+
+@media only screen and (min-width: 992px) {
+
+
+}
+
+/*==========================================*/
+/*              FORM CONTAINER              */
+/*==========================================*/
+
 .form{
     background-color: yellow;
 }
@@ -39,6 +61,8 @@
 
 
 }
+
+
 
 /*==========================================*/
 /*              DASHBOARD HOME              */
