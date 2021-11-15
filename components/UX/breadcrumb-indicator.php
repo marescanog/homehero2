@@ -1,41 +1,74 @@
+<?php
+    // $bci_current_page=4;    
+    $bci_total_pages = isset($bci_total_pages) ? $bci_total_pages : 3;
+    $bci_current_page = isset($bci_current_page) ? $bci_current_page : 1;
+    $bci_titles = isset($bci_titles) && is_array($bci_titles) ? $bci_titles : ["Choose date & time","Describe your project","Review & Submit"];
+?>
 <div class="breadcrumb-container mt-2">
     <ul class="bc-title-container">
-        <li class="bc-title">
-            Choose date & time
-        </li>
-        <li class="bc-title">Describe your project</li>
-        <li class="bc-title">Review & Submit</li>
+        <?php 
+            for($x = 0; $x < count($bci_titles); $x++){
+        ?>
+            <li class="bc-title">
+                <?php
+                    echo $bci_titles[$x];
+                ?>
+            </li>
+        <?php
+            }
+        ?>
     </ul>
     <div>
         <div class="line-container d-flex bc-w-60">
-            <div class="w-100 line-segment colored"></div>
-            <div class="w-100 line-segment"></div>
+            <?php 
+                for($x = 1; $x < $bci_total_pages; $x++){
+            ?>
+                <div class="w-100 line-segment 
+                    <?php
+                        if($x+1 <= $bci_current_page){
+                            echo " colored";
+                        }
+                    ?>
+                "></div>
+            <?php
+                }
+            ?>
         </div>
         <div class="box-container d-flex justify-content-between bc-w-60">
-            <div class="bc-circle colored">
-                <div class="circle-check circ-content-show">
-                    <i class="fas fa-check"></i>
+            <?php 
+                for($x = 1; $x <= $bci_total_pages; $x++){
+            ?>
+                <div class="bc-circle 
+                    <?php 
+                        if($x <= $bci_current_page){
+                            echo " colored";
+                        }
+                    ?>
+                ">
+                    <div class="circle-check
+                        <?php 
+                            if($x+1 <= $bci_current_page){
+                                echo " circ-content-show";
+                            }
+                        ?>
+                    ">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="circle-text 
+                        <?php
+                            if($x+1 >= $bci_current_page){
+                                echo " circ-content-show";
+                            }
+                        ?>
+                    ">
+                        <?php
+                            echo $x;
+                        ?>
+                    </div>
                 </div>
-                <div class="circle-text">
-                    1
-                </div>
-            </div>
-            <div class="bc-circle colored">
-                <div class="circle-check">
-                    <i class="fas fa-check"></i>
-                </div>
-                <div class="circle-text circ-content-show">
-                    2
-                </div>
-            </div>
-            <div class="bc-circle"> 
-                <div class="circle-check">
-                    <i class="fas fa-check"></i>
-                </div>
-                <div class="circle-text circ-content-show">
-                    3
-                </div>
-            </div>
+            <?php
+                }
+            ?>
         </div>
     </div>
 </div>
