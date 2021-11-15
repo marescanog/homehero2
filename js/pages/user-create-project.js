@@ -48,20 +48,15 @@ const load_create_project_form = (
         var button_page1 = document.getElementById("btn-page-1");
         var button_page2 = document.getElementById("btn-page-2");
         var button_page3 = document.getElementById("btn-page-3");
+        var button_back_page2 = document.getElementById("btn-back-page-2");
+        var button_back_page3 = document.getElementById("btn-back-page-3");
+
+        console.log(button_back_page2);
+        console.log(button_back_page3);
         // Input Feilds
         var text1 = document.getElementById("text1");
         var text2 = document.getElementById("text2");
         var text3 = document.getElementById("text3");
-
-        // console.log(JSON.stringify(obj));
-        // //Insert Data into input feilds
-        // if(obj.hasOwnProperty("page_1")){
-        //     text1.value = obj.page_1?.text1;
-        // }
-
-        // if(obj.hasOwnProperty("page_2")){
-        //     text2.value = obj.page_2?.text2;
-        // }
 
         // Add event listeners for the buttons
         button_page1.addEventListener("click", ()=>{

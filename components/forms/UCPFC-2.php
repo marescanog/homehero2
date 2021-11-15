@@ -9,6 +9,10 @@
         }
     ?>>
 
+    <button type="button" id="btn-back-page-2" class="btn btn-outline-warning">
+        Back
+    </button>
+
     <button type="button" id="btn-page-2" class="btn btn-warning text-white">
         Next
     </button>

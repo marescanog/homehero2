@@ -9,6 +9,10 @@
         }
     ?>>
 
+    <button type="button" id="btn-back-page-3" class="btn btn-outline-warning">
+        Back
+    </button>
+
     <button type="button" id="btn-page-3" class="btn btn-warning text-white">
         Submit
     </button>
