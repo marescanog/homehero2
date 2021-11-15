@@ -6,6 +6,7 @@
     $bci_page_2 = isset($_POST["page_2"]) ? $_POST["page_2"] : null;
     $bci_page_3 = isset($_POST["page_3"]) ? $_POST["page_3"] : null;
 
+    // var_dump($_POST);
     include "$level/components/UX/breadcrumb-indicator.php";
 ?>
 <!-- Form Title -->
@@ -18,42 +19,7 @@
     <div class="card shadow-sm mb-4">
         <div class="card-body form-card-height">
             <form id="form-submission-create-project">
-                <!-- First Page -->
-                <div class="form-hide
-                    <?php
-                        if($bci_current_page == 1){
-                            echo " form-show";
-                        }
-                    ?>
-                ">
-                    <?php
-                        include dirname(__FILE__)."\UCPFC-1.php";
-                    ?>
-                </div>
-                <!-- Second Page -->
-                <div class="form-hide
-                    <?php
-                        if($bci_current_page == 2){
-                            echo " form-show";
-                        }
-                    ?>
-                ">
-                    <?php
-                        include dirname(__FILE__)."\UCPFC-2.php";
-                    ?>
-                </div>
-                <!-- Third Page -->
-                <div class="form-hide
-                    <?php
-                        if($bci_current_page == 3){
-                            echo " form-show";
-                        }
-                    ?>
-                ">
-                    <?php
-                        include dirname(__FILE__)."\UCPFC-3.php";
-                    ?>
-                </div>
+                <div id="form-content-display"></div>
             </form>
         </div>
     </div>
