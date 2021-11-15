@@ -28,7 +28,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     <div class="<?php echo $hasHeader ?? ""; ?>">
     <!-- === Your Custom Page Content Goes Here below here === -->
 
-<div class="container  w-100 m-0 p-0 min-height">
+<div class="container container-full  w-100 m-lg-0 p-0 min-height">
     <div class="min-height content-container row flex-lg-row flex-column-reverse ">
         <!-- Info Block -->
         <div class="info col-12 col-lg-3  min-height">

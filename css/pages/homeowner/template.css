@@ -11,233 +11,63 @@
 }
 
 
-/*==========================================*/
-/*              DASHBOARD HOME              */
-/*==========================================*/
-
-
-@media only screen and (min-width: 992px) {
-
-
-}
-
-/*==========================================*/
-/*              DASHBOARD HOME              */
-/*==========================================*/
-
-
-@media only screen and (min-width: 992px) {
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-/*==========================================*/
-/*             FEATURED HEROES              */
-/*==========================================*/
-
-.featured-heroes{
-    min-height:540px; 
-    background-color:#FFFFFF;
-    // background-color:#00FFFF;
-}
-
-.feature-wrap{
-    max-width: 1300px;
-    margin-right: auto;
-    margin-left: auto;
-    // background-color:#FF00FF;
-}
-
-//.feature-row{
-    // background-color:#FFFF00;
-//}
-
-.featured-header{
-    font-size: 1.75em;
-    margin-left: 0.5em;
-}
-
-.feature-card{
-    // background-color: turquoise;
-    // border:1px solid #CCCCCC;
-    box-shadow: 0px 3px 12px rgba(0,0,0,0.16);
-    min-height: 435px;
-    margin-left: 1em;
-    margin-right: 1em;
-    margin-bottom: 1.25em;
-    flex: 1;
-    height: 100%;
-}
-
-.card{
-    height: 2em !important;
-}
-
-hr.card-hr {
-    border-top: 1px solid #9FAEAE;
-}
-
-.w-cap{
-    max-width: 375px;
-    padding-left: 0.25em;
-    padding-right: 0.25em;
-    margin-left: auto;
-    margin-right: auto;
+.min-height{
+    min-height: 32em;
 }
 
 @media only screen and (min-width: 992px) {
-    .featured-header{
-        font-size: 2em;
+    .min-height{
+        min-height: 43em;
     }
+}
 
-    .feature-card{
-        max-width: 381px;
-        margin-left: none;
-        margin-right: none;
-        margin-bottom: none;
-    }
 
-    .w-cap{
-        max-width: 1200px;
-        padding-left: 1em;
-        padding-right: 1em;
+
+@media only screen and (min-width: 280px) {
+    .container-full{
+        max-width: 370px;
         margin-left: auto;
         margin-right: auto;
     }
 }
 
-/*==========================================*/
-/*          POPULAR POSTINGS STYLES         */
-/*==========================================*/
-
-.pop-post_container{
-    min-height:540px; 
-    background-color:#E4E4E4;  
-    display: flex;
-    font-family: Arial, Helvetica, sans-serif;
+@media only screen and (min-width: 567px) {
+    .container-full{
+        max-width: 767px;
+    }
 }
 
-.pop-post_content-wrapper{
-    padding: 3em 1em 3em 1em;
+@media only screen and (min-width: 768px) {
+    .container-full{
+        max-width: 1000px;
+    }
 }
-
-.pop-post-desktop{
-    display: none;
-    margin-top: 2em;
-}
-
-.cust-card{
-    border-radius: 1em;
-}
-
-.card{
-    min-height: 250px;
-}
-
 
 @media only screen and (min-width: 992px) {
-    .pop-post_content-wrapper{
-        padding: 4.5em 0 4.5em 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    
-    .pop-post-desktop{
-        display: flex;
-    }
-
-    .pop-post-mobile{
-        display: none;
-    }
-
-    .card{
-        min-width: 500px;
-        min-height: 150px;
+    .container-full{
+        max-width: 1150px;
     }
 }
+
+@media only screen and (min-width: 1200px) {
+    .container-full{
+        max-width: 1400px;
+        margin-left: none;
+        margin-right: auto;
+    }
+}
+
+
+
 
 /*==========================================*/
-/*          JUMBOTRON FORM STYLES           */
+/*              DASHBOARD HOME              */
 /*==========================================*/
-
-.jum-form{
-    border: 1px solid #CCCCCC;
-    padding: 0;
-}
-
-.cust-select-container{
-    flex:1;
-    display: flex;
-    align-items: center;
-}
-
-.custom-select{
-    border: 1px solid transparent;
-    padding-left: 1;
-    background: transparent !important;
-    padding-right: 0;
-    padding-left: 0;
-    width: 100%;
-}
-
-.jumb-form-input-container{
-    flex:1.5;
-    padding-left: 8px
-}
-
-.jumb-form-input-container :focus{
-    outline: none;
-    border-bottom: 2px solid #F2AE00;
-    margin-right: 15px;
-}
-
-.jmb-form-btn{
-    font-weight: 900;
-    font-family: "Nunito";
-    border-radius: 0 0 0 0;
- }
-
- .cust-select-container :focus{
-    outline: none;
-    border-color: transparent;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0), 0 0 8px rgba(255, 0, 0, 0);
-    border-bottom: 2px solid #F2AE00;
-    margin-right: 15px;
- }
-
 
 
 @media only screen and (min-width: 992px) {
 
-    .jum-form{
-        border: 1px solid #CCCCCC;
-        padding: 0;
-        height: 3.25em;
-        align-items: center;
-    }
 
-    .jmb-form-btn{
-       border-radius: 0 5px 5px 0;
-       margin: 0;
-    }
-
-    .vert-line{
-        border-left:1px solid #CCCCCC;
-    }
-
-    .city-icon{
-        margin-left: 8px;
-        margin-right: 4px;
-    }
 }
+
+
