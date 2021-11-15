@@ -74,18 +74,24 @@
 }
 
 .info-wrapper {
-    background-color: white;
+    // background-color: white;
     max-width: 500px;
     margin-right: auto !important;
     margin-left: auto !important;
     padding-top: 2em;
     padding-bottom: 2em;
+    font-family: 'Arial';
 }
 
 .img-container{
     max-width:280px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.info-header{
+    font-weight: bold;
+    font-size: 1.625em;
 }
 
 

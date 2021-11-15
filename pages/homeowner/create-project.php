@@ -41,23 +41,23 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         <div class="min-height content-container row flex-lg-row flex-column-reverse  m-auto ">
             <!-- Info Block -->
             <div class="info-container col-12 col-lg-3 min-height">
-                <div class="info-wrapper flex-1">
-                    <h3 class="gray-font" >Create a project for Plumbing Repair</h3>
+                <div class="info-wrapper flex-1 gray-font">
+                    <h3 class="info-header" >Create a project for Plumbing Repair</h3>
 
                     <div class="img-container">
                         <img src="../../images/illustrations/plumbing.jpg" class="img-fluid" alt="Responsive image">
                     </div>
                     
-                    <p>Specify your project details to match up with the right HomeHero</p>
+                    <h6 class="mt-4"><i><b>Specify your project details to match up with the right HomeHero</b></i></h6>
 
-                    <h4>We match HomeHeroes by:</h4>
+                    <h6 class="mt-4"><i><b>We match HomeHeroes by:</b></i></h6>
                     <ul>
                         <li>Location</li>
                         <li>Services offered</li>
                         <li>Schedule</li>
                     </ul>
 
-                    <h4>Looking for a different service?</h4>
+                    <h6 class="mt-4"><b>Looking for a different service?</b></h6>
                     <a href="">Select another project category</a>
                 </div>
             </div>
