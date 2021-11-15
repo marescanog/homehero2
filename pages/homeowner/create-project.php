@@ -6,7 +6,7 @@
 //     exit();
 // }
 
-$level ="../../";
+$level ="../..";
 $fistName = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest";
 $initials = isset($_SESSION["initials"]) ? $_SESSION["initials"] : "GU";
 
@@ -28,8 +28,25 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     <div class="<?php echo $hasHeader ?? ""; ?>">
     <!-- === Your Custom Page Content Goes Here below here === -->
 
-    <div class="content-container">
-        <h1>ljkljl</h1>
+    <div class="content-container row">
+        <div class="col-12 col-lg-3">
+            <h3>Create a project for Plumbing Repair</h3>
+            <p>Picture</p>
+            <p>Specify your project details to match up with the right HomeHero</p>
+
+            <h4>We match HomeHeroes by:</h4>
+            <ul>
+                <li>Location</li>
+                <li>Services offered</li>
+                <li>Schedule</li>
+            </ul>
+
+            <h4>Looking for a different service?</h4>
+            <a href="">Select another project category</a>
+        </div>
+        <div class="col-12 col-lg-9">
+            <h2>Choose the best time for you</h2>
+        </div>
     </div>
 
 
@@ -60,8 +77,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     </div>
 <?php require_once dirname(__FILE__)."/$level/components/foot-meta.php"; ?>
 <!-- Custom JS Scripts Below -->
-    <script src="<?php echo $level;?>/js/components/loadModal.js"></script>
-    <script src="../../js/pages/user-home.js"></script>
+    <!-- <script src="../../js/pages/user-home.js"></script> -->
     <script>
 
    

@@ -6,7 +6,7 @@
 //     exit();
 // }
 
-$level ="../../";
+$level ="../..";
 $fistName = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest";
 $initials = isset($_SESSION["initials"]) ? $_SESSION["initials"] : "GU";
 
@@ -82,8 +82,8 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     </div>
 <?php require_once dirname(__FILE__)."/$level/components/foot-meta.php"; ?>
 <!-- Custom JS Scripts Below -->
-    <script src="<?php echo $level;?>/js/components/loadModal.js"></script>
-    <script src="../../js/pages/user-home.js"></script>
+    <!-- <script src="<?php echo $level;?>/js/components/loadModal.js"></script> -->
+    <!-- <script src="../../js/pages/user-home.js"></script> -->
     <script>
 
    

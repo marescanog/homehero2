@@ -1,6 +1,6 @@
 // console.log("user-signed-in.js is loaded!");
 
-appendStyleSheet("/css/headers/user.css");
+appendStyleSheet("/css/headers/header-homeowner.css");
 
 $( document ).ready(()=>{
     const logoutDesktop = document.getElementById("logout-link-desktop");
