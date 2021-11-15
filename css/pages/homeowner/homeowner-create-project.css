@@ -100,16 +100,142 @@
 
 }
 
+
 /*==========================================*/
 /*              FORM CONTAINER              */
 /*==========================================*/
 
-.form{
- //   background-color: yellow;
+.form-wrapper{
+   background-color: white;
 }
+
+.form-container{
+    // background-color: red !important;
+    max-width: 47em;
+}
+
+.form-title-container{
+    background-color: white;
+}
+
+.form-container{
+    background-color: white;
+}
+
 
 @media only screen and (min-width: 992px) {
 
+
+}
+
+/*==========================================*/
+/*              Breadcrumbs             */
+/*==========================================*/
+
+.breadcrumb-container{
+    text-align: center;
+}
+
+.bc-title-container{
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    font-size: smaller;
+}
+
+.bc-title{
+    margin: 0;
+    padding: 0;
+    // background-color: brown;
+    min-width: none;
+    display: none;
+}
+
+.bc-w-60{
+    width: 80% !important;
+}
+
+.box-container{
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    position: absolute;
+}
+
+.bc-circle{
+    width: 24px;
+    height: 24px;
+    background-color: #E4E4E4;
+    border-radius: 50px;
+    border: 3px solid white;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.bc-circle.colored{
+    width: 24px;
+    height: 24px;
+    background-color: #FAD255;
+    border-radius: 50px;
+    border: 3px solid white;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+}
+
+.circle-check{
+    line-height: 110%;
+    transform: scale(0.8);
+    display: none;
+}
+.circle-text{
+    font-weight: bold;
+    font-size: 8;
+    line-height: 95%;
+    display: none;
+}
+
+.circ-content-show{
+    display: block;
+}
+
+.line-container{
+    height: 0.5em;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    position: absolute;
+}
+
+.line-segment{
+    background-color: #E4E4E4;
+    height: 0.5em;
+    margin-top: 7px;
+}
+
+.line-segment.colored{
+    background-color: #FAD255;
+    height: 0.5em;
+}
+
+@media only screen and (min-width: 992px) {
+    .bc-w-60{
+        width: 60% !important;
+    }
+
+    .bc-title{
+        min-width: 130px;
+        display: flex;
+        justify-content: center;
+        display: inline;
+    }
 
 }
 
