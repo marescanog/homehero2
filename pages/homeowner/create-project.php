@@ -19,6 +19,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <link rel="stylesheet" href="../../css/headers/header-homeowner.css">
 <link rel="stylesheet" href="../../css/footer.css">
 <link rel="stylesheet" href="../../css/pages/homeowner/homeowner-create-project.css">
+<link rel="stylesheet" href="../../css/UX/breadcrumb-indicator.css">
 <!-- === Link your custom CSS  pages above here ===-->
 </head>
 <body class="container-fluid m-0 p-0  w-100 min-body-height">  
@@ -66,47 +67,9 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             <div class="form-wrapper d-flex justify-content-center min-height col-12 col-lg-9 text-center">
                 <div class="w-100 flex-1 mt-4 form-container">
                     <!-- breadcrumb -->
-                    <div class="breadcrumb-container mt-2">
-                        <ul class="bc-title-container">
-                            <li class="bc-title">
-                                Choose date & time
-                            </li>
-                            <li class="bc-title">Describe your project</li>
-                            <li class="bc-title">Review & Submit</li>
-                        </ul>
-                        <div>
-                            <div class="line-container d-flex bc-w-60">
-                                <div class="w-100 line-segment colored"></div>
-                                <div class="w-100 line-segment"></div>
-                            </div>
-                            <div class="box-container d-flex justify-content-between bc-w-60">
-                                <div class="bc-circle colored">
-                                    <div class="circle-check circ-content-show">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                    <div class="circle-text">
-                                        1
-                                    </div>
-                                </div>
-                                <div class="bc-circle colored">
-                                    <div class="circle-check">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                    <div class="circle-text circ-content-show">
-                                        2
-                                    </div>
-                                </div>
-                                <div class="bc-circle"> 
-                                    <div class="circle-check">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                    <div class="circle-text circ-content-show">
-                                        3
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php 
+                        include '../../components/UX/breadcrumb-indicator.php';
+                    ?>
                     <!-- Form Title -->
                     <div class="form-title-container mt-4">
                         <h3 class="pt-3 h4">Choose the best time for you</h3>
