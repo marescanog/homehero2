@@ -20,6 +20,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <link rel="stylesheet" href="../../css/footer.css">
 <link rel="stylesheet" href="../../css/pages/homeowner/homeowner-create-project.css">
 <link rel="stylesheet" href="../../css/UX/breadcrumb-indicator.css">
+<link rel="stylesheet" href="../../css/forms/user-create-project-form.css">
 <!-- === Link your custom CSS  pages above here ===-->
 </head>
 <body class="container-fluid m-0 p-0  w-100 min-body-height">  
@@ -47,7 +48,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                     <h3 class="info-header" >Create a project for Plumbing Repair</h3>
 
                     <div class="img-container">
-                        <img src="../../images/illustrations/plumbing.jpg" class="img-fluid" alt="Responsive image">
+                        <img src="<?php echo $level;?>/images/illustrations/plumbing.jpg" class="img-fluid" alt="Responsive image">
                     </div>
                     
                     <h6 class="mt-4"><i><b>Specify your project details to match up with the right HomeHero</b></i></h6>
@@ -64,25 +65,10 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                 </div>
             </div>
             <!-- Form Block -->
-            <div class="form-wrapper d-flex justify-content-center min-height col-12 col-lg-9 text-center">
+            <div class="form-wrapper d-flex justify-content-center min-height col-12 col-lg-9">
                 <div class="w-100 flex-1 mt-4 form-container">
-                    <!-- breadcrumb -->
-                    <?php 
-                        include '../../components/UX/breadcrumb-indicator.php';
-                    ?>
-                    <!-- Form Title -->
-                    <div class="form-title-container mt-4">
-                        <h3 class="pt-3 h4">Choose the best time for you</h3>
-                        <p>We'll match you with a HomeHero who can be scheduled at your time preference.</p>
-                    </div>
-                    <!-- Form Contents -->
-                    <div class="form-container">
-                        <div class="card shadow-sm mb-4">
-                            <div class="card-body form-height">
-                                
-                            </div>
-                        </div>
-                    </div>
+                    <?php //include "../../components/forms/user-create-project-form.php";?>
+                    <div id="user-create-project-form"></div>
                 </div>
             </div>
             <!-- Form Block End -->
@@ -105,6 +91,6 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     </div>
 <?php require_once dirname(__FILE__)."/$level/components/foot-meta.php"; ?>
 <!-- Custom JS Scripts Below -->
-    <!-- <script src="../../js/pages/user-home.js"></script> -->
+    <script src="../../js/pages/user-create-project.js"></script>
 </body>
 </html>
