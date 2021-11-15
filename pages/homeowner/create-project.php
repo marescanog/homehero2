@@ -20,19 +20,19 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <link rel="stylesheet" href="../../css/pages/homeowner/homeowner-create-project.css">
 <!-- === Link your custom CSS  pages above here ===-->
 </head>
- <body class="container-fluid m-0 p-0  w-100">  
+<body class="container-fluid m-0 p-0  w-100 min-body-height">  
     <!-- Add your Header NavBar here-->
     <?php 
         require_once dirname(__FILE__)."/$level/components/headers/ho-signed-in.php"; 
     ?>
-    <div class="<?php echo $hasHeader ?? ""; ?>">
+    <div class="min-body-height d-flex flex-column justify-content-between <?php echo $hasHeader ?? ""; ?>">
     <!-- === Your Custom Page Content Goes Here below here === -->
 
-<div class="container container-full  w-100 m-lg-0 p-0 min-height">
-    <div class="min-height content-container row flex-lg-row flex-column-reverse ">
+<div class="container container-full  w-100 m-0 p-0 min-height h-100">
+    <div class="min-height content-container row flex-lg-row flex-column-reverse  m-auto ">
         <!-- Info Block -->
-        <div class="info col-12 col-lg-3  min-height">
-            <div>
+        <div class="info-container col-12 col-lg-3 min-height">
+            <div class="info-wrapper flex-1">
                 <h3>Create a project for Plumbing Repair</h3>
 
                 <div class="img-container">

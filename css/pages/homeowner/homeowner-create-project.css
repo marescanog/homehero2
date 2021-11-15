@@ -14,25 +14,20 @@
     min-height: 32em;
 }
 
-.c-max{
-    max-width: 280px;
+.min-body-height{
+    min-height: 95vh;
 }
 
 @media only screen and (min-width: 992px) {
     .min-height{
         min-height: 43em;
     }
-}
 
-
-
-@media only screen and (min-width: 280px) {
-    .container-full{
-        max-width: 370px;
-        margin-left: auto;
-        margin-right: auto;
+    .min-body-height{
+        min-height: 100vh;
     }
 }
+
 
 @media only screen and (min-width: 567px) {
     .container-full{
@@ -65,12 +60,18 @@
 /*              Info Container              */
 /*==========================================*/
 
-.info{
+.info-container{
+    background-color: #FBF9EC;
+}
+
+.info-wrapper {
     background-color: blue;
 }
 
 .img-container{
     max-width:280px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -84,7 +85,7 @@
 /*==========================================*/
 
 .form{
-    background-color: yellow;
+ //   background-color: yellow;
 }
 
 @media only screen and (min-width: 992px) {
