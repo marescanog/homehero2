@@ -76,20 +76,14 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         </div>
     </div>
 
-
-<?php 
-    require_once dirname(__FILE__)."/$level/components/footer.php"; 
-?>
-
+    <!-- Footer Links -->
+    <?php 
+        require_once dirname(__FILE__)."/$level/components/footer.php"; 
+    ?>
     <!-- === Your Custom Page Content Goes Here above here === -->
     </div>
 <?php require_once dirname(__FILE__)."/$level/components/foot-meta.php"; ?>
 <!-- Custom JS Scripts Below -->
     <!-- <script src="../../js/pages/user-home.js"></script> -->
-    <script>
-
-   
-
-    </script>
 </body>
 </html>
