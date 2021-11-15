@@ -122,6 +122,9 @@
     background-color: white;
 }
 
+.form-height{
+    min-height: 32em;
+}
 
 @media only screen and (min-width: 992px) {
 

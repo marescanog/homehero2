@@ -65,6 +65,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             <!-- Form Block -->
             <div class="form-wrapper d-flex justify-content-center min-height col-12 col-lg-9 text-center">
                 <div class="w-100 flex-1 mt-4 form-container">
+                    <!-- breadcrumb -->
                     <div class="breadcrumb-container mt-2">
                         <ul class="bc-title-container">
                             <li class="bc-title">
@@ -106,16 +107,22 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                             </div>
                         </div>
                     </div>
-
+                    <!-- Form Title -->
                     <div class="form-title-container mt-4">
                         <h3 class="pt-3 h4">Choose the best time for you</h3>
                         <p>We'll match you with a HomeHero who can be scheduled at your time preference.</p>
                     </div>
+                    <!-- Form Contents -->
                     <div class="form-container">
-                        <h3>Contents</h3>
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-body form-height">
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- Form Block End -->
         </div>
     </div>
 
