@@ -42,7 +42,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             <!-- Info Block -->
             <div class="info-container col-12 col-lg-3 min-height">
                 <div class="info-wrapper flex-1">
-                    <h3>Create a project for Plumbing Repair</h3>
+                    <h3 class="gray-font" >Create a project for Plumbing Repair</h3>
 
                     <div class="img-container">
                         <img src="../../images/illustrations/plumbing.jpg" class="img-fluid" alt="Responsive image">

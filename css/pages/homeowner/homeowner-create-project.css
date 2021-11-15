@@ -74,7 +74,12 @@
 }
 
 .info-wrapper {
-    background-color: blue;
+    background-color: white;
+    max-width: 500px;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    padding-top: 2em;
+    padding-bottom: 2em;
 }
 
 .img-container{
