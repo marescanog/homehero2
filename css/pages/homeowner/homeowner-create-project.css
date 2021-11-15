@@ -11,7 +11,7 @@
 }
 
 .min-height{
-    min-height: 16em;
+    min-height: 32em;
 }
 
 @media only screen and (min-width: 992px) {
@@ -27,9 +27,14 @@
 /*              Info Container              */
 /*==========================================*/
 
-.bgc-info{
+.info{
     background-color: blue;
 }
+
+.form{
+    background-color: yellow;
+}
+
 @media only screen and (min-width: 992px) {
 
 

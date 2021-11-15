@@ -29,8 +29,8 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     <!-- === Your Custom Page Content Goes Here below here === -->
 
 <div class="container-fluid m-0 p-0 min-height">
-    <div class="content-container row flex-row-reverse flex-lg-row">
-        <div class="bgc-info col-12 col-lg-3">
+    <div class="min-height content-container row flex-lg-row flex-column-reverse">
+        <div class="info col-12 col-lg-3  min-height">
             <h3>Create a project for Plumbing Repair</h3>
             <p>Picture</p>
             <p>Specify your project details to match up with the right HomeHero</p>
@@ -45,7 +45,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             <h4>Looking for a different service?</h4>
             <a href="">Select another project category</a>
         </div>
-        <div class="col-12 col-lg-9">
+        <div class="min-height col-12 col-lg-9 form">
             <h2>Choose the best time for you</h2>
         </div>
     </div>
