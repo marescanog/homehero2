@@ -10,26 +10,12 @@
     background-color: #FBFBFB;
 }
 
-.min-height{
-    min-height: 16em;
-}
-
-@media only screen and (min-width: 992px) {
-
-    .min-height{
-        min-height: 43em;
-    }
-    
-}
-
 
 /*==========================================*/
-/*              Info Container              */
+/*              DASHBOARD HOME              */
 /*==========================================*/
 
-.bgc-info{
-    background-color: blue;
-}
+
 @media only screen and (min-width: 992px) {
 
 
