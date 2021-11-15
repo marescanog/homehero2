@@ -28,6 +28,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     <div class="<?php echo $hasHeader ?? ""; ?>">
     <!-- === Your Custom Page Content Goes Here below here === -->
 
+<div class="container-fluid m-0 p-0 vh-100">
     <div class="content-container row">
         <div class="col-12 col-lg-3">
             <h3>Create a project for Plumbing Repair</h3>
@@ -48,6 +49,8 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             <h2>Choose the best time for you</h2>
         </div>
     </div>
+</div>
+    
 
 
 
