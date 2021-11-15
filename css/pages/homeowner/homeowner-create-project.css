@@ -6,6 +6,7 @@
     color: #707070;
 }
 
+
 .bgc-lightgray{
     background-color: #FBFBFB;
 }
@@ -46,6 +47,14 @@
         max-width: 1150px;
     }
 }
+
+
+@media only screen and (min-width: 1024px) {
+    .ipad{
+        flex: 1;
+    }
+}
+
 
 @media only screen and (min-width: 1200px) {
     .container-full{
