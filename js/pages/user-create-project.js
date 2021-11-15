@@ -22,7 +22,12 @@ $(document).ready(()=>{
     // });
 })
 
-const load_create_project_form = (current_page = 1, page1_Data = null, page2_Data = null) => {
+const load_create_project_form = (
+    current_page = 1, 
+    page1_Data = null, 
+    page2_Data = null, 
+    page3_Data = null
+) => {
     let obj = {};
     obj['level'] = getDocumentLevel();
     obj["current_page"] = current_page;
@@ -31,6 +36,9 @@ const load_create_project_form = (current_page = 1, page1_Data = null, page2_Dat
     }
     if(page2_Data != null){
         obj["page_2"] = page2_Data;
+    }
+    if(page3_Data != null){
+        obj["page_3"] = page3_Data;
     }
 
     $("#user-create-project-form").load(getDocumentLevel()+"/components/forms/user-create-project-form.php",obj, ()=>{
@@ -45,15 +53,15 @@ const load_create_project_form = (current_page = 1, page1_Data = null, page2_Dat
         var text2 = document.getElementById("text2");
         var text3 = document.getElementById("text3");
 
-        console.log(JSON.stringify(obj));
-        //Insert Data into input feilds
-        if(obj.hasOwnProperty("page_1")){
-            text1.value = obj.page_1?.text1;
-        }
+        // console.log(JSON.stringify(obj));
+        // //Insert Data into input feilds
+        // if(obj.hasOwnProperty("page_1")){
+        //     text1.value = obj.page_1?.text1;
+        // }
 
-        if(obj.hasOwnProperty("page_2")){
-            text2.value = obj.page_2?.text2;
-        }
+        // if(obj.hasOwnProperty("page_2")){
+        //     text2.value = obj.page_2?.text2;
+        // }
 
         // Add event listeners for the buttons
         button_page1.addEventListener("click", ()=>{
@@ -80,7 +88,17 @@ const load_create_project_form = (current_page = 1, page1_Data = null, page2_Dat
             let data = {};
             formData.forEach((value, key) => data[key] = value);
 
-            
+            $.ajax({
+                type: 'POST',
+                url : 'http://localhost/slim3homeheroapi/public/job-post/create',
+                data : data,
+                success : function(response) {
+                    console.log(response);
+                },
+                error : function(response) {
+                    console.log(response);
+                },
+            });
         });
     });
 }

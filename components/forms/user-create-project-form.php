@@ -2,6 +2,10 @@
 <?php 
     $level = isset($_POST["level"]) ? $_POST["level"] : "../..";
     $bci_current_page = isset($_POST["current_page"]) ? $_POST["current_page"] : 1;
+    $bci_page_1 = isset($_POST["page_1"]) ? $_POST["page_1"] : null;
+    $bci_page_2 = isset($_POST["page_2"]) ? $_POST["page_2"] : null;
+    $bci_page_3 = isset($_POST["page_3"]) ? $_POST["page_3"] : null;
+
     include "$level/components/UX/breadcrumb-indicator.php";
 ?>
 <!-- Form Title -->
