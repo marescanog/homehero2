@@ -61,7 +61,6 @@ const load_create_project_form = (
             if(current_page == 1){
                 // Grab the DOM elements
                 const is_exact_schedule = document.getElementById("is_exact_schedule");
-                console.log(is_exact_schedule);
 
                 // Date Selection buttons
                 const button_date_3days = document.getElementById("schedule-within-3-days-btn");
@@ -93,7 +92,6 @@ const load_create_project_form = (
                     button.classList.add("text-white");
                 }
 
-
                 button_date_3days.addEventListener("click", ()=>{
                     removeSelected();
                     addHighlight(button_date_3days);
@@ -113,8 +111,14 @@ const load_create_project_form = (
                 });
 
                 button_specific.addEventListener("click", ()=>{
-
+                    removeSelected();
+                    is_exact_schedule.value = true;
                     console.log("Specific Date");
+                    console.log(is_exact_schedule.value);
+                    let page1Data = {
+                        is_exact_schedule: true
+                    }
+                    load_create_project_form(1, page1Data);
                 });
             }
 
