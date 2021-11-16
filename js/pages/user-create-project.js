@@ -214,43 +214,49 @@ const load_create_project_form = (
                 });
             }
 
-            // // Forward to Page 3
-            // if(button_page2 != null){
-            //     button_page2.addEventListener("click", ()=>{
-            //         const text1 = document.getElementById("text1");
-            //         let page1Data = {};
-            //         page1Data['text1'] = text1.value;
+            // Forward to Page 3
+            if(button_page2 != null){
+                button_page2.addEventListener("click", ()=>{
+                    // const text1 = document.getElementById("text1");
+                    // let page1Data = {};
+                    // page1Data['text1'] = text1.value;
 
-            //         const text2 = document.getElementById("text2");
-            //         let page2Data = {};
-            //         page2Data['text2'] = text2.value;
+                    // const text2 = document.getElementById("text2");
+                    // let page2Data = {};
+                    // page2Data['text2'] = text2.value;
 
-            //         const text3 = document.getElementById("text3");
-            //         let page3Data = {};
-            //         page3Data['text3'] = text3.value;
+                    // const text3 = document.getElementById("text3");
+                    // let page3Data = {};
+                    // page3Data['text3'] = text3.value;
 
-            //         load_create_project_form(3, page1Data, page2Data, page3Data);
-            //     })
-            // }
+                    // load_create_project_form(3, page1Data, page2Data, page3Data);
 
-            // // Backward to Page 2
-            // if(button_back_page3 != null){
-            //     button_back_page3.addEventListener("click", ()=>{
-            //         const text1 = document.getElementById("text1");
-            //         let page1Data = {};
-            //         page1Data['text1'] = text1.value;
+                    //Note: will add logic later, but for now, will jsut proceed to next page.
+                    load_create_project_form(3);
+                })
+            }
 
-            //         const text2 = document.getElementById("text2");
-            //         let page2Data = {};
-            //         page2Data['text2'] = text2.value;
+            // Backward to Page 2
+            if(button_back_page3 != null){
+                button_back_page3.addEventListener("click", ()=>{
+                    // const text1 = document.getElementById("text1");
+                    // let page1Data = {};
+                    // page1Data['text1'] = text1.value;
 
-            //         const text3 = document.getElementById("text3");
-            //         let page3Data = {};
-            //         page3Data['text3'] = text3.value;
+                    // const text2 = document.getElementById("text2");
+                    // let page2Data = {};
+                    // page2Data['text2'] = text2.value;
 
-            //         load_create_project_form(2, page1Data, page2Data, page3Data);
-            //     });
-            // }
+                    // const text3 = document.getElementById("text3");
+                    // let page3Data = {};
+                    // page3Data['text3'] = text3.value;
+
+                    // load_create_project_form(2, page1Data, page2Data, page3Data);
+
+                    //Note: will add logic later, but for now, will jsut proceed to next page.
+                    load_create_project_form(2);
+                });
+            }
 
             // // Submit the form
             // if(button_page3 != null){
