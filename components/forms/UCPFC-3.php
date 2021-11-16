@@ -9,32 +9,69 @@
     // var_dump($_POST);
 ?>
 
-<h5 class="text-center">Plumbing repair</h5>
+<h5 class="text-center project-title-review">Plumbing repair</h5>
 
 <hr class="custom"/>
 
-<div>
+<div class="Segeo-font">
     <div>
-        <h6>Project Info:</h6>
-        <div>
-            <p>Icon</p>
-            <p>Edit Project</p>
+        <div class="d-flex flex-row justify-content-between">
+            <h6 class="mt-1 project-subtitle-review">Project Info:</h6>
+            <div class="d-flex flex-row">
+                <div class="edit-icon">
+                    <?php
+                        include dirname(__FILE__)."/".$level.'/images/svg/edit_black_white24dp.svg'; 
+                    ?>
+                    <div class="edit-icon-square"></div>
+                </div>
+                <p class="edit-icon-text mt-1 ml-1">Edit Project</p>
+            </div>
         </div>
-        <div>
-            <p>Icon</p>
+
+
+        <div class="d-flex flex-row">
+            <div class="gray-icon">
+                <?php
+                    include dirname(__FILE__)."/".$level.'/images/svg/today_black_24dp.svg'; 
+                ?>
+            </div>
             <p>Sat, Sep 5 at 2:00pm</p>
         </div>
-        <div>
-            <p>Icon</p>
+
+        <div class="d-flex flex-row">
+            <div class="gray-icon">
+                <?php
+                    include dirname(__FILE__)."/".$level.'/images/svg/location_on_black_24dp.svg'; 
+                ?>
+            </div>
+            <p>99 Caraway Street, Mabolo, Cebu City</p>
+        </div>
+
+        <div class="d-flex flex-row">
+            <div class="gray-icon">
+                <?php
+                    include dirname(__FILE__)."/".$level.'/images/svg/straighten_black_24dp.svg'; 
+                ?>
+            </div>
             <p>Small - Est 1hr</p>
         </div>
-        <div>
-            <p>Icon</p>
+
+        <div class="d-flex flex-row">
+            <div class="gray-icon">
+                <?php
+                    include dirname(__FILE__)."/".$level.'/images/svg/description_black_24dp.svg'; 
+                ?>
+            </div>
             <p>I need help fixing a leaky sink. Please bring plumbing tools.</p>
         </div>
-        <div>
-            <div>
-                <p>Icon</p>
+
+        <div class="d-flex flex-row">
+            <div class="d-flex flex-row">
+                <div class="gray-icon">
+                    <?php
+                        include dirname(__FILE__)."/".$level.'/images/svg/local_offer_black_24dp.svg'; 
+                    ?>
+                </div>
                 <h6>Your Est. Offer</h6>
             </div>
             <div>
@@ -47,15 +84,24 @@
 <hr class="custom"/>
 
 <div>
-    <div>
-        <h6>Payment Option:</h6>
-        <div>
-            <p>icon</p>
-            <p>Select Option</p>
+    <div class="d-flex flex-row justify-content-between">
+        <h6 class="mt-1 project-subtitle-review">Payment Option:</h6>
+        <div class="d-flex flex-row">
+            <div class="edit-icon">
+                <?php
+                    include dirname(__FILE__)."/".$level.'/images/svg/edit_black_white24dp.svg'; 
+                ?>
+                <div class="edit-icon-square"></div>
+            </div>
+            <p class="edit-icon-text mt-1 ml-1">Select Option</p>
         </div>
     </div>
-    <div>
-        <p>Icon</p>
+    <div class="d-flex flex-row">
+        <div class="red-icon">
+            <?php
+                include dirname(__FILE__)."/".$level.'/images/svg/error_black_24dp.svg'; 
+            ?>
+        </div>
         <p>Payment Method</p>
     </div>
 </div>
