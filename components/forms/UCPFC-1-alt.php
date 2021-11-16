@@ -15,6 +15,12 @@
         <div class="w-100 ">
             <!-- bg primary -->
             <div class="justify-content-center d-flex flex-column-reverse">
+                <div class="form-group">
+                    <label for="time-picker">Select Time:</label>
+                    <input class="form-control" id="time-picker" type="text">
+                
+                </div>
+                
                 <input id="inline-calendar" type="text" readonly="readonly"> 
             </div>
         </div>

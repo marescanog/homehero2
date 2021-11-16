@@ -143,6 +143,12 @@ const load_create_project_form = (
                     minDate: "today"
                 });
 
+                const timePicker = flatpickr("#time-picker", {
+                    enableTime: true,
+                    noCalendar: true,
+                    dateFormat: "H:i",
+                })
+
                 // Go back to General Date
                 link_back_general.addEventListener("click", ()=>{
                     is_exact_schedule.value = false;
