@@ -1,6 +1,6 @@
 $(document).ready(()=>{
 
-    load_create_project_form(2);
+    load_create_project_form(3);
 
     const fp = flatpickr("#timePicker", {
         enableTime: true,
@@ -9,6 +9,7 @@ $(document).ready(()=>{
         minTime: "6:00",
         maxTime: "22:30",
     });
+
 
 
 
@@ -167,7 +168,7 @@ const load_create_project_form = (
             const button_page3 = document.getElementById("btn-page-3");
             // Back Buttons
             const button_back_page2 = document.getElementById("btn-back-page-2");
-            const button_back_page3 = document.getElementById("btn-back-page-3");
+            // const button_back_page3 = document.getElementById("btn-back-page-3");
 
             // Next, Back & Submit Button Logic
             // Forward to Page 2
@@ -236,27 +237,27 @@ const load_create_project_form = (
                 })
             }
 
-            // Backward to Page 2
-            if(button_back_page3 != null){
-                button_back_page3.addEventListener("click", ()=>{
-                    // const text1 = document.getElementById("text1");
-                    // let page1Data = {};
-                    // page1Data['text1'] = text1.value;
+            // // Backward to Page 2
+            // if(button_back_page3 != null){
+            //     button_back_page3.addEventListener("click", ()=>{
+            //         // const text1 = document.getElementById("text1");
+            //         // let page1Data = {};
+            //         // page1Data['text1'] = text1.value;
 
-                    // const text2 = document.getElementById("text2");
-                    // let page2Data = {};
-                    // page2Data['text2'] = text2.value;
+            //         // const text2 = document.getElementById("text2");
+            //         // let page2Data = {};
+            //         // page2Data['text2'] = text2.value;
 
-                    // const text3 = document.getElementById("text3");
-                    // let page3Data = {};
-                    // page3Data['text3'] = text3.value;
+            //         // const text3 = document.getElementById("text3");
+            //         // let page3Data = {};
+            //         // page3Data['text3'] = text3.value;
 
-                    // load_create_project_form(2, page1Data, page2Data, page3Data);
+            //         // load_create_project_form(2, page1Data, page2Data, page3Data);
 
-                    //Note: will add logic later, but for now, will jsut proceed to next page.
-                    load_create_project_form(2);
-                });
-            }
+            //         //Note: will add logic later, but for now, will jsut proceed to next page.
+            //         load_create_project_form(2);
+            //     });
+            // }
 
             // // Submit the form
             // if(button_page3 != null){
