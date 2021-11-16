@@ -12,16 +12,37 @@
 
 .custom-a {
     font-family: "Nunito", sans-serif;
-    font-weight: 800;
+    font-weight: 700;
+}
+
+.custom-a.selected {
+    font-weight: 900;
+    color: #F2AE00 !important;
+}
+
+.custom-underline.show{
+    background-color: #F2AE00;
+    height: 4px;
+    width: 5em;
+    border-radius: 10px;
+}
+
+.cust-width {
+    width: 5em;
+}
+
+.tray-margin{
+    margin-right: 5em !important;
 }
 
 .nav-container{
     width:100%;
 }
 
-.btn-warning{
-    text-shadow: 0 0 3px rgba(0,0,0,0.25);
+.header-img{
+    width: 50px;
 }
+
 
 #header-logo-desktop{
     display: none;
@@ -54,11 +75,15 @@
 }
 
 .circle{
-    background-color: burlywood;
+    background-color: #FFF29F;
     border-radius: 30px;
     width: 40px;
     height: 40px;
     text-align: center;
+}
+
+#navbarDropdown{
+    color:#8C6551 !important;
 }
 
 @media only screen and (min-width: 992px) {
@@ -74,31 +99,19 @@
     }
 
     #header-desktop-content{
-        // width: 90%;
         margin: auto;
-        // max-width: 1536px;
-    }
-
-    #header-logo-mobile{
-        display: none;
-    }
-
-    #header-btn-mobile{
-        display: none;
     }
 
     #header-mobile-container{
         display: none;
     }
     
-    #header-menu-links{
-        display: flex;
-        width: auto;
-        text-align: left;
+    #header-logo-mobile{
+        display: none;
     }
 
-    .nav-container{
-        width:90%;
+    #header-btn-mobile{
+        display: none;
     }
 
     .header{
