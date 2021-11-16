@@ -29,7 +29,7 @@
             <div class="ml-0 ml-lg-5 mt-1 mt-lg-5">
                 <h6>Schedule for:</h6>
                 <h4>Sep 10, 2:00 PM</h5>
-                <button id="btn-page-1" type="button" class="btn btn-lg btn-warning text-white my-2">
+                <button id="btn-page-1" type="button" class="btn btn-lg btn-warning text-white my-2 thicc">
                     Select & Continue
                 </button>
                 <p class="display-note">Note: You can still chat with the Homehero to adjust and finalize details & schedule.</p>

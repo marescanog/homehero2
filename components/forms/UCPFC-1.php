@@ -72,8 +72,8 @@
         </div>
 
         <div class="justify-content-center d-flex mt-4">
-            <button type="button" id="btn-page-1" class="btn btn-lg btn-warning text-white select-width">
-                    Next
+            <button type="button" id="btn-page-1" class="btn btn-lg btn-warning text-white select-width thicc">
+                    NEXT <i class="fas fa-long-arrow-alt-right h4 mt-1"></i>
             </button>
         </div>
 <?php 

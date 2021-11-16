@@ -13,8 +13,8 @@
 
 <hr class="custom"/>
 
-<div class="Segeo-font">
-    <div>
+<div class="Segeo-font d-flex flex-column justify-content-center align-items-center">
+    <div class="info-width">
         <div class="d-flex flex-row justify-content-between">
             <h6 class="mt-1 project-subtitle-review">Project Info:</h6>
             <div class="d-flex flex-row">
@@ -83,32 +83,34 @@
 
 <hr class="custom"/>
 
-<div>
-    <div class="d-flex flex-row justify-content-between">
-        <h6 class="mt-1 project-subtitle-review">Payment Option:</h6>
-        <div class="d-flex flex-row">
-            <div class="edit-icon">
-                <?php
-                    include dirname(__FILE__)."/".$level.'/images/svg/edit_black_white24dp.svg'; 
-                ?>
-                <div class="edit-icon-square"></div>
+<div class="Segeo-font flex-column justify-content-center align-items-center">
+    <div class="info-width mx-auto">
+        <div class="d-flex flex-row justify-content-between">
+            <h6 class="mt-1 project-subtitle-review">Payment Option:</h6>
+            <div class="d-flex flex-row">
+                <div class="edit-icon">
+                    <?php
+                        include dirname(__FILE__)."/".$level.'/images/svg/edit_black_white24dp.svg'; 
+                    ?>
+                    <div class="edit-icon-square"></div>
+                </div>
+                <p class="edit-icon-text mt-1 ml-1">Select Option</p>
             </div>
-            <p class="edit-icon-text mt-1 ml-1">Select Option</p>
         </div>
-    </div>
-    <div class="d-flex flex-row">
-        <div class="red-icon">
-            <?php
-                include dirname(__FILE__)."/".$level.'/images/svg/error_black_24dp.svg'; 
-            ?>
+        <div class="d-flex flex-row">
+            <div class="red-icon">
+                <?php
+                    include dirname(__FILE__)."/".$level.'/images/svg/error_black_24dp.svg'; 
+                ?>
+            </div>
+            <p>Payment Method</p>
         </div>
-        <p>Payment Method</p>
-    </div>
+    </div>  
 </div>
 
-<div>
-    <p class="text-center">* You will not be billed until the project is completed.</p>
-    <button type="button" id="btn-page-3" class="btn btn-warning text-white w-100">
+<div class="info-width mx-auto">
+    <p class="text-center p-0 m-0 info-notice">* You will not be billed until the project is completed.</p>
+    <button type="button" id="btn-page-3" class="thicc mt-2 btn btn-lg btn-warning text-white w-100">
         SUBMIT & POST
     </button>
 </div>

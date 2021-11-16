@@ -1,6 +1,6 @@
 $(document).ready(()=>{
 
-    load_create_project_form(3);
+    load_create_project_form();
 
     const fp = flatpickr("#timePicker", {
         enableTime: true,

@@ -443,6 +443,18 @@ hr.custom {
     font-size: 1.1rem;
 }
 
+.info-width{
+    max-width: 24em;
+}
+
+.info-notice{
+    font-size: small;
+}
+
+.thicc{
+    font-weight: 800;
+    font-family: 'Nunito';
+}
 
 @media only screen and (min-width: 992px) {
     .project-title-review{

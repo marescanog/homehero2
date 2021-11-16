@@ -57,12 +57,12 @@ placeholder="Feel free to give a short description or elaborate on specific deta
 
 
 <div class="d-flex flex-row justify-content-center mt-4 mt-lg-2">
-    <button type="button" id="btn-back-page-2" class="btn btn-outline-warning w-100 bottom-button-max-width">
-        Back
+    <button type="button" id="btn-back-page-2" class="btn btn-lg btn-outline-warning w-100 bottom-button-max-width thicc">
+    <i class="fas fa-long-arrow-alt-left h4 mt-1"></i> BACK 
     </button>
 
-    <button type="button" id="btn-page-2" class="btn btn-warning text-white w-100 ml-3 bottom-button-max-width">
-        Next
+    <button type="button" id="btn-page-2" class="btn btn-lg btn-warning text-white w-100 ml-3 bottom-button-max-width thicc">
+        NEXT <i class="fas fa-long-arrow-alt-right h4 mt-1"></i>
     </button>
 </div>
 
