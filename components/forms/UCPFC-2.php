@@ -10,29 +10,30 @@
 
 <h5 class="text-left">Project Name:</h5>
 <div class="form-group">
-    <input type="text" class="form-control" id="project_name" name="project_name" placeholder="Plumbing Repair">
+    <input type="text" class="gray form-control" id="project_name" name="project_name" placeholder="Plumbing Repair">
 </div>
 
 <h5 class="text-left">Description:</h5>
 <div class="form-group">
-<textarea class="form-control" id="project_description" name="project_description" rows="3"></textarea>
+<textarea class="gray-small form-control" id="project_description" name="project_description" rows="5" 
+placeholder="Feel free to give a short description or elaborate on specific details. For example, 'I need help assembling a cabinet. Please bring an electric drill.'"></textarea>
 </div>
 
-<h6>How big is your project?</h6>
-<div class="d-flex flex-row">
-    <div class="form-check">
+<h6 class="mt-3 text-lg-center">How big is your project?</h6>
+<div class="d-flex flex-column flex-lg-row justify-content-lg-between">
+    <div class="form-check mb-2 mb-lg-0">
         <input class="form-check-input" type="radio" name="jobSize" id="jobSize_small" value="small" checked>
         <label class="form-check-label" for="jobSize_small">
             Small - Est. 1 - 4 hrs.
         </label>
     </div>
-    <div class="form-check">
+    <div class="form-check mb-2 mb-lg-0">
         <input class="form-check-input" type="radio" name="jobSize" id="jobSize_Medium" value="medium">
         <label class="form-check-label" for="jobSize_Medium">
             Medium - Est 4 - 8 hrs.
         </label>
     </div>
-    <div class="form-check">
+    <div class="form-check mb-2 mb-lg-0">
         <input class="form-check-input" type="radio" name="jobSize" id="jobSize_large" value="large">
         <label class="form-check-label" for="jobSize_large">
             Large - Est 8+ hrs.
@@ -40,13 +41,13 @@
     </div>
 </div>
 
-<h6>Set an estimated offer</h6>
-<div>
-    <div class="form-group">
-        <label for="rateValue">P</label>
+<h6 class="mt-3 text-lg-center mb-2">Set an estimated offer</h6>
+<div class="d-flex flex-column flex-lg-row justify-content-center ">
+    <div class="form-group d-flex flex-row justify-content-center align-items-center est-offer-width">
+        <label for="rateValue" class="mr-3">P</label>
         <input type="number" class="form-control" id="rateValue" placeholder="Password" name="rateValue">
     </div>
-    <select class="custom-select">
+    <select class="custom-select est-offer-width ml-0 ml-lg-3">
         <option selected value="1">per hour</option>
         <option value="2">per day</option>
         <option value="3">per week</option>
@@ -54,15 +55,18 @@
     </select>
 </div>
 
-<div>
-    <button type="button" id="btn-back-page-2" class="btn btn-outline-warning">
+
+<div class="d-flex flex-row justify-content-center mt-4 mt-lg-2">
+    <button type="button" id="btn-back-page-2" class="btn btn-outline-warning w-100 bottom-button-max-width">
         Back
     </button>
 
-    <button type="button" id="btn-page-2" class="btn btn-warning text-white">
+    <button type="button" id="btn-page-2" class="btn btn-warning text-white w-100 ml-3 bottom-button-max-width">
         Next
     </button>
 </div>
+
+
 
 
 <div class="form-group">

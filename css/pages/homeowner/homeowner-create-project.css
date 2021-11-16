@@ -284,6 +284,89 @@ hr.custom {
 
 }
 
+
+/*==========================================*/
+/*==========================================*/
+/*==========================================*/
+/*==========================================*/
+/*              P A G E    2                */
+/*==========================================*/
+/*==========================================*/
+/*==========================================*/
+/*==========================================*/
+
+
+
+/*==========================================*/
+/*      Placeholder styles             */
+/*==========================================*/
+
+.gray.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #CCCCCC;
+    opacity: 1; /* Firefox */
+}
+
+.gray.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #CCCCCC;
+}
+
+.gray.form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: #CCCCCC;
+}
+
+.gray-small.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #CCCCCC;
+    opacity: 1; /* Firefox */
+    font-size: 0.9rem;
+}
+
+.gray-small.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #CCCCCC;
+    font-size: 0.9rem;
+}
+
+.gray-small.form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: #CCCCCC;
+    font-size: 0.9rem;
+}
+
+@media only screen and (min-width: 992px) {
+
+
+}
+
+
+/*==========================================*/
+/*           Set estimated offer            */
+/*==========================================*/
+
+.est-offer-width{
+    max-width: 10em;
+}
+
+@media only screen and (min-width: 992px) {
+
+
+}
+
+
+/*==========================================*/
+/*        BOTTOM NAVIGATION BUTTONS         */
+/*==========================================*/
+
+
+.bottom-button-max-width{
+    max-width: 10em;
+}
+
+@media only screen and (min-width: 992px) {
+    .bottom-button-max-width{
+        max-width: 10em;
+    }
+}
+
+
+
 /*==========================================*/
 /*              DASHBOARD HOME              */
 /*==========================================*/
