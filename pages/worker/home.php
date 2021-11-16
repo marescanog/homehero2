@@ -15,15 +15,14 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
 ?>
 <!-- === Link your custom CSS pages below here ===-->
-<link rel="stylesheet" href="../../css/headers/header-homeowner.css">
-<link rel="stylesheet" href="../../css/footer.css">
-<link rel="stylesheet" href="../../css/pages/homeowner/homeowner-create-project.css">
+<link rel="stylesheet" href="../../css/headers/header-worker.css">
+<!-- <link rel="stylesheet" href="../../css/pages/homeowner/homeowner-create-project.css"> -->
 <!-- === Link your custom CSS  pages above here ===-->
 </head>
  <body class="container-fluid m-0 p-0  w-100">  
     <!-- Add your Header NavBar here-->
     <?php 
-        require_once dirname(__FILE__)."/$level/components/headers/ho-signed-in.php"; 
+        require_once dirname(__FILE__)."/$level/components/headers/worker-signed-in.php"; 
     ?>
     <div class="<?php echo $hasHeader ?? ""; ?>">
     <!-- === Your Custom Page Content Goes Here below here === -->
@@ -61,9 +60,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
 
 
-<?php 
-    require_once dirname(__FILE__)."/$level/components/footer.php"; 
-?>
+
 
     <!-- === Your Custom Page Content Goes Here above here === -->
     </div>
