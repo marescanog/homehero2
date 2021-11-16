@@ -70,14 +70,15 @@
                 <input id="timePicker" class="form-control select-width" type="time" placeholder="Select Time">
             </div>
         </div>
-<?php 
-    }
-?>
+
         <div class="justify-content-center d-flex mt-4">
             <button type="button" id="btn-page-1" class="btn btn-lg btn-warning text-white select-width">
                     Next
             </button>
         </div>
+<?php 
+    }
+?>
     </div>
 
 

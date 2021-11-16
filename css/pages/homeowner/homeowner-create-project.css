@@ -265,6 +265,26 @@ hr.custom {
 
 
 /*==========================================*/
+/*              Date Display              */
+/*==========================================*/
+
+.date-display-container{
+    border-left: 1px solid transparent;
+}
+
+.display-note{
+    font-size: small;
+}
+
+@media only screen and (min-width: 992px) {
+
+    .date-display-container{
+        border-left: 1px solid #BFBFBF;
+    }
+
+}
+
+/*==========================================*/
 /*              DASHBOARD HOME              */
 /*==========================================*/
 
@@ -273,5 +293,4 @@ hr.custom {
 
 
 }
-
 

@@ -139,9 +139,10 @@ const load_create_project_form = (
                 const link_back_general = document.getElementById("link_back_general");
 
                 const inlineCalendar = flatpickr("#inline-calendar", {
-                    inline: true
+                    inline: true,
+                    minDate: "today"
                 });
-                
+
                 // Go back to General Date
                 link_back_general.addEventListener("click", ()=>{
                     is_exact_schedule.value = false;
