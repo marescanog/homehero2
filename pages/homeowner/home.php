@@ -6,7 +6,7 @@ if(!isset($_SESSION["token"])){
     exit();
 }
 
-$level ="../../";
+$level ="../..";
 $fistName = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest";
 $initials = isset($_SESSION["initials"]) ? $_SESSION["initials"] : "GU";
 
@@ -16,7 +16,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 ?>
 <!-- === Link your custom CSS pages below here ===-->
 <link rel="stylesheet" href="../../css/headers/header-homeowner.css">
-<link rel="stylesheet" href="../../css/homeowner-home.css">
+<link rel="stylesheet" href="../../css/pages/homeowner/homeowner-home.css">
 <link rel="stylesheet" href="../../css/footer.css">
 <!-- === Link your custom CSS  pages above here ===-->
 </head>
@@ -82,8 +82,8 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     </div>
 <?php require_once dirname(__FILE__)."/$level/components/foot-meta.php"; ?>
 <!-- Custom JS Scripts Below -->
-    <script src="<?php echo $level;?>/js/components/loadModal.js"></script>
-    <script src="../../js/pages/user-home.js"></script>
+    <!-- <script src="<?php echo $level;?>/js/components/loadModal.js"></script> -->
+    <!-- <script src="../../js/pages/user-home.js"></script> -->
     <script>
 
    

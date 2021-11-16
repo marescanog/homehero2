@@ -1,0 +1,483 @@
+.txt-semi{
+    font-weight: 700;
+}
+
+.gray-font{
+    color: #707070;
+}
+
+
+.bgc-lightgray{
+    background-color: #FBFBFB;
+}
+
+.min-height{
+    min-height: 32em;
+}
+
+.min-body-height{
+    min-height: 95vh;
+}
+
+@media only screen and (min-width: 992px) {
+    .min-height{
+        min-height: 43em;
+    }
+
+    .min-body-height{
+        min-height: 100vh;
+    }
+}
+
+
+@media only screen and (min-width: 567px) {
+    .container-full{
+        max-width: 767px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .container-full{
+        max-width: 1000px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .container-full{
+        max-width: 1150px;
+    }
+}
+
+
+@media only screen and (min-width: 1024px) {
+    .ipad{
+        flex: 1;
+    }
+}
+
+
+@media only screen and (min-width: 1200px) {
+    .container-full{
+        max-width: 1400px;
+        margin-left: none;
+        margin-right: auto;
+    }
+}
+
+
+/*==========================================*/
+/*              Info Container              */
+/*==========================================*/
+
+.info-container{
+    background-color: #FBF9EC;
+}
+
+.info-wrapper {
+    // background-color: white;
+    max-width: 500px;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    font-family: 'Arial';
+}
+
+.img-container{
+    max-width:280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.info-header{
+    font-weight: bold;
+    font-size: 1.625em;
+}
+
+
+@media only screen and (min-width: 992px) {
+
+
+}
+
+
+/*==========================================*/
+/*              FORM CONTAINER              */
+/*==========================================*/
+
+.form-wrapper{
+   background-color: white;
+}
+
+.form-container{
+    // background-color: red !important;
+    max-width: 47em;
+}
+
+.form-title-container{
+    background-color: white;
+}
+
+.form-container{
+    background-color: white;
+}
+
+@media only screen and (min-width: 992px) {
+
+
+}
+
+/*==========================================*/
+/*              DATE BUTTONS                */
+/*==========================================*/
+
+.date-btn{
+    width: 9.5em;
+    font-size: 0.85rem;
+    font-family: 'Nunito';
+    font-weight: 400;
+    margin-bottom: 0.75em;
+}
+
+@media only screen and (min-width: 992px) {
+    .date-btn{
+        margin-bottom: 0em;
+    }
+
+}
+
+
+/*==========================================*/
+/*              CHECKBOX STYLES             */
+/*==========================================*/
+.checkbox-lg{
+    width: 235px;
+}
+.checkbox-lg .custom-control-label::before, 
+.checkbox-lg .custom-control-label::after {
+  top: 1rem;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.checkbox-lg .custom-control-label {
+  padding-top: 13px;
+  padding-left: 6px;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #FFCC00!important;
+    border: 1px solid #F2AE00!important;
+  }
+  
+  .custom-checkbox .custom-control-input:checked:focus ~ .custom-control-label::before {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(242, 174, 0, 0.25)!important;
+  }
+  .custom-checkbox .custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 0, 0, 0.25) !important;
+
+  }
+  .custom-checkbox .custom-control-input:active ~ .custom-control-label::before {
+    background-color: #F2AE00!important;
+  }
+
+@media only screen and (min-width: 992px) {
+
+
+}
+
+/*==========================================*/
+/*            SELECT BOX & Label            */
+/*==========================================*/
+
+hr.custom {
+    border-top: 1px solid #707070;
+}
+
+.custom-hr{
+    height: 1px;
+    background-color: #707070;
+    opacity: 0.5;
+    margin-bottom: 10px
+}
+
+.w-30{
+    width: 5.5%
+}
+
+.select-width{
+    width: 60%;
+}
+
+@media only screen and (min-width: 325px) {
+
+    .w-30{
+        width: 15.5%
+    }
+}
+
+@media only screen and (min-width: 992px) {
+
+    .w-30{
+        width: 32.5%
+    }
+
+    .select-width{
+        width: 35%;
+    }
+}
+
+
+/*==========================================*/
+/*        FLATPIKR OVERRIDE STYLES          */
+/*==========================================*/
+
+#inline-calendar{
+    height: 1px !important;
+    opacity: 0 !important;
+}
+
+.flatpickr-day.selected {
+    background: #FFCC00 !important;
+    border-color: #FFCC00 !important;
+}
+
+.flatpickr-calendar{
+    transform:scale(0.75) translate(-65px,0px)!important;
+    -webkit-box-shadow: 0 0 0 transparent !important;
+    box-shadow: 0 0 0 transparent !important;
+}
+
+@media only screen and (min-width: 300px) {
+
+    .flatpickr-calendar{
+        transform:scale(0.75) translate(-35px,0px)!important;
+    }
+}
+
+@media only screen and (min-width: 330px) {
+
+    .flatpickr-calendar{
+        transform:scale(1) translate(0px,0px)!important;
+    }
+}
+
+
+
+/*==========================================*/
+/*              Date Display              */
+/*==========================================*/
+
+.date-display-container{
+    border-left: 1px solid transparent;
+}
+
+.display-note{
+    font-size: small;
+}
+
+@media only screen and (min-width: 992px) {
+
+    .date-display-container{
+        border-left: 1px solid #BFBFBF;
+    }
+
+}
+
+
+/*==========================================*/
+/*==========================================*/
+/*==========================================*/
+/*==========================================*/
+/*              P A G E    2                */
+/*==========================================*/
+/*==========================================*/
+/*==========================================*/
+/*==========================================*/
+
+
+
+/*==========================================*/
+/*      Placeholder styles             */
+/*==========================================*/
+
+.gray.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #CCCCCC;
+    opacity: 1; /* Firefox */
+}
+
+.gray.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #CCCCCC;
+}
+
+.gray.form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: #CCCCCC;
+}
+
+.gray-small.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #CCCCCC;
+    opacity: 1; /* Firefox */
+    font-size: 0.9rem;
+}
+
+.gray-small.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #CCCCCC;
+    font-size: 0.9rem;
+}
+
+.gray-small.form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: #CCCCCC;
+    font-size: 0.9rem;
+}
+
+@media only screen and (min-width: 992px) {
+
+
+}
+
+
+/*==========================================*/
+/*           Set estimated offer            */
+/*==========================================*/
+
+.est-offer-width{
+    max-width: 10em;
+}
+
+@media only screen and (min-width: 992px) {
+
+
+}
+
+
+/*==========================================*/
+/*        BOTTOM NAVIGATION BUTTONS         */
+/*==========================================*/
+
+
+.bottom-button-max-width{
+    max-width: 10em;
+}
+
+@media only screen and (min-width: 992px) {
+    .bottom-button-max-width{
+        max-width: 10em;
+    }
+}
+
+
+
+
+
+/*==========================================*/
+/*==========================================*/
+/*==========================================*/
+/*==========================================*/
+/*              P A G E    3                */
+/*==========================================*/
+/*==========================================*/
+/*==========================================*/
+/*==========================================*/
+
+
+
+
+/*==========================================*/
+/*                  ICONS                  */
+/*==========================================*/
+
+.edit-icon > svg{
+    fill: #259CFB ;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}
+
+.edit-icon-square {
+    border: 2px solid #259CFB;
+    height: 16px;
+    width: 16px;
+    border-radius: 3px;
+    position: absolute;
+    transform: translate(0, -16px);
+    cursor: pointer;
+}
+
+.edit-icon-text{
+    color: #259CFB;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.gray-icon > svg{
+    fill: #6C7474 ;
+    margin-right: 10px;
+}
+
+.red-icon > svg{
+    fill: #EA363B ;
+    margin-right: 10px;
+}
+
+
+@media only screen and (min-width: 992px) {
+
+
+}
+
+
+/*==========================================*/
+/*             Review Page text             */
+/*==========================================*/
+
+.Segeo-font{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.project-title-review{
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.project-subtitle-review{
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.info-width{
+    max-width: 24em;
+}
+
+.info-notice{
+    font-size: small;
+}
+
+.thicc{
+    font-weight: 800;
+    font-family: 'Nunito';
+}
+
+@media only screen and (min-width: 992px) {
+    .project-title-review{
+        font-size: 1.375rem;
+    }
+
+    .project-subtitle-review{
+        font-size: 1.125rem;
+    }
+}
+
+
+
+/*==========================================*/
+/*              DASHBOARD HOME              */
+/*==========================================*/
+
+
+@media only screen and (min-width: 992px) {
+
+
+}
+

@@ -1,0 +1,12 @@
+.form-card-height{
+    min-height: 28em;
+}
+
+.form-hide{
+    height: 0;
+    overflow: hidden;
+}
+
+.form-show{
+    height: 100%;
+}

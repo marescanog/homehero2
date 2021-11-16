@@ -27,7 +27,7 @@
     </div>
     <button <?php echo isset($jumb_id) ? "id='button-".$jumb_id."'" : ""?> 
         class="btn btn-warning text-white m-0 h-100 jmb-form-btn border-0"
-        type="button" data-toggle="modal" data-target="#modal"
+        type="button"
         >
     <?php echo isset($jumb_button_text) ? $jumb_button_text : "SEARCH"?>
     </button>

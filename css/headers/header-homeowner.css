@@ -1,5 +1,5 @@
 .header{
-    margin-top: 20px;
+    margin-top: 80px;
 }
 
 .navbar-custom{
@@ -50,18 +50,22 @@
 }
 
 .main-container{
-    min-width: 335px;
+    min-width: 280px;
 }
 
 .circle{
     background-color: burlywood;
     border-radius: 30px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
 }
 
 @media only screen and (min-width: 992px) {
     #header-logo-desktop{
         display: inline-block;
     }
+
     #header-btn-desktop{
         display: flex;
         height: 40px;
@@ -70,9 +74,9 @@
     }
 
     #header-desktop-content{
-        width: 90%;
+        // width: 90%;
         margin: auto;
-        max-width: 1536px;
+        // max-width: 1536px;
     }
 
     #header-logo-mobile{
