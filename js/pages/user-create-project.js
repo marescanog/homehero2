@@ -58,7 +58,11 @@ const load_create_project_form = (
         },
         ()=>{
             // Page 1 code
-            if(current_page == 1){
+            // Only Load Page 1 A if page1Data is null (new page)
+            // Or if is_exact_schedule is false
+            if(current_page == 1 
+                &&  (page1_Data == null 
+                    ||  page1_Data?.is_exact_schedule == false)){
                 // Grab the DOM elements
                 const is_exact_schedule = document.getElementById("is_exact_schedule");
 
@@ -122,6 +126,13 @@ const load_create_project_form = (
                 });
             }
 
+            // Only Load Page 1 B if there is page1Data
+            // Or if is_exact_schedule is true
+            if(current_page == 1 
+                &&  (page1_Data !== null 
+                    ||  page1_Data?.is_exact_schedule == true)){
+                        
+            }
 
             // Grab the DOM elements
             // Next Buttons
