@@ -1,4 +1,6 @@
-<?php $hasHeader = "header";?>
+<?php $hasHeader = "header";
+    $headerLink_Selected = $headerLink_Selected ?? 0;
+?>
 <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top w-100 p-0 mt-2">
     <div class="flex flex-column w-100 ">
         <div class="d-flex justify-content-between px-3 nav-container"  id="header-mobile-container">
@@ -31,30 +33,56 @@
             <div id="header-menu-links">
                 <div class="collapse navbar-collapse pr-3 " id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto align-items-center">
+
                         <li class="nav-item mr-lg-3 cust-width mt-3 mt-lg-0">
                             <!-- <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Registration.php">BROWSE</a> -->
-                            <a class="nav-link p-0 custom-a selected" href="">Postings</a>
-                            <div class="custom-underline show"></div>
+                            <a class="nav-link p-0 custom-a 
+                                <?php echo $headerLink_Selected == 0 ? " selected" : "";
+                                ?>
+                                " href="">Postings</a>
+                            <div class="custom-underline                                 
+                                <?php echo $headerLink_Selected == 0 ? " show" : "";?>">
+                            </div>
                         </li>
+
                         <li class="nav-item mr-lg-2 cust-width mt-3 mt-lg-0">
-                            <!-- <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Help.php">PROJECTS</a> -->
-                            <a class="nav-link p-0 custom-a" href="">Messages</a>
-                            <div class="custom-underline"></div>
+                            <a class="nav-link p-0 custom-a 
+                                <?php echo $headerLink_Selected == 1 ? " selected" : "";
+                                    ?>
+                            " href="">Messages</a>
+                            <div class="custom-underline                                 
+                                <?php echo $headerLink_Selected == 1 ? " show" : "";?>">
+                            </div>
                         </li>
+
                         <li class="nav-item mr-lg-3 cust-width mt-3 mt-lg-0">
-                            <!-- <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Help.php">PROJECTS</a> -->
-                            <a class="nav-link p-0 custom-a" href="">Services</a>
-                            <div class="custom-underline "></div>
+                            <a class="nav-link p-0 custom-a
+                                <?php echo $headerLink_Selected == 2 ? " selected" : "";
+                                ?>
+                            " href="">Services</a>
+                            <div class="custom-underline                                 
+                                <?php echo $headerLink_Selected == 2 ? " show" : "";?>">
+                            </div>
                         </li>
+
                         <li class="nav-item mr-lg-3 cust-width mt-3 mt-lg-0">
-                            <!-- <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Help.php">PROJECTS</a> -->
-                            <a class="nav-link p-0 custom-a" href="">Calendar</a>
-                            <div class="custom-underline"></div>
+                            <a class="nav-link p-0 custom-a 
+                                <?php echo $headerLink_Selected == 3 ? " selected" : "";
+                                ?>
+                            " href="">Calendar</a>
+                            <div class="custom-underline                                 
+                                <?php echo $headerLink_Selected == 3 ? " show" : "";?>">
+                            </div>
                         </li>
+
                         <li class="nav-item mr-lg-3 cust-width mt-3 mb-3 mt-lg-0 mb-lg-0">
-                            <!-- <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Help.php">PROJECTS</a> -->
-                            <a class="nav-link p-0 custom-a" href="">Profile</a>
-                            <div class="custom-underline"></div>
+                            <a class="nav-link p-0 custom-a 
+                                <?php echo $headerLink_Selected == 4 ? " selected" : "";
+                                ?>
+                            " href="">Profile</a>
+                            <div class="custom-underline                                 
+                                <?php echo $headerLink_Selected == 4 ? " show" : "";?>">
+                            </div>
                         </li>
                     </ul>
                 </div>
