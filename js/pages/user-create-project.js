@@ -173,7 +173,6 @@ const load_create_project_form = (
             // Forward to Page 2
             if(button_page1 != null){
                 button_page1.addEventListener("click", ()=>{
-                    console.log("clicked the next button")
                     // const text1 = document.getElementById("text1");
                     // let page1Data = {};
                     // page1Data['text1'] = text1.value;
@@ -187,27 +186,33 @@ const load_create_project_form = (
                     // page3Data['text3'] = text3.value;
 
                     // load_create_project_form(2, page1Data, page2Data, page3Data);
+
+                    //Note: will add logic later, but for now, will jsut proceed to next page.
+                    load_create_project_form(2);
                 })
             }
 
-            // // Backward to Page 1
-            // if(button_back_page2 != null){
-            //     button_back_page2.addEventListener("click", ()=>{
-            //         const text1 = document.getElementById("text1");
-            //         let page1Data = {};
-            //         page1Data['text1'] = text1.value;
+            // Backward to Page 1
+            if(button_back_page2 != null){
+                button_back_page2.addEventListener("click", ()=>{
+                    // const text1 = document.getElementById("text1");
+                    // let page1Data = {};
+                    // page1Data['text1'] = text1.value;
 
-            //         const text2 = document.getElementById("text2");
-            //         let page2Data = {};
-            //         page2Data['text2'] = text2.value;
+                    // const text2 = document.getElementById("text2");
+                    // let page2Data = {};
+                    // page2Data['text2'] = text2.value;
 
-            //         const text3 = document.getElementById("text3");
-            //         let page3Data = {};
-            //         page3Data['text3'] = text3.value;
+                    // const text3 = document.getElementById("text3");
+                    // let page3Data = {};
+                    // page3Data['text3'] = text3.value;
 
-            //         load_create_project_form(1, page1Data, page2Data, page3Data);
-            //     });
-            // }
+                    // load_create_project_form(1, page1Data, page2Data, page3Data);
+
+                    //Note: will add logic later, but for now, will jsut proceed to next page.
+                    load_create_project_form(1);
+                });
+            }
 
             // // Forward to Page 3
             // if(button_page2 != null){
