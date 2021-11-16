@@ -228,6 +228,41 @@ hr.custom {
 }
 
 
+/*==========================================*/
+/*        FLATPIKR OVERRIDE STYLES          */
+/*==========================================*/
+
+#inline-calendar{
+    height: 1px !important;
+    opacity: 0 !important;
+}
+
+.flatpickr-day.selected {
+    background: #FFCC00 !important;
+    border-color: #FFCC00 !important;
+}
+
+.flatpickr-calendar{
+    transform:scale(0.75) translate(-65px,0px)!important;
+    -webkit-box-shadow: 0 0 0 transparent !important;
+    box-shadow: 0 0 0 transparent !important;
+}
+
+@media only screen and (min-width: 300px) {
+
+    .flatpickr-calendar{
+        transform:scale(0.75) translate(-35px,0px)!important;
+    }
+}
+
+@media only screen and (min-width: 330px) {
+
+    .flatpickr-calendar{
+        transform:scale(1) translate(0px,0px)!important;
+    }
+}
+
+
 
 /*==========================================*/
 /*              DASHBOARD HOME              */

@@ -10,6 +10,8 @@ $(document).ready(()=>{
         maxTime: "22:30",
     });
 
+
+
     // var form = document.getElementById("form-home");
     // var button = document.getElementById("button-home");
 
@@ -131,7 +133,24 @@ const load_create_project_form = (
             if(current_page == 1 
                 &&  (page1_Data !== null 
                     ||  page1_Data?.is_exact_schedule == true)){
-                        
+                // Grab the DOM elements
+                const is_exact_schedule = document.getElementById("is_exact_schedule");
+                // Navigation Buttons
+                const link_back_general = document.getElementById("link_back_general");
+
+                const inlineCalendar = flatpickr("#inline-calendar", {
+                    inline: true
+                });
+                
+                // Go back to General Date
+                link_back_general.addEventListener("click", ()=>{
+                    is_exact_schedule.value = false;
+
+                    let page1Data = {
+                        is_exact_schedule: false
+                    }
+                    load_create_project_form(1, page1Data);
+                });
             }
 
             // Grab the DOM elements
