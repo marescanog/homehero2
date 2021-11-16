@@ -7,7 +7,7 @@
 
     // var_dump($_POST);
 ?>
-<h1>First page</h1>
+<h1>First page Alt</h1>
 <div class="form-group">
     <label class="text-left" for="text1">Text</label>
 

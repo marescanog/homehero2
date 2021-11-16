@@ -2,7 +2,13 @@ $(document).ready(()=>{
 
     load_create_project_form();
 
-
+    const fp = flatpickr("#timePicker", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        minTime: "6:00",
+        maxTime: "22:30",
+    });
 
     // var form = document.getElementById("form-home");
     // var button = document.getElementById("button-home");
@@ -35,25 +41,10 @@ const load_create_project_form = (
     page2_Data = null, 
     page3_Data = null,
 ) => {
-    // let obj = {};
-    // obj['level'] = getDocumentLevel();
-    // obj["current_page"] = current_page;
-    // if(page1_Data != null){
-    //     obj["page_1"] = page1_Data;
-    // }
-    // if(page2_Data != null){
-    //     obj["page_2"] = page2_Data;
-    // }
-    // if(page3_Data != null){
-    //     obj["page_3"] = page3_Data;
-    // }
 
     $("#user-create-project-form").load(getDocumentLevel()+"/components/forms/user-create-project-form.php",
     {
         current_page: current_page,
-        // page_1: page1_Data,
-        // page_2: page2_Data,
-        // page_3: page3_Data, 
         level: getDocumentLevel(),
     }, 
     ()=>{
@@ -66,6 +57,68 @@ const load_create_project_form = (
             level: getDocumentLevel(),
         },
         ()=>{
+            // Page 1 code
+            if(current_page == 1){
+                // Grab the DOM elements
+                const is_exact_schedule = document.getElementById("is_exact_schedule");
+                console.log(is_exact_schedule);
+
+                // Date Selection buttons
+                const button_date_3days = document.getElementById("schedule-within-3-days-btn");
+                const button_date_week = document.getElementById("schedule-within-week-btn");
+                const button_date_month = document.getElementById("schedule-within-month-btn");
+                const button_specific = document.getElementById("schedule-specific-date-btn");
+                // Group into Array
+                const buttons = [button_date_3days, button_date_week, button_date_month, button_specific];
+
+                // Private helper function to remove highlight class
+                const removeSelected = () => {
+                    buttons.forEach(button=>{
+                        if(button.classList.contains("text-white")){
+                            button.classList.remove("text-white");
+                        }
+                        if(button.classList.contains("btn-warning")){
+                            button.classList.remove("btn-warning");
+                        }
+                        if(!button.classList.contains("btn-outline-secondary")){
+                            button.classList.add("btn-outline-secondary");
+                        }
+                    });
+                }
+
+                // Private helper function to add highlight class
+                const addHighlight = (button)=>{
+                    button.classList.remove("btn-outline-secondary");
+                    button.classList.add("btn-warning");
+                    button.classList.add("text-white");
+                }
+
+
+                button_date_3days.addEventListener("click", ()=>{
+                    removeSelected();
+                    addHighlight(button_date_3days);
+                    console.log("3 days");
+                });
+
+                button_date_week.addEventListener("click", ()=>{
+                    removeSelected();
+                    addHighlight(button_date_week);
+                    console.log("1 week");
+                });
+
+                button_date_month.addEventListener("click", ()=>{
+                    removeSelected();
+                    addHighlight(button_date_month);
+                    console.log("1 Month");
+                });
+
+                button_specific.addEventListener("click", ()=>{
+
+                    console.log("Specific Date");
+                });
+            }
+
+
             // Grab the DOM elements
             // Next Buttons
             const button_page1 = document.getElementById("btn-page-1");
@@ -75,108 +128,110 @@ const load_create_project_form = (
             const button_back_page2 = document.getElementById("btn-back-page-2");
             const button_back_page3 = document.getElementById("btn-back-page-3");
 
+            // Next, Back & Submit Button Logic
             // Forward to Page 2
             if(button_page1 != null){
                 button_page1.addEventListener("click", ()=>{
-                    const text1 = document.getElementById("text1");
-                    let page1Data = {};
-                    page1Data['text1'] = text1.value;
+                    console.log("clicked the next button")
+                    // const text1 = document.getElementById("text1");
+                    // let page1Data = {};
+                    // page1Data['text1'] = text1.value;
 
-                    const text2 = document.getElementById("text2");
-                    let page2Data = {};
-                    page2Data['text2'] = text2.value;
+                    // const text2 = document.getElementById("text2");
+                    // let page2Data = {};
+                    // page2Data['text2'] = text2.value;
 
-                    const text3 = document.getElementById("text3");
-                    let page3Data = {};
-                    page3Data['text3'] = text3.value;
+                    // const text3 = document.getElementById("text3");
+                    // let page3Data = {};
+                    // page3Data['text3'] = text3.value;
 
-                    load_create_project_form(2, page1Data, page2Data, page3Data);
+                    // load_create_project_form(2, page1Data, page2Data, page3Data);
                 })
             }
 
-            // Backward to Page 1
-            if(button_back_page2 != null){
-                button_back_page2.addEventListener("click", ()=>{
-                    const text1 = document.getElementById("text1");
-                    let page1Data = {};
-                    page1Data['text1'] = text1.value;
+            // // Backward to Page 1
+            // if(button_back_page2 != null){
+            //     button_back_page2.addEventListener("click", ()=>{
+            //         const text1 = document.getElementById("text1");
+            //         let page1Data = {};
+            //         page1Data['text1'] = text1.value;
 
-                    const text2 = document.getElementById("text2");
-                    let page2Data = {};
-                    page2Data['text2'] = text2.value;
+            //         const text2 = document.getElementById("text2");
+            //         let page2Data = {};
+            //         page2Data['text2'] = text2.value;
 
-                    const text3 = document.getElementById("text3");
-                    let page3Data = {};
-                    page3Data['text3'] = text3.value;
+            //         const text3 = document.getElementById("text3");
+            //         let page3Data = {};
+            //         page3Data['text3'] = text3.value;
 
-                    load_create_project_form(1, page1Data, page2Data, page3Data);
-                });
-            }
+            //         load_create_project_form(1, page1Data, page2Data, page3Data);
+            //     });
+            // }
 
-            // Forward to Page 3
-            if(button_page2 != null){
-                button_page2.addEventListener("click", ()=>{
-                    const text1 = document.getElementById("text1");
-                    let page1Data = {};
-                    page1Data['text1'] = text1.value;
+            // // Forward to Page 3
+            // if(button_page2 != null){
+            //     button_page2.addEventListener("click", ()=>{
+            //         const text1 = document.getElementById("text1");
+            //         let page1Data = {};
+            //         page1Data['text1'] = text1.value;
 
-                    const text2 = document.getElementById("text2");
-                    let page2Data = {};
-                    page2Data['text2'] = text2.value;
+            //         const text2 = document.getElementById("text2");
+            //         let page2Data = {};
+            //         page2Data['text2'] = text2.value;
 
-                    const text3 = document.getElementById("text3");
-                    let page3Data = {};
-                    page3Data['text3'] = text3.value;
+            //         const text3 = document.getElementById("text3");
+            //         let page3Data = {};
+            //         page3Data['text3'] = text3.value;
 
-                    load_create_project_form(3, page1Data, page2Data, page3Data);
-                })
-            }
+            //         load_create_project_form(3, page1Data, page2Data, page3Data);
+            //     })
+            // }
 
-            // Backward to Page 2
-            if(button_back_page3 != null){
-                button_back_page3.addEventListener("click", ()=>{
-                    const text1 = document.getElementById("text1");
-                    let page1Data = {};
-                    page1Data['text1'] = text1.value;
+            // // Backward to Page 2
+            // if(button_back_page3 != null){
+            //     button_back_page3.addEventListener("click", ()=>{
+            //         const text1 = document.getElementById("text1");
+            //         let page1Data = {};
+            //         page1Data['text1'] = text1.value;
 
-                    const text2 = document.getElementById("text2");
-                    let page2Data = {};
-                    page2Data['text2'] = text2.value;
+            //         const text2 = document.getElementById("text2");
+            //         let page2Data = {};
+            //         page2Data['text2'] = text2.value;
 
-                    const text3 = document.getElementById("text3");
-                    let page3Data = {};
-                    page3Data['text3'] = text3.value;
+            //         const text3 = document.getElementById("text3");
+            //         let page3Data = {};
+            //         page3Data['text3'] = text3.value;
 
-                    load_create_project_form(2, page1Data, page2Data, page3Data);
-                });
-            }
+            //         load_create_project_form(2, page1Data, page2Data, page3Data);
+            //     });
+            // }
 
-            // Submit the form
-            if(button_page3 != null){
-                button_page3.addEventListener("click", ()=>{
-                    const myForm = document.getElementById("form-submission-create-project");
+            // // Submit the form
+            // if(button_page3 != null){
+            //     button_page3.addEventListener("click", ()=>{
+            //         const myForm = document.getElementById("form-submission-create-project");
                     
-                    console.log("Submitted!");  
+            //         console.log("Submitted!");  
 
-                    // Convert Form Data to Object
-                    let formData = new FormData(myForm);
-                    let data = {};
-                    formData.forEach((value, key) => data[key] = value);
+            //         // Convert Form Data to Object
+            //         let formData = new FormData(myForm);
+            //         let data = {};
+            //         formData.forEach((value, key) => data[key] = value);
 
-                    $.ajax({
-                        type: 'POST',
-                        url : 'http://localhost/slim3homeheroapi/public/job-post/create',
-                        data : data,
-                        success : function(response) {
-                            console.log(response);
-                        },
-                        error : function(response) {
-                            console.log(response);
-                        },
-                    });
+            //         $.ajax({
+            //             type: 'POST',
+            //             url : 'http://localhost/slim3homeheroapi/public/job-post/create',
+            //             data : data,
+            //             success : function(response) {
+            //                 console.log(response);
+            //             },
+            //             error : function(response) {
+            //                 console.log(response);
+            //             },
+            //         });
 
-                })
-            }
+            //     })
+            // }
         })
 
         // Grab the DOM elements

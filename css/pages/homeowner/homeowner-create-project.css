@@ -127,6 +127,107 @@
 
 }
 
+/*==========================================*/
+/*              DATE BUTTONS                */
+/*==========================================*/
+
+.date-btn{
+    width: 9.5em;
+    font-size: 0.85rem;
+    font-family: 'Nunito';
+    font-weight: 400;
+    margin-bottom: 0.75em;
+}
+
+@media only screen and (min-width: 992px) {
+    .date-btn{
+        margin-bottom: 0em;
+    }
+
+}
+
+
+/*==========================================*/
+/*              CHECKBOX STYLES             */
+/*==========================================*/
+.checkbox-lg{
+    width: 235px;
+}
+.checkbox-lg .custom-control-label::before, 
+.checkbox-lg .custom-control-label::after {
+  top: 1rem;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.checkbox-lg .custom-control-label {
+  padding-top: 13px;
+  padding-left: 6px;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #FFCC00!important;
+    border: 1px solid #F2AE00!important;
+  }
+  
+  .custom-checkbox .custom-control-input:checked:focus ~ .custom-control-label::before {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(242, 174, 0, 0.25)!important;
+  }
+  .custom-checkbox .custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 0, 0, 0.25) !important;
+
+  }
+  .custom-checkbox .custom-control-input:active ~ .custom-control-label::before {
+    background-color: #F2AE00!important;
+  }
+
+@media only screen and (min-width: 992px) {
+
+
+}
+
+/*==========================================*/
+/*            SELECT BOX & Label            */
+/*==========================================*/
+
+hr.custom {
+    border-top: 1px solid #707070;
+}
+
+.custom-hr{
+    height: 1px;
+    background-color: #707070;
+    opacity: 0.5;
+    margin-bottom: 10px
+}
+
+.w-30{
+    width: 5.5%
+}
+
+.select-width{
+    width: 60%;
+}
+
+@media only screen and (min-width: 325px) {
+
+    .w-30{
+        width: 15.5%
+    }
+}
+
+@media only screen and (min-width: 992px) {
+
+    .w-30{
+        width: 32.5%
+    }
+
+    .select-width{
+        width: 35%;
+    }
+}
+
+
 
 /*==========================================*/
 /*              DASHBOARD HOME              */

@@ -21,6 +21,8 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <link rel="stylesheet" href="../../css/pages/homeowner/homeowner-create-project.css">
 <link rel="stylesheet" href="../../css/UX/breadcrumb-indicator.css">
 <link rel="stylesheet" href="../../css/forms/user-create-project-form.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/confetti.css"> -->
 <!-- === Link your custom CSS  pages above here ===-->
 </head>
 <body class="container-fluid m-0 p-0  w-100 min-body-height">  
@@ -92,5 +94,6 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <?php require_once dirname(__FILE__)."/$level/components/foot-meta.php"; ?>
 <!-- Custom JS Scripts Below -->
     <script src="../../js/pages/user-create-project.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </body>
 </html>
