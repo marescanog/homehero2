@@ -19,7 +19,9 @@
     <div class="card shadow-sm mb-4">
         <div class="card-body form-card-height">
             <form id="form-submission-create-project">
-                <div id="form-content-display"></div>
+                <div class="mx-0 mx-lg-5">
+                    <div id="form-content-display"></div>
+                </div>
             </form>
         </div>
     </div>
