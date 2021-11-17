@@ -1,0 +1,136 @@
+.icons {
+    width: 18px;
+    height: auto;
+    vertical-align: center;
+  }
+
+/*
+ * Sidebar
+ */
+
+ .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100; /* Behind the navbar */
+    padding: 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  }
+  
+  .sidebar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 90px; /* Height of navbar */
+    height: calc(100vh - 90px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  }
+  
+  .sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+    margin-left: 1.5em;
+    font-family: 'Nunito';
+    font-weight: 600;
+  }
+  
+  .sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: #999;
+  }
+  
+  .sidebar .nav-link.active {
+    color: #F27900;
+    background-color: #FFF29F;
+    font-weight: 900 !important;
+  }
+  
+  .sidebar .nav-link:hover .feather,
+  .sidebar .nav-link.active .feather {
+    color: inherit;
+  }
+  
+  .sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+  }
+
+/*
+ * Responsive Container
+ */
+
+@media only screen and (min-width: 567px) {
+  .container-full{
+      max-width: 767px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .container-full{
+      max-width: 1000px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .container-full{
+      max-width: 1150px;
+  }
+}
+
+
+@media only screen and (min-width: 1024px) {
+  .ipad{
+      flex: 1;
+  }
+}
+
+
+@media only screen and (min-width: 1200px) {
+  .container-full{
+      max-width: 1400px;
+      margin-left: none;
+      margin-right: auto;
+  }
+  
+}
+
+
+/*
+* Other Styles
+*/
+
+// .topbar{
+//   max-width: 99%;
+//   // background-color: blueviolet !important;
+//   overflow-x: scroll;
+// }
+
+// .topbar>ul{
+//   list-style: none;
+// }
+
+// .topbar>ul>li{
+//   background-color:#FFF29F;
+//   min-width: 10em;
+//   margin-left: 1em;
+//   text-align: center;
+//   padding-top: 0.5em;
+//   padding-bottom: 0.5em;
+//   margin: 0.5em;
+//   border-radius: 10px;
+//   font-family: 'Nunito';
+//   font-weight: 700;
+//   color: #8C6551;
+// }
+
+// .topbar>ul>li.selected{
+//   background-color:#F27900;
+//   font-weight: 900;
+//   color: #FFFFFF;
+// }
+
+// #top-nav{
+//   left: 10;
+// }
