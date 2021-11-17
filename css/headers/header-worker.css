@@ -1,0 +1,120 @@
+.header{
+    margin-top: 80px;
+}
+
+.navbar-custom{
+    background-color: #FFFFFF;
+}
+
+.hr-yellow{
+    border-top: 3px solid #FCEBBF;
+}
+
+.custom-a {
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+}
+
+.custom-a.selected {
+    font-weight: 900;
+    color: #F2AE00 !important;
+}
+
+.custom-underline.show{
+    background-color: #F2AE00;
+    height: 4px;
+    width: 5em;
+    border-radius: 10px;
+}
+
+.cust-width {
+    width: 5em;
+}
+
+.tray-margin{
+    margin-right: 5em !important;
+}
+
+.nav-container{
+    width:100%;
+}
+
+.header-img{
+    width: 50px;
+}
+
+
+#header-logo-desktop{
+    display: none;
+}
+
+#header-btn-desktop{
+    display: none;
+}
+
+#header-logo-mobile{
+    display: inline-block;
+}
+
+#header-btn-mobile{
+    display: inline-block;
+}
+
+#header-mobile-container{
+    display: inline-block;
+}
+
+#header-menu-links{
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.main-container{
+    min-width: 280px;
+}
+
+.circle{
+    background-color: #FFF29F;
+    border-radius: 30px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+
+#navbarDropdown{
+    color:#8C6551 !important;
+}
+
+@media only screen and (min-width: 992px) {
+    #header-logo-desktop{
+        display: inline-block;
+    }
+
+    #header-btn-desktop{
+        display: flex;
+        height: 40px;
+        width: 120px;
+        margin: auto;
+    }
+
+    #header-desktop-content{
+        margin: auto;
+    }
+
+    #header-mobile-container{
+        display: none;
+    }
+    
+    #header-logo-mobile{
+        display: none;
+    }
+
+    #header-btn-mobile{
+        display: none;
+    }
+
+    .header{
+        margin-top: 76.3px;
+    }
+}

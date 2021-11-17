@@ -24,20 +24,20 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
  <body class="container-fluid m-0 p-0  w-100 bg-light">  
     <!-- Add your Header NavBar here-->
     <?php 
-        $headerLink_Selected = 0;
+        $headerLink_Selected = 4;
         require_once dirname(__FILE__)."/$level/components/headers/worker-signed-in.php"; 
     ?>
     <div class="<?php echo $hasHeader ?? ""; ?>">
     <!-- === Your Custom Page Content Goes Here below here === -->
 
 <?php
-    $current_nav_side_tab = "Opportunities";
+    $current_nav_side_tab = "Your Profile";
     require_once dirname(__FILE__)."/$level/components/headers/worker-side-nav.php"; 
 ?>
 <div class="container container-full  w-100 m-lg-0 p-0 min-height">
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 ">
 
-<h1>Postings</h1>
+<h1>Profile</h1>
 
 
 
