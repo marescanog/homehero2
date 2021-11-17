@@ -35,11 +35,11 @@
                     <ul class="navbar-nav mr-auto align-items-center">
 
                         <li class="nav-item mr-lg-3 cust-width mt-3 mt-lg-0">
-                            <!-- <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Registration.php">BROWSE</a> -->
                             <a class="nav-link p-0 custom-a 
                                 <?php echo $headerLink_Selected == 0 ? " selected" : "";
                                 ?>
-                                " href="">Postings</a>
+                                " href="<?php echo $level;?>/pages/worker/home.php"
+                                >Postings</a>
                             <div class="custom-underline                                 
                                 <?php echo $headerLink_Selected == 0 ? " show" : "";?>">
                             </div>
@@ -49,7 +49,8 @@
                             <a class="nav-link p-0 custom-a 
                                 <?php echo $headerLink_Selected == 1 ? " selected" : "";
                                     ?>
-                            " href="">Messages</a>
+                            " href="<?php echo $level;?>/pages/worker/messages.php"
+                                >Messages</a>
                             <div class="custom-underline                                 
                                 <?php echo $headerLink_Selected == 1 ? " show" : "";?>">
                             </div>
@@ -59,7 +60,7 @@
                             <a class="nav-link p-0 custom-a
                                 <?php echo $headerLink_Selected == 2 ? " selected" : "";
                                 ?>
-                            " href="">Services</a>
+                            " href="<?php echo $level;?>/pages/worker/services.php">Services</a>
                             <div class="custom-underline                                 
                                 <?php echo $headerLink_Selected == 2 ? " show" : "";?>">
                             </div>
@@ -69,7 +70,7 @@
                             <a class="nav-link p-0 custom-a 
                                 <?php echo $headerLink_Selected == 3 ? " selected" : "";
                                 ?>
-                            " href="">Calendar</a>
+                            " href="<?php echo $level;?>/pages/worker/calendar.php">Calendar</a>
                             <div class="custom-underline                                 
                                 <?php echo $headerLink_Selected == 3 ? " show" : "";?>">
                             </div>
@@ -79,7 +80,7 @@
                             <a class="nav-link p-0 custom-a 
                                 <?php echo $headerLink_Selected == 4 ? " selected" : "";
                                 ?>
-                            " href="">Profile</a>
+                            " href="<?php echo $level;?>/pages/worker/profile.php">Profile</a>
                             <div class="custom-underline                                 
                                 <?php echo $headerLink_Selected == 4 ? " show" : "";?>">
                             </div>

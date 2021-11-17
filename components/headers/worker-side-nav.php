@@ -24,7 +24,8 @@
             for($x=0; $x< count($tabs[$hs]); $x++){
           ?>
             <li class="nav-item">
-              <a class="nav-link <?php echo $current_nav_side_tab == $tabs[$hs][$x] ? 'active' : '';?>" href="./home.php">
+              <a id="<?php echo "side-nav-".$x;?>"
+                class="nav-link <?php echo $current_nav_side_tab == $tabs[$hs][$x] ? 'active' : '';?>" href="./home.php">
                 <?php
                   echo $iconsSideNav[$hs][$x];
                   echo " ".$tabs[$hs][$x];
