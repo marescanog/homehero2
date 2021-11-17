@@ -1,7 +1,7 @@
 <?php $hasHeader = "header";
     $headerLink_Selected = $headerLink_Selected ?? 0;
 ?>
-<nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top w-100 p-0 mt-2">
+<nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top w-100 p-0 pt-2">
     <div class="flex flex-column w-100 ">
         <div class="d-flex justify-content-between px-3 nav-container"  id="header-mobile-container">
             <a id="header-logo-mobile" class="navbar-brand custom-a" href="<?php echo $level;?>/index.php">
