@@ -20,7 +20,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <h5 class="font-weight-bold" style="color: #707070;">Worker Register</h5>
+        <h5 class="font-weight-bold" style="color: #707070; text-align: center; font-size:24px">Worker Registration</h5>
         <form id="registerForm" type="POST" onSubmit="registerHandler(event)" name="modalForm" class="m-4">
             <div class="d-flex">
                 <div class="form-group w-100 mr-2">
@@ -39,9 +39,25 @@
             <div class="form-group">
                 <input type="password" class="form-control" id="RU_confirmPassword" name="confirm_password" placeholder="Re-enter password" autocomplete required maxlength="50">
             </div>
-            <div>
-                are you above the age of 18?
+            <p class="text-center  p-0 m-0">Are you above the age of 18?</p>
+            <div class="d-flex flex-row justify-content-center mb-3">
+                
+                <div class="d-flex">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                        <label class="form-check-label" for="exampleRadios1">
+                            Yes
+                        </label>
+                    </div>
+                    <div class="form-check ml-3">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                        <label class="form-check-label" for="exampleRadios2">
+                            No
+                        </label>
+                    </div>
+                </div>
             </div>
+            
             <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="agree" required>
                 <label class="form-check-label" for="agree" style="font-size:0.8em;">I agree to HomeHero's <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</label>

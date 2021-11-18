@@ -14,17 +14,17 @@
           </button>
           </div>
 
-          <div class="modal-body" style="min-width: 350px">
+          <div class="modal-body" style="min-width: 350px;">
               <form id="modal-login-form" type="POST" >
-              <h4 style="font-weight: bold; font-size: 26px; color: #707070">Welcome Back!</h4>
-                      <h5 style="font-size: 16px; color: #707070">Sign into your Worker account </h5>
+              <h4 style="font-weight: bold; font-size: 24px; color: #707070; text-align: center;">Worker Portal</h4>
+                      <h5 style="font-size: 16px; color: #707070">Welcome back! Sign into your Worker account </h5>
                   
                       <div class="form-group mb-2 mt-1">    
-                    <label for="HOLnm" class="font-weight-bold" style="color: #707070;font-size: 14px;">MOBILE NUMBER</label>
+                    <label for="HOLnm" class="font-weight-bold" style="color: #707070;font-size: 14px; text-align: center;">MOBILE NUMBER</label>
                     <input type="mobile-number" class="form-control mt-0" id="HOLnm" name="phone_number" placeholder="09XX-XXX-XXXX" autocomplete require maxlength="11">
                   </div>
                   <div class="form-group mb-1 mt-1">
-                    <label for="HOLpassword" class="font-weight-bold" style="color: #707070;font-size: 14px;">PASSWORD</label>
+                    <label for="HOLpassword" class="font-weight-bold" style="color: #707070;font-size: 14px; text-align: center;">PASSWORD</label>
                     <input type="password" class="form-control mt-0 mb-0" id="HOLps" name="password" placeholder="at least 6 characters" autocomplete require minlength="6">
                   </div>
                   <a class="mt-0 mb-2" href="#" style="font-size:0.8em;">
