@@ -29,16 +29,89 @@
     }
 }
 
-
-
-
 /*==========================================*/
-/*              DASHBOARD HOME              */
+/*               TABS                       */
 /*==========================================*/
+
+#tabs{
+	background: #FFFF;
+    min-height: 200px;
+    padding: 0rem;
+}
+
+#tabs h1{
+    color: #707070;
+}
+
+#tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #F2AE00 !important;
+    background-color: transparent;
+    border-color: transparent transparent #FFFF;
+    border-bottom: 4px solid #F2AE00 !important;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: "Nunito";
+}
+
+#tabs .nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    color: #707070;
+    font-size: 18px;
+    font-family: "Nunito";
+}
+
+.nav-tabs {
+    border-bottom: 2px solid #F2AE00;
+}
+
+.nav-tabs :hover{
+    cursor: pointer;
+}
 
 
 @media only screen and (min-width: 992px) {
 
+    // #tabs{
+    //    // padding: 1.25rem;
+    //  }
+}
 
+
+/*==========================================*/
+/*              BREADCRUMBS              */
+/*==========================================*/
+
+.breadcrumb{
+    background-color: white;
+    padding-left: 0;
+    margin: 0;
+    color: #707070;
+}
+
+.breadcrumb-item > a {
+    color: #707070;
+}
+
+.breadcrumb-item.active{
+    text-decoration: underline;
+    text-underline-offset:5px
+}
+
+
+
+/*==========================================*/
+/*                   OTHER                  */
+/*==========================================*/
+
+.separator{
+    border-bottom: 2px solid #EDEDED !important;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.sidelink{
+    cursor: pointer;
 }
 
