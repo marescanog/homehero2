@@ -1,0 +1,44 @@
+.txt-semi{
+    font-weight: 700;
+}
+
+.gray-font{
+    color: #707070;
+}
+
+
+.bgc-lightgray{
+    background-color: #FBFBFB;
+}
+
+.min-height{
+    min-height: 32em;
+}
+
+.min-body-height{
+    min-height: 95vh;
+}
+
+@media only screen and (min-width: 992px) {
+    .min-height{
+        min-height: 43em;
+    }
+
+    .min-body-height{
+        min-height: 100vh;
+    }
+}
+
+
+
+
+/*==========================================*/
+/*              DASHBOARD HOME              */
+/*==========================================*/
+
+
+@media only screen and (min-width: 992px) {
+
+
+}
+
