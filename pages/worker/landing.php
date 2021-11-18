@@ -45,7 +45,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             <div class="jumbotron-card mt-5 pt-5 col-12 col-lg-6" > 
                 <div class="card w-lg-75 ml-lg-auto mr-lg-3 mb-lg-5 jumbotron-card-body">
                     <div class="card-body">
-                        
+                            <h3>Find new work in Mandaue</h3>
              
                     </div>
                 </div>
