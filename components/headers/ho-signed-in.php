@@ -10,15 +10,15 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div id="header-btn-mobile" class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle d-flex justify-content-center align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="circle mr-1 p-1"><?php echo $initials; ?></div>
+                    <a class="nav-link dropdown-toggle d-flex justify-content-center align-items-center brownt-text" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="circle mr-1 p-1 d-flex justify-content-center align-items-center"><span class="d-block"><?php echo $initials; ?></span></div>
                         <?php echo $fistName;?>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="">Action</a>
-                    <a class="dropdown-item" href="">Another action</a>
+                    <a class="dropdown-item" href="">Profile</a>
+                    <a class="dropdown-item" href="">Settings</a>
                     <div class="dropdown-divider"></div>
-                    <a id="logout-link-mobile" class="dropdown-item" >logout</a>
+                    <a id="logout-link-mobile" class="dropdown-item" >Logout</a>
                     </div>
                 </div>
             </div>
@@ -49,10 +49,10 @@
                                 <?php echo $fistName;?>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="#">Settings</a>
                             <div class="dropdown-divider"></div>
-                            <a id="logout-link-desktop" class="dropdown-item" >logout</a>
+                            <a id="logout-link-desktop" class="dropdown-item" >Logout</a>
                             </div>
                         </li>
                     </ul>
