@@ -26,25 +26,21 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             <ul>
                 <li><a href="./homeowner/home.php">Home</a></li>
                 <li><a href="./homeowner/create-project.php">Project Creation</a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
+                <li><a href=""></a>All Projects</li>
+                <li><a href=""></a>Single Project</li>
+                <li><a href=""></a>Messages</li>
             </ul>
             <h2>Worker</h2>
             <ul>
+                <li><a href=""></a>Registration</li>
                 <li><a href="./worker/home.php">Home</a></li>
                 <li><a href="./worker/landing.php">Landing</a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
             </ul>
             <h2>Support</h2>
             <ul>
                 <li><a href="./support/home.php">Home</a> </li>
                 <li><a href="./support/index.php">Signup</a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
+                <li><a href="./support/home.php">Dashboard</a></li>
             </ul>
         </div>
 
