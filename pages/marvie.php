@@ -26,7 +26,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             <ul>
                 <li><a href="./homeowner/home.php">Home</a></li>
                 <li><a href="./homeowner/create-project.php">Project Creation</a></li>
-                <li><a href=""></a>All Projects</li>
+                <li><a href="./homeowner/projects.php">projects</a></li>
                 <li><a href=""></a>Single Project</li>
                 <li><a href=""></a>Messages</li>
             </ul>
