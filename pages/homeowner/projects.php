@@ -30,12 +30,11 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     <!-- === Your Custom Page Content Goes Here below here === -->
 
     <!-- Main Content -->
-    <div class="container container-full  w-100 m-0 p-0 min-height h-100">
-        <div class="min-height content-container row flex-lg-row flex-column-reverse  m-auto gray-font">
-            
-        </div>
-    </div>
+    <div class="container w-100 m-0 p-0 min-body-height h-100 justify-content-center ml-auto mr-auto gray-font">
+        
 
+
+    </div>
     <!-- Footer Links -->
     <?php 
         require_once dirname(__FILE__)."/$level/components/footer.php"; 
