@@ -112,7 +112,12 @@ const loadSchedule = () => {
         scheduleData["week"] = week;
 
         $("#schedule-preference").load(level+"/components/sections/register-general-schedule.php",scheduleData,()=>{
+            const clicky = document.getElementById("clicky");
+            clicky.addEventListener("click", ()=>{
+                $("#schedule-preference").load(level+"/components/sections/register-specific-hours.php",()=>{
 
+                });
+            })
         });
     });
 }
