@@ -14,7 +14,7 @@
 <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top w-100 p-0 m-0">
     <div class="flex flex-column w-100 p-0 m-0">
         <div class="d-flex nav-container align-items-center">
-            <a class="navbar-brand custom-a  p-2" href="<?php echo $level;?>/index.php">
+            <a class="navbar-brand custom-a  p-2">
                 <img src="<?php echo $level;?>/images/logo/worker-header-sm.jpg" class="header-img" alt="Home Hero Logo" id="header-logo-desktop">
             </a>
             <h6 class="<?php 
