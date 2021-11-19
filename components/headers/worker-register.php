@@ -17,7 +17,9 @@
             <a class="navbar-brand custom-a  p-2" href="<?php echo $level;?>/index.php">
                 <img src="<?php echo $level;?>/images/logo/worker-header-sm.jpg" class="header-img" alt="Home Hero Logo" id="header-logo-desktop">
             </a>
-            <h6 class="d-none mt-lg-2 d-lg-inline header-label"><?php echo $header_title;?></h6>
+            <h6 class="<?php 
+                 echo $isComplete == 0 ? " d-none " : "";
+            ?> mt-lg-2 d-lg-inline header-label"><?php echo $header_title;?></h6>
             <div class="adjust-breadcrumb">
                 <?php 
                     $hasTitle = false;
