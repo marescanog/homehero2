@@ -47,8 +47,8 @@
         }
       ?>
       <div class="row">
-          <p class="text-center col-12 m-0 p-0">Edit Times</p>
+          <p id="clicky" class="text-center col-12 m-0 p-0 clicky">Edit Times</p>
       </div>
   </div>
 </div>
-<p class="mt-3 mb-0 p-0">* You'll still be able to change your schedule through your online account settings.</p>
+<p class="mt-3 mb-0 p-0 note-bottom">* You'll still be able to modify your schedule through your online account settings.</p>

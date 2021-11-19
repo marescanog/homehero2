@@ -246,7 +246,17 @@
 /*==========================================*/
 /*          POPULAR POSTINGS STYLES         */
 /*==========================================*/
+ .note-bottom{
+     font-size: 0.9rem;
+ }
 
+ .clicky{
+     color: #2699FB;
+ }
+ .clicky:hover{
+     text-decoration: underline;
+     cursor: pointer;
+ }
 @media only screen and (min-width: 992px) {
 
 
