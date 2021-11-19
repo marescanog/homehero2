@@ -5,6 +5,18 @@
     $week = isset($_POST["week"]) ? $_POST["week"] : null;
 ?>
 <h6>Schedule Preference</h6>
+<div class="row ml-3 mb-2">
+    <div class="radio-item col-12 m-0">
+        <input type="radio" id="ritema" name="ritem" value="ropt1" checked>
+        <label for="ritema">Any day or time</label>
+    </div>
+    <div class="radio-item col-12 m-0">
+        <input type="radio" id="ritemb" name="ritem" value="ropt2">
+        <label for="ritemb">My service hours</label>
+    </div>
+</div>
+
+
 <div class="card">
   <div class="card-body">
       <?php 
