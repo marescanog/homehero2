@@ -8,7 +8,7 @@
     ];
     $subtitles = [
         "Complete the online HomeHero worker application process.",
-        "Wait for an agent to call you for updates on your application.",
+        "Wait for an agent to call or text you for updates on your application.",
         "Login with your credentials and start earning money!"
     ];
     $infoHTML = [
