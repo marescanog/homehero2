@@ -62,8 +62,10 @@ const loadSchedule = () => {
     const level = getDocumentLevel();
     // Grab the DOM element for page type
     let edit = document.getElementById("edit").value == 1;
-    console.log(edit);
-    $("#body").load(level+"/components/sections/register-schedule.php", ()=>{
+    const outerPageData = {};
+    outerPageData["edit"] = edit;
+
+    $("#body").load(level+"/components/sections/register-schedule.php",outerPageData, ()=>{
         const next = document.getElementById("next");
         const back = document.getElementById("back");
         next.addEventListener("click", ()=>{
@@ -109,14 +111,19 @@ const loadSchedule = () => {
             day["isDayOff"] = arrayData[x];
             day["start"] = convertFrom24To12Format(arrayData[x+1]);
             day["end"] = convertFrom24To12Format(arrayData[x+2]);
+            day["sRaw"] = arrayData[x+1];
+            day["eRaw"] = arrayData[x+2];
             week.push(day);
         }
+
+        // move Sunday to front
+        rotateRight(week);
        
         // Add the new array as data to be passed into
         scheduleData["week"] = week;
-
+        console.log(week);
         if(edit){
-            $("#schedule-preference").load(level+"/components/sections/register-specific-hours.php",()=>{
+            $("#schedule-preference").load(level+"/components/sections/register-specific-hours.php",scheduleData,()=>{
                 // const clicky = document.getElementById("clicky");
                 // clicky.addEventListener("click", ()=>{
 
@@ -131,14 +138,6 @@ const loadSchedule = () => {
             });
         }
     });
-}
-
-const convertFrom24To12Format = (time24) => {
-    const [sHours, minutes] = time24.match(/([0-9]{1,2}):([0-9]{2})/).slice(1);
-    const period = +sHours < 12 ? 'AM' : 'PM';
-    const hours = +sHours % 12 || 12;
-  
-    return `${hours}:${minutes} ${period}`;
 }
 
 // Page 3

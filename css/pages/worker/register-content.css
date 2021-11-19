@@ -244,7 +244,7 @@
 
 
 /*==========================================*/
-/*          POPULAR POSTINGS STYLES         */
+/*              SCHEDULE STYLES             */
 /*==========================================*/
  .note-bottom{
      font-size: 0.9rem;
@@ -258,6 +258,9 @@
      cursor: pointer;
  }
  
+ .check-adjust-sched{
+     margin-top: 12px;
+ }
 @media only screen and (min-width: 992px) {
 
 
