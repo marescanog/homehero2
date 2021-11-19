@@ -21,7 +21,7 @@ placeholder="Feel free to give a short description or elaborate on specific deta
 
 <h6 class="mt-3 text-lg-center">How big is your project?</h6>
 <div class="d-flex flex-column flex-lg-row justify-content-lg-between">
-    <div class="form-check mb-2 mb-lg-0">
+    <!-- <div class="form-check mb-2 mb-lg-0">
         <input class="form-check-input" type="radio" name="jobSize" id="jobSize_small" value="small" checked>
         <label class="form-check-label" for="jobSize_small">
             Small - Est. 1 - 4 hrs.
@@ -38,6 +38,24 @@ placeholder="Feel free to give a short description or elaborate on specific deta
         <label class="form-check-label" for="jobSize_large">
             Large - Est 8+ hrs.
         </label>
+    </div> -->
+    <div class="form-check mb-2 mb-lg-0">
+        <div class="radio-item col-12 m-0">
+            <input type="radio" id="ritema" name="job_size" value="0" checked>
+            <label for="ritema">Small - Est. 1 - 4 hrs.</label>
+        </div>
+    </div>
+    <div class="form-check mb-2 mb-lg-0">
+        <div class="radio-item col-12 m-0">
+            <input type="radio" id="ritemb" name="job_size" value="1" >
+            <label for="ritemb">Medium - Est 4 - 8 hrs.</label>
+        </div>
+    </div>
+    <div class="form-check mb-2 mb-lg-0">
+        <div class="radio-item col-12 m-0">
+            <input type="radio" id="ritemc" name="job_size" value="2" >
+            <label for="ritemc">Large - Est 8+ hrs.</label>
+        </div>
     </div>
 </div>
 
