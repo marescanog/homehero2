@@ -44,8 +44,12 @@ const loadPersonalInfo = () => {
     const level = getDocumentLevel();
     $("#body").load(level+"/components/sections/register-personal-info.php", ()=>{
         const next = document.getElementById("next");
+        const back = document.getElementById("back");
         next.addEventListener("click", ()=>{
             window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=2";
+        })
+        back.addEventListener("click", ()=>{
+            window.location.href = getDocumentLevel()+"/pages/worker/register.php";
         })
     });
 }
@@ -54,8 +58,12 @@ const loadSchedule = () => {
     const level = getDocumentLevel();
     $("#body").load(level+"/components/sections/register-schedule.php", ()=>{
         const next = document.getElementById("next");
+        const back = document.getElementById("back");
         next.addEventListener("click", ()=>{
             window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=3";
+        })
+        back.addEventListener("click", ()=>{
+            window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=1";
         })
     });
 }
@@ -64,8 +72,12 @@ const loadServiceArea = () => {
     const level = getDocumentLevel();
     $("#body").load(level+"/components/sections/register-service-area.php", ()=>{
         const next = document.getElementById("next");
+        const back = document.getElementById("back");
         next.addEventListener("click", ()=>{
             window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=4";
+        })
+        back.addEventListener("click", ()=>{
+            window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=2";
         })
     });
 }
@@ -76,6 +88,9 @@ const loadReview = () => {
         const next = document.getElementById("next");
         next.addEventListener("click", ()=>{
             window.location.href = getDocumentLevel()+"/pages/worker/completed-registration.php";
+        })
+        back.addEventListener("click", ()=>{
+            window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=3";
         })
     });
 }
