@@ -15,8 +15,11 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
 ?>
 <!-- === Link your custom CSS pages below here ===-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../css/headers/register.css">
-<link rel="stylesheet" href="../../css/headers/worker-side-nav.css">
+<link rel="stylesheet" href="../../css/pages/worker/register-content.css">
 <link rel="stylesheet" href="../../css/UX/breadcrumb-indicator.css">
 <script src="https://kit.fontawesome.com/d10ff4ba99.js" crossorigin="anonymous"></script>
 <!-- <link rel="stylesheet" href="../../css/pages/homeowner/homeowner-create-project.css"> -->
@@ -38,7 +41,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     <div class="header">
     <!-- === Your Custom Page Content Goes Here below here === -->
 
-<div class="container w-100 min-height bg-success">
+<div class="container w-100 min-height">
     <input id="page" type="hidden" value="<?php
         echo htmlentities($bci_current_page);
     ?>">

@@ -30,7 +30,9 @@ $(document).ready(()=>{
 
 const loadOrientation = () => {
     const level = getDocumentLevel();
-    $("#body").load(level+"/components/sections/register-orientation.php", ()=>{
+    data={}
+    data["level"] = level;
+    $("#body").load(level+"/components/sections/register-orientation.php", data, ()=>{
         const next = document.getElementById("next");
         next.addEventListener("click", ()=>{
             window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=1";

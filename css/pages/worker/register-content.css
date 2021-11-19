@@ -1,0 +1,73 @@
+
+.container-fluid{
+    background-color: #FBF9EC !important;
+    color: #707070;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.title-style-1{
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.italic-text{
+    font-style: italic;
+}
+
+.smol{
+    font-size: small;
+}
+
+.btn-text-1{
+    font-family: 'Nunito';
+    font-weight: 900;
+    font-size: 1.75em;
+}
+
+
+/*==========================================*/
+/*             Orientation Styles           */
+/*==========================================*/
+
+.card-orientation{
+   min-height: 28.125em; 
+}
+
+.orientation-img{
+    width: 5em;
+    height: 5em;
+    margin-left: 1.25em;
+}
+
+.step-number{
+    font-size: 4.375rem;
+    font-family: 'Racing Sans One';
+}
+
+.orientation-txt-container{
+    max-width: 14em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.orntn-btn-container{
+    max-width: 250px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media only screen and (min-width: 992px) {
+
+
+}
+
+
+/*==========================================*/
+/*          POPULAR POSTINGS STYLES         */
+/*==========================================*/
+
+@media only screen and (min-width: 992px) {
+
+
+}
