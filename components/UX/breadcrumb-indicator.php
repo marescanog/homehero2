@@ -58,7 +58,6 @@
                 ">
                     <div class="circle-check
                         <?php 
-                            echo $isHeader ? " adjust-c-20" : "";
                             if($x+1 <= $bci_current_page){
                                 echo " circ-content-show";
                             }

@@ -25,14 +25,22 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
  <body class="container-fluid m-0 p-0  w-100 bg-light">  
     <!-- Add your Header NavBar here-->
     <?php 
-        $headerLink_Selected = 0;
+        // Get the current page number based on query string
+        $bci_current_page = isset($_GET["page"]) ? $_GET["page"] : 0;
+        $bci_current_page = (int) $bci_current_page;
+        if($bci_current_page < 0 || $bci_current_page > 4){
+            $bci_current_page = 0;
+        }
+        // $isComplete = true;
+        // $header_title = "Complete";
         require_once dirname(__FILE__)."/$level/components/headers/worker-register.php"; 
     ?>
-    <div class="<?php echo $hasHeader ?? ""; ?>">
+    <div id="header"></div>
+    <div class="header">
     <!-- === Your Custom Page Content Goes Here below here === -->
 
-<div class="container w-100 min-height">
-    <h1>Register</h1>
+<div class="container w-100 min-height bg-success">
+    <div id="body"></div>
 </div>
 
 
@@ -40,11 +48,6 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     </div>
 <?php require_once dirname(__FILE__)."/$level/components/foot-meta.php"; ?>
 <!-- Custom JS Scripts Below -->
-    <!-- <script src="../../js/pages/user-home.js"></script> -->
-    <script>
-
-   
-
-    </script>
+    <script src="../../js/pages/worker-register.js"></script>
 </body>
 </html>
