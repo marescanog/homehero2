@@ -54,11 +54,15 @@ const loadPersonalInfo = () => {
             window.location.href = level+"/pages/worker/register.php";
         })
     });
+
 }
 
 // Page 3
 const loadSchedule = () => {
     const level = getDocumentLevel();
+    // Grab the DOM element for page type
+    let edit = document.getElementById("edit").value == 1;
+    console.log(edit);
     $("#body").load(level+"/components/sections/register-schedule.php", ()=>{
         const next = document.getElementById("next");
         const back = document.getElementById("back");
@@ -111,14 +115,21 @@ const loadSchedule = () => {
         // Add the new array as data to be passed into
         scheduleData["week"] = week;
 
-        $("#schedule-preference").load(level+"/components/sections/register-general-schedule.php",scheduleData,()=>{
-            const clicky = document.getElementById("clicky");
-            clicky.addEventListener("click", ()=>{
-                $("#schedule-preference").load(level+"/components/sections/register-specific-hours.php",()=>{
+        if(edit){
+            $("#schedule-preference").load(level+"/components/sections/register-specific-hours.php",()=>{
+                // const clicky = document.getElementById("clicky");
+                // clicky.addEventListener("click", ()=>{
 
-                });
-            })
-        });
+                // })
+            });
+        } else {
+            $("#schedule-preference").load(level+"/components/sections/register-general-schedule.php",scheduleData,()=>{
+                const clicky = document.getElementById("clicky");
+                clicky.addEventListener("click", ()=>{
+                    window.location.href = level+"/pages/worker/register.php"+"?page=2&edit=true";
+                })
+            });
+        }
     });
 }
 

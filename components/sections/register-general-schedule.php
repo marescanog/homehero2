@@ -3,6 +3,7 @@
         "Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"
     ];
     $week = isset($_POST["week"]) ? $_POST["week"] : null;
+    $isOnEdit = isset($_GET["edit"]) ? $_GET["edit"] : false;
 ?>
 <h6>Schedule Preference</h6>
 <div class="row ml-3 mb-2">

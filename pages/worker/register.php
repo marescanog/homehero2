@@ -34,6 +34,12 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         if($bci_current_page < 0 || $bci_current_page > 4){
             $bci_current_page = 0;
         }
+        // For pages with edit option, get if is on edit mode
+        $edit = isset($_GET["edit"]) ? $_GET["edit"] == "true" : false;
+        if(gettype($edit) !== "boolean"){
+            $edit = false;
+        }
+        
         // $isComplete = true;
         // $header_title = "Complete";
         require_once dirname(__FILE__)."/$level/components/headers/worker-register.php"; 
@@ -45,7 +51,13 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     <input id="page" type="hidden" value="<?php
         echo htmlentities($bci_current_page);
     ?>">
+    <input id="edit" type="hidden" value="<?php
+        echo htmlentities($edit);
+    ?>">
     <div id="body"></div>
+    <?php 
+        // echo var_dump($edit);
+    ?>
 </div>
 
 
