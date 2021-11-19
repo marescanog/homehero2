@@ -32,7 +32,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             </ul>
             <h2>Worker</h2>
             <ul>
-                <li><a href=""></a>Registration</li>
+                <li><a href="./worker/register.php">Registration</a></li>
                 <li><a href="./worker/home.php">Home</a></li>
                 <li><a href="./worker/landing.php">Landing</a></li>
             </ul>
