@@ -72,7 +72,11 @@ const loadSchedule = () => {
             window.location.href = level+"/pages/worker/register.php"+"?page=3";
         })
         back.addEventListener("click", ()=>{
-            window.location.href = level+"/pages/worker/register.php"+"?page=1";
+            if(edit){
+                window.location.href = level+"/pages/worker/register.php"+"?page=2";
+            } else {
+                window.location.href = level+"/pages/worker/register.php"+"?page=1";
+            }
         })
 
         const rawPretendData = {
