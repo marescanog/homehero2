@@ -281,7 +281,25 @@ hr.custom {
 }
 
 
+/*==========================================*/
+/*              SERVICE STYLES              */
+/*==========================================*/
+/* Set the size of the div element that contains the map */
+#map {
+    height: 400px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
+}
 
+
+
+@media only screen and (min-width: 992px) {
+    .min-card-cities{
+        min-width: 30.56em;
+    }
+
+}
 
 
 
