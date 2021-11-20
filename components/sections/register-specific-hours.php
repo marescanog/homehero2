@@ -17,9 +17,9 @@
     ?>
     <div class="col-3 col-lg-2 pt-0 pt-lg-2">
         <div class="custom-control custom-checkbox pt-3">
-            <input type="checkbox" class="custom-control-input" id="chk-<?php echo $daysOfTheWeek[$x];?>" name="chk-<?php echo $daysOfTheWeek[$x];?>">
-            <label class="custom-control-label check-label" for="chk-<?php echo $daysOfTheWeek[$x];?>">
-                <?php echo $daysOfTheWeek[$x];?>
+            <input type="checkbox" class="custom-control-input" id="chk-<?php echo htmlentities($daysOfTheWeek[$x]);?>" name="chk-<?php echo $daysOfTheWeek[$x];?>">
+            <label class="custom-control-label check-label" for="chk-<?php echo htmlentities($daysOfTheWeek[$x]);?>">
+                <?php echo htmlentities($daysOfTheWeek[$x]);?>
             </label>
         </div>
     </div>
@@ -58,6 +58,7 @@
                     >
                 </div>
             </div>
+            <input id="dayoff-input-<?php echo $daysOfTheWeek[$x];?>" type="hidden" value ="<?php echo $dayObj["isDayOff"];?>">
             <p id="appy-click-<?php echo $daysOfTheWeek[$x];?>" class="clicky smol mt-3 mt-sm-0 d-none">Apply to all checked days</p>
         </div>
     </div>

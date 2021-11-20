@@ -158,7 +158,7 @@ const loadSchedule = () => {
                 ];
 
                 const daysBase = [
-                    "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"
+                    "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
                 ];
 
                 // Set up the Show/Hide for the edit panel of each row in schedule
@@ -171,7 +171,8 @@ const loadSchedule = () => {
                     const thisEndInput = document.getElementById(endInputIds[dayType]);
                     const thisApplyClick = document.getElementById(applyClickIds[dayType]);
 
-                    // Private Helper Show/Hide Functions
+                    // Private functions
+                    // Show Panel
                     const showEditSchedPanel = () => {
                         // Show the Edit panel
                         day.innerText = "Apply"                            
@@ -187,6 +188,7 @@ const loadSchedule = () => {
                             }
                         });
                     }
+                    // Hide Panel
                     const hideEditSchedPanel = () => {
                         // Hide Edit panel
                         day.innerText = "Edit"                          
@@ -203,15 +205,48 @@ const loadSchedule = () => {
                         });
                     }
 
+                    // Get Panel's Current Start Value
+                    const newStartTimeFeild = document.getElementById("start-time-input-"+daysBase[dayType]);
+                    const newEndTimeFeild = document.getElementById("end-time-input-"+daysBase[dayType]);
+
+
                     // Add the logic for "Apply" clickable item
                     thisApplyClick.addEventListener("click", ()=>{
+                        // Grab the HTML DOM elements & values
+                        let newStartTime = newStartTimeFeild.value;
+                        let newEndTime = newEndTimeFeild.value;
                         console.log("hehe "+dayType);
                         const myForm = document.getElementById("schedule-form");
                         const formData = getFormDataAsObj(myForm);
                         // console.log(myForm);
-                        console.log(formData);
+                        // console.log(formData);
+                        console.log("selected checked days are:")
+                        //Change All input feilds that have the checked attr
                         daysBase.forEach(day=>{
-                            console.log("chk-"+day);
+                            if(formData.hasOwnProperty("chk-"+day)){
+                                // Get feilds to change to new values
+                                const checkedStart = document.getElementById("start-time-input-"+day);
+                                const label = document.getElementById("label-"+day);
+                                const checkedEnd = document.getElementById("end-time-input-"+day);
+                                const dayOffInput = document.getElementById("dayoff-input-"+day);
+
+                                // Change Label to new time
+                                label.innerText = convertFrom24To12Format(newStartTime) + " - " +
+                                convertFrom24To12Format(newEndTime);
+
+                                // Change start time input value to new time
+                                checkedStart.setAttribute("value", newStartTime);
+
+                                // Change end time input value to new time
+                                checkedEnd.setAttribute("value", newEndTime);
+
+                                // change day off to false
+                                dayOffInput.setAttribute("value", "0");
+
+                                // Close the Panel
+                                hideEditSchedPanel();
+                                // console.log("chk-"+day);
+                            }
                         });
                     });
 
