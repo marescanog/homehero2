@@ -132,7 +132,10 @@ const loadSchedule = () => {
                 const clickyThu = document.getElementById("clicky-Thu");
                 const clickyFri = document.getElementById("clicky-Fri");
                 const clickySat = document.getElementById("clicky-Sat");
-
+                // Grab DOM for Reset 9-5 and Day off setting
+                const reset9to5DOM = document.getElementById("reset9to5Link");
+                const setDayOffDOM = document.getElementById("setDayOffLink");
+               
                 const clickyWeek = [
                     clickySun, clickyMon, clickyTue, clickyWed, clickyThu, clickyFri, clickySat
                 ];
@@ -160,6 +163,75 @@ const loadSchedule = () => {
                 const daysBase = [
                     "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
                 ];
+
+                    // Accepts a string Mon - Sun, newStartTime value and newEndTime value
+                    // Sets the label & inputs to new time
+                    const setNewTime = (dayTxt, newStartTime, newEndTime) => {
+                        // Get feilds to change to new values
+                        const checkedStart = document.getElementById("start-time-input-"+dayTxt);
+                        const label = document.getElementById("label-"+dayTxt);
+                        const checkedEnd = document.getElementById("end-time-input-"+dayTxt);
+                        const dayOffInput = document.getElementById("dayoff-input-"+dayTxt);
+
+                        // Change Label to new time
+                        label.innerText = convertFrom24To12Format(newStartTime) + " - " +
+                        convertFrom24To12Format(newEndTime);
+
+                        // Change start time input value to new time
+                        checkedStart.setAttribute("value", newStartTime);
+
+                        // Change end time input value to new time
+                        checkedEnd.setAttribute("value", newEndTime);
+
+                        // change day off to false
+                        dayOffInput.setAttribute("value", "0");
+                    }
+
+
+                    // Accepts a string Mon - Sun
+                    // Sets the label & day off inputs to day off
+                    // Does not change the previous time values
+                    const setDayOff = (dayTxt) => {
+                        // Get feilds to change to new values
+                        const label = document.getElementById("label-"+dayTxt);
+                        const dayOffInput = document.getElementById("dayoff-input-"+dayTxt);
+
+                        // Change Label to Day off
+                        label.innerText = "Day off";
+
+                        // change day off to true
+                        dayOffInput.setAttribute("value", "1");
+                    }
+
+
+                 // Add logic for the reset 9-5 clickable item
+                 reset9to5DOM.addEventListener("click", ()=>{
+                    const myForm = document.getElementById("schedule-form");
+                    const formData = getFormDataAsObj(myForm);
+                    // Reset All input feilds that have the checked attr
+                    daysBase.forEach(dayTxt=>{
+                        if(formData.hasOwnProperty("chk-"+dayTxt)){
+                            // Reset 
+                            setNewTime(dayTxt,"09:00:00","17:00:00");
+                            // Close panel
+                        }
+                    });
+                });
+
+
+                // Add logic for the set Days off clickable item
+                setDayOffDOM.addEventListener("click", ()=>{
+                    const myForm = document.getElementById("schedule-form");
+                    const formData = getFormDataAsObj(myForm);
+                    // Set Days off for input feilds that have the checked attr
+                    daysBase.forEach(dayTxt=>{
+                        if(formData.hasOwnProperty("chk-"+dayTxt)){
+                            // Apply day off 
+                            setDayOff(dayTxt);
+                            // Close panel
+                        }
+                    });
+                });
 
                 // Set up the Show/Hide for the edit panel of each row in schedule
                 clickyWeek.forEach(day=>{
@@ -205,43 +277,27 @@ const loadSchedule = () => {
                         });
                     }
 
+
                     // Get Panel's Current Start Value
                     const newStartTimeFeild = document.getElementById("start-time-input-"+daysBase[dayType]);
                     const newEndTimeFeild = document.getElementById("end-time-input-"+daysBase[dayType]);
 
 
-                    // Add the logic for "Apply" clickable item
+                    // Add the logic for "Apply Multiple" clickable item
                     thisApplyClick.addEventListener("click", ()=>{
                         // Grab the HTML DOM elements & values
                         let newStartTime = newStartTimeFeild.value;
                         let newEndTime = newEndTimeFeild.value;
-                        console.log("hehe "+dayType);
+                        // console.log("hehe "+dayType);
                         const myForm = document.getElementById("schedule-form");
                         const formData = getFormDataAsObj(myForm);
                         // console.log(myForm);
                         // console.log(formData);
-                        console.log("selected checked days are:")
-                        //Change All input feilds that have the checked attr
+                        // console.log("selected checked days are:")
+                        // Change All input feilds that have the checked attr
                         daysBase.forEach(dayTxt=>{
                             if(formData.hasOwnProperty("chk-"+dayTxt)){
-                                // Get feilds to change to new values
-                                const checkedStart = document.getElementById("start-time-input-"+dayTxt);
-                                const label = document.getElementById("label-"+dayTxt);
-                                const checkedEnd = document.getElementById("end-time-input-"+dayTxt);
-                                const dayOffInput = document.getElementById("dayoff-input-"+dayTxt);
-
-                                // Change Label to new time
-                                label.innerText = convertFrom24To12Format(newStartTime) + " - " +
-                                convertFrom24To12Format(newEndTime);
-
-                                // Change start time input value to new time
-                                checkedStart.setAttribute("value", newStartTime);
-
-                                // Change end time input value to new time
-                                checkedEnd.setAttribute("value", newEndTime);
-
-                                // change day off to false
-                                dayOffInput.setAttribute("value", "0");
+                                setNewTime(dayTxt,newStartTime,newEndTime)
 
                                 // Close the Panel
                                 hideEditSchedPanel();
@@ -249,6 +305,7 @@ const loadSchedule = () => {
                             }
                         });
                     });
+
 
                     // Add the logic for "Edit" clickable item
                     day.addEventListener("click", ()=>{

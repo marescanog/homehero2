@@ -7,8 +7,8 @@
 ?>
 <h6>Set Availability</h6>
 <div class="d-flex">
-    <p class="clicky smol m-0 ">Reset to 9-5 <br> for checked days</p>
-    <p class="clicky smol m-0 ml-lg-4">Set as day-off <br> for checked days</p>
+    <p id="reset9to5Link" class="clicky smol m-0 ">Reset to 9-5 <br> for checked days</p>
+    <p id="setDayOffLink" class="clicky smol m-0 ml-lg-4">Set as day-off <br> for checked days</p>
 </div>
 
 <div class="row">
