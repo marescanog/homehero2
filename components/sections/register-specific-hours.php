@@ -59,7 +59,9 @@
                 </div>
             </div>
             <input id="dayoff-input-<?php echo $daysOfTheWeek[$x];?>" type="hidden" value ="<?php echo $dayObj["isDayOff"];?>">
-            <p id="appy-click-<?php echo $daysOfTheWeek[$x];?>" class="clicky smol mt-3 mt-sm-0 d-none">Apply to all checked days</p>
+            <div>
+                <p id="appy-click-<?php echo $daysOfTheWeek[$x];?>" class="apply-multiple-adjustwidth clicky smol mt-3 mt-sm-0 d-none">Apply to all checked days</p>
+            </div>
         </div>
     </div>
     <div class="col-2 col-lg-3 d-flex p-0 p-lg-2">

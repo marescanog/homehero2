@@ -203,6 +203,14 @@ const loadSchedule = () => {
                         dayOffInput.setAttribute("value", "1");
                     }
 
+                    // Resets all checked panels back to zero
+                    const resetToUncheckAll = () => {
+                        daysBase.forEach(dayTxt=>{
+                            const checkBox = document.getElementById("chk-"+dayTxt);
+                            checkBox.checked = false;
+                        })
+                    }
+
 
                  // Add logic for the reset 9-5 clickable item
                  reset9to5DOM.addEventListener("click", ()=>{
@@ -213,9 +221,9 @@ const loadSchedule = () => {
                         if(formData.hasOwnProperty("chk-"+dayTxt)){
                             // Reset 
                             setNewTime(dayTxt,"09:00:00","17:00:00");
-                            // Close panel
                         }
                     });
+                    resetToUncheckAll();
                 });
 
 
@@ -231,6 +239,7 @@ const loadSchedule = () => {
                             // Close panel
                         }
                     });
+                    resetToUncheckAll();
                 });
 
                 // Set up the Show/Hide for the edit panel of each row in schedule
@@ -288,22 +297,23 @@ const loadSchedule = () => {
                         // Grab the HTML DOM elements & values
                         let newStartTime = newStartTimeFeild.value;
                         let newEndTime = newEndTimeFeild.value;
-                        // console.log("hehe "+dayType);
                         const myForm = document.getElementById("schedule-form");
                         const formData = getFormDataAsObj(myForm);
-                        // console.log(myForm);
-                        // console.log(formData);
-                        // console.log("selected checked days are:")
-                        // Change All input feilds that have the checked attr
+                        let countChanged = 0;
                         daysBase.forEach(dayTxt=>{
                             if(formData.hasOwnProperty("chk-"+dayTxt)){
-                                setNewTime(dayTxt,newStartTime,newEndTime)
-
-                                // Close the Panel
-                                hideEditSchedPanel();
-                                // console.log("chk-"+day);
+                                // Set new time
+                                setNewTime(dayTxt,newStartTime,newEndTime);
+                                countChanged++;
                             }
                         });
+                        if(countChanged == 0){
+                            alert("No days were selected! Please check on a day.");
+                        } else {
+                            // Close the Panel
+                            hideEditSchedPanel();
+                            resetToUncheckAll();
+                        }
                     });
 
 
