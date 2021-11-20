@@ -170,7 +170,38 @@ const loadSchedule = () => {
                     const thisToLabel = document.getElementById(toLabelIDs[dayType]);
                     const thisEndInput = document.getElementById(endInputIds[dayType]);
                     const thisApplyClick = document.getElementById(applyClickIds[dayType]);
-                    
+
+                    // Private Helper Show/Hide Functions
+                    const showEditSchedPanel = () => {
+                        // Show the Edit panel
+                        day.innerText = "Apply"                            
+                        thisLabel.classList.add("d-none");
+                        thisStartInput.setAttribute("type", "time");
+                        thisToLabel.classList.remove("d-none");
+                        thisEndInput.setAttribute("type", "time");
+                        thisApplyClick.classList.remove("d-none");
+                        // Hide all Edit labels except for current
+                        clickyWeek.forEach(editLabel=>{
+                            if(day != editLabel){
+                                editLabel.classList.add("d-none");
+                            }
+                        });
+                    }
+                    const hideEditSchedPanel = () => {
+                        // Hide Edit panel
+                        day.innerText = "Edit"                          
+                        thisLabel.classList.remove("d-none");
+                        thisStartInput.setAttribute("type", "hidden");
+                        thisToLabel.classList.add("d-none");
+                        thisEndInput.setAttribute("type", "hidden");
+                        thisApplyClick.classList.add("d-none");
+                        // Show all Edit labels
+                        clickyWeek.forEach(editLabel=>{
+                            if(day != editLabel){
+                                editLabel.classList.remove("d-none");
+                            }
+                        });
+                    }
 
                     // Add the logic for "Apply" clickable item
                     thisApplyClick.addEventListener("click", ()=>{
@@ -187,33 +218,9 @@ const loadSchedule = () => {
                     // Add the logic for "Edit" clickable item
                     day.addEventListener("click", ()=>{
                         if(day.innerText == "Edit"){
-                            // Show the Edit panel
-                            day.innerText = "Apply"                            
-                            thisLabel.classList.add("d-none");
-                            thisStartInput.setAttribute("type", "time");
-                            thisToLabel.classList.remove("d-none");
-                            thisEndInput.setAttribute("type", "time");
-                            thisApplyClick.classList.remove("d-none");
-                            // Hide all Edit labels except for current
-                            clickyWeek.forEach(editLabel=>{
-                                if(day != editLabel){
-                                    editLabel.classList.add("d-none");
-                                }
-                            });
+                            showEditSchedPanel();
                         } else if (day.innerText == "Apply"){
-                            // Hide Edit panel
-                            day.innerText = "Edit"                          
-                            thisLabel.classList.remove("d-none");
-                            thisStartInput.setAttribute("type", "hidden");
-                            thisToLabel.classList.add("d-none");
-                            thisEndInput.setAttribute("type", "hidden");
-                            thisApplyClick.classList.add("d-none");
-                            // Show all Edit labels
-                            clickyWeek.forEach(editLabel=>{
-                                if(day != editLabel){
-                                    editLabel.classList.remove("d-none");
-                                }
-                            });
+                            hideEditSchedPanel();
                         }
                     });
                 });
