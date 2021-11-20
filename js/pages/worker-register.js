@@ -124,28 +124,94 @@ const loadSchedule = () => {
       
         if(edit){
             $("#schedule-preference").load(level+"/components/sections/register-specific-hours.php",scheduleData,()=>{
+                // Grab Edit Element for each
                 const clickySun = document.getElementById("clicky-Sun");
                 const clickyMon = document.getElementById("clicky-Mon");
                 const clickyTue = document.getElementById("clicky-Tue");
                 const clickyWed = document.getElementById("clicky-Wed");
-                const clickyThur = document.getElementById("clicky-Thur");
+                const clickyThu = document.getElementById("clicky-Thu");
                 const clickyFri = document.getElementById("clicky-Fri");
                 const clickySat = document.getElementById("clicky-Sat");
 
                 const clickyWeek = [
-                    clickySun, clickyMon, clickyTue, clickyWed, clickyThur, clickyFri, clickySat
+                    clickySun, clickyMon, clickyTue, clickyWed, clickyThu, clickyFri, clickySat
                 ];
 
+                const labelWeek = [
+                    "label-Sun", "label-Mon", "label-Tue", "label-Wed", "label-Thu", "label-Fri", "label-Sat"
+                ]
+
+                const startInputIds = [
+                    "start-time-input-Sun", "start-time-input-Mon", "start-time-input-Tue", "start-time-input-Wed", "start-time-input-Thu", "start-time-input-Fri", "start-time-input-Sat"
+                ]
+
+                const toLabelIDs = [
+                    "to-Sun", "to-Mon", "to-Tue", "to-Wed", "to-Thu", "to-Fri", "to-Sat"
+                ]
+
+                const endInputIds = [
+                    "end-time-input-Sun", "end-time-input-Mon", "end-time-input-Tue", "end-time-input-Wed", "end-time-input-Thu", "end-time-input-Fri", "end-time-input-Sat"
+                ]
+
+                const applyClickIds = [
+                    "appy-click-Sun", "appy-click-Mon", "appy-click-Tue", "appy-click-Wed", "appy-click-Thu", "appy-click-Fri", "appy-click-Sat"
+                ]
+
+                // Set up the Show/Hide for the edit panel of each row in schedule
                 clickyWeek.forEach(day=>{
+                    // Grab Values & HTML Entitites
+                    let dayType = day.getAttribute("data-day");
+                    const thisApplyClick = document.getElementById(applyClickIds[dayType]);
+
+                    // Add the logic for "Apply" clickable item
+                    thisApplyClick.addEventListener("click", ()=>{
+                        console.log("hehe "+dayType);
+                    });
+
+                    // Add the logic for "Edit" clickable item
                     day.addEventListener("click", ()=>{
+                        let dayType = day.getAttribute("data-day");
+                        const thisLabel = document.getElementById(labelWeek[dayType]);
+                        const thisStartInput = document.getElementById(startInputIds[dayType]);
+                        const thisToLabel = document.getElementById(toLabelIDs[dayType]);
+                        const thisEndInput = document.getElementById(endInputIds[dayType]);
+                        const thisApplyClick = document.getElementById(applyClickIds[dayType]);
+
                         // console.log(day);
                         if(day.innerText == "Edit"){
-                            day.innerText = "Done"
-                        } else if (day.innerText == "Done"){
-                            day.innerText = "Edit"
+                            // Show the Edit panel
+                            day.innerText = "Apply"                            
+                            thisLabel.classList.add("d-none");
+                            thisStartInput.setAttribute("type", "time");
+                            thisToLabel.classList.remove("d-none");
+                            thisEndInput.setAttribute("type", "time");
+                            thisApplyClick.classList.remove("d-none");
+                            // Hide all Edit labels except for current
+                            clickyWeek.forEach(editLabel=>{
+                                if(day != editLabel){
+                                    editLabel.classList.add("d-none");
+                                }
+                            });
+                        } else if (day.innerText == "Apply"){
+                            // Hide Edit panel
+                            day.innerText = "Edit"                          
+                            thisLabel.classList.remove("d-none");
+                            thisStartInput.setAttribute("type", "hidden");
+                            thisToLabel.classList.add("d-none");
+                            thisEndInput.setAttribute("type", "hidden");
+                            thisApplyClick.classList.add("d-none");
+                            // Show all Edit labels
+                            clickyWeek.forEach(editLabel=>{
+                                if(day != editLabel){
+                                    editLabel.classList.remove("d-none");
+                                }
+                            });
                         }
                     });
                 });
+
+                
+
                 // const clicky = document.getElementById("clicky");
                 // clicky.addEventListener("click", ()=>{
 
