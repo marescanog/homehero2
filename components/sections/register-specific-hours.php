@@ -23,7 +23,7 @@
             </label>
         </div>
     </div>
-    <div id="d-box-<?php echo $daysOfTheWeek[$x];?>" class="col-6 col-lg-7 d-flex align-items-center justify-content-center">
+    <div id="d-box-<?php echo $daysOfTheWeek[$x];?>" class="col-7 col-lg-7 d-flex align-items-center justify-content-center">
         <p class="check-adjust-sched d-none">
             <?php
                 $dayObj = ($week == null) ? null :  $week[$x];;
@@ -58,10 +58,10 @@
                     >
                 </div>
             </div>
-            <p class="clicky smol mt-3 mt-lg-0 d-none">Apply to selected days</p>
+            <p class="clicky smol mt-3 mt-lg-0">Apply to selected days</p>
         </div>
     </div>
-    <div class="col-3 d-flex">
+    <div class="col-2 col-lg-3 d-flex p-0 p-lg-2">
         <p id="clicky-<?php echo $daysOfTheWeek[$x];?>" class="clicky check-adjust-sched text-center text-lg-left pl-0 pl-sm-3">Edit</p>
     </div>
     <?php 
