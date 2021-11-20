@@ -139,45 +139,53 @@ const loadSchedule = () => {
 
                 const labelWeek = [
                     "label-Sun", "label-Mon", "label-Tue", "label-Wed", "label-Thu", "label-Fri", "label-Sat"
-                ]
+                ];
 
                 const startInputIds = [
                     "start-time-input-Sun", "start-time-input-Mon", "start-time-input-Tue", "start-time-input-Wed", "start-time-input-Thu", "start-time-input-Fri", "start-time-input-Sat"
-                ]
+                ];
 
                 const toLabelIDs = [
                     "to-Sun", "to-Mon", "to-Tue", "to-Wed", "to-Thu", "to-Fri", "to-Sat"
-                ]
+                ];
 
                 const endInputIds = [
                     "end-time-input-Sun", "end-time-input-Mon", "end-time-input-Tue", "end-time-input-Wed", "end-time-input-Thu", "end-time-input-Fri", "end-time-input-Sat"
-                ]
+                ];
 
                 const applyClickIds = [
                     "appy-click-Sun", "appy-click-Mon", "appy-click-Tue", "appy-click-Wed", "appy-click-Thu", "appy-click-Fri", "appy-click-Sat"
-                ]
+                ];
+
+                const daysBase = [
+                    "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"
+                ];
 
                 // Set up the Show/Hide for the edit panel of each row in schedule
                 clickyWeek.forEach(day=>{
                     // Grab Values & HTML Entitites
                     let dayType = day.getAttribute("data-day");
+                    const thisLabel = document.getElementById(labelWeek[dayType]);
+                    const thisStartInput = document.getElementById(startInputIds[dayType]);
+                    const thisToLabel = document.getElementById(toLabelIDs[dayType]);
+                    const thisEndInput = document.getElementById(endInputIds[dayType]);
                     const thisApplyClick = document.getElementById(applyClickIds[dayType]);
+                    
 
                     // Add the logic for "Apply" clickable item
                     thisApplyClick.addEventListener("click", ()=>{
                         console.log("hehe "+dayType);
+                        const myForm = document.getElementById("schedule-form");
+                        const formData = getFormDataAsObj(myForm);
+                        // console.log(myForm);
+                        console.log(formData);
+                        daysBase.forEach(day=>{
+                            console.log("chk-"+day);
+                        });
                     });
 
                     // Add the logic for "Edit" clickable item
                     day.addEventListener("click", ()=>{
-                        let dayType = day.getAttribute("data-day");
-                        const thisLabel = document.getElementById(labelWeek[dayType]);
-                        const thisStartInput = document.getElementById(startInputIds[dayType]);
-                        const thisToLabel = document.getElementById(toLabelIDs[dayType]);
-                        const thisEndInput = document.getElementById(endInputIds[dayType]);
-                        const thisApplyClick = document.getElementById(applyClickIds[dayType]);
-
-                        // console.log(day);
                         if(day.innerText == "Edit"){
                             // Show the Edit panel
                             day.innerText = "Apply"                            

@@ -7,7 +7,7 @@
 
     <h6 class="title-subtitle-1">You'll be matched with projects based on your hours of availability.</h6>
 </div>
-<form>
+<form id="schedule-form">
 <div class="row card-container">
     <div class="card sm-shadow">
         <div class="card-body">

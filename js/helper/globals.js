@@ -11,3 +11,10 @@ function rotateRight(arr){
     arr.unshift(last);
     return arr;
 }
+
+const getFormDataAsObj = (myForm) =>{
+    let formData = new FormData(myForm);
+    let data = {};
+    formData.forEach((value, key) => data[key] = value);
+    return data;
+}
