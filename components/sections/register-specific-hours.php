@@ -16,7 +16,7 @@
         for($x=0; $x<7; $x++){
     ?>
     <div class="col-3 col-lg-2 pt-0 pt-lg-2">
-        <div class="checkbox-lg custom-control custom-checkbox">
+        <div class="custom-control custom-checkbox pt-3">
             <input type="checkbox" class="custom-control-input" id="chk-<?php echo $daysOfTheWeek[$x];?>" name="chk-<?php echo $daysOfTheWeek[$x];?>">
             <label class="custom-control-label check-label" for="chk-<?php echo $daysOfTheWeek[$x];?>">
                 <?php echo $daysOfTheWeek[$x];?>
