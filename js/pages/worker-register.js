@@ -121,9 +121,31 @@ const loadSchedule = () => {
        
         // Add the new array as data to be passed into
         scheduleData["week"] = week;
-        console.log(week);
+      
         if(edit){
             $("#schedule-preference").load(level+"/components/sections/register-specific-hours.php",scheduleData,()=>{
+                const clickySun = document.getElementById("clicky-Sun");
+                const clickyMon = document.getElementById("clicky-Mon");
+                const clickyTue = document.getElementById("clicky-Tue");
+                const clickyWed = document.getElementById("clicky-Wed");
+                const clickyThur = document.getElementById("clicky-Thur");
+                const clickyFri = document.getElementById("clicky-Fri");
+                const clickySat = document.getElementById("clicky-Sat");
+
+                const clickyWeek = [
+                    clickySun, clickyMon, clickyTue, clickyWed, clickyThur, clickyFri, clickySat
+                ];
+
+                clickyWeek.forEach(day=>{
+                    day.addEventListener("click", ()=>{
+                        // console.log(day);
+                        if(day.innerText == "Edit"){
+                            day.innerText = "Done"
+                        } else if (day.innerText == "Done"){
+                            day.innerText = "Edit"
+                        }
+                    });
+                });
                 // const clicky = document.getElementById("clicky");
                 // clicky.addEventListener("click", ()=>{
 
