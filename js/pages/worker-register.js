@@ -170,7 +170,7 @@ const loadSchedule = () => {
                     const thisToLabel = document.getElementById(toLabelIDs[dayType]);
                     const thisEndInput = document.getElementById(endInputIds[dayType]);
                     const thisApplyClick = document.getElementById(applyClickIds[dayType]);
-
+                    
                     // Private functions
                     // Show Panel
                     const showEditSchedPanel = () => {
@@ -222,13 +222,13 @@ const loadSchedule = () => {
                         // console.log(formData);
                         console.log("selected checked days are:")
                         //Change All input feilds that have the checked attr
-                        daysBase.forEach(day=>{
-                            if(formData.hasOwnProperty("chk-"+day)){
+                        daysBase.forEach(dayTxt=>{
+                            if(formData.hasOwnProperty("chk-"+dayTxt)){
                                 // Get feilds to change to new values
-                                const checkedStart = document.getElementById("start-time-input-"+day);
-                                const label = document.getElementById("label-"+day);
-                                const checkedEnd = document.getElementById("end-time-input-"+day);
-                                const dayOffInput = document.getElementById("dayoff-input-"+day);
+                                const checkedStart = document.getElementById("start-time-input-"+dayTxt);
+                                const label = document.getElementById("label-"+dayTxt);
+                                const checkedEnd = document.getElementById("end-time-input-"+dayTxt);
+                                const dayOffInput = document.getElementById("dayoff-input-"+dayTxt);
 
                                 // Change Label to new time
                                 label.innerText = convertFrom24To12Format(newStartTime) + " - " +
@@ -255,6 +255,20 @@ const loadSchedule = () => {
                         if(day.innerText == "Edit"){
                             showEditSchedPanel();
                         } else if (day.innerText == "Apply"){
+                            // Apply for only this selected panel
+                            let thisdayTxt = daysBase[dayType];
+                            let newStartTime = newStartTimeFeild.value;
+                            let newEndTime = newEndTimeFeild.value;
+                            // Get feilds to change to new values
+                            const label = document.getElementById("label-"+thisdayTxt);
+                            const dayOffInput = document.getElementById("dayoff-input-"+thisdayTxt);
+
+                            // Change Label to new time
+                            label.innerText = convertFrom24To12Format(newStartTime) + " - " +
+                            convertFrom24To12Format(newEndTime);
+
+                            // change day off to false
+                            dayOffInput.setAttribute("value", "0");
                             hideEditSchedPanel();
                         }
                     });
