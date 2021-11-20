@@ -81,7 +81,51 @@
     border: 2px solid #F2AE00;
 }
 
+/*==========================================*/
+/*             Radio Button Styles           */
+/*==========================================*/
 
+.radio-item {
+    display: inline-block;
+    position: relative;
+    padding: 0 6px;
+    margin: 10px 0 0;
+  }
+  
+  .radio-item input[type='radio'] {
+    display: none;
+  }
+  
+  .radio-item label {
+    color: #666;
+    font-weight: normal;
+  }
+  
+  .radio-item label:before {
+    content: " ";
+    display: inline-block;
+    position: relative;
+    top: 5px;
+    left: -4px;
+    margin: 0 5px 0 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 11px;
+    border: 2px solid #F2AE00;
+    background-color: transparent;
+  }
+  
+  .radio-item input[type=radio]:checked + label:after {
+    border-radius: 11px;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 9px;
+    left: 6px;
+    content: " ";
+    display: block;
+    background: #FAD255;
+  }
 
 /*==========================================*/
 /*             Orientation Styles           */
@@ -197,8 +241,53 @@
     color: #A9A9A9;
 }
 
+
+
 /*==========================================*/
-/*          POPULAR POSTINGS STYLES         */
+/*              SCHEDULE STYLES             */
+/*==========================================*/
+ .note-bottom{
+     font-size: 0.9rem;
+ }
+
+ .clicky{
+     color: #2699FB;
+ }
+ .clicky:hover{
+     text-decoration: underline;
+     cursor: pointer;
+ }
+ 
+ .check-adjust-sched{
+     margin-top: 12px;
+ }
+
+ .apply-multiple-adjustwidth{
+     width: 150px;
+ }
+
+//  .checkbox-lg .custom-control .custom-checkbox{
+//      width: 10px;
+//  }
+
+hr.custom {
+    border-top: 1px solid #707070;
+    opacity: 0.5;
+}
+
+@media only screen and (min-width: 992px) {
+
+
+}
+
+
+
+
+
+
+
+/*==========================================*/
+/*          SCHEDULE STYLES         */
 /*==========================================*/
 
 @media only screen and (min-width: 992px) {
