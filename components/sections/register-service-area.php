@@ -10,8 +10,8 @@
     <div class="card sm-shadow">
         <div class="card-body min-card-cities">
             <h6>Preferred cities</h6>
-            <p>Select the cities you would like to serve</p>
-            <p class="clicky"></p>
+            <p class="m-0">Select the cities you would like to serve</p>
+            <p class="clicky smol p-0 m-0">Clear All</p>
             <div class="row">
                 <div class="col-6">
                     <?php 
@@ -72,6 +72,6 @@
 <script src="../../js/helper/map.js"></script>
 <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
 <script
-    src="https://maps.googleapis.com/maps/api/js?key=ZEAPIKEY&callback=initMap&libraries=&v=weekly"
+    src="https://maps.googleapis.com/maps/api/js?key=XEAPIKEY&callback=initMap&libraries=&v=weekly"
     async
 ></script>

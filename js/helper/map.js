@@ -9,7 +9,8 @@ function initMap() {
         center: cebu,
         zoom: 8.7,
         mapTypeId: 'roadmap',
-        disableDefaultUI: true
+        disableDefaultUI: true,
+        draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true
     });
 
     const BantayanPolygons = bantayan_Delimeters.map(delimeter => {
