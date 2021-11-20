@@ -208,6 +208,28 @@ const loadSchedule = () => {
                         daysBase.forEach(dayTxt=>{
                             const checkBox = document.getElementById("chk-"+dayTxt);
                             checkBox.checked = false;
+                        });
+                    }
+
+                    // Resets all panels back to hide
+                    const resetPanels = () => {
+                        clickyWeek.forEach( EditClick =>{
+                            if(EditClick.innerText == "Apply"){
+                                EditClick.innerText = "Edit";
+                                let dayType = EditClick.getAttribute("data-day");
+                                const thisLabel = document.getElementById(labelWeek[dayType]);
+                                const thisApplyClick = document.getElementById(applyClickIds[dayType]);
+                                const thisToLabel = document.getElementById(toLabelIDs[dayType]);
+                                const thisEndInput = document.getElementById(endInputIds[dayType]);
+                                const thisStartInput = document.getElementById(startInputIds[dayType]);
+                                thisLabel.classList.remove("d-none");
+                                thisStartInput.setAttribute("type", "hidden");
+                                thisToLabel.classList.add("d-none");
+                                thisEndInput.setAttribute("type", "hidden");
+                                thisApplyClick.classList.add("d-none");
+                            } else {
+                                EditClick.classList.remove("d-none");
+                            }                            
                         })
                     }
 
@@ -216,14 +238,21 @@ const loadSchedule = () => {
                  reset9to5DOM.addEventListener("click", ()=>{
                     const myForm = document.getElementById("schedule-form");
                     const formData = getFormDataAsObj(myForm);
+                    let changedFeilds = 0;
                     // Reset All input feilds that have the checked attr
                     daysBase.forEach(dayTxt=>{
                         if(formData.hasOwnProperty("chk-"+dayTxt)){
                             // Reset 
                             setNewTime(dayTxt,"09:00:00","17:00:00");
+                            changedFeilds++;
                         }
                     });
-                    resetToUncheckAll();
+                    if(changedFeilds==0){
+                        alert("No days were selected! Please check on a day.");
+                    } else {
+                        resetToUncheckAll();
+                        resetPanels();
+                    }
                 });
 
 
@@ -231,15 +260,21 @@ const loadSchedule = () => {
                 setDayOffDOM.addEventListener("click", ()=>{
                     const myForm = document.getElementById("schedule-form");
                     const formData = getFormDataAsObj(myForm);
+                    let changedFeilds = 0;
                     // Set Days off for input feilds that have the checked attr
                     daysBase.forEach(dayTxt=>{
                         if(formData.hasOwnProperty("chk-"+dayTxt)){
                             // Apply day off 
                             setDayOff(dayTxt);
-                            // Close panel
+                            changedFeilds++;
                         }
                     });
-                    resetToUncheckAll();
+                    if(changedFeilds==0){
+                        alert("No days were selected! Please check on a day.");
+                    } else {
+                        resetToUncheckAll();
+                        resetPanels();
+                    }
                 });
 
                 // Set up the Show/Hide for the edit panel of each row in schedule
