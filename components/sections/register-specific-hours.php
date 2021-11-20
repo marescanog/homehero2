@@ -71,3 +71,43 @@
         }
     ?>
 </div>
+
+<hr class="card-title card-subtitle-main"/>
+<h6>Lead Time</h6>
+<p class="card-subtitle mb-2 text-muted card-subtitle-muted mt-2">How far in advanced can customers book you for a job?</p>
+<div class="row">
+    <div class="col-6 pr-1">
+        <select class="custom-select">
+            <option selected value="1">Anytime</option>
+            <option value="2">10</option>
+            <option value="3">30</option>
+        </select>
+    </div>
+    <div class="col-6 pl-1">
+        <select class="custom-select">
+            <option selected disabled>or select time frame</option>
+            <option value="2">weeks</option>
+            <option value="3">months</option>
+        </select>
+    </div>
+</div>
+
+<p class="card-subtitle mb-2 text-muted card-subtitle-muted mt-3">How much notice do you need before doing a job?</p>
+<div class="row">
+    <div class="col-6 pr-1">
+        <select class="custom-select">
+            <option value="1" selected>Start Right Away</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+    </div>
+    <div class="col-6 pl-1">
+        <select class="custom-select">
+            <option selected disabled>or select time frame</option>
+            <option value="1">day/s</option>
+            <option value="2">week/s</option>
+            <option value="3">month/s</option>
+        </select>
+    </div>
+</div>
+<p class="mt-3 mb-0 p-0 note-bottom smol">* You'll still be able to change your schedule through your online account settings.</p>
