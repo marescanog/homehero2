@@ -22,7 +22,7 @@
                 <div class="collapse navbar-collapse pr-3" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item pr-lg-5">
-                            <a class="nav-link custom-a" href="<?php echo $level;?>/pages/worker/landing.php">FIND WORK</a>
+                            <a class="nav-link custom-a" href="<?php echo $level;?>/pages/worker/">FIND WORK</a>
                         </li>
                         <li class="nav-item pr-lg-5">
                             <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Help.php">HELP</a>
