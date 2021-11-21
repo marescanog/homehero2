@@ -72,6 +72,6 @@
 <script src="../../js/helper/map.js"></script>
 <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
 <script
-    src="https://maps.googleapis.com/maps/api/js?key=XEAPIKEY&callback=initMap&libraries=&v=weekly"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXU_PqKQa_6xzfa5Ugz2I_nHozEfr5yuo&callback=initMap&libraries=&v=weekly"
     async
 ></script>
