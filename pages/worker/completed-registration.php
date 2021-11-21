@@ -18,8 +18,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <link rel="stylesheet" href="../../css/headers/register.css">
 <link rel="stylesheet" href="../../css/headers/worker-side-nav.css">
 <link rel="stylesheet" href="../../css/UX/breadcrumb-indicator.css">
-<script src="https://kit.fontawesome.com/d10ff4ba99.js" crossorigin="anonymous"></script>
-<!-- <link rel="stylesheet" href="../../css/pages/homeowner/homeowner-create-project.css"> -->
+<link rel="stylesheet" href="../../css/pages/worker/register-complete.css">
 <!-- === Link your custom CSS  pages above here ===-->
 </head>
  <body class="container-fluid m-0 p-0  w-100 bg-light">  
@@ -33,13 +32,28 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     <div class="header">
     <!-- === Your Custom Page Content Goes Here below here === -->
 
-<div class="container w-100 min-height bg-success">
+<div class="container w-100 min-height title-2-container">
     <input id="page" type="hidden" value="<?php
         echo htmlentities($bci_current_page);
     ?>">
-    <div id="body">
-        <h1>Completed Registration!</h1>
+    <div class="row d-flex flex-column pt-0 pt-lg-3">
+        <img src='<?php echo $level;?>/images/logo/HH_Logo_Light.svg'>
+        <h1 class="title-style-1 mt-3">Application sucessfully submitted!</h1>
     </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center align-items-center">
+            <div class="img-container">
+                <img src="<?php echo $level;?>/images/pages/registration/complete.jpg" class="img-fluid" alt="Responsive image">
+            </div>
+        </div>
+        <div class="col-12 d-flex flex-column justify-content-center">
+            <p class="text-left p-text">A representative will review your information and <b>contact you within 24-48 hours.</b></p>
+            <p class="text-left p-text">In the meantime, feel free to explore the HomeHero <b>dashboard while waiting for your account to be activated.</b></p>
+        </div>
+    </div>
+    <div class="orntn-btn-container mb-3 mb-lg-3">
+    <button id="next" class="btn btn-lg btn-outline-warning btn-text-outline w-100 btn-text-1">GO TO DASHBOARD</button>
+</div>
 </div>
 
 
@@ -47,6 +61,6 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     </div>
 <?php require_once dirname(__FILE__)."/$level/components/foot-meta.php"; ?>
 <!-- Custom JS Scripts Below -->
-    <!-- <script src="../../js/pages/worker-register.js"></script> -->
+    <script src="../../js/pages/worker-complete.js"></script>
 </body>
 </html>

@@ -1,0 +1,67 @@
+
+.container-fluid{
+    background-color: #FBF9EC !important;
+    color: #707070;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.title-style-1{
+    text-align: center;
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+.title-2-container{
+    max-width: 30.56em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.p-text{
+    font-size: 1.125rem;
+}
+
+
+.btn-text-1{
+    font-family: 'Nunito';
+    font-weight: 900;
+    font-size: 1.75em;
+}
+
+.btn-text-2{
+    font-family: 'Nunito';
+    font-weight: 900;
+    font-size: 1.5em;
+}
+
+.btn-text-outline{
+    font-family: 'Nunito';
+    font-weight: 900;
+    font-size: 1.5em;
+    color:#F2AE00;
+    border: 2px solid #F2AE00;
+}
+
+.btn-text-outline:hover{
+    font-family: 'Nunito';
+    font-weight: 900;
+    font-size: 1.5em;
+    color:white;
+    border: 2px solid #F2AE00;
+}
+
+.img-container{
+    max-width: 350px !important;
+}
+
+
+
+
+/*==========================================*/
+/*          SCHEDULE STYLES         */
+/*==========================================*/
+
+@media only screen and (min-width: 992px) {
+
+
+}
