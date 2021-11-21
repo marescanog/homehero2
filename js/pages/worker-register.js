@@ -404,6 +404,7 @@ const loadServiceArea = () => {
     $("#body").load(level+"/components/sections/register-service-area.php", ()=>{
         const next = document.getElementById("next");
         const back = document.getElementById("back");
+        
         next.addEventListener("click", ()=>{
             window.location.href = level+"/pages/worker/register.php"+"?page=4";
         })
