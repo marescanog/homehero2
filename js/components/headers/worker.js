@@ -19,9 +19,21 @@ $( document ).ready(()=>{
         loadModal("worker-login",modalTypes,submitLoginHandler,getDocumentLevel());
     });
 
+    // Opens Modal & loads content when user clicks on the "Register" header link
     signUpHeaderLink.addEventListener("click", ()=>{
         loadModal("worker-signup", modalTypes, submitSignUpModalhandler, getDocumentLevel());
     });
+
+    // Handler functions: Functions that run inside the modal
+
+    // 
+    const submitSignUpModalhandler = () => {
+        var signUpSubmitButton = document.getElementById("RU-submit-btn");
+        signUpSubmitButton.addEventListener("click", ()=>{
+            // registerHandler();
+            console.log("Switch to the PIN CODE model");
+        });
+    }
 
     const submitLoginHandler = () => {
         const button = document.getElementById("LU-submit-btn");
@@ -30,11 +42,90 @@ $( document ).ready(()=>{
         })
     }
 
-    const submitSignUpModalhandler = () => {
-        var signUpSubmitButton = document.getElementById("RU-submit-btn");
-        signUpSubmitButton.addEventListener("click", ()=>{
-            registerHandler();
-        });
+    // Database functions: Functions that are called by the handler that call an Ajax request for the database
+    const registerHandler =(e)=>{
+        // e.preventDefault();
+    
+        // Grab DOM elements
+        const myForm = document.getElementById('registerForm');
+        const RUSignupSubmitButton = document.getElementById("RU-submit-btn");
+        const RUSignupSubmitTxt = document.getElementById("RU-submit-btn-txt");
+        const buttonLoadSpinner = document.getElementById("RU-submit-btn-load");
+    
+        // Disable and show loading
+        RUSignupSubmitButton.setAttribute("disabled", "true");
+        RUSignupSubmitTxt.innerHTML = "Loading"
+        buttonLoadSpinner.setAttribute("class", "d-inline");
+        myForm.style.opacity = "0.5";
+    
+        var elements = myForm.elements;
+        for (var i = 0, len = elements.length; i < len; ++i) {
+            elements[i].readOnly = true;
+        }
+    
+        // Convert Form Data to Object
+        let formData = new FormData(myForm);
+        let data = {};
+        formData.forEach((value, key) => data[key] = value);
+    
+        // // Send Post Request to API
+        // $.ajax({
+        //     type : 'POST',
+        //     url : 'https://slim3api.herokuapp.com/auth/user-registration',
+        //     data : data,
+        //     success : function(response) {
+        //         var res = JSON.parse(response);
+        //         // console.log(response);
+        //         let message = res["response"];
+         
+        //         // Enable and hide loading
+        //         RUSignupSubmitButton.removeAttribute("disabled");
+        //         RUSignupSubmitTxt.innerHTML = "Register"
+        //      buttonLoadSpinner.removeAttribute("class");
+        //      buttonLoadSpinner.setAttribute("class", "d-none");
+        //         myForm.style.opacity = "1";
+    
+        //         var elements = myForm.elements;
+        //         for (var i = 0, len = elements.length; i < len; ++i) {
+        //             elements[i].readOnly = false;
+        //         }
+    
+        //         Swal.fire({
+        //             title: res["success"] ? 'Success!': 'Error!',
+        //             text: message,
+        //             icon: res["success"] ? 'success': 'error',
+        //             confirmButtonText: 'Close'
+        //         }).then(result => {
+        //             if(res["success"]){
+        //                 //  Reset Form, Close Modal
+        //                 myForm.reset();
+        //                 $('#modal').modal('hide');
+        //             }
+        //         })
+        //     },
+        //     error: function (response) {
+        //         var message = JSON.stringify(response.responseJSON.response.message);
+        //         // Enable and hide loading
+        //         RUSignupSubmitButton.removeAttribute("disabled");
+        //         RUSignupSubmitTxt.innerHTML = "Register"
+        //         buttonLoadSpinner.removeAttribute("class");
+        //         buttonLoadSpinner.setAttribute("class", "d-none");
+        //         myForm.style.opacity = "1";
+    
+        //         var elements = myForm.elements;
+        //         for (var i = 0, len = elements.length; i < len; ++i) {
+        //             elements[i].readOnly = false;
+        //         }
+    
+        //         // console.log(response.responseJSON)
+        //         Swal.fire({
+        //             title:'Error!',
+        //             text: message,
+        //             icon: 'error',
+        //             confirmButtonText: 'Close'
+        //         })
+        //     },
+        // });
     }
 
     const login = () =>{
@@ -148,91 +239,6 @@ $( document ).ready(()=>{
 
         //     }
         // })
-    }
-
-    const registerHandler =(e)=>{
-        // e.preventDefault();
-    
-        // Grab DOM elements
-        const myForm = document.getElementById('registerForm');
-        const RUSignupSubmitButton = document.getElementById("RU-submit-btn");
-        const RUSignupSubmitTxt = document.getElementById("RU-submit-btn-txt");
-        const buttonLoadSpinner = document.getElementById("RU-submit-btn-load");
-    
-        // Disable and show loading
-        RUSignupSubmitButton.setAttribute("disabled", "true");
-        RUSignupSubmitTxt.innerHTML = "Loading"
-        buttonLoadSpinner.setAttribute("class", "d-inline");
-        myForm.style.opacity = "0.5";
-    
-        var elements = myForm.elements;
-        for (var i = 0, len = elements.length; i < len; ++i) {
-            elements[i].readOnly = true;
-        }
-    
-        // Convert Form Data to Object
-        let formData = new FormData(myForm);
-        let data = {};
-        formData.forEach((value, key) => data[key] = value);
-    
-        // // Send Post Request to API
-        // $.ajax({
-        //     type : 'POST',
-        //     url : 'https://slim3api.herokuapp.com/auth/user-registration',
-        //     data : data,
-        //     success : function(response) {
-        //         var res = JSON.parse(response);
-        //         // console.log(response);
-        //         let message = res["response"];
-         
-        //         // Enable and hide loading
-        //         RUSignupSubmitButton.removeAttribute("disabled");
-        //         RUSignupSubmitTxt.innerHTML = "Register"
-        //      buttonLoadSpinner.removeAttribute("class");
-        //      buttonLoadSpinner.setAttribute("class", "d-none");
-        //         myForm.style.opacity = "1";
-    
-        //         var elements = myForm.elements;
-        //         for (var i = 0, len = elements.length; i < len; ++i) {
-        //             elements[i].readOnly = false;
-        //         }
-    
-        //         Swal.fire({
-        //             title: res["success"] ? 'Success!': 'Error!',
-        //             text: message,
-        //             icon: res["success"] ? 'success': 'error',
-        //             confirmButtonText: 'Close'
-        //         }).then(result => {
-        //             if(res["success"]){
-        //                 //  Reset Form, Close Modal
-        //                 myForm.reset();
-        //                 $('#modal').modal('hide');
-        //             }
-        //         })
-        //     },
-        //     error: function (response) {
-        //         var message = JSON.stringify(response.responseJSON.response.message);
-        //         // Enable and hide loading
-        //         RUSignupSubmitButton.removeAttribute("disabled");
-        //         RUSignupSubmitTxt.innerHTML = "Register"
-        //         buttonLoadSpinner.removeAttribute("class");
-        //         buttonLoadSpinner.setAttribute("class", "d-none");
-        //         myForm.style.opacity = "1";
-    
-        //         var elements = myForm.elements;
-        //         for (var i = 0, len = elements.length; i < len; ++i) {
-        //             elements[i].readOnly = false;
-        //         }
-    
-        //         // console.log(response.responseJSON)
-        //         Swal.fire({
-        //             title:'Error!',
-        //             text: message,
-        //             icon: 'error',
-        //             confirmButtonText: 'Close'
-        //         })
-        //     },
-        // });
     }
 
     const pageUnavailable = () => {

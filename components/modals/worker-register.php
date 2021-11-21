@@ -1,11 +1,6 @@
 <!-- 
-    Merged some contents such as ids and other properties
-    To be inserted:
-        Links for terms and conditions, privacy policy, login, and worker registration anchors
-
-    Additional Note: Since this modal will be used in different pages with different 
-        folder addresses, Include a php call out of level.
-        Validation will now be manual JS since we will base it on form submisstion.
+    PHP to detect if there is already values filled in. Echo back into modal value.
+    JQuery for Client side Validation? Insert into header meta?
  -->
 <?php 
     $level = isset($_POST['level']) ? $_POST['level'] : '.';
