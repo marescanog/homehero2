@@ -30,25 +30,71 @@ $(function() {
 $("#SMSVerification").validate({
     submitHandler: function(form, event) { 
         event.preventDefault();
+        // Grab DOM elements for PIN checking
         const smsformData = getFormDataAsObj(form);
         const errorDisplay = document.getElementById("sms-error-display");
-        console.log(smsformData);
-        // console.log(errorDisplay);
+        // console.log("SMS form data is (PIN)");
+        // console.log(smsformData);
 
+        // Combine the pin codes into one code, format into a single data object with messagebird ID
+        const dataToSendToSMSVerification = {};
+        const SMSPIN = smsformData['code-1']+smsformData['code-2']+smsformData['code-3']+smsformData['code-4']+smsformData['code-5']+smsformData['code-6'];
+        dataToSendToSMSVerification["messagebird_id"] = smsformData["messagebird_id"];
+        dataToSendToSMSVerification["pin"] = SMSPIN;
+
+        // console.log(dataToSendToSMSVerification);
+        // Verify SMS Code
+        // If SMS is correct, proceed with registration
+        // Otherwise dont
+
+
+        // Grab DOM elements to freeze form and the submit button, initiate loading
+        const button = document.getElementById("WSMS-submit-btn");
+        const buttonTxt = document.getElementById("WSMS-submit-btn-txt");
+        const buttonLoadSpinner = document.getElementById("WSMS-submit-btn-load");
+        const SMSForm = document.getElementById("SMSVerification"); // This is our form to disable
+
+        // Send Post Request to API
+        // Ajax to verify SMS PIN;
+        $.ajax({
+            type: 'POST',
+            url : 'https://slim3api.herokuapp.com/auth/verify-SMS-dummy', // PROD - DUMMY
+            // url: 'http://localhost/slim3homeheroapi/public/auth/verify-SMS-dummy', // DEV - DUMMY
+            // url: 'http://localhost/slim3homeheroapi/public/auth/check-phone', // PROD - API
+            // url: 'http://localhost/slim3homeheroapi/public/auth/check-phone', // DEV - API
+            data : dataToSendToSMSVerification,
+            success : function(response) {
+                // console.log(response);
+
+                // Freeze the form
+                disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, SMSForm);
+
+                // Grab DOM elements for user account creation
+                const submitForm = document.getElementById("formData"); // This is our form to submit
+                const submitformData = getFormDataAsObj(submitForm);
+                console.log("Submit form data is (fnmae,lname, etc)")
+                console.log(submitformData);
+
+                // ajax call to submit data and make a new worker, submitformData is the data
+            },
+            error: function (response) {
+                console.log(response);
+                enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, SMSForm);
+                // Either Invalid Incorrect PIN or something wrong with API
+                // CLEAN UP - make errorDisplay display a new message "PIN Entered is invalid" instead of SWAL Alert
+                Swal.fire({
+                    title: 'Incorrect PIN code!',
+                    text: "Please try enter the PIN code sent to your mobile device.",
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                })
+            },
+        });
+
+        // On success remove SMS error message if applicable
         if(!errorDisplay.classList.contains('d-none')){
             errorDisplay.classList.add('d-none');
         }
 
-        const submitForm = document.getElementById("formData");
-        const submitformData = getFormDataAsObj(submitForm);
-        console.log(submitformData);
-        // errorDisplay.classList.remove("d-none");
-
-        // if(!$("#sms-error-display").hasClass("d-none")){
-        //     $("#sms-error-display").removeClass('d-none');
-        // }
-        // Verify SMS Code
-        // If SMS is correct, proceed with registration
-        // Otherwise don
     }
 });
