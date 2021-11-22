@@ -54,6 +54,11 @@ $("#registerForm").validate({
         event.preventDefault();
         const formData = getFormDataAsObj(form);
 
+        // erase error message from ajax phone number
+        // ajax to check phone number;
+        // Freeze modal
+        // display error message when phone number is taken
+
         // console.log(formData);
         // check if phone number exists via ajax
         // if exists pass the data to the load modal form
