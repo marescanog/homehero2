@@ -96,8 +96,10 @@ $("#registerForm").validate({
             success : function(response) {
                 console.log(response);
                 // Proceed to SMS verification to submit with Ajax for worker creation.
+                // Verify password and get a hashed password
+                // loadModal("SMS-verification-worker", modalTypes, ()=>{}, getDocumentLevel(),formData);
                 enableForm();
-                Swal.fire('Proceed to SMS verification', '', 'info');
+
             },
             error: function (response) {
                 // display error message when phone number is taken
@@ -111,25 +113,44 @@ $("#registerForm").validate({
                 // Enable forms
                 enableForm();
 
-                // This function adds an error message to the phone feild
+                // This function adds an error message to the phone feild if an erro message has not been added
+                // Otherwise it toggles the attributes and classes to show the error
                 const tryDifferentNumber = ()=>{
-                    // Add an aria to the feild & new class
+                    // Check if there is already an aria added, otherwise don't add and just toggle class and attributes
+                    // Grab the DOM elements
+                    const errorDisplay = document.getElementById("RU_phone-error");
                     const phoneFeild = document.getElementById("RU_phone");
-                    const att = document.createAttribute("aria-describedby");       
-                    att.value = "RU_phone-error";                           
-                    phoneFeild.setAttributeNode(att);
-                    phoneFeild.classList.add("is-invalid");
-                    phoneFeild.setAttribute("aria-invalid", "true");
-
-                    // Create error message
-                    let newDiv = document.createElement("DIV");
-                    newDiv.setAttribute("id", "RU_phone-error");
-                    newDiv.setAttribute("class", "invalid-feedback");
-                    newDiv.innerText = "Phone number is already associated with an existing account. Please enter a different number."
-
-                    // Append error message
                     const phoneFormGroup = document.getElementById("RU_phone_formGroup");
-                    phoneFormGroup.appendChild(newDiv); 
+
+                    if(errorDisplay == null){
+                        // Add an aria to the feild & new class
+                        const att = document.createAttribute("aria-describedby");       
+                        att.value = "RU_phone-error";                           
+                        phoneFeild.setAttributeNode(att);
+                        phoneFeild.classList.add("is-invalid");
+                        phoneFeild.setAttribute("aria-invalid", "true");
+
+                        // Create error message
+                        let newDiv = document.createElement("DIV");
+                        newDiv.setAttribute("id", "RU_phone-error");
+                        newDiv.setAttribute("class", "invalid-feedback");
+                        newDiv.innerText = "Phone number is already associated with an existing account. Please enter a different number."
+
+                        // Append error message
+                        phoneFormGroup.appendChild(newDiv); 
+                    } else {
+                        // errorDisplay Exists and just toggle classes;
+                        phoneFeild.classList.add("is-invalid");
+                        phoneFeild.setAttribute("aria-invalid", "true");
+                        phoneFeild.setAttribute("aria-describedby", "RU_phone-error");
+
+                        // error display classes and attributes
+                        errorDisplay.setAttribute("id", "RU_phone-error");
+                        errorDisplay.setAttribute("class", "invalid-feedback");
+                        errorDisplay.innerText = "Phone number is already associated with an existing account. Please enter a different number."
+                        errorDisplay.style = "";
+                    }
+                    
                 }
 
                 // For the fourth SWAL button
