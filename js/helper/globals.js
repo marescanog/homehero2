@@ -60,3 +60,49 @@ const enableForm_hideLoadingButton = (button, buttonTxt, buttonLoadSpinner, form
         elements[i].disabled = false;
     }
 }
+
+
+// This function adds an error message to the phone feild if an error message has not been added
+// Otherwise it toggles the attributes and classes to show the error
+// accepts an id and an Error Message
+/* Sample HTML for reference
+        <div id="RU_phone_formGroup" class="form-group">
+            <input type="text" class="form-control" id="RU_phone" name="phone" placeholder="Mobile number (09XXXXXXXXX)" autocomplete required maxlength="15">
+        </div>
+*/
+const enableErrorDisplayFor = (id_name, error_message)=>{
+    // Check if there is already an aria added, otherwise don't add and just toggle class and attributes
+    // Grab the DOM elements
+    const errorDisplay = document.getElementById(id_name+"-error");
+    const phoneFeild = document.getElementById(id_name);
+    const phoneFormGroup = document.getElementById(id_name+"_formGroup");
+
+    if(errorDisplay == null){
+        // Add an aria to the feild & new class
+        const att = document.createAttribute("aria-describedby");       
+        att.value = id_name+"-error";                           
+        phoneFeild.setAttributeNode(att);
+        phoneFeild.classList.add("is-invalid");
+        phoneFeild.setAttribute("aria-invalid", "true");
+
+        // Create error message
+        let newDiv = document.createElement("DIV");
+        newDiv.setAttribute("id", id_name+"-error");
+        newDiv.setAttribute("class", "invalid-feedback");
+        newDiv.innerText = error_message;
+
+        // Append error message
+        phoneFormGroup.appendChild(newDiv); 
+    } else {
+        // errorDisplay Exists and just toggle classes;
+        phoneFeild.classList.add("is-invalid");
+        phoneFeild.setAttribute("aria-invalid", "true");
+        phoneFeild.setAttribute("aria-describedby", id_name+"-error");
+
+        // error display classes and attributes
+        errorDisplay.setAttribute("id", id_name+"-error");
+        errorDisplay.setAttribute("class", "invalid-feedback");
+        errorDisplay.innerText = error_message;
+        errorDisplay.style = "";
+    }
+}
