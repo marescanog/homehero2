@@ -27,8 +27,8 @@
                     </div>
                 </div>
                 <!-- Mobile Number input feild -->
-                <div class="form-group">
-                    <input type="text" class="form-control" id="RU_phone" name="phone_number" placeholder="Mobile number (09XXXXXXXXX)" autocomplete required maxlength="15">
+                <div id="RU_phone_formGroup" class="form-group">
+                    <input type="text" class="form-control" id="RU_phone" name="phone" placeholder="Mobile number (09XXXXXXXXX)" autocomplete required maxlength="15">
                 </div>
                 <!-- Password and Confirm password input feild -->
                 <div class="form-group">
@@ -64,9 +64,9 @@
                     <label class="form-check-label" for="agree" style="font-size:0.8em;">I agree to HomeHero's <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</label>
                 </div>
                 <!-- Submit Button -->
-                <button id="RU-submit-btn" type="submit" value="Submit" class="btn btn-warning text-white font-weight-bold w-100 mb-3 submit">
-                    <span id="RU-submit-btn-txt">CREATE ACCOUNT</span>
-                    <div id="RU-submit-btn-load" class="d-none">
+                <button id="RW-submit-btn" type="submit" value="Submit" class="btn btn-warning text-white font-weight-bold w-100 mb-3 submit">
+                    <span id="RW-submit-btn-txt">CREATE ACCOUNT</span>
+                    <div id="RW-submit-btn-load" class="d-none">
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         <span class="sr-only">Loading...</span>
                     </div>
