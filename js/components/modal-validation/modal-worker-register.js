@@ -6,7 +6,7 @@ $("#registerForm").validate({
         last_name:{
             maxlength: 50
         },
-        phone_number:{
+        phone:{
             phonePH: true
         },
         above18: { 
@@ -32,7 +32,7 @@ $("#registerForm").validate({
             required:  "Please enter your last name",
             maxlength: "Last name cannot be beyond 50 characters"
         },
-        phone_number: {
+        phone: {
             required: "Please enter your mobile number"
         },
         password:{
@@ -52,12 +52,190 @@ $("#registerForm").validate({
     },
     submitHandler: function(form, event) { 
         event.preventDefault();
-        const formData = getFormDataAsObj(form);
+        
+        // erase error message from ajax phone number
+
+        // Freeze Form & Disable
+            // Grab DOM elements & Form data
+            const button = document.getElementById("RW-submit-btn");
+            const buttonTxt = document.getElementById("RW-submit-btn-txt");
+            const buttonLoadSpinner = document.getElementById("RW-submit-btn-load");
+            const formData = getFormDataAsObj(form);
+
+            // Disable and show loading
+            button.setAttribute("disabled", "true");
+            buttonTxt.innerHTML = "Loading"
+            buttonLoadSpinner.setAttribute("class", "d-inline");
+            form.style.opacity = "0.5";
+
+            var elements = form.elements;
+            for (var i = 0, len = elements.length; i < len; ++i) {
+                elements[i].disabled = true;
+            }
+
+            // this function enables the form
+            const enableForm = ()=> {
+                button.removeAttribute("disabled");
+                buttonTxt.innerHTML = "CREATE ACCOUNT"
+                buttonLoadSpinner.setAttribute("class", "d-none");
+                form.style.opacity = "1";
+
+                var elements = form.elements;
+                for (var i = 0, len = elements.length; i < len; ++i) {
+                    elements[i].disabled = false;
+                }
+            }
+
+        // Send Post Request to API
+        // Ajax to check phone number;
+        $.ajax({
+            type: 'GET',
+            url : 'https://slim3api.herokuapp.com/auth/check-phone', // PROD
+            // url: 'http://localhost/slim3homeheroapi/public/auth/check-phone', // DEV
+            data : formData,
+            success : function(response) {
+                console.log(response);
+                // Proceed to SMS verification to submit with Ajax for worker creation.
+                enableForm();
+                Swal.fire('Proceed to SMS verification', '', 'info');
+            },
+            error: function (response) {
+                // display error message when phone number is taken
+                console.log(response);
+                const data = response["responseJSON"]["response"]["data"];
+                const message = response["responseJSON"]["response"]["message"];
+
+                console.log(data);
+                console.log(message);
+
+                // Enable forms
+                enableForm();
+
+                // This function adds an error message to the phone feild
+                const tryDifferentNumber = ()=>{
+                    // Add an aria to the feild & new class
+                    const phoneFeild = document.getElementById("RU_phone");
+                    const att = document.createAttribute("aria-describedby");       
+                    att.value = "RU_phone-error";                           
+                    phoneFeild.setAttributeNode(att);
+                    phoneFeild.classList.add("is-invalid");
+                    phoneFeild.setAttribute("aria-invalid", "true");
+
+                    // Create error message
+                    let newDiv = document.createElement("DIV");
+                    newDiv.setAttribute("id", "RU_phone-error");
+                    newDiv.setAttribute("class", "invalid-feedback");
+                    newDiv.innerText = "Phone number is already associated with an existing account. Please enter a different number."
+
+                    // Append error message
+                    const phoneFormGroup = document.getElementById("RU_phone_formGroup");
+                    phoneFormGroup.appendChild(newDiv); 
+                }
+
+                // For the fourth SWAL button
+                $(document).on('click', "#try-diff-number", function() {
+                    tryDifferentNumber();
+                    swal.close();
+                });
+
+                // Check if the phone number already has an existing user or support account
+                if(data.isWorker == true){
+                    Swal.fire({
+                        title: 'Phone number already registered to an account!',
+                        text: message,
+                        icon: 'error',
+                        showCancelButton: true,
+                        confirmButtonText: 'Try a different number',
+                        cancelButtonText: 'Login with this number at worker portal'
+                    }). then((result)=>{
+                        if (result.isConfirmed) {
+                            tryDifferentNumber();
+                        } else if (result.dismiss === Swal.DismissReason.cancel) {
+                            // Login with this number
+                            // Open Worker Portal
+                            loadModal("worker-login",modalTypes,()=>{},getDocumentLevel());
+                        }
+                    });
+                } else {
+                    if(data.isHomeowner == true && (data.isSupport == true||data.isAdmin == true)){
+                        Swal.fire({
+                            title: 'Phone number number already registered to an account!',
+                            // text: "This phone number is associated with a homeowner account and a support account. Would you like to try a different number?",
+                            icon: 'error',
+                            html: "<p>This phone number is associated with a homeowner account and a support account. Would you like to try a different number?</p><button id='try-diff-number' class='btn btn-primary'>Try a different number</button>",
+                            showDenyButton: true,
+                            showCancelButton: true,
+                            confirmButtonText: 'Log in at the homeowner portal instead',
+                            cancelButtonText: 'Log in at the support portal instead.',
+                            denyButtonText: `Register as a worker with this number`,
+                        }). then((result)=>{
+                            if (result.isConfirmed) {
+                                // redirect to homeowner portal
+                                Swal.fire('Redirect to homeowner portal', '', 'info');
+                            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                // redirect to worker portal
+                                Swal.fire('Redirect to worker portal', '', 'info');
+                            } else if (result.isDenied) {
+                                // Proceed to SMS verification to submit with Ajax for worker creation.
+                                Swal.fire('Proceed to SMS verification', '', 'info');
+                            } 
+                        })
+                    } else if (data.isSupport == true||data.isAdmin == true){
+                        Swal.fire({
+                            title: 'Phone number number already registered to an account!',
+                            text: "Looks like you have a support account associated with this number. Would you like to log in as support instead?",
+                            icon: 'error',
+                            showCancelButton: true,
+                            showDenyButton: true,
+                            confirmButtonText: 'Try a different phone number instead',
+                            cancelButtonText: 'Log in at the support portal instead.',
+                            denyButtonText: `Register as a worker with this number`,
+                        }).then((result)=>{
+                            if (result.isConfirmed) {
+                                // try different number
+                                tryDifferentNumber();
+                            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                // redirect to worker portal
+                                Swal.fire('Redirect to support portal', '', 'info');
+                            } else if (result.isDenied) {
+                                // Proceed to SMS verification to submit with Ajax for worker creation.
+                                Swal.fire('Proceed to SMS verification', '', 'info');
+                            } 
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Phone number number already registered to an account!',
+                            text: "Looks like you have a homeowner account associated with this number. Would you like to log in to your homeowner account instead?",
+                            icon: 'error',
+                            showCancelButton: true,
+                            showDenyButton: true,
+                            confirmButtonText: 'Try a different phone number instead',
+                            cancelButtonText: 'Log in at the homeowner portal instead',
+                            denyButtonText: `Register as a worker with this number`,
+                        }).then((result)=>{
+                            if (result.isConfirmed) {
+                                // try different number
+                                tryDifferentNumber();
+                            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                // redirect to worker portal
+                                Swal.fire('Redirect to homeowner portal', '', 'info');
+                            } else if (result.isDenied) {
+                                // Proceed to SMS verification to submit with Ajax for worker creation.
+                                Swal.fire('Proceed to SMS verification', '', 'info');
+                            } 
+                        });
+                    }
+                }
+
+            }
+        });
+
+        // hashpassword before sending
 
         // console.log(formData);
         // check if phone number exists via ajax
         // if exists pass the data to the load modal form
-        loadModal("SMS-verification-worker", modalTypes, ()=>{}, getDocumentLevel(),formData);
+        //loadModal("SMS-verification-worker", modalTypes, ()=>{}, getDocumentLevel(),formData);
         // if not exists ask user to log in using the phone number
     }
 });
