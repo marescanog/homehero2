@@ -84,9 +84,11 @@ $("#registerForm").validate({
                         // Then add in ajax code that adds the worker direct to the DB (the api route that adds a worker)
                     },
                     error: function (response) {
-                        // Add/Toggle errors for appropriate feilds
-                        // Password
-                        // Confirm Password
+                        // CLEANUP ADD/TOGGLE ERRORS FOR APPROPRIATE FEILDS
+                        // enableErrorDisplayFor(ID,MESSAGE) for the ff:;
+                        // id="(id_name)_formGroup" to the div with formgroup class for the ff.
+                            // Password
+                            // Confirm Password
                         console.log(response);
                     }
                 });
@@ -94,57 +96,20 @@ $("#registerForm").validate({
                 enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
 
             },
+            // CLEANUP -> ADD APPROPRIATE NAVIGATION TO LOGIN MODALS INSTEAD OF SWAL DISPLAY
             error: function (response) {
                 // display error message when phone number is taken
-                console.log(response);
+                // console.log(response);
                 const data = response["responseJSON"]["response"]["data"];
                 const message = response["responseJSON"]["response"]["message"];
 
-                console.log(data);
-                console.log(message);
+                // console.log(data);
+                // console.log(message);
 
                 // Enable forms
                 enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
 
-                // // This function adds an error message to the phone feild if an erro message has not been added
-                // // Otherwise it toggles the attributes and classes to show the error
-                // const tryDifferentNumber = ()=>{
-                //     // Check if there is already an aria added, otherwise don't add and just toggle class and attributes
-                //     // Grab the DOM elements
-                //     const errorDisplay = document.getElementById("RU_phone-error");
-                //     const phoneFeild = document.getElementById("RU_phone");
-                //     const phoneFormGroup = document.getElementById("RU_phone_formGroup");
-
-                //     if(errorDisplay == null){
-                //         // Add an aria to the feild & new class
-                //         const att = document.createAttribute("aria-describedby");       
-                //         att.value = "RU_phone-error";                           
-                //         phoneFeild.setAttributeNode(att);
-                //         phoneFeild.classList.add("is-invalid");
-                //         phoneFeild.setAttribute("aria-invalid", "true");
-
-                //         // Create error message
-                //         let newDiv = document.createElement("DIV");
-                //         newDiv.setAttribute("id", "RU_phone-error");
-                //         newDiv.setAttribute("class", "invalid-feedback");
-                //         newDiv.innerText = "Phone number is already associated with an existing account. Please enter a different number."
-
-                //         // Append error message
-                //         phoneFormGroup.appendChild(newDiv); 
-                //     } else {
-                //         // errorDisplay Exists and just toggle classes;
-                //         phoneFeild.classList.add("is-invalid");
-                //         phoneFeild.setAttribute("aria-invalid", "true");
-                //         phoneFeild.setAttribute("aria-describedby", "RU_phone-error");
-
-                //         // error display classes and attributes
-                //         errorDisplay.setAttribute("id", "RU_phone-error");
-                //         errorDisplay.setAttribute("class", "invalid-feedback");
-                //         errorDisplay.innerText = "Phone number is already associated with an existing account. Please enter a different number."
-                //         errorDisplay.style = "";
-                //     }
-                    
-                // }
+                // Display Error message
                 enableErrorDisplayFor("RU_phone","Phone number is already associated with an existing account. Please enter a different number.");
 
                 // For the fourth SWAL button
