@@ -33,17 +33,17 @@ $("#SMSVerification").validate({
         // Grab DOM elements for PIN checking
         const smsformData = getFormDataAsObj(form);
         const errorDisplay = document.getElementById("sms-error-display");
-        // console.log("SMS form data is (PIN)");
-        // console.log(smsformData);
+        console.log("SMS form data is (PIN)");
+        console.log(smsformData);
 
         // Verify SMS Code
         // If SMS is correct, proceed with registration
         // Otherwise dont
 
-        // // On success remove SMS error message if applicable
-        // if(!errorDisplay.classList.contains('d-none')){
-        //     errorDisplay.classList.add('d-none');
-        // }
+        // On success remove SMS error message if applicable
+        if(!errorDisplay.classList.contains('d-none')){
+            errorDisplay.classList.add('d-none');
+        }
         // // Grab DOM elements for user account creation
         // const submitForm = document.getElementById("formData");
         // const submitformData = getFormDataAsObj(submitForm);

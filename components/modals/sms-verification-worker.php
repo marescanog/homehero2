@@ -9,13 +9,13 @@
     $phone = null;
     $securepass = null;
     $data = null;
-    $mode = "dev";
     if(isset($_POST['data'])){
         $data = $_POST['data'];
         $firstName = isset($data['first_name']) ? $data['first_name'] : null;
         $lastName = isset($data['last_name']) ? $data['last_name'] : null;
         $phone = isset($data['phone']) ? $data['phone'] : null;
         $securepass = isset($data['securepass']) ? $data['securepass'] : null;
+        $messagebirdID = isset($data['messagebird_id']) ? $data['messagebird_id'] : null;
     }
 ?>
 <div id="sms-modal" class="modal-content">
@@ -45,8 +45,13 @@
                     style="width:30px; height:43px; font-size:2rem; outline:0; border-width:0px 0px 2px; overflow:hidden" placeholder="0" required maxlength="1">
                 <input name="code-3" class="mr-1 text-center code" type="tel" 
                     style="width:30px; height:43px; font-size:2rem; outline:0; border-width:0px 0px 2px; overflow:hidden" placeholder="0" required maxlength="1">
-                <input name="code-4" class="mr-1 text-center code" type="tel" 
+                <input name="code-4" class="mr-1 ml-4 text-center code" type="tel" 
                     style="width:30px; height:43px; font-size:2rem; outline:0; border-width:0px 0px 2px; overflow:hidden" placeholder="0" required maxlength="1">
+                    <input name="code-5" class="mr-1 text-center code" type="tel" 
+                    style="width:30px; height:43px; font-size:2rem; outline:0; border-width:0px 0px 2px; overflow:hidden" placeholder="0" required maxlength="1">
+                <input name="code-6" class="mr-1 text-center code" type="tel" 
+                    style="width:30px; height:43px; font-size:2rem; outline:0; border-width:0px 0px 2px; overflow:hidden" placeholder="0" required maxlength="1">
+                <input type="hidden" name="messagebird_id" value="<?php echo htmlentities($messagebirdID); ?>">
             </div>
             <div id="sms-error-display" class="c d-none">
                 <p class="text-danger">Your verification PIN is required</p>
@@ -65,7 +70,6 @@
             <input type="hidden" name="last_name" value="<?php echo htmlentities($lastName);?>" readonly>
             <input type="hidden" name="phone" value="<?php echo htmlentities($phone);?>" readonly>
             <input type="hidden" name="pass" value="<?php echo htmlentities($securepass);?>" readonly>
-            <input type="hidden" name="mode" value="<?php echo htmlentities($mode);?>" readonly>
         </form>
     </div>
 
