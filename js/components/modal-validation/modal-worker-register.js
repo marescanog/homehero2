@@ -174,7 +174,7 @@ $("#registerForm").validate({
                         cancelButtonText: 'Login with this number at worker portal'
                     }). then((result)=>{
                         if (result.isConfirmed) {
-                            tryDifferentNumber();
+                            enableErrorDisplayFor("RU_phone","Phone number is already associated with an existing account. Please enter a different number.");
                         } else if (result.dismiss === Swal.DismissReason.cancel) {
                             // Login with this number
                             // Open Worker Portal
