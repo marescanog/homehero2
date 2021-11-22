@@ -89,8 +89,41 @@ $("#registerForm").validate({
                         dataToPassToSMSModal["phone"] = formData["phone"];
                         dataToPassToSMSModal["securepass"] = response['response']['data'];
 
-                        // pass that form data into the load modal
-                        loadModal("SMS-verification-worker", modalTypes, ()=>{}, getDocumentLevel(), dataToPassToSMSModal);                        
+                        const dataToPassToSMSGeneration = {};
+                        dataToPassToSMSGeneration["phone"] = formData["phone"];
+
+                        // Before passing, we call api to generate an SMS code. If the number is inavlid, we display the error
+                        // message here, otherwise if valid proceed to show SMS modal
+                        $.ajax({
+                            type: "POST",
+                            url : 'https://slim3api.herokuapp.com//auth/generate-SMS-dummy', // PROD-DUMMY
+                            // url: 'http://localhost/slim3homeheroapi/public/auth/generate-SMS-dummy', // DEV-DUMMY,
+                            //url : 'https://slim3api.herokuapp.com/auth/verify-password', // PROD-API
+                            // url: 'http://localhost/slim3homeheroapi/public/auth/verify-password', // DEV-API,
+                            data: dataToPassToSMSGeneration,
+                            success: function(response){
+                                // If it is a success, then SMS was generated successfully
+                                // console.log(response['response']['data']['messagebird_id']);
+                                // grab the messagebird id and add it to the dataToPassToSMSModal
+                                dataToPassToSMSModal["messagebird_id"] = response['response']['data']['messagebird_id'];
+
+                                // pass the complete form data into the load modal
+                                loadModal("SMS-verification-worker", modalTypes, ()=>{}, getDocumentLevel(), dataToPassToSMSModal);
+                            },
+                            error: function (response) {
+                                console.log(response);
+                                // Either Invalid phone number or something wrong with API
+                                Swal.fire({
+                                    title: 'Invalid phone number!',
+                                    text: "Please try entering a valid phone number",
+                                    icon: 'error',
+                                    confirmButtonText: 'Try a different number'
+                                })
+                            }
+                        });
+
+                        // pass that form data into the load modal (This can be used in the event we skip SMS, just change load modal to ajax directly saving dataToPassToSMSModal to db)
+                        // loadModal("SMS-verification-worker", modalTypes, ()=>{}, getDocumentLevel(), dataToPassToSMSModal);                        
                     },
                     error: function (response) {
                         // CLEANUP ADD/TOGGLE ERRORS FOR APPROPRIATE FEILDS
