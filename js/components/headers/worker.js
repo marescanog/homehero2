@@ -28,11 +28,19 @@ $( document ).ready(()=>{
 
     // 
     const submitSignUpModalhandler = () => {
-        var signUpSubmitButton = document.getElementById("RU-submit-btn");
-        signUpSubmitButton.addEventListener("click", ()=>{
-            // registerHandler();
-            console.log("Switch to the PIN CODE model");
-        });
+        // const signUpSubmitButton = document.getElementById("RU-submit-btn");
+        const signUpSubmitButton = document.getElementById("RU-submit-btn");
+        // signUpSubmitButton.addEventListener("click", ()=>{
+        //     // const myForm = document.getElementById("registerForm");
+        //     // console.log(myForm);
+        //     // $("#registerForm").validate();
+
+        //     $("#commentForm").validate();
+
+        //     // registerHandler();
+        //     // After JQUERY Validation is successful, Switch to PIN CODE PROMPT
+        //     console.log("Switch to the PIN CODE model");
+        // });
     }
 
     const submitLoginHandler = () => {

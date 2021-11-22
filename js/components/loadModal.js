@@ -11,11 +11,12 @@ const modalTypes = {
     "worker-login":  docLevelModal+"/components/modals/worker-login.php",
     "tempAddr" : docLevelModal+"/components/modals/temporary/temp-enter-address.php", 
     "tempRegister": docLevelModal+"/components/modals/temporary/test-modal-register.php",
-    "tempLogin": docLevelModal+"/components/modals/temporary/temp-login.php"
+    "tempLogin": docLevelModal+"/components/modals/temporary/temp-login.php",
+    "SMS-verification":  docLevelModal+"/components/modals/sms-verification.php"
 }
 
 // This function loads the
-const loadModal = (modalType, modalTypes, modalFunction = () => {}, level=".") => {
+const loadModal = (modalType, modalTypes, modalFunction = () => {}, level=".", data = {}) => {
     // const modalTypes = {
     //     "name" : "location",
     // }
@@ -23,6 +24,7 @@ const loadModal = (modalType, modalTypes, modalFunction = () => {}, level=".") =
         // create an empty object
         let obj = {};
         obj['level'] = level;
+        obj['data'] = data;
         $("#modal-contents").load(modalTypes[modalType], obj, ()=>{
             modalFunction();
         });
