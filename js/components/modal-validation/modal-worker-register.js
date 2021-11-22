@@ -97,6 +97,23 @@ $("#registerForm").validate({
                 console.log(response);
                 // Proceed to SMS verification to submit with Ajax for worker creation.
                 // Verify password and get a hashed password
+                $.ajax({
+                    type: 'GET',
+                    url : 'https://slim3api.herokuapp.com/auth/verify-password', // PROD
+                    // url: 'http://localhost/slim3homeheroapi/public/auth/verify-password', // DEV
+                    data : formData,
+                    success : function(response) {
+                        console.log(response);
+                        // if we were to skip the step of SMS verification, we would remove/comment out loadModal Code
+                        // Then add in ajax code that adds the worker direct to the DB (the api route that adds a worker)
+                    },
+                    error: function (response) {
+                        // Add/Toggle errors for appropriate feilds
+                        // Password
+                        // Confirm Password
+                        console.log(response);
+                    }
+                });
                 // loadModal("SMS-verification-worker", modalTypes, ()=>{}, getDocumentLevel(),formData);
                 enableForm();
 
