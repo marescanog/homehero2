@@ -1,6 +1,5 @@
 <!-- 
     PHP to detect if there is already values filled in. Echo back into modal value.
-    JQuery for Client side Validation? Insert into header meta?
  -->
 <?php 
     $level = isset($_POST['level']) ? $_POST['level'] : '.';
@@ -15,44 +14,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <h5 class="font-weight-bold" style="color: #707070; text-align: center; font-size:24px">Worker Registration</h5>
-        <!-- <form id="registerForm" type="POST" onSubmit="switchToPINForm(event)" name="modalForm" class="cmxform m-4">
-            <fieldset>
-
-
-
-           
-            
-            
-
-            
-
-            </fieldset>
-        </form> -->
-        <!-- <form class="cmxform" id="commentForm" method="get" onsubmit="switchToPINForm(event)">
-            <fieldset>
-                <legend>Please provide your name, email address (won't be published) and a comment</legend>
-                <p>
-                <label for="cname">Name (required, at least 2 characters)</label>
-                <input id="cname" name="name" minlength="2" type="text" required>
-                </p>
-                <p>
-                <label for="cemail">E-Mail (required)</label>
-                <input id="cemail" type="email" name="email" required>
-                </p>
-                <p>
-                <label for="curl">URL (optional)</label>
-                <input id="curl" type="url" name="url">
-                </p>
-                <p>
-                <label for="ccomment">Your comment (required)</label>
-                <textarea id="ccomment" name="comment" required></textarea>
-                </p>
-                <p>
-                <input class="submit" type="submit" value="Submit">
-                </p>
-            </fieldset>
-        </form> -->
+        <h5 class="font-weight-bold mb-3" style="color: #707070; text-align: center; font-size:24px">Worker Registration</h5>
         <form  id="registerForm" method="POST">
             <fieldset>
                 <!-- First Name and Last Name Input Feilds -->
@@ -70,7 +32,7 @@
                 </div>
                 <!-- Password and Confirm password input feild -->
                 <div class="form-group">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" autocomplete >
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" minlength="8" maxlength="31" autocomplete >
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Re-enter password" autocomplete >
@@ -97,7 +59,10 @@
                     </div>
                 </div>
                  <!-- Check box (Above 18) Input-->
-
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="agree" name="agree">
+                    <label class="form-check-label" for="agree" style="font-size:0.8em;">I agree to HomeHero's <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</label>
+                </div>
                 <!-- Submit Button -->
                 <button id="RU-submit-btn" type="submit" value="Submit" class="btn btn-warning text-white font-weight-bold w-100 mb-3 submit">
                     <span id="RU-submit-btn-txt">CREATE ACCOUNT</span>
@@ -111,7 +76,7 @@
                 <p>
                     Already have an account? <a href="#">Login</a>
                     </br>
-                    Looking for work? <a href="#">Register</a> at the worker's portal.
+                    Looking to hire a worker? <a href="#">Sign-up</a> at the homeowner's portal.
                 </p>
             </div>
 

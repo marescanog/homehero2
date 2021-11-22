@@ -15,7 +15,10 @@ jQuery.validator.setDefaults({
     errorElement: 'div',
     errorClass: 'invalid-feedback',
     errorPlacement: function (error, element) {
-        if (element.parent('.input-group-prepend').length) {
+        if(element.parent().hasClass('form-check')){
+            element.parent().append(error);
+        } 
+        else if(element.parent('.input-group-prepend').length) {
             $(element).siblings(".invalid-feedback").append(error);
             //error.insertAfter(element.parent());
         } else {
@@ -23,3 +26,14 @@ jQuery.validator.setDefaults({
         }
     },
 });
+
+jQuery.validator.addMethod("phonePH", function(phone_number, element) {
+    phone_number = phone_number.replace(/\s+/g, "");
+    return this.optional(element) || phone_number.length > 9 && 
+    // Regex for phone number pattern with optional space or hyphen
+    phone_number.match(/^(09|\+639)\d{2}[- ]?\d{3}[- ]?\d{4}$/);
+    // Regex for just phone number format
+    // phone_number.match(/^(09|\+639)\d{9}$/);
+    // Regex for just hyphens and numbers
+    // phone_number.match(/^[+]?[\d]+([\-][\d]+)*\d$/);
+}, "Please specify a valid PH phone number");
