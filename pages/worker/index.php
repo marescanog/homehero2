@@ -163,6 +163,6 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     </div>
 <?php require_once dirname(__FILE__)."/$level/components/foot-meta.php"; ?>
 <!-- Custom JS Scripts Below -->
-    <script src="./js/pages/landing.js"></script>
+    <!-- <script src="./js/pages/landing.js"></script> -->
 </body>
 </html>
