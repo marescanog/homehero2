@@ -54,10 +54,10 @@ $("#registerForm").validate({
         event.preventDefault();
         const formData = getFormDataAsObj(form);
 
-        console.log(formData);
+        // console.log(formData);
         // check if phone number exists via ajax
         // if exists pass the data to the load modal form
-        loadModal("SMS-verification-worker", modalTypes, ()=>{}, getDocumentLevel());
+        loadModal("SMS-verification-worker", modalTypes, ()=>{}, getDocumentLevel(),formData);
         // if not exists ask user to log in using the phone number
     }
 });

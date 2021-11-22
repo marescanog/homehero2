@@ -1,11 +1,18 @@
-<!-- 
-    To be inserted:
-        Form onsubmit event
-        Dynamic phone number implementation
-
--->
 <?php 
     $level = isset($_POST['level']) ? $_POST['level'] : '../..';
+    $firstName = null;
+    $lastName = null;
+    $phone = null;
+    $password = null;
+    $data = null;
+    $mode = "dev";
+    if(isset($_POST['data'])){
+        $data = $_POST['data'];
+        $firstName = isset($data['first_name']) ? $data['first_name'] : null;
+        $lastName = isset($data['last_name']) ? $data['last_name'] : null;
+        $phone = isset($data['phone_number']) ? $data['phone_number'] : null;
+        $password = isset($data['password']) ? $data['password'] : null;
+    }
 ?>
 <div id="sms-modal" class="modal-content">
     <div class="modal-header">
@@ -17,11 +24,18 @@
         </button>
     </div>
     <div class="modal-body">
-        <p>
-            <?php echo var_dump($_POST);
+        <!-- <p>
+            <?php 
+                //echo var_dump($_POST);
             ?>
         </p>
-        <form id="SMSVerification" type="POST" onSubmit="SMSVerificationHandler(event)" name="modalForm" class="m-4">
+        <p>Data is</p>
+        <p>
+            <?php 
+               // echo var_dump($data);
+            ?>
+        </p> -->
+        <form id="SMSVerification" type="POST" name="modalForm" class="m-4">
         <h5 style="font-family: Segoe UI;
                 font-style: normal;
                 font-weight: bold;
@@ -29,8 +43,9 @@
                 line-height: 24px;
                 color: #707070;
         ">Verify SMS</h5>
-        <p>Enter the verification PIN sent to <?php echo "0912 345 6789" ?></p>
-            <div class="d-flex" style="height:200px;">
+        <p>Enter the verification PIN sent to <?php echo htmlentities($phone); ?></p>
+        <div class="d-flex flex-column" style="height:200px;">
+            <div class="d-flex form-sms" >
                 <input name="code-1" class="mr-1 text-center code" type="tel" 
                     style="width:30px; height:43px; font-size:2rem; outline:0; border-width:0px 0px 2px; overflow:hidden" placeholder="0" required maxlength="1">
                 <input name="code-2" class="mr-1 text-center code" type="tel" 
@@ -40,6 +55,11 @@
                 <input name="code-4" class="mr-1 text-center code" type="tel" 
                     style="width:30px; height:43px; font-size:2rem; outline:0; border-width:0px 0px 2px; overflow:hidden" placeholder="0" required maxlength="1">
             </div>
+            <div id="sms-error-display" class="c d-none">
+                <p class="text-danger">Your verification PIN is required</p>
+            </div>
+        </div>
+
             <button type="submit" class="btn btn-warning text-white font-weight-bold w-100">
                 <span id="RU-submit-btn-txt">VERIFY ACCOUNT</span>
                 <div id="RU-submit-btn-load" class="d-none">
@@ -48,37 +68,15 @@
                 </div>
             </button>
         </form>
+        <form id="formData" type="POST">
+            <input type="hidden" name="first_name" value="<?php echo htmlentities($firstName);?>" readonly>
+            <input type="hidden" name="last_name" value="<?php echo htmlentities($lastName);?>" readonly>
+            <input type="hidden" name="phone" value="<?php echo htmlentities($phone);?>" readonly>
+            <input type="hidden" name="password" value="<?php echo htmlentities($password);?>" readonly>
+            <input type="hidden" name="mode" value="<?php echo htmlentities($mode);?>" readonly>
+        </form>
     </div>
 
 </div>
-
-<!-- 
-    Script to limit input to numbers and enable auto focus change for input once a number is inputted 
-    Source: https://stackoverflow.com/questions/10539113/focusing-on-next-input-jquery
--->
-<script>
-$(function() {
-    var charLimit = 1;
-    $(".code").keydown(function(e) {
-
-        var keys = [8, 9, /*16, 17, 18,*/ 19, 20, 27, 33, 34, 35, 36, 37, 38, 39, 40, 45, 46, 48, 144, 145];
-
-        if (e.which == 8 && this.value.length == 0) {
-            $(this).prev('.code').focus();
-        } else if ($.inArray(e.which, keys) >= 0) {
-            return true;
-        } else if (this.value.length >= charLimit) {
-            $(this).next('.code').focus();
-            return false;
-        } else if (e.shiftKey || e.which <= 48 || e.which >= 58) {
-            return false;
-        }
-    }).keyup (function () {
-        if (this.value.length >= charLimit) {
-            $(this).next('.code').focus();
-            return false;
-        }
-    });
-});
-</script>
+<script src="<?php echo $level?>/js/components/modal-validation/modal-worker-sms.js"></script>
 

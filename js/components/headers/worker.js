@@ -22,6 +22,7 @@ $( document ).ready(()=>{
     // Opens Modal & loads content when user clicks on the "Register" header link
     signUpHeaderLink.addEventListener("click", ()=>{
         loadModal("worker-signup", modalTypes, submitSignUpModalhandler, getDocumentLevel());
+        // loadModal("SMS-verification-worker", modalTypes, ()=>{}, getDocumentLevel());
     });
 
     // Handler functions: Functions that run inside the modal

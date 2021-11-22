@@ -15,9 +15,18 @@ jQuery.validator.setDefaults({
     errorElement: 'div',
     errorClass: 'invalid-feedback',
     errorPlacement: function (error, element) {
-        if(element.parent().hasClass('form-check')){
+        // Error placement for the SMS Verification Modals
+        // Remove d-none on success by grabbing ID element
+        if(element.hasClass('code')){
+            if(element.parent().siblings("#sms-error-display").hasClass('d-none')){
+                element.parent().siblings("#sms-error-display").removeClass('d-none')
+            }
+        }
+        // Error placement for the Terms and conditions checkbox
+        else if (element.parent().hasClass('form-check')){
             element.parent().append(error);
         } 
+        // Error placement for everything else
         else if(element.parent('.input-group-prepend').length) {
             $(element).siblings(".invalid-feedback").append(error);
             //error.insertAfter(element.parent());
