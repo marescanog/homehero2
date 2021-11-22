@@ -31,13 +31,13 @@
         ">Verify SMS</h5>
         <p>Enter the verification PIN sent to <?php echo "0912 345 6789" ?></p>
             <div class="d-flex" style="height:200px;">
-                <input name="code-1" class="mr-1 text-center code" type="text" pattern="\d*"
+                <input name="code-1" class="mr-1 text-center code" type="tel" 
                     style="width:30px; height:43px; font-size:2rem; outline:0; border-width:0px 0px 2px; overflow:hidden" placeholder="0" required maxlength="1">
-                <input name="code-2" class="mr-1 text-center code" type="text" pattern="\d*"
+                <input name="code-2" class="mr-1 text-center code" type="tel" 
                     style="width:30px; height:43px; font-size:2rem; outline:0; border-width:0px 0px 2px; overflow:hidden" placeholder="0" required maxlength="1">
-                <input name="code-3" class="mr-1 text-center code" type="text" pattern="\d*"
+                <input name="code-3" class="mr-1 text-center code" type="tel" 
                     style="width:30px; height:43px; font-size:2rem; outline:0; border-width:0px 0px 2px; overflow:hidden" placeholder="0" required maxlength="1">
-                <input name="code-4" class="mr-1 text-center code" type="text" pattern="\d*"
+                <input name="code-4" class="mr-1 text-center code" type="tel" 
                     style="width:30px; height:43px; font-size:2rem; outline:0; border-width:0px 0px 2px; overflow:hidden" placeholder="0" required maxlength="1">
             </div>
             <button type="submit" class="btn btn-warning text-white font-weight-bold w-100">
