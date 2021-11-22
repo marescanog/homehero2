@@ -9,9 +9,9 @@ $("#registerForm").validate({
         phone_number:{
             phonePH: true
         },
-        exampleRadios: { 
+        above18: { 
             required: true,
-            equalTo : "#exampleRadios1",
+            equalTo : "#above18-yes",
         },
         password : {
             required: true,
@@ -44,7 +44,7 @@ $("#registerForm").validate({
             required:  "Please re-enter the password",
             equalTo : "This field must match entered password"
         },
-        exampleRadios:{
+        above18:{
             required: "Please select Yes or No", 
             equalTo : "You must be over the age of 18 to register."
         },
@@ -52,8 +52,13 @@ $("#registerForm").validate({
     },
     submitHandler: function(form, event) { 
         event.preventDefault();
-        alert("Do some stuff...");
-        //submit via ajax
+        const formData = getFormDataAsObj(form);
+
+        console.log(formData);
+        // check if phone number exists via ajax
+        // if exists pass the data to the load modal form
+        loadModal("SMS-verification-worker", modalTypes, ()=>{}, getDocumentLevel());
+        // if not exists ask user to log in using the phone number
     }
 });
 // '[name="password"]'

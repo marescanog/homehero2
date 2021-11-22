@@ -44,13 +44,13 @@
                     <div class="d-flex flex-row justify-content-center mb-3">
                         <div class="d-flex">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
+                                <input class="form-check-input" type="radio" name="above18" id="above18-yes" value="yes" >
                                 <label class="form-check-label" for="exampleRadios1">
                                     Yes
                                 </label>
                             </div>
                             <div class="form-check ml-3">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" >
+                                <input class="form-check-input" type="radio" name="above18" id="above18-no" value="no" >
                                 <label class="form-check-label" for="exampleRadios2">
                                     No
                                 </label>
