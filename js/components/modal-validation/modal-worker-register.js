@@ -70,7 +70,7 @@ $("#registerForm").validate({
             // url: 'http://localhost/slim3homeheroapi/public/auth/check-phone', // DEV
             data : formData,
             success : function(response) {
-                console.log(response);
+                // console.log(response);
                 // Proceed to SMS verification to submit with Ajax for worker creation.
                 // Verify password and get a hashed password
                 $.ajax({
