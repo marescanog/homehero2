@@ -65,7 +65,11 @@ const enableForm_hideLoadingButton = (button, buttonTxt, buttonLoadSpinner, form
 // This function adds an error message to the phone feild if an error message has not been added
 // Otherwise it toggles the attributes and classes to show the error
 // accepts an id and an Error Message
-
+/* Sample HTML for reference
+        <div id="RU_phone_formGroup" class="form-group">
+            <input type="text" class="form-control" id="RU_phone" name="phone" placeholder="Mobile number (09XXXXXXXXX)" autocomplete required maxlength="15">
+        </div>
+*/
 const enableErrorDisplayFor = (id_name, error_message)=>{
     // Check if there is already an aria added, otherwise don't add and just toggle class and attributes
     // Grab the DOM elements
