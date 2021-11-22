@@ -52,40 +52,16 @@ $("#registerForm").validate({
     },
     submitHandler: function(form, event) { 
         event.preventDefault();
-        
-        // erase error message from ajax phone number
+
+        // Grab DOM elements & Form data
+        const button = document.getElementById("RW-submit-btn");
+        const buttonTxt = document.getElementById("RW-submit-btn-txt");
+        const buttonLoadSpinner = document.getElementById("RW-submit-btn-load");
+        const formData = getFormDataAsObj(form);
 
         // Freeze Form & Disable
-            // Grab DOM elements & Form data
-            const button = document.getElementById("RW-submit-btn");
-            const buttonTxt = document.getElementById("RW-submit-btn-txt");
-            const buttonLoadSpinner = document.getElementById("RW-submit-btn-load");
-            const formData = getFormDataAsObj(form);
-
-            // Disable and show loading
-            button.setAttribute("disabled", "true");
-            buttonTxt.innerHTML = "Loading"
-            buttonLoadSpinner.setAttribute("class", "d-inline");
-            form.style.opacity = "0.5";
-
-            var elements = form.elements;
-            for (var i = 0, len = elements.length; i < len; ++i) {
-                elements[i].disabled = true;
-            }
-
-            // this function enables the form
-            const enableForm = ()=> {
-                button.removeAttribute("disabled");
-                buttonTxt.innerHTML = "CREATE ACCOUNT"
-                buttonLoadSpinner.setAttribute("class", "d-none");
-                form.style.opacity = "1";
-
-                var elements = form.elements;
-                for (var i = 0, len = elements.length; i < len; ++i) {
-                    elements[i].disabled = false;
-                }
-            }
-
+        disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
+           
         // Send Post Request to API
         // Ajax to check phone number;
         $.ajax({
@@ -115,7 +91,7 @@ $("#registerForm").validate({
                     }
                 });
                 // loadModal("SMS-verification-worker", modalTypes, ()=>{}, getDocumentLevel(),formData);
-                enableForm();
+                enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
 
             },
             error: function (response) {
@@ -128,7 +104,7 @@ $("#registerForm").validate({
                 console.log(message);
 
                 // Enable forms
-                enableForm();
+                enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
 
                 // This function adds an error message to the phone feild if an erro message has not been added
                 // Otherwise it toggles the attributes and classes to show the error
@@ -268,13 +244,8 @@ $("#registerForm").validate({
             }
         });
 
-        // hashpassword before sending
 
-        // console.log(formData);
-        // check if phone number exists via ajax
-        // if exists pass the data to the load modal form
-        //loadModal("SMS-verification-worker", modalTypes, ()=>{}, getDocumentLevel(),formData);
-        // if not exists ask user to log in using the phone number
+        
     }
 });
 // '[name="password"]'
