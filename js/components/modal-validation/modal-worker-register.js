@@ -79,9 +79,18 @@ $("#registerForm").validate({
                     // url: 'http://localhost/slim3homeheroapi/public/auth/verify-password', // DEV
                     data : formData,
                     success : function(response) {
-                        console.log(response);
-                        // if we were to skip the step of SMS verification, we would remove/comment out loadModal Code
-                        // Then add in ajax code that adds the worker direct to the DB (the api route that adds a worker)
+                        // Note: if we were to skip the step of SMS verification, we would remove/comment out loadModal Code
+                        // Then add in ajax code that adds the worker direct to the DB (the api route that adds a worker);
+
+                        // Create a new object only containing: firstname, lastname, mobile number and hashedpass/securepass
+                        const dataToPassToSMSModal = {};
+                        dataToPassToSMSModal["first_name"] = formData["first_name"];
+                        dataToPassToSMSModal["last_name"] = formData["last_name"];
+                        dataToPassToSMSModal["phone"] = formData["phone"];
+                        dataToPassToSMSModal["securepass"] = response['response']['data'];
+
+                        // pass that form data into the load modal
+                        loadModal("SMS-verification-worker", modalTypes, ()=>{}, getDocumentLevel(), dataToPassToSMSModal);                        
                     },
                     error: function (response) {
                         // CLEANUP ADD/TOGGLE ERRORS FOR APPROPRIATE FEILDS
@@ -92,7 +101,7 @@ $("#registerForm").validate({
                         console.log(response);
                     }
                 });
-                // loadModal("SMS-verification-worker", modalTypes, ()=>{}, getDocumentLevel(),formData);
+                
                 enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
 
             },
@@ -120,6 +129,9 @@ $("#registerForm").validate({
 
                 // Check if the phone number already has an existing user or support account
                 if(data.isWorker == true){
+                    // CLEANUP TO DO : CHECK IF WORKER HAS FINISHED REGISTRATION
+                    // IF NOT FINISHED, REDIRECT TO REGISTRATION PAGES
+                    // IF FINISHED SWAL FIRE BELOW
                     Swal.fire({
                         title: 'Phone number already registered to an account!',
                         text: message,

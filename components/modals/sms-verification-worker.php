@@ -1,17 +1,21 @@
 <?php 
+    // on the SMS verification worker form, write PHP to grab the POST data and echo it back into a hidden form
+    // Once SMS verificaiton submission is successful, ajax to write to database on the js for the modal sms verification
+
+    // Grab information passed from Worker registration form
     $level = isset($_POST['level']) ? $_POST['level'] : '../..';
     $firstName = null;
     $lastName = null;
     $phone = null;
-    $password = null;
+    $securepass = null;
     $data = null;
     $mode = "dev";
     if(isset($_POST['data'])){
         $data = $_POST['data'];
         $firstName = isset($data['first_name']) ? $data['first_name'] : null;
         $lastName = isset($data['last_name']) ? $data['last_name'] : null;
-        $phone = isset($data['phone_number']) ? $data['phone_number'] : null;
-        $password = isset($data['password']) ? $data['password'] : null;
+        $phone = isset($data['phone']) ? $data['phone'] : null;
+        $securepass = isset($data['securepass']) ? $data['securepass'] : null;
     }
 ?>
 <div id="sms-modal" class="modal-content">
@@ -24,17 +28,6 @@
         </button>
     </div>
     <div class="modal-body">
-        <!-- <p>
-            <?php 
-                //echo var_dump($_POST);
-            ?>
-        </p>
-        <p>Data is</p>
-        <p>
-            <?php 
-               // echo var_dump($data);
-            ?>
-        </p> -->
         <form id="SMSVerification" type="POST" name="modalForm" class="m-4">
         <h5 style="font-family: Segoe UI;
                 font-style: normal;
@@ -59,10 +52,9 @@
                 <p class="text-danger">Your verification PIN is required</p>
             </div>
         </div>
-
-            <button type="submit" class="btn btn-warning text-white font-weight-bold w-100">
-                <span id="RU-submit-btn-txt">VERIFY ACCOUNT</span>
-                <div id="RU-submit-btn-load" class="d-none">
+            <button id="WSMS-submit-btn" type="submit" class="btn btn-warning text-white font-weight-bold w-100">
+                <span id="WSMS-submit-btn-txt">VERIFY ACCOUNT</span>
+                <div id="WSMS-submit-btn-load" class="d-none">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     <span class="sr-only">Loading...</span>
                 </div>
@@ -72,7 +64,7 @@
             <input type="hidden" name="first_name" value="<?php echo htmlentities($firstName);?>" readonly>
             <input type="hidden" name="last_name" value="<?php echo htmlentities($lastName);?>" readonly>
             <input type="hidden" name="phone" value="<?php echo htmlentities($phone);?>" readonly>
-            <input type="hidden" name="password" value="<?php echo htmlentities($password);?>" readonly>
+            <input type="hidden" name="pass" value="<?php echo htmlentities($securepass);?>" readonly>
             <input type="hidden" name="mode" value="<?php echo htmlentities($mode);?>" readonly>
         </form>
     </div>

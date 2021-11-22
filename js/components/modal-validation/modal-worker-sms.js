@@ -30,25 +30,24 @@ $(function() {
 $("#SMSVerification").validate({
     submitHandler: function(form, event) { 
         event.preventDefault();
+        // Grab DOM elements for PIN checking
         const smsformData = getFormDataAsObj(form);
         const errorDisplay = document.getElementById("sms-error-display");
-        console.log(smsformData);
-        // console.log(errorDisplay);
+        // console.log("SMS form data is (PIN)");
+        // console.log(smsformData);
 
-        if(!errorDisplay.classList.contains('d-none')){
-            errorDisplay.classList.add('d-none');
-        }
-
-        const submitForm = document.getElementById("formData");
-        const submitformData = getFormDataAsObj(submitForm);
-        console.log(submitformData);
-        // errorDisplay.classList.remove("d-none");
-
-        // if(!$("#sms-error-display").hasClass("d-none")){
-        //     $("#sms-error-display").removeClass('d-none');
-        // }
         // Verify SMS Code
         // If SMS is correct, proceed with registration
-        // Otherwise don
+        // Otherwise dont
+
+        // // On success remove SMS error message if applicable
+        // if(!errorDisplay.classList.contains('d-none')){
+        //     errorDisplay.classList.add('d-none');
+        // }
+        // // Grab DOM elements for user account creation
+        // const submitForm = document.getElementById("formData");
+        // const submitformData = getFormDataAsObj(submitForm);
+        // console.log("Submit form data is (fnmae,lname, etc)")
+        // console.log(submitformData);
     }
 });
