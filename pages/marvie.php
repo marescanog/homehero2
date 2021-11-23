@@ -24,7 +24,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             <h3>Testing UI links</h3>
             <h2>Home Owner</h2>
             <ul>
-                <li><a href="./homeowner/home.php">Home</a></li>
+                <li><a href="./homeowner/home.php">Home</a> (Has redirect set-up - redirects to index.php when no user token)</li>
                 <li><a href="./homeowner/create-project.php">Project Creation</a></li>
                 <li><a href="./homeowner/projects.php">projects</a></li>
                 <li><a href=""></a>Single Project</li>
@@ -32,7 +32,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             </ul>
             <h2>Worker</h2>
             <ul>
-                <li><a href="./worker/register.php">Registration</a></li>
+                <li><a href="./worker/register.php">Registration</a> (Has redirect set-up - redirects to worker landing when no registration token)</li>
                 <li><a href="./worker/home.php">Home</a></li>
                 <li><a href="./worker/">Landing</a></li>
             </ul>

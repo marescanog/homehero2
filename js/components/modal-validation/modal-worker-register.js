@@ -138,7 +138,8 @@ $("#registerForm").validate({
                         Swal.fire({
                             title: "Error",
                             text: "Something went wrong. Please try again",
-                            icon: "error"
+                            icon: "error",
+                            
                         })
                     }
                 });
@@ -200,6 +201,7 @@ $("#registerForm").validate({
                                     showCancelButton: true,
                                     confirmButtonText: 'Continue Registration',
                                     showLoaderOnConfirm: true,
+                                    onClose: enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form),
                                     preConfirm: (password) => {
                                         registrationTokenData['password'] = password;
                                         let result = $.ajax({
@@ -253,7 +255,8 @@ $("#registerForm").validate({
                                                                 title: 'Error!',
                                                                 text: 'Something went wrong! Please try again',
                                                                 icon: 'error',
-                                                                confirmButtonText: 'ok'
+                                                                confirmButtonText: 'ok',
+                                                                onClose: enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form)
                                                             })
                                                         }
                                                     }
@@ -280,7 +283,8 @@ $("#registerForm").validate({
                                     icon: 'error',
                                     showCancelButton: true,
                                     confirmButtonText: 'Try a different number',
-                                    cancelButtonText: 'Login with this number at worker portal'
+                                    cancelButtonText: 'Login with this number at worker portal',
+                                    onClose: enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form)
                                 }). then((result)=>{
                                     if (result.isConfirmed) {
                                         enableErrorDisplayFor("RU_phone","Phone number is already associated with an existing account. Please enter a different number.");
@@ -297,7 +301,8 @@ $("#registerForm").validate({
                             Swal.fire({
                                 title: "Error",
                                 text: "Something went wrong. Please try again",
-                                icon: "error"
+                                icon: "error",
+                                onClose: enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form)
                             })
                         }
                     });
@@ -321,6 +326,7 @@ enableErrorDisplayFor("RU_phone","Phone number is already associated with an exi
                             confirmButtonText: 'Log in at the homeowner portal instead',
                             cancelButtonText: 'Log in at the support portal instead.',
                             denyButtonText: `Register as a worker with this number`,
+                            onClose: enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form)
                         }). then((result)=>{
                             if (result.isConfirmed) {
                                 // redirect to homeowner portal
@@ -343,6 +349,7 @@ enableErrorDisplayFor("RU_phone","Phone number is already associated with an exi
                             confirmButtonText: 'Try a different phone number instead',
                             cancelButtonText: 'Log in at the support portal instead.',
                             denyButtonText: `Register as a worker with this number`,
+                            onClose: enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form)
                         }).then((result)=>{
                             if (result.isConfirmed) {
                                 // try different number
@@ -365,6 +372,7 @@ enableErrorDisplayFor("RU_phone","Phone number is already associated with an exi
                             confirmButtonText: 'Try a different phone number instead',
                             cancelButtonText: 'Log in at the homeowner portal instead',
                             denyButtonText: `Register as a worker with this number`,
+                            onClose: enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form)
                         }).then((result)=>{
                             if (result.isConfirmed) {
                                 // try different number
