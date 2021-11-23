@@ -134,7 +134,12 @@ $("#registerForm").validate({
                         // id="(id_name)_formGroup" to the div with formgroup class for the ff.
                             // Password
                             // Confirm Password
-                        console.log(response);
+                        console.log(response)
+                        Swal.fire({
+                            title: "Error",
+                            text: "Something went wrong. Please try again",
+                            icon: "error"
+                        })
                     }
                 });
                 
@@ -145,46 +150,166 @@ $("#registerForm").validate({
             error: function (response) {
                 // display error message when phone number is taken
                 // console.log(response);
+
                 const data = response["responseJSON"]["response"]["data"];
                 const message = response["responseJSON"]["response"]["message"];
-
                 // console.log(data);
                 // console.log(message);
 
-                // Enable forms
-                enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
-
-                // Display Error message
-                enableErrorDisplayFor("RU_phone","Phone number is already associated with an existing account. Please enter a different number.");
-
                 // For the fourth SWAL button
                 $(document).on('click', "#try-diff-number", function() {
+                    enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
                     enableErrorDisplayFor("RU_phone","Phone number is already associated with an existing account. Please enter a different number.");
                     swal.close();
                 });
 
+                const formatDataForHasRegistered = {};
+                formatDataForHasRegistered["phone"] = formData["phone"];
+
+                // CLEANUP TO DO : CHECK IF WORKER HAS FINISHED REGISTRATION
+                // IF NOT FINISHED, REDIRECT TO REGISTRATION PAGES
                 // Check if the phone number already has an existing user or support account
                 if(data.isWorker == true){
-                    // CLEANUP TO DO : CHECK IF WORKER HAS FINISHED REGISTRATION
-                    // IF NOT FINISHED, REDIRECT TO REGISTRATION PAGES
-                    // IF FINISHED SWAL FIRE BELOW
-                    Swal.fire({
-                        title: 'Phone number already registered to an account!',
-                        text: message,
-                        icon: 'error',
-                        showCancelButton: true,
-                        confirmButtonText: 'Try a different number',
-                        cancelButtonText: 'Login with this number at worker portal'
-                    }). then((result)=>{
-                        if (result.isConfirmed) {
-                            enableErrorDisplayFor("RU_phone","Phone number is already associated with an existing account. Please enter a different number.");
-                        } else if (result.dismiss === Swal.DismissReason.cancel) {
-                            // Login with this number
-                            // Open Worker Portal
-                            loadModal("worker-login",modalTypes,()=>{},getDocumentLevel());
+                    $.ajax({
+                        type: "GET",
+                        url: "https://slim3api.herokuapp.com/auth/worker/hasRegistered", // PROD
+                        // url: "http://localhost/slim3homeheroapi/public/auth/worker/hasRegistered", // DEV
+                        data: formatDataForHasRegistered,
+                        success: function (response) {
+                            console.log(response)
+                            const responseObject = JSON.parse(response)
+                            console.log(responseObject)
+                            console.log(responseObject['response']['has_completed_registration'] == 1);
+                            const hasCompletedRegistration = responseObject['response']['has_completed_registration'] == 1;
+        
+                            // if the user is a worker and has not completed the registration process
+                            // it will prompt the user to continue with registration
+                            if(hasCompletedRegistration == false){
+                                const registrationTokenData = {};
+                                registrationTokenData["password"] = "";
+                                registrationTokenData["phone"] = responseObject['response']['phone_no'];
+                                registrationTokenData["userID"] = responseObject['response']['user_id'];
+                                $.fn.modal.Constructor.prototype._enforceFocus = function() {};
+                                Swal.fire({
+                                    title: 'Looks like you have already started the registration process',
+                                    text: 'Please input your password to continue with registration.',
+                                    input: 'text',
+                                    inputAttributes: {
+                                      autocapitalize: 'off'
+                                    },
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Continue Registration',
+                                    showLoaderOnConfirm: true,
+                                    preConfirm: (password) => {
+                                        registrationTokenData['password'] = password;
+                                        let result = $.ajax({
+                                            type: "POST",
+                                            url: "https://slim3api.herokuapp.com/auth/worker/create-registration-token",
+                                            data: registrationTokenData,
+                                            success: (result)=>{
+                                                // console.log(result)
+                                                return result;
+                                            }
+                                        })
+                                        //  Return result back of ajax to the next modal
+                                        return result;
+                                    },
+                                    allowOutsideClick: () => !Swal.isLoading()
+                                  }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        // console.log(result.value);
+                                        // console.log(result.value.response);
+                                            if(result.value.response.message){
+                                                // Swal.fire({
+                                                //     title: 'password correct!',
+                                                // })
+                                                let data = {};
+                                                data['registration_token'] = result.value.response.data.token;
+                                                data['hasRegistered'] = result.value.response.data.has_registered;
+                                                $.ajax({
+                                                    type : 'POST',
+                                                    url : getDocumentLevel()+'/auth/register-auth.php',
+                                                    data : data,
+                                                    success : function(response) {
+                                                        var res = JSON.parse(response);
+                                                        // Your response after register-auth is
+                                                        console.log(res)
+                                                        if(res["status"] == 200){
+                                                            // Unfreeze the form & Rest
+
+                                                            Swal.fire({
+                                                                title: 'Verification success!',
+                                                                text: 'Redirecting you to the registration pages...',
+                                                                icon: "success",
+                                                                timer: 3500,
+                                                                showCancelButton: false,
+                                                                showConfirmButton: false,
+                                                                timerProgressBar: true,
+                                                                }).then(result => {
+                                                                window.location = getDocumentLevel()+'/pages/worker/register.php';
+                                                            })
+                                                        } else {
+                                                            Swal.fire({
+                                                                title: 'Error!',
+                                                                text: 'Something went wrong! Please try again',
+                                                                icon: 'error',
+                                                                confirmButtonText: 'ok'
+                                                            })
+                                                        }
+                                                    }
+                                                });
+                                            } else {
+                                                // Enable forms
+                                                enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
+
+                                                // Display Error message
+                                                enableErrorDisplayFor("RU_phone","Phone number is already associated with an existing account. Please enter a different number.");
+                                                Swal.fire({
+                                                    title: 'password incorrect!',
+                                                    text: 'Click on forgot password to recover your account.'
+                                                })
+                                            }
+                                    }
+                                  })
+                            } else {
+                                // Otherwise if the user is already done with registration, it will 
+                                // prompt the user to either login his/her worker account or enter a different number
+                                Swal.fire({
+                                    title: 'Phone number already registered to an account!',
+                                    text: message,
+                                    icon: 'error',
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Try a different number',
+                                    cancelButtonText: 'Login with this number at worker portal'
+                                }). then((result)=>{
+                                    if (result.isConfirmed) {
+                                        enableErrorDisplayFor("RU_phone","Phone number is already associated with an existing account. Please enter a different number.");
+                                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                        // Login with this number
+                                        // Open Worker Portal
+                                        loadModal("worker-login",modalTypes,()=>{},getDocumentLevel());
+                                    }
+                                });
+                            }
+                        },
+                        error: function (response) {
+                            console.log(response)
+                            Swal.fire({
+                                title: "Error",
+                                text: "Something went wrong. Please try again",
+                                icon: "error"
+                            })
                         }
                     });
+
                 } else {
+// Temporary
+// Enable forms
+enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
+
+// Display Error message
+enableErrorDisplayFor("RU_phone","Phone number is already associated with an existing account. Please enter a different number.");
+
                     if(data.isHomeowner == true && (data.isSupport == true||data.isAdmin == true)){
                         Swal.fire({
                             title: 'Phone number number already registered to an account!',
