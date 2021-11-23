@@ -1,10 +1,26 @@
 <?php 
 
-// session_start();
-// if(isset($_SESSION["token"])){
-//     header("Location: ./pages/homeowner/home.php");
-//     exit();
-// }
+session_start();
+if(isset($_SESSION["registration_token"]) && isset($_SESSION["hasRegistered"])){
+    session_destroy(); //destroy entire session 
+    session_start(); // start new session
+}else if(isset($_SESSION["token"]) && isset($_SESSION["user_type"])){
+    switch($_SESSION["user_type"]){
+        case 1:
+            header("Location: ../homeowner/home.php"); // homeowner dashboard
+            break;
+        case 2:
+            header("Location: ./home.php"); // worker dashboard
+            break;
+        case 3:
+        case 4:
+            header("Location: ../support/"); // support log-in portal
+            break;
+        default:
+            header("Location: ../../"); // default landing page
+    }
+    exit();
+}
 
 $level ="../..";
 require_once dirname(__FILE__)."/$level/components/head-meta.php"; 
