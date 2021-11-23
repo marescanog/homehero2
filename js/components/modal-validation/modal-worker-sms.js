@@ -76,6 +76,34 @@ $("#SMSVerification").validate({
                 console.log(submitformData);
 
                 // ajax call to submit data and make a new worker, submitformData is the data
+                $.ajax({
+                    type: 'POST',
+                     url : 'https://slim3api.herokuapp.com/auth/worker/create-account', // PROD 
+                    //url: 'http://localhost/slim3homeheroapi/public/auth/worker/create-account', // DEV
+                    data : submitformData,
+                    success : function(response) {
+                        console.log(response);
+                        // // Unfreeze the form
+                        // disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, SMSForm);
+                        // Redirect to Worker Registration
+                        // window.location = getDocumentLevel()+'/pages/worker/register.php'
+                        Swal.fire({
+                            title: 'Phone number verification success!',
+                            text: 'Redirecting you to the registration pages...',
+                            icon: "success",
+                            timer: 3500,
+                            showCancelButton: false,
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            }).then((result) => {
+                                window.location = getDocumentLevel()+'/pages/worker/register.php';
+                                // an ajax to assign token?
+                            })
+                    },
+                    error: function(response){
+                        console.log(response);
+                    }
+                });
             },
             error: function (response) {
                 console.log(response);

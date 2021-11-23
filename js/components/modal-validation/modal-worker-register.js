@@ -61,6 +61,9 @@ $("#registerForm").validate({
 
         // Freeze Form & Disable
         disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
+
+        const phoneCheckInDatabase = {}
+        phoneCheckInDatabase["phone"] = formData["phone"];
            
         // Send Post Request to API
         // Ajax to check phone number;
@@ -68,15 +71,15 @@ $("#registerForm").validate({
             type: 'GET',
             url : 'https://slim3api.herokuapp.com/auth/check-phone', // PROD
             // url: 'http://localhost/slim3homeheroapi/public/auth/check-phone', // DEV
-            data : formData,
+            data : phoneCheckInDatabase,
             success : function(response) {
                 // console.log(response);
                 // Proceed to SMS verification to submit with Ajax for worker creation.
                 // Verify password and get a hashed password
                 $.ajax({
-                    type: 'GET',
+                    type: 'POST',
                     url : 'https://slim3api.herokuapp.com/auth/verify-password', // PROD
-                    // url: 'http://localhost/slim3homeheroapi/public/auth/verify-password', // DEV
+                    //url: 'http://localhost/slim3homeheroapi/public/auth/verify-password', // DEV
                     data : formData,
                     success : function(response) {
                         // Note: if we were to skip the step of SMS verification, we would remove/comment out loadModal Code
