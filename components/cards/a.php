@@ -20,7 +20,7 @@
 <div class="card mt-4" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title"><?php echo $arr[$x]['fname']." ".$arr[$x]['lname'] ;?></h5>
-    <h6 class="card-subtitle mb-2 text-muted"><?php echo $arr[$x]['type'] == 1 ? "User" : "Admin";?></h6>
+    <h6 class="card-subtitle mb-2 text-muted"><?php echo $arr[$x]['type'] == 1 ? "Homeowner" : ($arr[$x]['type'] == 2 ? "Worker" : "Admin");?></h6>
   </div>
 </div>
 
