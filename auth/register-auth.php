@@ -6,17 +6,18 @@
     $data = []; 
 
     // Check if token is generated
-    $token = isset($_POST['token']) ? $_POST['token'] : null;
+    $token = isset($_POST['registration_token']) ? $_POST['registration_token'] : null;
 
-    $firstName = isset($_POST['first_name']) ? $_POST['first_name'] : null;
-    $initials = isset($_POST['initials']) ? $_POST['initials'] : null;
+    $hasRegistered = isset($_POST['hasRegistered']) ? $_POST['hasRegistered'] : null;
+    // $skill = isset($_POST['skill']) ? $_POST['skill'] : null;
+    // $city = isset($_POST['city']) ? $_POST['city'] : null;
 
 
     if($token != null){
-        $_SESSION['token'] = $token;
-        $_SESSION['first_name'] = $firstName ;
-        $_SESSION['initials'] = $initials;
-        $retVal = "Received token";
+        $_SESSION['registration_token'] = $token;
+        $_SESSION['hasRegistered'] = $hasRegistered ;
+        // $_SESSION['initials'] = $initials;
+        $retVal = "Received Registration token";
         $status = 200;
     } else {
         $retVal = "Invalid Token";
@@ -25,7 +26,7 @@
     $myObj = array(
         'status' => $status,
         'message' => $retVal,
-        'data' => $_SESSION['token']  
+        'data' => $_SESSION['registration_token']  
     );
     
     $myJSON = json_encode($myObj, JSON_FORCE_OBJECT);

@@ -78,27 +78,52 @@ $("#SMSVerification").validate({
                 // ajax call to submit data and make a new worker, submitformData is the data
                 $.ajax({
                     type: 'POST',
-                     url : 'https://slim3api.herokuapp.com/auth/worker/create-account', // PROD 
+                    url : 'https://slim3api.herokuapp.com/auth/worker/create-account', // PROD 
                     //url: 'http://localhost/slim3homeheroapi/public/auth/worker/create-account', // DEV
                     data : submitformData,
                     success : function(response) {
-                        console.log(response);
-                        // // Unfreeze the form
-                        // disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, SMSForm);
-                        // Redirect to Worker Registration
-                        // window.location = getDocumentLevel()+'/pages/worker/register.php'
-                        Swal.fire({
-                            title: 'Phone number verification success!',
-                            text: 'Redirecting you to the registration pages...',
-                            icon: "success",
-                            timer: 3500,
-                            showCancelButton: false,
-                            showConfirmButton: false,
-                            timerProgressBar: true,
-                            }).then((result) => {
-                                window.location = getDocumentLevel()+'/pages/worker/register.php';
-                                // an ajax to assign token?
-                            })
+                        //console.log("your response after account creation is:")
+                        //console.log(response);
+                        // Redirect to Registration Auth then Worker Registration pages
+                        let data = {};
+                        data['registration_token'] = response.response.data.token;
+                        data['hasRegistered'] = false;
+                        //console.log("your data token is");
+                        //console.log(data);
+                        // an ajax to assign registration session token
+                        $.ajax({
+                            type : 'POST',
+                            url : getDocumentLevel()+'/auth/register-auth.php',
+                            data : data,
+                            success : function(response) {
+                                var res = JSON.parse(response);
+                                // Your response after register-auth is
+                                console.log(res)
+                                if(res["status"] == 200){
+                                    // Unfreeze the form & Rest
+                                    disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, SMSForm);
+                                    $('#SMSVerification')[0].reset();
+                                    Swal.fire({
+                                        title: 'Phone number verification success!',
+                                        text: 'Redirecting you to the registration pages...',
+                                        icon: "success",
+                                        timer: 3500,
+                                        showCancelButton: false,
+                                        showConfirmButton: false,
+                                        timerProgressBar: true,
+                                        }).then(result => {
+                                        window.location = getDocumentLevel()+'/pages/worker/register.php';
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        title: 'Error!',
+                                        text: 'Something went wrong! Please try again',
+                                        icon: 'error',
+                                        confirmButtonText: 'ok'
+                                    })
+                                }
+                            }
+                        });
                     },
                     error: function(response){
                         console.log(response);

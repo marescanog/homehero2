@@ -1,14 +1,24 @@
 <?php 
 
-// session_start();
-// if(!isset($_SESSION["token"])){
-//     header("Location: ../../");
-//     exit();
-// }
+session_start();
+if(!isset($_SESSION["registration_token"])){
+    header("Location: ./");
+    exit();
+}
+
+if(!isset($_SESSION["hasRegistered"])){
+    header("Location: ./");
+    exit();
+}
+
+if($_SESSION["hasRegistered"] == "false"){
+    header("Location: ./");
+    exit(); 
+}
 
 $level ="../..";
-$fistName = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest";
-$initials = isset($_SESSION["initials"]) ? $_SESSION["initials"] : "GU";
+// $fistName = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest";
+// $initials = isset($_SESSION["initials"]) ? $_SESSION["initials"] : "GU";
 
 
 require_once dirname(__FILE__)."/$level/components/head-meta.php"; 
