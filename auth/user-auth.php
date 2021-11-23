@@ -16,6 +16,7 @@
         $_SESSION['token'] = $token;
         $_SESSION['first_name'] = $firstName ;
         $_SESSION['initials'] = $initials;
+        $_SESSION['user_type'] = 1;
         $retVal = "Received token";
         $status = 200;
     } else {
