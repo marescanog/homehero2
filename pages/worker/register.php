@@ -54,7 +54,19 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     <input id="edit" type="hidden" value="<?php
         echo htmlentities($edit);
     ?>">
-    <div id="body"></div>
+    <div id="body">
+        <div class="d-flex flex-column justify-content-center align-items-center pb-5 vh-100">
+            <div class="d-flex flex-column justify-content-center align-items-center pb-5" style=
+            "height:50%;">
+                <div class="spinner-grow text-warning text-center" role="status"  style="height:50px; width:50px">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <div class="mt-3 ml-2 text-center" style="font-size: 0.85rem;">
+                    Loading...
+                </div>
+            </div>
+        </div>
+    </div>
     <?php 
         // echo var_dump($edit);
     ?>

@@ -46,3 +46,7 @@ jQuery.validator.addMethod("phonePH", function(phone_number, element) {
     // Regex for just hyphens and numbers
     // phone_number.match(/^[+]?[\d]+([\-][\d]+)*\d$/);
 }, "Please specify a valid PH phone number");
+
+jQuery.validator.addMethod('filesize', function (value, element, param) {
+    return this.optional(element) || (element.files[0].size <= param)
+}, 'File size must be less than {0');

@@ -44,11 +44,79 @@ const loadOrientation = () => {
 // Page 2
 const loadPersonalInfo = () => {
     const level = getDocumentLevel();
-    $("#body").load(level+"/components/sections/register-personal-info.php", ()=>{
+    data={}
+    data["level"] = level;
+
+    $("#body").load(level+"/components/sections/register-personal-info.php", data, ()=>{
         const next = document.getElementById("next");
         const back = document.getElementById("back");
         next.addEventListener("click", ()=>{
-            window.location.href = level+"/pages/worker/register.php"+"?page=2";
+            // window.location.href = level+"/pages/worker/register.php"+"?page=2";
+            
+            $("#personal-info").validate({
+                rules:{
+                    skill_list:{
+                        required: true,
+                        minlength: 1,
+                    },
+                    default_rate: {
+                        required: true,
+                        number: true
+                    },
+                    clearance_no: "required",
+                    expiration_date: "required",
+                    nbi_photos: {
+                        required: true,
+                        extension: "jpeg,jpg,png,pdf,JPEG,JPG,PNG,PDF",
+                        filesize: 5000000   //max size 5000 kb 5MB
+                    }
+                },
+                messages:{
+                    skill_list: "Please check at least one skill.",
+                    default_rate:{
+                        required:  "Please enter your rate",
+                    },
+                    clearance_no: "Please enter your NBI clearance number",
+                    expiration_date: "Please enter an expiration date",
+                    nbi_photos: {
+                        required: "Please upload a photo of your NBI clearance.",
+                        extension: "Please upload a file with a jpg, png or pdf extension",
+                        filesize: "File size must be less than 5 MB"
+                    }
+                },
+                submitHandler: function(form, event) { 
+                    event.preventDefault();
+                    const formData = getFormDataAsObj(form);
+                    const checkedBoxes = document.getElementsByName("skill_list");
+                    // Grab all checked items
+                    const checkedSkills = []; 
+                    checkedBoxes.forEach(check=>{
+                        if(check.checked){
+                            checkedSkills.push(check.value);
+                        }
+                    })
+                    formData["skill_list"] = checkedSkills;
+
+                    console.log(checkedSkills);
+                    console.log(formData); 
+                    console.log("hihi");
+
+
+                    Swal.fire({
+                        title: 'Continue to the Next Modal?',
+                        showDenyButton: true,
+                        showCancelButton: true,
+                        confirmButtonText: 'Continue',
+                        denyButtonText: `Stay`,
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = level+"/pages/worker/register.php"+"?page=2";
+                        } else if (result.isDenied) {
+                          Swal.fire('Staying here', '', 'info')
+                        }
+                      })
+                }
+            });
         })
         back.addEventListener("click", ()=>{
             window.location.href = level+"/pages/worker/register.php";
