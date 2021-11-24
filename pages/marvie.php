@@ -19,7 +19,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
     <div class="container">
         <h1>marvie</h1>
-            <form id="uploadForm" action="upload.php" method="POST" enctype="mulipart/form-data" onsubmit="fileSubmit(event)">
+            <!-- <form id="uploadForm" action="upload.php" method="POST" enctype="mulipart/form-data" onsubmit="fileSubmit(event)">
                 <div class="form-group">
                     <label for="file">File</label>
                     <input id="fileUpload" name="file" type="file" class="form-control"aria-describedby="file">
@@ -83,7 +83,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             }
         </script>
 
-        </div>
+        </div> -->
 
         <div class="container">
             <h3>Testing UI links</h3>
