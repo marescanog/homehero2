@@ -40,7 +40,7 @@
     <h2 class="title-style-2">Tell us a bit about yourself</h2>
     <h6 class="title-subtitle-1">Please answer a few quick questions to complete your application.</h6>
 </div>
-<form id="personal-info">
+<form id="personal-info" method="POST" enctype="multipart/form-data">
 <div class="row card-container">
     <div class="card sm-shadow">
         <div class="card-body">

@@ -19,6 +19,71 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
     <div class="container">
         <h1>marvie</h1>
+            <form id="uploadForm" action="upload.php" method="POST" enctype="mulipart/form-data" onsubmit="fileSubmit(event)">
+                <div class="form-group">
+                    <label for="file">File</label>
+                    <input id="fileUpload" name="file" type="file" class="form-control"aria-describedby="file">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        <div class="container">
+        <script>
+            function fileSubmit(e){
+                e.preventDefault();
+                console.log("file press!")
+
+                // Grab the form HTML DOM element
+                let myForm = $("#uploadForm")[0];
+                
+                // // Place All the data in a new form data
+                // let formData = new FormData(myForm);
+
+                // New form Data
+                let formData = new FormData();
+
+                // Grab the uploaded images
+                let imageFiles = $('#fileUpload')[0].files;
+
+                //     // Append all images to form data
+                //     for(var x = 0; x < imageFiles.length; x++){
+                //         formData.append(`file${x}`, imageFiles[x]);
+                //     }    
+
+                // Append image to form data
+                formData.append(`file`, imageFiles[0]);
+
+                console.log(imageFiles[0])
+                
+                $.ajax({
+                    type : 'POST',
+                    url : '../auth/fileHandler/filetransfer.php',
+                    data : formData,
+                    contentType: false,
+                    processData: false,
+                    success : function(response) {
+
+                        console.log(response);
+                        // disableRehomeFormSpinner();
+                        // //alert(response);
+                        // var res = JSON.parse(response);
+                        // setTimeout(function() {
+                        //     alert(res["message"]);
+                        // },100);
+                        // if(res["status"] == 200){
+                        //     myForm.reset();
+                        //     var image_holder = $("#image-holder");
+                        //     image_holder.empty();
+                        // }     
+
+                    }
+                });
+                    
+
+                
+            }
+        </script>
+
+        </div>
 
         <div class="container">
             <h3>Testing UI links</h3>
