@@ -19,6 +19,22 @@ const getFormDataAsObj = (myForm) =>{
     return data;
 };
 
+// This function accepts a string of the name of the group of checkboxes
+const getAllCheckedElementsByName = (name) =>{
+    const checkedBoxes = document.getElementsByName(name);
+
+    // Grab all checked items
+    const checkedItems = []; 
+    
+    checkedBoxes.forEach(check=>{
+        if(check.checked){
+            checkedItems.push(check.value);
+        }
+    })
+
+    return checkedItems;
+}
+
 
 
 /* Reference for disableForm_displayLoadingButton & enableForm_hideLoadingButton
