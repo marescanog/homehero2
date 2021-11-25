@@ -204,7 +204,7 @@
             </label>
             <div class="custom-file">
                 <label class="custom-file-label lightgray-text" for="nbi_photos">Choose file</label>
-                <input type="file" class="custom-file-input" id="nbi_photos" name="nbi_photos" >
+                <input id="nbi-file-input" type="file" class="custom-file-input" name="file" >
             </div>
         </div>
     </div>

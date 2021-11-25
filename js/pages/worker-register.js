@@ -101,6 +101,60 @@ const loadPersonalInfo = () => {
                     console.log(formData); 
                     console.log("hihi");
 
+                    // const nbiupload = document.getElementById("nbi-file-input");
+
+                    // Grab the uploaded images
+                    let imageFile = $('#nbi-file-input')[0].files[0];
+
+                    const data = {};
+                    data['file'] = imageFile;
+                    data['file_types'] = ["pdf","jpg","jpeg","png"];
+                    data['bucket_name'] = "nbi-photos";
+
+                    // console.log(data);
+
+                    var fileField = document.querySelectorAll("input[type='file']");
+
+                    var thisFsda = fileField[1];
+
+                    //formData.append('np_image_path', fileField.files[0]);
+
+                    const testForm = new FormData();
+
+                    testForm.append('file', thisFsda.files[0]);
+                    testForm.append('file_types', JSON.stringify(data['file_types']));
+                    testForm.append('bucket_name', "nbi-photos");
+                    console.log(thisFsda);
+
+                    $.ajax({
+                        type : 'POST',
+                        //url : 'http://localhost/IM2/hh-thirdparty/google-cloud-api/upload-single', // DEV
+                        url : 'https://hh-thirdparty.herokuapp.com/google-cloud-api/upload-single', // PROD
+                        data : testForm,
+                        contentType: false,
+                        processData: false,
+                        // headers: {"Content-Type": "application/x-www-form-urlencoded"},
+                        success : function(response) {
+    
+                            console.log(response);
+                            // disableRehomeFormSpinner();
+                            // //alert(response);
+                            // var res = JSON.parse(response);
+                            // setTimeout(function() {
+                            //     alert(res["message"]);
+                            // },100);
+                            // if(res["status"] == 200){
+                            //     myForm.reset();
+                            //     var image_holder = $("#image-holder");
+                            //     image_holder.empty();
+                            // }     
+    
+                        },
+                        error: function(response){
+                            console.log(response);
+                        }
+                    });
+
 
                     Swal.fire({
                         title: 'Continue to the Next Modal?',
