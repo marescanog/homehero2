@@ -206,7 +206,8 @@ $("#registerForm").validate({
                                         registrationTokenData['password'] = password;
                                         let result = $.ajax({
                                             type: "POST",
-                                            url: "https://slim3api.herokuapp.com/auth/worker/create-registration-token",
+                                             url: "https://slim3api.herokuapp.com/auth/worker/create-registration-token", // PROD
+                                            // url: "http://localhost/slim3homeheroapi/public/auth/worker/create-registration-token", // DEV
                                             data: registrationTokenData,
                                             success: (result)=>{
                                                 // console.log(result)
