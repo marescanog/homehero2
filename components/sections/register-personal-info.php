@@ -1,4 +1,51 @@
 <?php
+session_start();
+
+// Make curl for the personal inforation pagge information vv
+$url = "http://localhost/slim3homeheroapi/public/registration/personal-info";
+$post_data = array(
+    'query' => 'some stuff',
+    'method' => 'post',
+    'ya' => 'boo'
+);
+
+$headers = array(
+    "Authorization: Bearer ".$_SESSION["registration_token"],
+    'Content-Type: application/json',
+);
+
+// 1. Initialize
+$ch = curl_init();
+
+// 2. set options
+    // URL to submit to
+    curl_setopt($ch, CURLOPT_URL, $url);
+
+    // Return output instead of outputting it
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    // Type of request = POST
+    // curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_HTTPGET, 1);
+
+    // Set headers for auth
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    
+    // Adding the post variables to the request
+    // curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+
+    // Execute the request and fetch the response. Check for errors
+    $output = curl_exec($ch);
+
+    if($output === FALSE){
+        echo "cURL Error:" . curl_error($ch);
+    }
+
+    curl_close($ch);
+
+    // $output =  json_decode(json_encode($output), true);
+    $output =  json_decode($output);
+
     // Data for form rendering
     $level = $_POST["level"] ?? "../..";
     $formSkill_list =  $_POST["expertise"] ?? [
@@ -30,9 +77,31 @@
     // Data from User, format & clean
     $default_rate = $_POST["default_rate"] ?? null; $default_rate = $default_rate ? htmlentities(number_format($default_rate, 2, '.', '')) : null; // float
     $default_rate_type = $_POST["default_rate_type"] ?? null; $default_rate_type = htmlentities($default_rate_type); // array of strings
-    $expertise_list = $_POST["expertise_list"] ?? null; // Array of expertise Ids
+    //$expertise_list = $_POST["expertise_list"] ?? null; // Array of expertise Ids
+    $expertise_list = [];
 
     $totalCertificates = $_POST["total_Certicates"] ?? 1;
+
+    // Populate data from curl output
+    if($output !== FALSE && $output !== null && $output !== "" && !empty($output)){
+        if($output->success == false){
+        ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>SERVER ERROR</strong> 
+                <?php echo $output->response;?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php
+        } else {
+            // Get Current Saved Skills
+            $savedSkills = (array) $output->response->expertiseList;
+            for($w = 0; $w < count($savedSkills); $w++){
+                array_push($expertise_list, $savedSkills[$w]->id);
+            }
+        }
+    }
 
 ?>
 <?php // echo var_dump($_POST);?>
@@ -67,7 +136,7 @@
                                 value="<?php echo $formSkill_list[$x]["id"];?>"
                                 <?php 
                                     if($expertise_list != null){
-                                        echo in_array($x+1, $expertise_list) ? "checked" : "";
+                                        echo in_array($formSkill_list[$x]["id"], $expertise_list) ? "checked" : "";
                                     }
                                 ?>
                             >
@@ -116,6 +185,20 @@
             </h5>
             <h6 class="card-subtitle mb-2 text-muted card-subtitle-muted">
                 Estimate how much you'd like to earn for your work.
+                <?php 
+                    echo "<br>";
+                    echo "<br>";
+                    echo "<p>Test Area</p>";
+
+
+                    // $default_rateg = $output->response->data;
+                    // var_dump($default_rateg);
+                     var_dump($output->response->expertiseList);
+
+                    echo "<br>";
+                    echo "<br>";
+                    echo "<p>Test Area</p>";
+                ?>
             </h6>
             <div class="row">
                 <div class="form-group col-5">
