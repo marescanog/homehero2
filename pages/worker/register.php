@@ -7,48 +7,54 @@ if(!isset($_SESSION["registration_token"])){
     exit();
 }
 
-// use the session variable via curl to retreive user data
-$url = "https://slim3api.herokuapp.com/create-guest";
+// // use the session variable via curl to retreive user data
+// // $url = "https://slim3api.herokuapp.com/create-guest";
+// $url = "http://localhost/slim3homeheroapi/public/registration/personal-info";
+// $post_data = array(
+//     'query' => 'some stuff',
+//     'method' => 'post',
+//     'ya' => 'boo'
+// );
 
-$post_data = array(
-    'query' => 'some stuff',
-    'method' => 'post',
-    'ya' => 'boo'
-);
+// $headers = array(
+//     "Authorization: Bearer ".$_SESSION["registration_token"],
+//     'Content-Type: application/json',
+// );
 
-$headers = array(
-    "Authorization: Bearer ".$_SESSION["registration_token"],
-    'Content-Type: application/json',
-);
+// // make curl request based on page number , move $bci_current_page code below to up here ($_GET["page"])
 
-// 1. Initialize
-$ch = curl_init();
 
-// 2. set options
-    // URL to submit to
-    curl_setopt($ch, CURLOPT_URL, $url);
+// // 1. Initialize
+// $ch = curl_init();
 
-    // Return output instead of outputting it
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+// // 2. set options
+//     // URL to submit to
+//     curl_setopt($ch, CURLOPT_URL, $url);
 
-    // Type of request = POST
-    // curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_HTTPGET, 1);
+//     // Return output instead of outputting it
+//     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+//     // Type of request = POST
+//     // curl_setopt($ch, CURLOPT_POST, 1);
+//     curl_setopt($ch, CURLOPT_HTTPGET, 1);
+
+//     // Set headers for auth
+//     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     
+//     // Adding the post variables to the request
+//     // curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
 
-    // Adding the post variables to the request
-    // curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+//     // Execute the request and fetch the response. Check for errors
+//     $output = curl_exec($ch);
 
-    // Execute the request and fetch the response. Check for errors
-    $output = curl_exec($ch);
+//     if($output === FALSE){
+//         echo "cURL Error:" . curl_error($ch);
+//     }
 
-    if($output === FALSE){
-        echo "cURL Error:" . curl_error($ch);
-    }
+//     curl_close($ch);
 
-    curl_close($ch);
 
-// cUrl code example
+// cUrl code reference example from past project
 // $ch = curl_init();
 // curl_setopt($ch, CURLOPT_URL, "https://api.sendgrid.com/v3/mail/send");
 // curl_setopt($ch, CURLOPT_POST, 1);
@@ -126,9 +132,11 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         <?php 
             // echo var_dump($edit);
             // echo $_SESSION["registration_token"];
-            $test = json_decode($output);
-            echo var_dump($test->success);
-            echo var_dump($test->response->data[0]);
+
+
+            //$test = json_decode($output);
+            // echo var_dump($test->success);
+            // echo var_dump($test->response->data[0]);
             //echo var_dump($test);
         ?>
     </div>
