@@ -2,7 +2,8 @@
 session_start();
 
 // Make curl for the personal inforation pagge information vv
-$url = "http://localhost/slim3homeheroapi/public/registration/personal-info";
+// $url = "http://localhost/slim3homeheroapi/public/registration/personal-info"; // DEV
+$url = "https://slim3api.herokuapp.com/registration/personal-info"; // PROD
 $post_data = array(
     'query' => 'some stuff',
     'method' => 'post',
