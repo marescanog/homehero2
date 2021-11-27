@@ -45,6 +45,7 @@
                         id="start-time-input-<?php echo $daysOfTheWeek[$x];?>" 
                         name="start-time-<?php echo $daysOfTheWeek[$x];?>"
                         value="<?php echo $dayObj["sRaw"];?>"
+                        style="max-width: 107.8px;"
                     >
                 </div>
                 <div id="to-<?php echo $daysOfTheWeek[$x];?>" class="mx-2 d-none">
@@ -55,6 +56,7 @@
                         id="end-time-input-<?php echo $daysOfTheWeek[$x];?>" 
                         name="end-time-<?php echo $daysOfTheWeek[$x];?>"
                         value="<?php echo $dayObj["eRaw"];?>"
+                        style="width: 107.8px;"
                     >
                 </div>
             </div>

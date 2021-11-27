@@ -1,4 +1,52 @@
 <?php
+session_start();
+
+// Make curl for the personal inforation pagge information vv
+// $url = "http://localhost/slim3homeheroapi/public/registration/personal-info"; // DEV
+$url = "https://slim3api.herokuapp.com/registration/personal-info"; // PROD
+$post_data = array(
+    'query' => 'some stuff',
+    'method' => 'post',
+    'ya' => 'boo'
+);
+
+$headers = array(
+    "Authorization: Bearer ".$_SESSION["registration_token"],
+    'Content-Type: application/json',
+);
+
+// 1. Initialize
+$ch = curl_init();
+
+// 2. set options
+    // URL to submit to
+    curl_setopt($ch, CURLOPT_URL, $url);
+
+    // Return output instead of outputting it
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    // Type of request = POST
+    // curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_HTTPGET, 1);
+
+    // Set headers for auth
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    
+    // Adding the post variables to the request
+    // curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+
+    // Execute the request and fetch the response. Check for errors
+    $output = curl_exec($ch);
+
+    if($output === FALSE){
+        echo "cURL Error:" . curl_error($ch);
+    }
+
+    curl_close($ch);
+
+    // $output =  json_decode(json_encode($output), true);
+    $output =  json_decode($output);
+
     // Data for form rendering
     $level = $_POST["level"] ?? "../..";
     $formSkill_list =  $_POST["expertise"] ?? [
@@ -28,12 +76,56 @@
 
     // =================================
     // Data from User, format & clean
-    $default_rate = $_POST["default_rate"] ?? null; $default_rate = $default_rate ? htmlentities(number_format($default_rate, 2, '.', '')) : null; // float
-    $default_rate_type = $_POST["default_rate_type"] ?? null; $default_rate_type = htmlentities($default_rate_type); // array of strings
-    $expertise_list = $_POST["expertise_list"] ?? null; // Array of expertise Ids
+    // $default_rate = $_POST["default_rate"] ?? null; $default_rate = $default_rate ? htmlentities(number_format($default_rate, 2, '.', '')) : null; // float
+    // $default_rate_type = $_POST["default_rate_type"] ?? null; $default_rate_type = htmlentities($default_rate_type); // array of strings
+    // $expertise_list = $_POST["expertise_list"] ?? null; // Array of expertise Ids
+    $expertise_list = [];
+    $default_rate = null;
+    $default_rate_type =null;
+    $nbi_information = false;
+    $savedFiles = [];
 
     $totalCertificates = $_POST["total_Certicates"] ?? 1;
 
+    // Populate data from curl output
+    if($output !== FALSE && $output !== null && $output !== "" && !empty($output)){
+        if($output->success == false){
+        ?>
+            <div class="title-2-container alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>  <?php echo $output->response->status == 500 ? "500 SERVER ERROR": "401 NOT FOUND";?></strong> 
+                <?php echo $output->response->message;?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php
+        } else {
+            // Get Current Saved Skills
+            $savedSkills = (array) $output->response->expertiseList;
+            for($w = 0; $w < count($savedSkills); $w++){
+                array_push($expertise_list, $savedSkills[$w]->id);
+            }
+            // Get Salary goal
+            $default_rate = $output->response->defaultRate_andType->default_rate;
+            $default_rate_type = $output->response->defaultRate_andType->default_rate_type;
+            // Get NBI information
+            $nbi_information = $output->response->nbi_information;
+            // Get NBI image Files
+            $savedFiles = (array) $output->response->nbi_files;
+        }
+    }
+    
+    if($default_rate != null || $default_rate_type != null || $nbi_information != false || count($savedFiles) != 0){
+        ?>
+            <div class="title-2-container alert alert-primary alert-dismissible fade show" role="alert">
+                <strong>INFORMATION RESTORED</strong> 
+                <?php echo "Your information from the last session was saved and restored. You can now review and continue your application.";?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php
+    }
 ?>
 <?php // echo var_dump($_POST);?>
 <div class="row d-flex flex-column title-2-container pt-1 pt-lg-3">
@@ -67,7 +159,7 @@
                                 value="<?php echo $formSkill_list[$x]["id"];?>"
                                 <?php 
                                     if($expertise_list != null){
-                                        echo in_array($x+1, $expertise_list) ? "checked" : "";
+                                        echo in_array($formSkill_list[$x]["id"], $expertise_list) ? "checked" : "";
                                     }
                                 ?>
                             >
@@ -190,22 +282,52 @@
                     <label for="clearance_no" class="LABEL-THICC-SMOL" >
                         N.B.I.CLEARANCE NO.
                     </label>
-                    <input type="tel" class="form-control" id="clearance_no" name="clearance_no" placeholder="ex: 2103265345" >
+                    <input type="tel" class="form-control" id="clearance_no" name="clearance_no" placeholder="ex: 2103265345" 
+                        <?php
+                            if($nbi_information == true){
+                                echo "value='".$nbi_information->clearance_no."'";
+                            }
+                        ?>
+                    >
                 </div>
                 <div class="form-group col-6">
                     <label for="expiration_date" class="LABEL-THICC-SMOL">
                         EXPIRATION DATE
                     </label>
-                    <input type="date" class="form-control" id="expiration_date" name="expiration_date" placeholder="ex: 10/21/22" >
+                    <input id="nbi-date-feild" type="date" class="form-control" name="expiration_date" placeholder="ex: 10/21/22" 
+                        <?php
+                            if($nbi_information == true){
+                                echo "value='".$nbi_information->expiration_date."'";
+                            }
+                        ?>
+                    >
                 </div>
             </div>
-            <label for="customFile" class="LABEL-THICC-SMOL">
-                PLEASE UPLOAD A RECENT COPY OF YOUR N.B.I.
-            </label>
-            <div class="custom-file">
-                <label class="custom-file-label lightgray-text" for="nbi_photos">Choose file</label>
-                <input id="nbi-file-input" type="file" class="custom-file-input" name="file" >
-            </div>
+            <?php 
+                if(count($savedFiles) >= 1){
+            ?>
+                <div class="d-flex justify-content-between">
+                    <p class="LABEL-THICC-SMOL">
+                        YOUR FILE UPLOAD
+                    </p>
+                    <p class="clicky smol">
+                        Change Image
+                    </p>
+                </div>
+                <img src="<?php echo $savedFiles[0]->file_path.$savedFiles[0]->file_name;?>" alt="..." class="img-thumbnail">
+            <?php 
+                } else {
+            ?>
+                <label for="customFile" class="LABEL-THICC-SMOL">
+                    PLEASE UPLOAD A RECENT COPY OF YOUR N.B.I.
+                </label>
+                <div id="detect-nbi-change" class="custom-file">
+                    <label id="label-nbi-file-input"class="custom-file-label lightgray-text" for="nbi_photos">Choose file</label>
+                    <input id="nbi-file-input" type="file" class="custom-file-input" name="file" >
+                </div>
+            <?php
+                }
+            ?>
         </div>
     </div>
 </div>

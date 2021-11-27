@@ -1,3 +1,38 @@
+const uploadForm = (form) => {
+    console.log("Insert code to upload form");
+    console.log(form);
+}
+
+const uploadForm_withSingleImage = (form, imageForm) => {
+        $.ajax({
+        type : 'POST',
+        //url : 'http://localhost/IM2/hh-thirdparty/google-cloud-api/upload-single', // DEV
+        url : 'https://hh-thirdparty.herokuapp.com/google-cloud-api/upload-single', // PROD
+        data : imageForm,
+        contentType: false,
+        processData: false,
+        // headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        success : function(response) {
+            console.log("Insert ajax to save Form Data")
+            console.log("Response from api is: ");
+            console.log(response);
+            console.log(response['response']['file_location']);
+            console.log(response['response']['newFileName']);
+            console.log("Your form data is: ");
+            console.log(form);
+        },
+        error: function(response){
+            console.log(response);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error on form upload',
+                text: 'Please try again!',
+            })
+        }
+    });
+}
+
+
 $(document).ready(()=>{
     // Grab the DOM element
     let page = parseInt(document.getElementById("page").value);
@@ -48,12 +83,36 @@ const loadPersonalInfo = () => {
     data["level"] = level;
 
     $("#body").load(level+"/components/sections/register-personal-info.php", data, ()=>{
+        // nbi file caption change on select
+        const nbi_file_input = document.getElementById("nbi-file-input");
+        if(nbi_file_input != null){
+            $("#detect-nbi-change").on('change','#nbi-file-input' , function(){ 
+                const fileName = nbi_file_input.files[0].name;
+                const label = document.getElementById("label-nbi-file-input");
+                label.innerText = fileName;
+            });
+        }
+
+        // Get tomorrow's date
+        const today = new Date(); 
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        
+        // Flatpickr settings for the date feild
+        flatpickr("#nbi-date-feild", {
+            //altInput: true,
+            //altFormat: "F j, Y",
+            dateFormat: "Y-m-d",
+            //minDate: "today",
+            minDate: today,
+        });
+
         const next = document.getElementById("next");
         const back = document.getElementById("back");
         next.addEventListener("click", ()=>{
             // window.location.href = level+"/pages/worker/register.php"+"?page=2";
-            
             $("#personal-info").validate({
+                ignore: [],
                 rules:{
                     skill_list:{
                         required: true,
@@ -64,8 +123,11 @@ const loadPersonalInfo = () => {
                         number: true
                     },
                     clearance_no: "required",
-                    expiration_date: "required",
-                    nbi_photos: {
+                    expiration_date: {
+                        required: true,
+                        validDate: true
+                    },
+                    file: {
                         required: true,
                         extension: "jpeg,jpg,png,pdf,JPEG,JPG,PNG,PDF",
                         filesize: 5000000   //max size 5000 kb 5MB
@@ -77,8 +139,10 @@ const loadPersonalInfo = () => {
                         required:  "Please enter your rate",
                     },
                     clearance_no: "Please enter your NBI clearance number",
-                    expiration_date: "Please enter an expiration date",
-                    nbi_photos: {
+                    expiration_date: {
+                        required: "Please enter an expiration date",
+                    },
+                    file: {
                         required: "Please upload a photo of your NBI clearance.",
                         extension: "Please upload a file with a jpg, png or pdf extension",
                         filesize: "File size must be less than 5 MB"
@@ -97,64 +161,38 @@ const loadPersonalInfo = () => {
                     })
                     formData["skill_list"] = checkedSkills;
 
-                    console.log(checkedSkills);
-                    console.log(formData); 
-                    console.log("hihi");
+                    // console.log(checkedSkills);
+                    // console.log("Your form data is: ");
+                    // console.log(formData); 
 
-                    // const nbiupload = document.getElementById("nbi-file-input");
+                    // Grab the uploaded images (Currently this does not include Certificates. Just the NBI info for now)
+                    // Grab all file feilds
+                    // const fileFields = document.querySelectorAll("input[type='file']");
+                    // console.log(fileFields);
 
-                    // Grab the uploaded images
-                    let imageFile = $('#nbi-file-input')[0].files[0];
+                    // Grab NBI file feild
+                    const nbi_feild = document.getElementById("nbi-file-input");
+                    // console.log(nbi_feild);
 
-                    const data = {};
-                    data['file'] = imageFile;
-                    data['file_types'] = ["pdf","jpg","jpeg","png"];
-                    data['bucket_name'] = "nbi-photos";
+                    if(nbi_feild == null){
+                        uploadForm(formData);
+                    } else {
+                        // Set necessary data for upload image api call
+                        const upload_data = {};
+                        upload_data['file_types'] = ["pdf","jpg","jpeg","png"]; // allowed types of file as per DB (in future make ajax call to grab this)
+                        upload_data['bucket_name'] = "nbi-photos"; // location in google cloud/ bucket in cloud
 
-                    // console.log(data);
+                        // Create new form for the images
+                        const imageForm = new FormData();
 
-                    var fileField = document.querySelectorAll("input[type='file']");
+                        // Append all images to the new form
+                        imageForm.append('file', nbi_feild.files[0]);
+                        imageForm.append('file_types', JSON.stringify(upload_data['file_types']));
+                        imageForm.append('bucket_name', upload_data['bucket_name']);
 
-                    var thisFsda = fileField[1];
-
-                    //formData.append('np_image_path', fileField.files[0]);
-
-                    const testForm = new FormData();
-
-                    testForm.append('file', thisFsda.files[0]);
-                    testForm.append('file_types', JSON.stringify(data['file_types']));
-                    testForm.append('bucket_name', "nbi-photos");
-                    console.log(thisFsda);
-
-                    $.ajax({
-                        type : 'POST',
-                        //url : 'http://localhost/IM2/hh-thirdparty/google-cloud-api/upload-single', // DEV
-                        url : 'https://hh-thirdparty.herokuapp.com/google-cloud-api/upload-single', // PROD
-                        data : testForm,
-                        contentType: false,
-                        processData: false,
-                        // headers: {"Content-Type": "application/x-www-form-urlencoded"},
-                        success : function(response) {
-    
-                            console.log(response);
-                            // disableRehomeFormSpinner();
-                            // //alert(response);
-                            // var res = JSON.parse(response);
-                            // setTimeout(function() {
-                            //     alert(res["message"]);
-                            // },100);
-                            // if(res["status"] == 200){
-                            //     myForm.reset();
-                            //     var image_holder = $("#image-holder");
-                            //     image_holder.empty();
-                            // }     
-    
-                        },
-                        error: function(response){
-                            console.log(response);
-                        }
-                    });
-
+                        // uploadForm_withSingleImage(formData, imageForm);
+                        uploadForm(formData);
+                    }
 
                     Swal.fire({
                         title: 'Continue to the Next Modal?',
