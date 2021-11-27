@@ -5,11 +5,24 @@ jQuery.validator.setDefaults({
     onkeyup: false,
 
     highlight: function (element) {
-        jQuery(element).closest('.form-control').addClass('is-invalid');
+        if(jQuery(element).hasClass('flatpickr-input')){
+            if(jQuery(element).attr('readonly') == 'readonly'){
+                jQuery(element).next().addClass('is-invalid');
+            }
+        } else {
+            jQuery(element).closest('.form-control').addClass('is-invalid');
+        }
     },
     unhighlight: function (element) {
-        jQuery(element).closest('.form-control').removeClass('is-invalid');
-        jQuery(element).closest('.form-control').addClass('is-valid');
+        if(jQuery(element).hasClass('flatpickr-input')){
+            if(jQuery(element).attr('readonly') == 'readonly'){
+                jQuery(element).next().removeClass('is-invalid');
+                jQuery(element).next().addClass('is-valid');
+            }
+        } else {
+            jQuery(element).closest('.form-control').removeClass('is-invalid');
+            jQuery(element).closest('.form-control').addClass('is-valid');
+        }
     },
 
     errorElement: 'div',
