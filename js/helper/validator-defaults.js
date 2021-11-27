@@ -22,6 +22,9 @@ jQuery.validator.setDefaults({
                 element.parent().siblings("#sms-error-display").removeClass('d-none')
             }
         }
+        else if (element.hasClass('flatpickr-input')){
+            element.parent().append(error);
+        }
         // Error placement for the Terms and conditions checkbox
         else if (element.parent().hasClass('form-check')){
             element.parent().append(error);
@@ -50,3 +53,24 @@ jQuery.validator.addMethod("phonePH", function(phone_number, element) {
 jQuery.validator.addMethod('filesize', function (value, element, param) {
     return this.optional(element) || (element.files[0].size <= param)
 }, 'File size must be less than {0');
+
+const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+// a and b are javascript Date objects
+function dateDiffInDays(a, b) {
+    // Discard the time and time-zone information.
+    const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+    const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+    return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+}
+
+jQuery.validator.addMethod('validDate', function (value, element, param) {
+    // Get tomorrow's date
+    const today = new Date();
+
+    const selectedDate = new Date(value);
+    const difference = dateDiffInDays(today, selectedDate);
+
+    return this.optional(element) ||  difference >= 1
+}, 'Date must be a valid date beyond today');
