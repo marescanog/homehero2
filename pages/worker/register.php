@@ -73,6 +73,18 @@ if(!isset($_SESSION["registration_token"])){
 
 require_once dirname(__FILE__)."/$level/components/head-meta.php"; 
 
+// Get the current page number based on query string
+$bci_current_page = isset($_GET["page"]) ? $_GET["page"] : 0;
+$bci_current_page = (int) $bci_current_page;
+if($bci_current_page < 0 || $bci_current_page > 4){
+    $bci_current_page = 0;
+}
+// For pages with edit option, get if is on edit mode
+$edit = isset($_GET["edit"]) ? $_GET["edit"] == "true" : false;
+if(gettype($edit) !== "boolean"){
+    $edit = false;
+}
+
 ?>
 <!-- === Link your custom CSS pages below here ===-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,23 +95,16 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <link rel="stylesheet" href="../../css/UX/breadcrumb-indicator.css">
 <script src="https://kit.fontawesome.com/d10ff4ba99.js" crossorigin="anonymous"></script>
 <!-- <link rel="stylesheet" href="../../css/pages/homeowner/homeowner-create-project.css"> -->
+<?php 
+    if($bci_current_page == 1){
+        echo "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css'>";
+    }
+?>
 <!-- === Link your custom CSS  pages above here ===-->
 </head>
  <body class="container-fluid m-0 p-0  w-100 bg-light">  
     <!-- Add your Header NavBar here-->
-    <?php 
-        // Get the current page number based on query string
-        $bci_current_page = isset($_GET["page"]) ? $_GET["page"] : 0;
-        $bci_current_page = (int) $bci_current_page;
-        if($bci_current_page < 0 || $bci_current_page > 4){
-            $bci_current_page = 0;
-        }
-        // For pages with edit option, get if is on edit mode
-        $edit = isset($_GET["edit"]) ? $_GET["edit"] == "true" : false;
-        if(gettype($edit) !== "boolean"){
-            $edit = false;
-        }
-        
+    <?php        
         // $isComplete = true;
         // $header_title = "Complete";
         require_once dirname(__FILE__)."/$level/components/headers/worker-register.php"; 
@@ -149,5 +154,11 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <?php require_once dirname(__FILE__)."/$level/components/foot-meta.php"; ?>
 <!-- Custom JS Scripts Below -->
     <script src="../../js/pages/worker-register.js"></script>
+    <?php 
+        if($bci_current_page == 1){
+         echo "<script src='https://cdn.jsdelivr.net/npm/flatpickr'></script>";
+        }
+    ?>
+
 </body>
 </html>
