@@ -722,11 +722,20 @@ const loadSchedule = () => {
 const loadServiceArea = () => {
     const level = getDocumentLevel();
     $("#body").load(level+"/components/sections/register-service-area.php", ()=>{
-        const next = document.getElementById("next");
+        const button = document.getElementById("PI-submit-btn");
+        const buttonTxt = document.getElementById("PI-submit-btn-txt");
+        const buttonLoadSpinner = document.getElementById("PI-submit-btn-load");
         const back = document.getElementById("back");
         
-        next.addEventListener("click", ()=>{
-            window.location.href = level+"/pages/worker/register.php"+"?page=4";
+        button.addEventListener("click", ()=>{
+           // window.location.href = level+"/pages/worker/register.php"+"?page=4";
+           $("#city-preference").validate({
+            submitHandler: function(form, event) { 
+                event.preventDefault();
+                // Freeze the form
+                disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
+            }
+            });
         })
         back.addEventListener("click", ()=>{
             window.location.href = level+"/pages/worker/register.php"+"?page=2";
