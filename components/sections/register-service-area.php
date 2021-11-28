@@ -1,6 +1,94 @@
 <?php
-    $cities = ["Bantayan", "Carcar", "Cebu City", "Daanbantayan", "Danao", "Lapu-lapu", "Liloan", "Mandaue", "Minglanilla", "Naga", "Talisay", "Toledo"];
+    session_start();
+    
+    // Make curl for the general schedule info
+    // $url = "http://localhost/slim3homeheroapi/public/registration/preferred-cities"; // DEV
+    $url = "https://slim3api.herokuapp.com/registration/preferred-cities"; // PROD
+    
+    $headers = array(
+        "Authorization: Bearer ".$_SESSION["registration_token"],
+        'Content-Type: application/json',
+    );
+    
+    // 1. Initialize
+    $ch = curl_init();
+    
+    // 2. set options
+        // URL to submit to
+        curl_setopt($ch, CURLOPT_URL, $url);
+    
+        // Return output instead of outputting it
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    
+        // Type of request = GET
+        curl_setopt($ch, CURLOPT_HTTPGET, 1);
+    
+        // Set headers for auth
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    
+        // Execute the request and fetch the response. Check for errors
+        $output = curl_exec($ch);
+    
+        if($output === FALSE){
+            echo "cURL Error:" . curl_error($ch);
+        }
+    
+        curl_close($ch);
+    
+        // $output =  json_decode(json_encode($output), true);
+        $output =  json_decode($output);
+    
+        $schedule_preference = null;
+    
+        // Populate data from curl output
+        if($output !== FALSE && $output !== null && $output !== "" && !empty($output)){
+            if($output->success == false){
+            ?>
+                <div class="title-2-container alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>  <?php echo $output->response->status == 500 ? "500 SERVER ERROR": "401 NOT FOUND";?></strong> 
+                    <?php echo $output->response->message;?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php
+            } else {
+                // Populate Data from DB
+                $preferred_citites = $output->response;
+            }
+        }
+    
+        // =================================
+        // =================================
+    
+        // Data for rendering
+        $cities = ["Bantayan", "Carcar", "Cebu City", "Daanbantayan", "Danao", "Lapu-lapu", "Liloan", "Mandaue", "Minglanilla", "Naga", "Talisay", "Toledo"];
+        // Better Data mimics DB data
+        $citiesDBFormat = [
+            ["id"=>"1","city_name"=>"Bantayan" ],
+            ["id"=>"2","city_name"=>"Carcar" ],
+            ["id"=>"3","city_name"=>"Cebu City" ],
+            ["id"=>"4","city_name"=>"Daanbantayan" ],
+            ["id"=>"5","city_name"=>"Danao" ],
+            ["id"=>"6","city_name"=>"Lapu-lapu" ],
+            ["id"=>"7","city_name"=>"Liloan" ],
+            ["id"=>"8","city_name"=>"Mandaue" ],
+            ["id"=>"9","city_name"=>"Minglanilla" ],
+            ["id"=>"10","city_name"=>"Naga" ],
+            ["id"=>"11","city_name"=>"Talisay" ],
+            ["id"=>"12","city_name"=>"Toledo" ],
+        ];
+
+        // =================================
+        // =================================
+        // Data from User, format & clean if necessary
 ?>
+<?php  // echo var_dump($output);?>
+<?php  // echo var_dump($output->response);?>
+<?php  // echo var_dump($_SESSION["registration_token"]);?>
+<?php   // echo var_dump($preferred_citites);?>
+<?php   // echo var_dump($citiesDBFormat[0]["city_name"]);?>
+
 <div class="row d-flex flex-column title-2-container pt-1 pt-lg-3">
     <h2 class="title-style-2">Set your preferred service areas</h2>
     <h6 class="title-subtitle-1">Customers will be able to find you based on where you choose to work.</h6>
@@ -19,9 +107,19 @@
                     ?>
                     <div class="pt-0 pt-lg-2">
                         <div class="custom-control custom-checkbox pt-3">
-                            <input type="checkbox" class="custom-control-input" id="chk-<?php echo htmlentities($cities[$x]);?>" name="chk-<?php echo $daysOfTheWeek[$x];?>">
-                            <label class="custom-control-label check-label" for="chk-<?php echo htmlentities($cities[$x]);?>">
-                                <?php echo htmlentities($cities[$x]);?>
+                            <input type="checkbox" class="custom-control-input" 
+                                id="chk-<?php echo htmlentities($citiesDBFormat[$x]["id"]);?>" 
+                                name="chk-<?php echo htmlentities($citiesDBFormat[$x]["id"]);?>"
+                                <?php
+                                if(in_array($citiesDBFormat[$x]["id"],$preferred_citites)){
+                                        echo "checked";
+                                }
+                                ?>
+                            >
+                            <label class="custom-control-label check-label" 
+                                for="chk-<?php echo htmlentities($citiesDBFormat[$x]["id"]);?>">
+                                <!-- Echoes Name into Label -->
+                                <?php echo htmlentities($citiesDBFormat[$x]["city_name"]);?>
                             </label>
                         </div>
                     </div>
@@ -36,9 +134,19 @@
                     ?>
                     <div class="col-lg-2 pt-0 pt-lg-2">
                         <div class="custom-control custom-checkbox pt-3">
-                            <input type="checkbox" class="custom-control-input" id="chk-<?php echo htmlentities($cities[$x]);?>" name="chk-<?php echo $daysOfTheWeek[$x];?>">
-                            <label class="custom-control-label check-label" for="chk-<?php echo htmlentities($cities[$x]);?>">
-                                <?php echo htmlentities($cities[$x]);?>
+                            <input type="checkbox" class="custom-control-input" 
+                                id="chk-<?php echo htmlentities($citiesDBFormat[$x]["id"]);?>" 
+                                name="chk-<?php echo htmlentities($citiesDBFormat[$x]["id"]);?>"
+                                <?php
+                                if(in_array($citiesDBFormat[$x]["id"],$preferred_citites)){
+                                        echo "checked";
+                                }
+                                ?>
+                            >
+                            <label class="custom-control-label check-label" 
+                                for="chk-<?php echo htmlentities($citiesDBFormat[$x]["id"]);?>">
+                                <!-- Echoes Name into Label -->
+                                <?php echo htmlentities($citiesDBFormat[$x]["city_name"]);?>
                             </label>
                         </div>
                     </div>
