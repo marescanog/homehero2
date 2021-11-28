@@ -1,3 +1,54 @@
+const save_preferred_workSchedule = (form) => {
+    console.log("proceeeding to next page...");
+    //console.log("Getting the registration session token...");
+    const dataOBJ = getFormDataAsObj(form);
+    console.log(dataOBJ);
+
+    $.ajaxSetup({cache: false})
+    $.get(getDocumentLevel()+'/auth/get-register-session.php', function (data) {
+        session = data;
+        // console.log(session);
+        const parsedSession = JSON.parse(session);
+        const token = parsedSession['registration_token'];
+
+        // Create new form 
+        const samoka = new FormData();
+
+        // Append 
+        samoka.append('schedule_preference', dataOBJ["ritem"] == 'ropt1' ? 0 : 1);
+        //console.log(dataOBJ["ritem"] == 'ropt1' ? 0 : 1);
+        // console.log("your token is")
+        // console.log(token);
+        //console.log(form);
+
+        $.ajax({
+            type : 'POST',
+            // url : 'http://localhost/slim3homeheroapi/public/registration/save-general-schedule', // DEV
+             url : 'https://slim3api.herokuapp.com/registration/save-general-schedule', // PROD
+            data : samoka,
+            contentType: false,
+            processData: false,
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            success : function(response) {
+                console.log(response);
+                window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=3";
+            },
+            error: function(response){
+                console.log(response);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error on form upload',
+                    text: 'Please try again!',
+                })
+            }
+        });
+    });
+}
+
+
+
 const getRegisterSessionToken_then_uploadForm = (form) => {
     console.log("Getting the registration session token...");
     $.ajaxSetup({cache: false})
@@ -48,19 +99,23 @@ const uploadForm = (form, session) => {
         },
         success : function(response) {
             console.log(response);
-            Swal.fire({
-                title: 'Continue to the Next Modal?',
-                showDenyButton: true,
-                showCancelButton: true,
-                confirmButtonText: 'Continue',
-                denyButtonText: `Stay`,
-              }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=2";
-                } else if (result.isDenied) {
-                  Swal.fire('Staying here', '', 'info')
-                }
-              });
+
+            window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=2";
+
+            // // This swal is for dev purposes only below
+            // Swal.fire({
+            //     title: 'Continue to the Next Modal?',
+            //     showDenyButton: true,
+            //     showCancelButton: true,
+            //     confirmButtonText: 'Continue',
+            //     denyButtonText: `Stay`,
+            //   }).then((result) => {
+            //     if (result.isConfirmed) {
+            //         window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=2";
+            //     } else if (result.isDenied) {
+            //       Swal.fire('Staying here', '', 'info')
+            //     }
+            //   });
         },
         error: function(response){
             console.log(response);
@@ -137,6 +192,7 @@ $(document).ready(()=>{
     loadRegisterBody[page]();
 })
 
+// =======================================================================================================
 // Page 1
 const loadOrientation = () => {
     const level = getDocumentLevel();
@@ -150,6 +206,7 @@ const loadOrientation = () => {
     });
 }
 
+// =======================================================================================================
 // Page 2
 const loadPersonalInfo = () => {
     const level = getDocumentLevel();
@@ -309,6 +366,7 @@ const loadPersonalInfo = () => {
 
 }
 
+// =======================================================================================================
 // Page 3
 const loadSchedule = () => {
     const level = getDocumentLevel();
@@ -318,10 +376,20 @@ const loadSchedule = () => {
     outerPageData["edit"] = edit;
 
     $("#body").load(level+"/components/sections/register-schedule.php",outerPageData, ()=>{
-        const next = document.getElementById("next");
+        const button = document.getElementById("PI-submit-btn");
+        const buttonTxt = document.getElementById("PI-submit-btn-txt");
+        const buttonLoadSpinner = document.getElementById("PI-submit-btn-load");
         const back = document.getElementById("back");
-        next.addEventListener("click", ()=>{
-            window.location.href = level+"/pages/worker/register.php"+"?page=3";
+        button.addEventListener("click", ()=>{
+            //window.location.href = level+"/pages/worker/register.php"+"?page=3";
+            $("#schedule-form").validate({
+                submitHandler: function(form, event) { 
+                    event.preventDefault();
+                    // Freeze the form
+                    save_preferred_workSchedule(form);
+                    disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
+                }
+            });
         })
         back.addEventListener("click", ()=>{
             if(edit){
