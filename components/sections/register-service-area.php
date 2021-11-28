@@ -2,8 +2,8 @@
     session_start();
     
     // Make curl for the general schedule info
-    // $url = "http://localhost/slim3homeheroapi/public/registration/preferred-cities"; // DEV
-    $url = "https://slim3api.herokuapp.com/registration/preferred-cities"; // PROD
+     // $url = "http://localhost/slim3homeheroapi/public/registration/preferred-cities"; // DEV
+     $url = "https://slim3api.herokuapp.com/registration/preferred-cities"; // PROD
     
     $headers = array(
         "Authorization: Bearer ".$_SESSION["registration_token"],
@@ -38,7 +38,7 @@
         // $output =  json_decode(json_encode($output), true);
         $output =  json_decode($output);
     
-        $schedule_preference = null;
+        $preferred_cities = null;
     
         // Populate data from curl output
         if($output !== FALSE && $output !== null && $output !== "" && !empty($output)){
@@ -54,7 +54,7 @@
             <?php
             } else {
                 // Populate Data from DB
-                $preferred_citites = $output->response;
+                $preferred_cities = $output->response;
             }
         }
     
@@ -83,17 +83,17 @@
         // =================================
         // Data from User, format & clean if necessary
 ?>
-<?php  // echo var_dump($output);?>
+<?php   // echo var_dump($output);?>
 <?php  // echo var_dump($output->response);?>
 <?php  // echo var_dump($_SESSION["registration_token"]);?>
-<?php   // echo var_dump($preferred_citites);?>
+<?php   //  echo var_dump($preferred_cities);?>
 <?php   // echo var_dump($citiesDBFormat[0]["city_name"]);?>
 
 <div class="row d-flex flex-column title-2-container pt-1 pt-lg-3">
     <h2 class="title-style-2">Set your preferred service areas</h2>
     <h6 class="title-subtitle-1">Customers will be able to find you based on where you choose to work.</h6>
 </div>
-<form>
+<form id="city-preference">
 <div class="row card-container">
     <div class="card sm-shadow">
         <div class="card-body min-card-cities">
@@ -108,16 +108,18 @@
                     <div class="pt-0 pt-lg-2">
                         <div class="custom-control custom-checkbox pt-3">
                             <input type="checkbox" class="custom-control-input" 
-                                id="chk-<?php echo htmlentities($citiesDBFormat[$x]["id"]);?>" 
-                                name="chk-<?php echo htmlentities($citiesDBFormat[$x]["id"]);?>"
+                                id="chk-<?php echo htmlentities($citiesDBFormat[$x]["city_name"]);?>" 
+                                value="<?php echo htmlentities($citiesDBFormat[$x]["id"]);?>"
+                                name="chk-cities"
                                 <?php
-                                if(in_array($citiesDBFormat[$x]["id"],$preferred_citites)){
-                                        echo "checked";
-                                }
+                                    if($preferred_cities != null && $preferred_cities != "" && !empty($preferred_cities)
+                                         && in_array($citiesDBFormat[$x]["id"],$preferred_cities)){
+                                            echo "checked";
+                                    }
                                 ?>
                             >
                             <label class="custom-control-label check-label" 
-                                for="chk-<?php echo htmlentities($citiesDBFormat[$x]["id"]);?>">
+                                for="chk-<?php echo htmlentities($citiesDBFormat[$x]["city_name"]);?>">
                                 <!-- Echoes Name into Label -->
                                 <?php echo htmlentities($citiesDBFormat[$x]["city_name"]);?>
                             </label>
@@ -135,16 +137,18 @@
                     <div class="col-lg-2 pt-0 pt-lg-2">
                         <div class="custom-control custom-checkbox pt-3">
                             <input type="checkbox" class="custom-control-input" 
-                                id="chk-<?php echo htmlentities($citiesDBFormat[$x]["id"]);?>" 
-                                name="chk-<?php echo htmlentities($citiesDBFormat[$x]["id"]);?>"
+                                id="chk-<?php echo htmlentities($citiesDBFormat[$x]["city_name"]);?>" 
+                                value="<?php echo htmlentities($citiesDBFormat[$x]["id"]);?>"
+                                name="chk-cities"
                                 <?php
-                                if(in_array($citiesDBFormat[$x]["id"],$preferred_citites)){
-                                        echo "checked";
-                                }
+                                    if($preferred_cities != null && $preferred_cities != "" && !empty($preferred_cities)
+                                         && in_array($citiesDBFormat[$x]["id"],$preferred_cities)){
+                                            echo "checked";
+                                    }
                                 ?>
                             >
                             <label class="custom-control-label check-label" 
-                                for="chk-<?php echo htmlentities($citiesDBFormat[$x]["id"]);?>">
+                                for="chk-<?php echo htmlentities($citiesDBFormat[$x]["city_name"]);?>">
                                 <!-- Echoes Name into Label -->
                                 <?php echo htmlentities($citiesDBFormat[$x]["city_name"]);?>
                             </label>
@@ -167,8 +171,17 @@
     <div class="col-6">
         <button id="back" type="button" class=" w-100 btn btn-outline-warning btn-text-outline">BACK</button>
     </div>
-    <div class="col-6">
+    <!-- <div class="col-6">
         <button id="next" type="button" class=" w-100 btn btn-warning text-white btn-text-2">NEXT</button>
+    </div> -->
+    <div class="col-6">
+        <button id="PI-submit-btn" type="type" value="Submit" class="w-100 btn btn-warning text-white btn-text-2 justify-content-center align-items-center">
+                <span id="PI-submit-btn-txt">SAVE & NEXT</span>
+                <div id="PI-submit-btn-load" class="d-none">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span class="sr-only">Loading...</span>
+               </div>
+        </button>
     </div>
 </div>
 </form>
