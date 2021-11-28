@@ -127,7 +127,7 @@ $ch = curl_init();
         <?php
     }
 ?>
-<?php // echo var_dump($_POST);?>
+<?php  // echo var_dump($output);?>
 <div class="row d-flex flex-column title-2-container pt-1 pt-lg-3">
     <h2 class="title-style-2">Tell us a bit about yourself</h2>
     <h6 class="title-subtitle-1">Please answer a few quick questions to complete your application.</h6>
@@ -314,7 +314,8 @@ $ch = curl_init();
                         Change Image
                     </p>
                 </div>
-                <img src="<?php echo $savedFiles[0]->file_path.$savedFiles[0]->file_name;?>" alt="..." class="img-thumbnail">
+                <img src="<?php echo $savedFiles[0]->file_path.$savedFiles[0]->file_name;?>" alt="User's uploaded image" class="img-thumbnail">
+                <input type="hidden" name="old_file_id" value="<?php echo $savedFiles[0]->id;?>">
             <?php 
                 } else {
             ?>
@@ -335,8 +336,18 @@ $ch = curl_init();
     <div class="col-6">
         <button id="back" type="button" class=" w-100 btn btn-outline-warning btn-text-outline">BACK</button>
     </div>
-    <div class="col-6">
+    <!-- <div class="col-6">
         <button id="next" type="submit" class=" w-100 btn btn-warning text-white btn-text-2">NEXT</button>
+    </div> -->
+    <div class="col-6">
+        <button id="PI-submit-btn" type="submit" value="Submit" class="w-100 btn btn-warning text-white btn-text-2 justify-content-center align-items-center">
+            <span id="PI-submit-btn-txt">SAVE & NEXT</span>
+            <div id="PI-submit-btn-load" class="d-none">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span class="sr-only">Loading...</span>
+            </div>
+        </button>
     </div>
+
 </div>
 </form>
