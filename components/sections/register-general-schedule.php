@@ -1,52 +1,65 @@
 <?php
 
 session_start();
+// http://localhost/slim3homeheroapi/public/registration/save-general-schedule
+// http://localhost/slim3homeheroapi/public/registration/general-schedule
 
-// // Make curl for the personal inforation pagge information vv
-// // $url = "http://localhost/slim3homeheroapi/public/registration/personal-info"; // DEV
-// // $url = "https://slim3api.herokuapp.com/registration/personal-info"; // PROD
-// $post_data = array(
-//     'query' => 'some stuff',
-//     'method' => 'post',
-//     'ya' => 'boo'
-// );
+// Make curl for the general schedule info
+// $url = "http://localhost/slim3homeheroapi/public/registration/general-schedule"; // DEV
+ $url = "https://slim3api.herokuapp.com/registration/general-schedule"; // PROD
 
-// $headers = array(
-//     "Authorization: Bearer ".$_SESSION["registration_token"],
-//     'Content-Type: application/json',
-// );
+$headers = array(
+    "Authorization: Bearer ".$_SESSION["registration_token"],
+    'Content-Type: application/json',
+);
 
-// // 1. Initialize
-// $ch = curl_init();
+// 1. Initialize
+$ch = curl_init();
 
-// // 2. set options
-//     // URL to submit to
-//     curl_setopt($ch, CURLOPT_URL, $url);
+// 2. set options
+    // URL to submit to
+    curl_setopt($ch, CURLOPT_URL, $url);
 
-//     // Return output instead of outputting it
-//     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    // Return output instead of outputting it
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-//     // Type of request = POST
-//     // curl_setopt($ch, CURLOPT_POST, 1);
-//     curl_setopt($ch, CURLOPT_HTTPGET, 1);
+    // Type of request = GET
+    curl_setopt($ch, CURLOPT_HTTPGET, 1);
 
-//     // Set headers for auth
-//     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    
-//     // Adding the post variables to the request
-//     // curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+    // Set headers for auth
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-//     // Execute the request and fetch the response. Check for errors
-//     $output = curl_exec($ch);
+    // Execute the request and fetch the response. Check for errors
+    $output = curl_exec($ch);
 
-//     if($output === FALSE){
-//         echo "cURL Error:" . curl_error($ch);
-//     }
+    if($output === FALSE){
+        echo "cURL Error:" . curl_error($ch);
+    }
 
-//     curl_close($ch);
+    curl_close($ch);
 
-//     // $output =  json_decode(json_encode($output), true);
-//     $output =  json_decode($output);
+    // $output =  json_decode(json_encode($output), true);
+    $output =  json_decode($output);
+
+    $schedule_preference = null;
+
+    // Populate data from curl output
+    if($output !== FALSE && $output !== null && $output !== "" && !empty($output)){
+        if($output->success == false){
+        ?>
+            <div class="title-2-container alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>  <?php echo $output->response->status == 500 ? "500 SERVER ERROR": "401 NOT FOUND";?></strong> 
+                <?php echo $output->response->message;?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php
+        } else {
+            // Populate Data from DB
+            $schedule_preference = $output->response->has_schedule_preference;
+        }
+    }
 
     // =================================
     // =================================
@@ -58,23 +71,35 @@ session_start();
     $week = isset($_POST["week"]) ? $_POST["week"] : null;
     $isOnEdit = isset($_GET["edit"]) ? $_GET["edit"] : false;
 
+
     // =================================
     // =================================
     // Data from User, format & clean
 ?>
-<?php  //echo var_dump($output);?>
-<?php  echo var_dump($_SESSION["registration_token"]);?>
-
+<?php  //echo var_dump($output->response->has_schedule_preference);?>
+<?php  // echo var_dump($output->response);?>
+<?php  // echo var_dump($_SESSION["registration_token"]);?>
+<?php  // echo var_dump($schedule_preference);?>
 
 
 <h6>Schedule Preference</h6>
 <div class="row ml-3 mb-2">
     <div class="radio-item col-12 m-0">
-        <input type="radio" id="ritema" name="ritem" value="ropt1" checked>
+        <input type="radio" id="ritema" name="ritem" value="ropt1" 
+        <?php 
+            if( $schedule_preference !== null && $schedule_preference == 0){
+                 echo 'checked';
+            }
+        ?>>
         <label for="ritema">Any day or time</label>
     </div>
     <div class="radio-item col-12 m-0">
-        <input type="radio" id="ritemb" name="ritem" value="ropt2">
+        <input type="radio" id="ritemb" name="ritem" value="ropt2"        
+        <?php 
+            if( $schedule_preference !== null && $schedule_preference == 1){
+                 echo 'checked';
+            }
+        ?>>
         <label for="ritemb">My service hours</label>
     </div>
 </div>
