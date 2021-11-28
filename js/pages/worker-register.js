@@ -1,10 +1,81 @@
-const uploadForm = (form) => {
-    console.log("Insert code to upload form");
+const getRegisterSessionToken_then_uploadForm = (form) => {
+    console.log("Getting the registration session token...");
+    $.ajaxSetup({cache: false})
+    $.get(getDocumentLevel()+'/auth/get-register-session.php', function (data) {
+        session = data;
+        console.log(session);
+        //console.log(form);
+        uploadForm(form, session);
+    });
+}
+
+const uploadForm = (form, session) => {
+    console.log("Then calling app api...")
     console.log(form);
+    const parsedSession = JSON.parse(session);
+    const token = parsedSession['registration_token'];
+    console.log("your token is")
+    console.log(token);
+    // Create new form 
+    const samoka = new FormData();
+
+    // Append all 
+    samoka.append('skill_list', form["skill_list"]);
+    samoka.append('clearance_no', form["clearance_no"]);
+    samoka.append('default_rate', form["default_rate"]);
+    samoka.append('default_rate_type', form["default_rate_type"]);
+    samoka.append('expiration_date', form["expiration_date"]);
+
+    // Special case if new file has been uploaded
+    if(form["file_id"] == "false"){
+        samoka.append('file_id', form["false"]);
+        samoka.append('file_name', form["file_name"]);
+        samoka.append('file_path', form["file_path"]);
+    } else {
+        samoka.append('file_id', form["old_file_id"]);
+    }
+
+    // samok ajax di gnhan object kapoy nimu ui
+    $.ajax({
+        type : 'POST',
+        // url : 'http://localhost/slim3homeheroapi/public/registration/save-personal-info', // DEV
+        url : 'https://slim3api.herokuapp.com/registration/save-personal-info', // PROD
+        data : samoka,
+        contentType: false,
+        processData: false,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        success : function(response) {
+            console.log(response);
+            Swal.fire({
+                title: 'Continue to the Next Modal?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Continue',
+                denyButtonText: `Stay`,
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=2";
+                } else if (result.isDenied) {
+                  Swal.fire('Staying here', '', 'info')
+                }
+              });
+        },
+        error: function(response){
+            console.log(response);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error on form upload',
+                text: 'Please try again!',
+            })
+        }
+    });
 }
 
 const uploadForm_withSingleImage = (form, imageForm) => {
-        $.ajax({
+    console.log("Calling google api...");
+    $.ajax({
         type : 'POST',
         //url : 'http://localhost/IM2/hh-thirdparty/google-cloud-api/upload-single', // DEV
         url : 'https://hh-thirdparty.herokuapp.com/google-cloud-api/upload-single', // PROD
@@ -13,13 +84,16 @@ const uploadForm_withSingleImage = (form, imageForm) => {
         processData: false,
         // headers: {"Content-Type": "application/x-www-form-urlencoded"},
         success : function(response) {
-            console.log("Insert ajax to save Form Data")
-            console.log("Response from api is: ");
             console.log(response);
-            console.log(response['response']['file_location']);
-            console.log(response['response']['newFileName']);
-            console.log("Your form data is: ");
-            console.log(form);
+            const file_path = response.response.file_location;
+            const file_name = response.response.newFileName;
+            // console.log(file_name);
+            // console.log(file_path);
+            form['file_id'] = 'false';
+            form['file_name'] = file_name;
+            form['file_path'] = file_path;
+            // console.log(form);
+            getRegisterSessionToken_then_uploadForm(form);
         },
         error: function(response){
             console.log(response);
@@ -107,9 +181,13 @@ const loadPersonalInfo = () => {
             minDate: today,
         });
 
-        const next = document.getElementById("next");
+
+        const button = document.getElementById("PI-submit-btn");
+        const buttonTxt = document.getElementById("PI-submit-btn-txt");
+        const buttonLoadSpinner = document.getElementById("PI-submit-btn-load");
+
         const back = document.getElementById("back");
-        next.addEventListener("click", ()=>{
+        button.addEventListener("click", ()=>{
             // window.location.href = level+"/pages/worker/register.php"+"?page=2";
             $("#personal-info").validate({
                 ignore: [],
@@ -175,10 +253,19 @@ const loadPersonalInfo = () => {
                     // console.log(nbi_feild);
 
                     if(nbi_feild == null){
-                        uploadForm(formData);
+                        // Freeze the form
+                        disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
+                        // Pass to Appropriate function to call API
+                        // This api is called when there is no image to upload (No Changes)
+                        // it just takes the formData with file_id = "false" and (old_file_id) appended to it.
+                            formData["file_id"] = "false";
+                            // First need to get registration session token from server and pass it into the AUTH header on ajax request
+                            getRegisterSessionToken_then_uploadForm(formData);
                     } else {
                         // Set necessary data for upload image api call
                         const upload_data = {};
+                        // Note, this setting has been removed from DB
+                        // It only exists in this code now
                         upload_data['file_types'] = ["pdf","jpg","jpeg","png"]; // allowed types of file as per DB (in future make ajax call to grab this)
                         upload_data['bucket_name'] = "nbi-photos"; // location in google cloud/ bucket in cloud
 
@@ -190,23 +277,28 @@ const loadPersonalInfo = () => {
                         imageForm.append('file_types', JSON.stringify(upload_data['file_types']));
                         imageForm.append('bucket_name', upload_data['bucket_name']);
 
-                        // uploadForm_withSingleImage(formData, imageForm);
-                        uploadForm(formData);
+                        // Freeze the form
+                        disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
+
+                        // Pass to Appropriate function to call API
+                        // This api is called when there is no image to upload (No Changes)
+                        // It requires an ImageForm Object-> contains images only and the form data.
+                            uploadForm_withSingleImage(formData, imageForm);
                     }
 
-                    Swal.fire({
-                        title: 'Continue to the Next Modal?',
-                        showDenyButton: true,
-                        showCancelButton: true,
-                        confirmButtonText: 'Continue',
-                        denyButtonText: `Stay`,
-                      }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = level+"/pages/worker/register.php"+"?page=2";
-                        } else if (result.isDenied) {
-                          Swal.fire('Staying here', '', 'info')
-                        }
-                      })
+                    // Swal.fire({
+                    //     title: 'Continue to the Next Modal?',
+                    //     showDenyButton: true,
+                    //     showCancelButton: true,
+                    //     confirmButtonText: 'Continue',
+                    //     denyButtonText: `Stay`,
+                    //   }).then((result) => {
+                    //     if (result.isConfirmed) {
+                    //         window.location.href = level+"/pages/worker/register.php"+"?page=2";
+                    //     } else if (result.isDenied) {
+                    //       Swal.fire('Staying here', '', 'info')
+                    //     }
+                    //   });
                 }
             });
         })
