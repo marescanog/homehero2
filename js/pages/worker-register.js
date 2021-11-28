@@ -1,3 +1,52 @@
+const save_preferred_cities = (form) => {
+    console.log("proceeeding to next page...");
+    //console.log("Getting the registration session token...");
+    //const dataOBJ = getFormDataAsObj(form);
+    console.log(form);
+
+    $.ajaxSetup({cache: false})
+    $.get(getDocumentLevel()+'/auth/get-register-session.php', function (data) {
+        session = data;
+        // console.log(session);
+        const parsedSession = JSON.parse(session);
+        const token = parsedSession['registration_token'];
+
+        // Create new form 
+        const samoka = new FormData();
+
+        // Append 
+        samoka.append('preferred_cities', form["preferred_cities"]);
+        // console.log("your token is")
+        // console.log(token);
+        // console.log(form);
+        // console.log(samoka);
+
+        $.ajax({
+            type : 'POST',
+            // url : 'http://localhost/slim3homeheroapi/public/registration/save-preferred-cities', // DEV
+             url : 'https://slim3api.herokuapp.com/registration/save-preferred-cities', // PROD
+            data : samoka,
+            contentType: false,
+            processData: false,
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            success : function(response) {
+                console.log(response);
+                window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=4";
+            },
+            error: function(response){
+                console.log(response);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error on form upload',
+                    text: 'Please try again!',
+                })
+            }
+        });
+    });
+}
+
 const save_preferred_workSchedule = (form) => {
     console.log("proceeeding to next page...");
     //console.log("Getting the registration session token...");
@@ -729,11 +778,38 @@ const loadServiceArea = () => {
         
         button.addEventListener("click", ()=>{
            // window.location.href = level+"/pages/worker/register.php"+"?page=4";
-           $("#city-preference").validate({
+           $("#city-preference").validate({rules:{
+            chk_cities:{
+                required: true,
+                minlength: 1,
+            },
+        },
+        messages:{
+            chk_cities:{
+                required:  "Please select at lease one city.",
+            },
+        },
             submitHandler: function(form, event) { 
                 event.preventDefault();
+
+                const formData = getFormDataAsObj(form);
+                const checkedBoxes = document.getElementsByName("chk_cities");
+                // Grab all checked items
+                const checkedCities = []; 
+                checkedBoxes.forEach(check=>{
+                    if(check.checked){
+                        checkedCities.push(check.value);
+                    }
+                })
+                formData["preferred_cities"] = checkedCities;
+                //console.log(formData)
+
+                // Submit the form
+                save_preferred_cities(formData);
+
                 // Freeze the form
                 disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
+
             }
             });
         })
