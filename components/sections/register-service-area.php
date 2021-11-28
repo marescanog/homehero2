@@ -99,18 +99,21 @@
         <div class="card-body min-card-cities">
             <h6>Preferred cities</h6>
             <p class="m-0">Select the cities you would like to serve</p>
-            <p class="clicky smol p-0 m-0">Clear All</p>
-            <div class="row">
-                <div class="col-6">
+            <p class="clicky smol p-0 m-0" style="transform: translateY(10px);">Clear All</p>
+            <div class="row pb-4">
+                <div class="col-12 pl-3 mb-0 pb-0 mt-0 pt-0" >
+                    <input  style="height:1px; overflow: hidden;" type="checkbox" name="chk_cities" disabled>
+                </div>
+                <div class="col-6" class="margin-top: -100px;">
                     <?php 
                         for($x=0; $x<6; $x++){
                     ?>
-                    <div class="pt-0 pt-lg-2">
+                    <div class="pt-0 pt-lg-0">
                         <div class="custom-control custom-checkbox pt-3">
                             <input type="checkbox" class="custom-control-input" 
                                 id="chk-<?php echo htmlentities($citiesDBFormat[$x]["city_name"]);?>" 
                                 value="<?php echo htmlentities($citiesDBFormat[$x]["id"]);?>"
-                                name="chk-cities"
+                                name="chk_cities"
                                 <?php
                                     if($preferred_cities != null && $preferred_cities != "" && !empty($preferred_cities)
                                          && in_array($citiesDBFormat[$x]["id"],$preferred_cities)){
@@ -139,7 +142,7 @@
                             <input type="checkbox" class="custom-control-input" 
                                 id="chk-<?php echo htmlentities($citiesDBFormat[$x]["city_name"]);?>" 
                                 value="<?php echo htmlentities($citiesDBFormat[$x]["id"]);?>"
-                                name="chk-cities"
+                                name="chk_cities"
                                 <?php
                                     if($preferred_cities != null && $preferred_cities != "" && !empty($preferred_cities)
                                          && in_array($citiesDBFormat[$x]["id"],$preferred_cities)){
