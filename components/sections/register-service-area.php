@@ -2,7 +2,7 @@
     session_start();
     
     // Make curl for the general schedule info
-     // $url = "http://localhost/slim3homeheroapi/public/registration/preferred-cities"; // DEV
+    // $url = "http://localhost/slim3homeheroapi/public/registration/preferred-cities"; // DEV
      $url = "https://slim3api.herokuapp.com/registration/preferred-cities"; // PROD
     
     $headers = array(
@@ -85,7 +85,7 @@
 ?>
 <?php   // echo var_dump($output);?>
 <?php  // echo var_dump($output->response);?>
-<?php  // echo var_dump($_SESSION["registration_token"]);?>
+<?php   // echo var_dump($_SESSION["registration_token"]);?>
 <?php   //  echo var_dump($preferred_cities);?>
 <?php   // echo var_dump($citiesDBFormat[0]["city_name"]);?>
 
