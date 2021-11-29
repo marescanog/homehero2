@@ -882,7 +882,8 @@ const loadReview = () => {
                     // Your response after register-auth is
                     console.log(res)
                     if(res["status"] == 200){
-                        window.location.href = level+"/pages/worker/completed-registration.php";
+                        // window.location.href = level+"/pages/worker/completed-registration.php";
+                        hideLoadingOverlay();
                     } else {
                         hideLoadingOverlay();
                         Swal.fire({
