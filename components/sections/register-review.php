@@ -1,10 +1,83 @@
 <?php
-    $daysOfTheWeek = [
-        "Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"
-    ];
-    $week = isset($_POST["week"]) ? $_POST["week"] : null;
-    $isOnEdit = isset($_GET["edit"]) ? $_GET["edit"] : false;
+    session_start();
+    
+    // Make curl for the general schedule info
+    // $url = "http://localhost/slim3homeheroapi/public/registration/review-information"; // DEV
+     $url = "https://slim3api.herokuapp.com/registration/review-information"; // PROD
+    
+    $headers = array(
+        "Authorization: Bearer ".$_SESSION["registration_token"],
+        'Content-Type: application/json',
+    );
+    
+    // 1. Initialize
+    $ch = curl_init();
+    
+    // 2. set options
+        // URL to submit to
+        curl_setopt($ch, CURLOPT_URL, $url);
+    
+        // Return output instead of outputting it
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    
+        // Type of request = GET
+        curl_setopt($ch, CURLOPT_HTTPGET, 1);
+    
+        // Set headers for auth
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    
+        // Execute the request and fetch the response. Check for errors
+        $output = curl_exec($ch);
+    
+        if($output === FALSE){
+            echo "cURL Error:" . curl_error($ch);
+        }
+    
+        curl_close($ch);
+    
+        // $output =  json_decode(json_encode($output), true);
+        $output =  json_decode($output);
+    
+        $preferred_cities = null;
+    
+        // Populate data from curl output
+        if($output !== FALSE && $output !== null && $output !== "" && !empty($output)){
+            if($output->success == false){
+            ?>
+                <div class="title-2-container alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>  <?php echo $output->response->status == 500 ? "500 SERVER ERROR": "401 NOT FOUND";?></strong> 
+                    <?php echo $output->response->message;?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php
+            } else {
+                // Populate Data from DB
+                $preferred_cities = $output->response;
+            }
+        }
+    
+        // =================================
+        // =================================
+            
+        // Data for rendering
+        $daysOfTheWeek = [
+            "Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"
+        ];
+        $week = isset($_POST["week"]) ? $_POST["week"] : null;
+        $isOnEdit = isset($_GET["edit"]) ? $_GET["edit"] : false;
+
+        $hasSchedPref = $output->response->has_sched_pref == "true";
+
+        // =================================
+        // =================================
+        // Data from User, format & clean if necessary
 ?>
+<?php   //echo var_dump($output);?>
+<?php   //echo var_dump($output->response->name);?>
+<?php   //echo var_dump($hasSchedPref);?>
+
 <div class="row d-flex flex-column title-2-container pt-1 pt-lg-3">
     <h2 class="title-style-2">REVIEW YOUR INFO</h2>
     <h6 class="title-subtitle-1">Please take time to review your information before your submit your application.</h6>
@@ -23,7 +96,7 @@
                         NAME
                     </p>
                     <p class="m-0">
-                        Jose Santos
+                        <?php echo htmlentities($output->response->name);?>
                     </p>
                 </div>
                 <div class="col-6">
@@ -31,7 +104,7 @@
                         MOBILE NUMBER
                     </p>
                     <p class="m-0">
-                        0922-222-2222
+                    <?php echo htmlentities($output->response->mobile);?>
                     </p>
                 </div>
             </div>
@@ -46,7 +119,7 @@
                         SKILLS
                     </p>
                     <p class="m-0">
-                        Electrical, Carpentry
+                        <?php echo htmlentities($output->response->skills);?>
                     </p>
                 </div>
             </div>
@@ -56,7 +129,7 @@
                         SALARY GOAL
                     </p>
                     <p class="m-0">
-                        300.00 /per day
+                        <?php echo htmlentities($output->response->salary);?>
                     </p>
                 </div>
             </div>
@@ -66,7 +139,7 @@
                         CERTIFICATION/DIPLOMA
                     </p>
                     <p class="m-0">
-                        TESDA certificate, TOR
+                        <?php echo htmlentities($output->response->cert);?>
                     </p>
                 </div>
             </div>
@@ -76,7 +149,7 @@
                         NBI CLEARANCE NO.
                     </p>
                     <p class="m-0">
-                        20009182378
+                        <?php echo htmlentities($output->response->nbiNo);?>
                     </p>
                 </div>
                 <div class="col-6">
@@ -84,7 +157,7 @@
                         EXPIRATION DATE
                     </p>
                     <p class="m-0">
-                        09/12/2022
+                        <?php echo htmlentities($output->response->expiration);?>
                     </p>
                 </div>
             </div>
@@ -94,34 +167,46 @@
                 Service Hours
             </h5>
             <p class="clicky smol pt-0 mt-0">Edit Hours</p>
+            <!-- $hasSchedPref -->
             <div class="card">
                 <div class="card-body">
                     <?php 
-                        for($x=0; $x<7; $x++ ){
+                        if($hasSchedPref){
+                            for($x=0; $x<7; $x++ ){
                     ?>
-                    <div class="row">
-                        <div class="col-4">
-                            <p><?php echo $daysOfTheWeek[$x];?></p>
-                        </div>
-                        <div class="col-8">
-                            <p class="text-center">
-                                <?php
-                                    $dayObj = ($week == null) ? null :  $week[$x];;
-                                    if($week != null){
-                                        if($dayObj["isDayOff"]){
-                                            echo "Day off";
-                                        }else{
-                                            echo $dayObj["start"]." - ".$dayObj["end"];
-                                        }
-                                    } else {
-                                        echo "9:00 AM - 5:00 PM";
-                                    }
-                                ?>
-                            </p>
-                        </div>
-                    </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p><?php echo $daysOfTheWeek[$x];?></p>
+                                </div>
+                                <div class="col-8">
+                                    <p class="text-center">
+                                        <?php
+                                            $dayObj = ($week == null) ? null :  $week[$x];;
+                                            if($week != null){
+                                                if($dayObj["isDayOff"]){
+                                                    echo "Day off";
+                                                }else{
+                                                    echo $dayObj["start"]." - ".$dayObj["end"];
+                                                }
+                                            } else {
+                                                echo "9:00 AM - 5:00 PM";
+                                            }
+                                        ?>
+                                    </p>
+                                </div>
+                            </div>
                     <?php 
                         }
+                      } else {
+                    ?>
+                        <p class="LABEL-THICC-SMOL m-0">
+                            SCHEDULE
+                        </p>
+                        <p class="m-0">
+                            No Preferred Schedule
+                        </p>
+                    <?php
+                      }
                     ?>
                     <div class="row mt-3">
                         <div class="col-6">
@@ -129,7 +214,7 @@
                                 BOOKING LEAD TIME
                             </p>
                             <p class="m-0">
-                                1 month/s
+                                <?php echo htmlentities($output->response->booking_lead);?>
                             </p>
                         </div>
                         <div class="col-6">
@@ -137,7 +222,7 @@
                                 NOTICE LEAD TIME
                             </p>
                             <p class="m-0">
-                                3 day/s
+                                <?php echo htmlentities($output->response->notice_lead);?>
                             </p>
                         </div>
                     </div>
@@ -155,7 +240,7 @@
                         CITIES
                     </p>
                     <p class="m-0">
-                        Cebu City, Mandaue, Talisay
+                        <?php echo htmlentities($output->response->cities);?>
                     </p>
                 </div>
             </div>
