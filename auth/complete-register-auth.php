@@ -5,10 +5,9 @@
     $status = 400;
     $data = []; 
 
-    $hasRegistered = isset($_POST['hasRegistered']) ? $_POST['hasRegistered'] : null;
+    $hasRegistered = isset($_SESSION['registration_token']) ? $_SESSION['registration_token'] : null;
 
-    if($token != null){
-        $_SESSION['registration_token'] = $token;
+    if(   $hasRegistered != null){
         $_SESSION['hasRegistered'] = true ;
         // $_SESSION['initials'] = $initials;
         $retVal = "updated Registration token";
