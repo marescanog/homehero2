@@ -1,3 +1,21 @@
+const showLoadingOverlay = () => {
+    Swal.fire({
+        title: "",
+        imageUrl: getDocumentLevel()+"/images/svg/Spinner-1s-200px.svg",
+        imageWidth: 200,
+        imageHeight: 200,
+        imageAlt: 'Custom image',
+        showCancelButton: false,
+        showConfirmButton: false,
+        background: 'transparent',
+        allowOutsideClick: false
+    });
+}
+
+const hideLoadingOverlay= () => {
+    swal.close();
+}
+
 const save_preferred_cities = (form) => {
     console.log("proceeeding to next page...");
     //console.log("Getting the registration session token...");
@@ -40,6 +58,7 @@ const save_preferred_cities = (form) => {
                 window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=4";
             },
             error: function(response){
+                hideLoadingOverlay();
                 console.log(response);
                 Swal.fire({
                     icon: 'error',
@@ -89,6 +108,7 @@ const save_preferred_workSchedule = (form) => {
                 window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=3";
             },
             error: function(response){
+                hideLoadingOverlay();
                 console.log(response);
                 Swal.fire({
                     icon: 'error',
@@ -106,6 +126,7 @@ const getRegisterSessionToken_then_uploadForm = (form) => {
     console.log("Getting the registration session token...");
     $.ajaxSetup({cache: false})
     $.get(getDocumentLevel()+'/auth/get-register-session.php', function (data) {
+        
         session = data;
         console.log(session);
         //console.log(form);
@@ -171,6 +192,7 @@ const uploadForm = (form, session) => {
             //   });
         },
         error: function(response){
+            hideLoadingOverlay();
             console.log(response);
             Swal.fire({
                 icon: 'error',
@@ -204,6 +226,7 @@ const uploadForm_withSingleImage = (form, imageForm) => {
             getRegisterSessionToken_then_uploadForm(form);
         },
         error: function(response){
+            hideLoadingOverlay();
             console.log(response);
             Swal.fire({
                 icon: 'error',
@@ -362,6 +385,8 @@ const loadPersonalInfo = () => {
                     const nbi_feild = document.getElementById("nbi-file-input");
                     // console.log(nbi_feild);
 
+                    showLoadingOverlay();
+
                     if(nbi_feild == null){
                         // Freeze the form
                         disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
@@ -439,6 +464,7 @@ const loadSchedule = () => {
                 submitHandler: function(form, event) { 
                     event.preventDefault();
                     // Freeze the form
+                    showLoadingOverlay();
                     save_preferred_workSchedule(form);
                     disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
                 }
@@ -814,6 +840,7 @@ const loadServiceArea = () => {
                 // Submit the form (DEV BUILD UNCOMMENT)
                 // save_preferred_cities(formData);
 
+                showLoadingOverlay();
                 // Freeze the form
                 disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
 
@@ -834,9 +861,39 @@ const loadServiceArea = () => {
 const loadReview = () => {
     const level = getDocumentLevel();
     $("#body").load(level+"/components/sections/register-review.php", ()=>{
-        const next = document.getElementById("next");
-        next.addEventListener("click", ()=>{
-            window.location.href = level+"/pages/worker/completed-registration.php";
+        const button = document.getElementById("PI-submit-btn");
+        const buttonTxt = document.getElementById("PI-submit-btn-txt");
+        const buttonLoadSpinner = document.getElementById("PI-submit-btn-load");
+        const back = document.getElementById("back");
+        button.addEventListener("click", ()=>{
+            // window.location.href = level+"/pages/worker/completed-registration.php";
+
+            // Enable Modal Overalay and disable button
+            disable_button_enableModalSpinner(button, buttonTxt, buttonLoadSpinner);
+            showLoadingOverlay();
+
+            // Do an ajax call to save the "Registered option into worker and make a support ticket"
+            // For worker verification
+            $.ajax({
+                type : 'GET',
+                url : getDocumentLevel()+'/auth/complete-register-auth.php',
+                success : function(response) {
+                    var res = JSON.parse(response);
+                    // Your response after register-auth is
+                    console.log(res)
+                    if(res["status"] == 200){
+                        window.location.href = level+"/pages/worker/completed-registration.php";
+                    } else {
+                        hideLoadingOverlay();
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Something went wrong! Please try again',
+                            icon: 'error',
+                            confirmButtonText: 'ok'
+                        })
+                    }
+                }
+            });
         })
         back.addEventListener("click", ()=>{
             window.location.href = level+"/pages/worker/register.php"+"?page=3";

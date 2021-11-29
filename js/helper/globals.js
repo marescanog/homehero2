@@ -122,3 +122,10 @@ const enableErrorDisplayFor = (id_name, error_message)=>{
         errorDisplay.style = "";
     }
 }
+
+
+const disable_button_enableModalSpinner = (button, buttonTxt, buttonLoadSpinner) => {
+    button.setAttribute("disabled", "true");
+    buttonTxt.innerHTML = "Loading"
+    buttonLoadSpinner.setAttribute("class", "d-inline");
+};

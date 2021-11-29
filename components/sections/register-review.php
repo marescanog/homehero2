@@ -251,10 +251,21 @@
 </div>
 <div class="row card-container my-3">
     <div class="col-6">
-        <button id="back" type="button" class=" w-100 btn btn-outline-warning btn-text-outline">BACK</button>
+        <button id="back" type="button" class="h-100 w-100 btn btn-outline-warning btn-text-outline">BACK</button>
     </div>
-    <div class="col-6">
+    <!-- <div class="col-6">
         <button id="next" type="button" class=" w-100 btn btn-warning text-white btn-text-2">NEXT</button>
+    </div> -->
+    <div  class="col-6">
+        <button id="PI-submit-btn" type="button" data-toggle="modal" data-target="#modal" class="w-100 btn btn-warning text-white btn-text-2 justify-content-center align-items-center">
+                <span id="PI-submit-btn-txt">SUBMIT APPLICATION</span>
+                <div id="PI-submit-btn-load" class="d-none">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span class="sr-only">Loading...</span>
+               </div>
+        </button>
     </div>
 </div>
 </form>
+
+

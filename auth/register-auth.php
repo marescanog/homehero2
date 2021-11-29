@@ -15,7 +15,7 @@
 
     if($token != null){
         $_SESSION['registration_token'] = $token;
-        $_SESSION['hasRegistered'] = $hasRegistered ;
+        $_SESSION['hasRegistered'] = false;
         // $_SESSION['initials'] = $initials;
         $retVal = "Received Registration token";
         $status = 200;
