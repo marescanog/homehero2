@@ -27,8 +27,8 @@ const save_preferred_cities = (form) => {
         console.log(form);
         $.ajax({
             type : 'POST',
-             url : 'http://localhost/slim3homeheroapi/public/registration/save-preferred-cities', // DEV
-            // url : 'https://slim3api.herokuapp.com/registration/save-preferred-cities', // PROD
+            // url : 'http://localhost/slim3homeheroapi/public/registration/save-preferred-cities', // DEV
+             url : 'https://slim3api.herokuapp.com/registration/save-preferred-cities', // PROD
             data : form,
             // contentType: false,
             // processData: false,
