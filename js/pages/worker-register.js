@@ -16,24 +16,28 @@ const save_preferred_cities = (form) => {
 
         // Append 
         samoka.append('preferred_cities', form["preferred_cities"]);
+        samoka.append('token', form["preferred_cities"]);
         // console.log("your token is")
-        // console.log(token);
+        console.log(token);
         // console.log(form);
         // console.log(samoka);
 
+        form['token'] = token;
+
+        console.log(form);
         $.ajax({
             type : 'POST',
-            // url : 'http://localhost/slim3homeheroapi/public/registration/save-preferred-cities', // DEV
-             url : 'https://slim3api.herokuapp.com/registration/save-preferred-cities', // PROD
-            data : samoka,
-            contentType: false,
-            processData: false,
-            headers: {
-                "Authorization": `Bearer ${token}`
-            },
+             url : 'http://localhost/slim3homeheroapi/public/registration/save-preferred-cities', // DEV
+            // url : 'https://slim3api.herokuapp.com/registration/save-preferred-cities', // PROD
+            data : form,
+            // contentType: false,
+            // processData: false,
+            // headers: {
+            //     "Authorization": `Bearer ${token}`
+            // },
             success : function(response) {
                 console.log(response);
-                window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=4";
+                //window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=4";
             },
             error: function(response){
                 console.log(response);
@@ -808,7 +812,7 @@ const loadServiceArea = () => {
                 save_preferred_cities(formData);
 
                 // Freeze the form
-                disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
+                // disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
 
             }
             });
