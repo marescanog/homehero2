@@ -28,7 +28,7 @@ const save_preferred_cities = (form) => {
         $.ajax({
             type : 'POST',
              url : 'http://localhost/slim3homeheroapi/public/registration/save-preferred-cities', // DEV
-            // url : 'https://slim3api.herokuapp.com/registration/save-preferred-cities', // PROD
+            // url : 'https://slim3api.herokuapp.com/registration/save-preferred-cities', // PROD (HAS A CORS ISSUE FOR SOME REASON)
             data : samoka,
             contentType: false,
             processData: false,
@@ -37,7 +37,7 @@ const save_preferred_cities = (form) => {
             },
             success : function(response) {
                 console.log(response);
-                //window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=4";
+                window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=4";
             },
             error: function(response){
                 console.log(response);
@@ -808,14 +808,18 @@ const loadServiceArea = () => {
                 formData["preferred_cities"] = checkedCities;
                 //console.log(formData)
 
+
+                // (DEV BUILD UNCOMMENT)
+                // (DEV BUILD UNCOMMENT)
                 // Submit the form (DEV BUILD UNCOMMENT)
-               // save_preferred_cities(formData);
+                // save_preferred_cities(formData);
 
                 // Freeze the form
                 disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
 
+                // (PROD BUILD)
                 // (PROD BUILD UNCOMMENT - CANNOT PROCEED DUE TO CORS)
-                window.location.href = level+"/pages/worker/register.php"+"?page=4";
+                 window.location.href = level+"/pages/worker/register.php"+"?page=4";
 
             }
             });
