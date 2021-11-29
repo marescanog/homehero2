@@ -7,6 +7,11 @@ if(!isset($_SESSION["registration_token"])){
     exit();
 }
 
+if(isset($_SESSION["hasRegistered"]) && $_SESSION["hasRegistered"] == true){
+    header("Location: ./");
+    exit();
+}
+
 // // use the session variable via curl to retreive user data
 // // $url = "https://slim3api.herokuapp.com/create-guest";
 // $url = "http://localhost/slim3homeheroapi/public/registration/personal-info";

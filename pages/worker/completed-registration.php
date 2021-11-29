@@ -11,7 +11,7 @@ if(!isset($_SESSION["hasRegistered"])){
     exit();
 }
 
-if($_SESSION["hasRegistered"] == "false"){
+if($_SESSION["hasRegistered"] == false){
     header("Location: ./");
     exit(); 
 }
