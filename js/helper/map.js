@@ -239,18 +239,43 @@ function initMap() {
     ];
 
     const cityNames = ["Bantayan", "Carcar", "Cebu City", "Daanbantayan", "Danao", "Lapu-lapu", "Liloan", "Mandaue", "Minglanilla", "Naga", "Talisay", "Toledo"];
+    // const cityIds = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+    // for(let x = 0; x < cityNames.length; x++){
+    //     const check = document.getElementById("chk-"+cityNames[x]);
+    //     // const check = document.getElementById("chk-"+cityIds[x]);
+    //     check.addEventListener("click", ()=>{
+    //         if(check.checked){
+    //             setPolygons[x]();
+    //         } else {
+    //             unsetPolygons[x]();
+    //         }
+    //     });
 
-    for(let x = 0; x < cityNames.length; x++){
-        const check = document.getElementById("chk-"+cityNames[x]);
+    //     // Load checked images
+    //     if(check.checked){
+    //         console.log(cityNames[x]+" is checked!");
+    //     }
 
-        check.addEventListener("click", ()=>{
+
+    // }
+
+    $(document).ready(()=>{
+        for(let x = 0; x < cityNames.length; x++){
+            const check = document.getElementById("chk-"+cityNames[x]);
+            // const check = document.getElementById("chk-"+cityIds[x]);
+            check.addEventListener("click", ()=>{
+                if(check.checked){
+                    setPolygons[x]();
+                } else {
+                    unsetPolygons[x]();
+                }
+            });
+    
+            // Load checked polygons
             if(check.checked){
                 setPolygons[x]();
-            } else {
-                unsetPolygons[x]();
             }
-        });
-    }
-
+        }
+    });
 
 };
