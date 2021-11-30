@@ -95,7 +95,7 @@ $("#SMSVerification").validate({
                         // an ajax to assign registration session token
                         $.ajax({
                             type : 'POST',
-                            url : getDocumentLevel()+'/auth/setloginSession.php',
+                            url : getDocumentLevel()+'/auth/setLoginSession.php',
                             data : data,
                             success : function(response) {
                                 var res = JSON.parse(response);
