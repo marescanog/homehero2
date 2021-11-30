@@ -15,28 +15,31 @@
           </div>
 
           <div class="modal-body">
-              <form id="modal-login-form" type="POST" onSubmit="hoLogin(event)" name="hoLoginForm">
+              <form id="modal-login-form" type="POST"  name="hoLoginForm">
               <h4 style="font-weight: bold; font-size: 26px; color: #707070">Welcome Back!</h4>
                       <h5 style="font-size: 16px; color: #707070">Sign into your Homeowner account </h5>
                   
-                      <div class="form-group mb-2 mt-1">    
+                      <div class="form-group mb-1 mt-1">    
                     <label for="HOLnm" class="font-weight-bold" style="color: #707070;font-size: 14px;">MOBILE NUMBER</label>
-                    <input type="mobile-number" class="form-control mt-0" id="HOLnm" name="phone_number" placeholder="09XX-XXX-XXXX" autocomplete require maxlength="11">
+                               <!-- Mobile Number input feild -->
+                      <div id="RU_phone_formGroup" class="form-group">
+                          <input type="text" class="form-control" id="RU_phone" name="phone" placeholder="Mobile number (09XXXXXXXXX)" autocomplete required maxlength="15">
+                      </div>
                   </div>
-                  <div class="form-group mb-1 mt-1">
+                  <div class="form-group mb-1 mt-0">
                     <label for="HOLpassword" class="font-weight-bold" style="color: #707070;font-size: 14px;">PASSWORD</label>
-                    <input type="password" class="form-control mt-0 mb-0" id="HOLps" name="password" placeholder="at least 6 characters" autocomplete require minlength="6">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" minlength="8" maxlength="31" autocomplete >
                   </div>
                   <a class="mt-0 mb-2" href="#" style="font-size:0.8em;">
                     Forgot password?
                     </a> 
-                  <br>
-                  <button id="LU-submit-btn" type="button" class="btn btn-warning text-white font-weight-bold w-100 mb-3 mt-2" >
-                  <span id="LU-submit-btn-txt">CONTINUE</span>
-                  <div id="LU-submit-btn-load" class="d-none">
-                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                      <span class="sr-only">Loading...</span>
-                    </button>
+                    <button id="RU-submit-btn"  type="submit" value="Submit"  class="btn btn-warning text-white font-weight-bold w-100 mb-3 py-2 mt-3">
+                      <span id="RU-submit-btn-txt">LOGIN</span>
+                      <div id="RU-submit-btn-load" class="d-none">
+                          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                          <span class="sr-only">Loading...</span>
+                      </div>
+                  </button>
                   <div class="text-center" style="font-size:0.8em;">
                         <p id="su">
                           Dont have an account? <a href="#">Sign-up</a>
@@ -49,5 +52,5 @@
           </div>
     </div>
 </div>
-
+<script src="<?php echo $level?>/js/components/modal-validation/modal-homeowner-login.js"></script>
                    

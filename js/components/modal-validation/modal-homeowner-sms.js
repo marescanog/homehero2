@@ -82,16 +82,20 @@ $("#SMSVerification").validate({
                     //url: 'http://localhost/slim3homeheroapi/public/auth/homeowner/create-account', // DEV
                     data : submitformData,
                     success : function(response) {
-                        console.log("your response after account creation is:")
-                        console.log(response);
+                        // console.log("your response after account creation is:")
+                        // console.log(response);
 
                         // Redirect to User Auth then User Home page
                         let data = {};
                         data['token'] = response.response.data.token;
                         data['userType'] = 1;
+                        data['email'] = response.response.data.email;
+                        data['first_name'] = response.response.data.first_name;
+                        data['initials'] = response.response.data.initials;
+                        data['role'] = response.response.data.role;
 
-                        console.log("your data token is");
-                        console.log(data);
+                        // console.log("your data token is");
+                        // console.log(data);
                         // an ajax to assign registration session token
                         $.ajax({
                             type : 'POST',

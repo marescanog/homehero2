@@ -12,11 +12,11 @@ $( document ).ready(()=>{
 
     // Set events for elements
     buttonDesktop.addEventListener("click", ()=>{
-        loadModal("user-login",modalTypes,submitLoginHandler,getDocumentLevel());
+        loadModal("user-login",modalTypes,()=>{},getDocumentLevel());
     });
 
     buttonMobile.addEventListener("click", ()=>{
-        loadModal("user-login",modalTypes,submitLoginHandler,getDocumentLevel());
+        loadModal("user-login",modalTypes,()=>{},getDocumentLevel());
     });
 
     signUpHeaderLink.addEventListener("click", ()=>{
@@ -24,10 +24,10 @@ $( document ).ready(()=>{
     });
 
     const submitLoginHandler = () => {
-        const button = document.getElementById("LU-submit-btn");
-        button.addEventListener("click", ()=>{
-            login();
-        })
+        // const button = document.getElementById("LU-submit-btn");
+        // button.addEventListener("click", ()=>{
+        //     login();
+        // })
     }
 
     const submitSignUpModalhandler = () => {
