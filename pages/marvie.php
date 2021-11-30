@@ -90,8 +90,8 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             <h2>Home Owner</h2>
             <ul>
                 <li><a href="./homeowner/home.php">Home</a> (Has redirect set-up - redirects to index.php when no user token)</li>
-                <li><a href="./homeowner/create-project.php">Project Creation</a></li>
-                <li><a href="./homeowner/projects.php">projects</a></li>
+                <li><a href="./homeowner/create-project.php">Project Creation</a> (Has redirect set-up - redirects to index.php when no user token)</li>
+                <li><a href="./homeowner/projects.php">projects</a> (Has redirect set-up - redirects to index.php when no user token)</li>
                 <li><a href=""></a>Single Project</li>
                 <li><a href=""></a>Messages</li>
             </ul>
