@@ -1,10 +1,10 @@
 <?php 
 
-// session_start();
-// if(!isset($_SESSION["token"])){
-//     header("Location: ../../");
-//     exit();
-// }
+session_start();
+if(!isset($_SESSION["token"])){
+    header("Location: ../../");
+    exit();
+}
 
 $level ="../..";
 $fistName = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest";

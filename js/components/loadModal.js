@@ -13,7 +13,8 @@ const modalTypes = {
     "tempRegister": docLevelModal+"/components/modals/temporary/test-modal-register.php",
     "tempLogin": docLevelModal+"/components/modals/temporary/temp-login.php",
     "SMS-verification":  docLevelModal+"/components/modals/sms-verification.php",
-    "SMS-verification-worker":  docLevelModal+"/components/modals/sms-verification-worker.php"
+    "SMS-verification-worker":  docLevelModal+"/components/modals/sms-verification-worker.php",
+    "SMS-verification-homeowner":  docLevelModal+"/components/modals/sms-verification.php"
 }
 
 // This function loads the
