@@ -3,8 +3,6 @@ session_start();
 $output = null;
 
 // curl to get the needed modal information
-// Make curl for the personal inforation pagge information vv
-// $url = "http://localhost/slim3homeheroapi/public/search-proj"; // DEV
 
 // Make curl for the personal inforation pagge information vv
 // $url = "http://localhost/slim3homeheroapi/public/populate-address-form"; // DEV
