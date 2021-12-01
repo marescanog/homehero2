@@ -8,7 +8,7 @@ $output = null;
 
 // Make curl for the personal inforation pagge information vv
 // $url = "http://localhost/slim3homeheroapi/public/populate-address-form"; // DEV
- $url = "https://slim3api.herokuapp.com/search-proj"; // PROD
+ $url = "https://slim3api.herokuapp.com/populate-address-form"; // PROD
 
 $headers = array(
     "Authorization: Bearer ".$_SESSION["token"],
@@ -59,11 +59,14 @@ $ch = curl_init();
             </div> -->
         <?php
         } else {
-            $defaultHome = $output->response->defaultHome;
-            $Addressess = $output->response->allAddress;
-            $cities = $output->response->cities;
-            $homeTypes = $output->response->hometype;
-            $barangays = $output->response->barangays;
+            if($output->response){
+                $defaultHome = $output->response->defaultHome;
+                $Addressess = $output->response->allAddress;
+                $cities = $output->response->cities;
+                $homeTypes = $output->response->hometype;
+                $barangays = $output->response->barangays;
+            }
+
         }
     }
 
