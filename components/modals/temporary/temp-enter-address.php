@@ -179,7 +179,53 @@ $ch = curl_init();
 
     <form id="enterAddress" type="POST" name="modalForm">
         <div class="modal-body">
-            <h1>TEST</h1>
+        <!-- Modal body Start -->
+            <div>
+                <?php //--------------- PHP ZONE ----------------
+                    if(count($Addressess) == 0){
+                        echo "<h6>You have no addresses saved. Save a new Address: </h6>";
+                    } else {
+                ?><!-------------------------------------------------->
+                <!-- HTML ZONE -->
+
+                <div class="form-group">
+                <label for="as">Addressess:</label>
+                <select id="saved-add-select" class="custom-select c">
+                    <option  selected value="">Choose an address</option>
+                        <?php for($x = 0; $x < count($Addressess); $x++) {?>
+                            <option 
+                                value="<?php echo $Addressess[$x]->home_id;?>"
+                            >
+                                <?php echo $Addressess[$x]->street_no." ".$Addressess[$x]->street_name;?>
+                            </option>
+                        <?php 
+                            }
+                        ?>
+                </select>
+                <button id="saved-add" class="btn btn-primary" type="button">Use Saved Address</button>
+                <script>
+                    const saved_add_This = document.getElementById("saved-add");
+                    const AddressText2 = document.getElementById("add-address-text");
+                    const HomeFeild2 = document.getElementById("home_address_field");
+                    const saved_add_select = document.getElementById("saved-add-select");
+                    const address_name_label = document.getElementById("address_name_label");
+                    saved_add_This.addEventListener("click", ()=>{
+                        AddressText2.innerText = saved_add_select.options[saved_add_select.selectedIndex].text;
+                        HomeFeild2.value = saved_add_select.value;
+                        address_name_label.value =  saved_add_select.options[saved_add_select.selectedIndex].text;
+                        $("#modal").modal('hide');
+                    });
+                </script>
+            </div>
+            <?php //--------------- PHP ZONE ----------------
+                } // Closing bracket for if else above
+            ?><!-------------------------------------------------->
+            </div>
+             <!-- HTML ZONE -->
+
+             
+
+        <!-- Modal body End -->
         </div>
         <div class="modal-footer">
             <button id="PI-submit-btn" type="submit" value="Submit" class="w-100 btn btn-warning text-white qbtn-text-2 justify-content-center align-items-center">
