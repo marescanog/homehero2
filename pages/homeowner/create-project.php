@@ -40,14 +40,44 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             <div class="col-12 col-lg-9"></div>
         </div>
     </div>
-
     <!-- Main Content -->
     <div class="container container-full  w-100 m-0 p-0 min-height h-100">
         <div class="min-height content-container row flex-lg-row flex-column-reverse  m-auto gray-font">
             <!-- Info Block -->
             <div class="info-container col-12 col-lg-3 min-height">
                 <div class="info-wrapper flex-1 gray-font">
-                    <h3 class="info-header" >Create a project for Plumbing Repair</h3>
+                    <?php 
+                    
+                        $project_type= isset($_POST["project_type"]) ? $_POST["project_type"] : "General project";
+                        $project_id = isset($_POST["project_id"]) ? $_POST["project_id"] : null ;
+                        $project_category = isset($_POST["project_category"]) ?  $_POST["project_category"] : null ;
+                        $home_id = isset($_POST["home_id"]) ? $_POST["home_id"] : null ;
+                        $addr = isset($_POST["address_name_label"]) ? $_POST["address_name_label"] : null ;
+                        // echo  $project_id;
+                        // echo  $project_category;
+                        // echo  $home_id;
+                    ?>
+                    <p>
+                    <?php //echo var_dump($_POST);?>
+                    </p>
+
+                    <div>
+                        <input type="hidden" name="home_id" id="home_id"  value="<?php echo $home_id;?>">
+                        <input type="hidden" name="job_size_id" id="job_size_id">
+                        <input type="hidden" name="required_expertise_id" id="required_expertise_id"  value="<?php echo $project_id;?>">
+                        <input type="hidden" name="job_post_status_id" id="job_post_status_id">
+                        <input type="hidden" name="job_description" id="job_description">
+                        <input type="hidden" name="rate_offer" id="rate_offer">
+                        <input type="hidden" name="rate_type_id" id="rate_type_id">
+                        <input type="hidden" name="is_exact_schedule" id="is_exact_schedule" value="false">
+                        <input type="hidden" name="preferred_date_time" id="preferred_date_time">
+                        <input type="hidden" name="days_offset" id="days_offset">
+                        <input type="hidden" name="project_name" id="project_name">
+                        <input type="hidden" name="address_name_label" id="address_name_label" value="<?php echo $addr;?>">
+                    </div>
+
+
+                    <h3 class="info-header" >Create a project for <?php echo $project_type;?></h3>
 
                     <div class="img-container">
                         <img src="<?php echo $level;?>/images/illustrations/plumbing.jpg" class="img-fluid" alt="Responsive image">
@@ -69,8 +99,21 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             <!-- Form Block -->
             <div class="form-wrapper d-flex justify-content-center min-height col-12 col-lg-9">
                 <div class="w-100 flex-1 mt-4 form-container">
+                    <?php 
+                        if($home_id == null && $project_id == null){
+                            echo "you have not selected an address and a project category";
+                        }
+                        else if($project_id == null){
+                            echo "you have not selected project category";
+                        }
+                        else if($home_id == null){
+                            echo "you have not selected an address";
+                        }
+                    ?>
                     <?php //include "../../components/forms/user-create-project-form.php";?>
-                    <div id="user-create-project-form"></div>
+                    <div id="user-create-project-form">
+
+                    </div>
                 </div>
             </div>
             <!-- Form Block End -->
