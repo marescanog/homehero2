@@ -123,14 +123,14 @@ $ch = curl_init();
                 <label for="as">Street No.</label>
                 <input type="text" class="form-control" id="as" placeholder="ex. 5" name="street_no">
             </div>
-            <p>
+            <!-- <p>
                 <?php// echo var_dump($_SESSION)?>
                 <?php // echo var_dump($output->response->defaultHome)?>
                 <?php // echo var_dump($output->response->allAddress)?>
                 <?php // echo var_dump($output->response->cities)?>
                 <?php // echo var_dump($output->response->hometype)?>
                 <?php  // echo var_dump($output->response->barangays)?>
-            </p>
+            </p> -->
             <div class="form-group">
                 <label for="as">Street Name:</label>
                 <input type="text" class="form-control" id="as" placeholder="ex. Green road" name="street_name">
