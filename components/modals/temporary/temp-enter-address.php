@@ -37,7 +37,7 @@ $ch = curl_init();
     $output = curl_exec($ch);
 
     // Moved inside Modal Body for better display of error messages
-    $mode = "DEV"; // DEV to see verbose error messsages, PROD for production build
+    $mode = "PROD"; // DEV to see verbose error messsages, PROD for production build
     $curl_error_message = null;
 
     // Declare variables to be used in this modal
@@ -153,7 +153,7 @@ $ch = curl_init();
 ?>
     <!-- MODAL BODY DEV -->
     <?php //--------------- PHP ZONE ------------------------
-        if($mode !== null || $mode = "DEV"){
+        if($mode !== null && $mode == "DEV"){
     ?> <!-------------------------------------------------->
     <!-- HTML ZONE -->
         <div class="modal-body">
