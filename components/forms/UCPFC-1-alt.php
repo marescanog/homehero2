@@ -8,8 +8,8 @@
     // var_dump($_POST);
 ?>
 
-<div class="w-100">
-    <a href="" id="link_back_general"><< General Date</a>
+<div id="this-cal" class="w-100">
+    <a id="link_back_general"><< General Date</a>
     <h5 class="text-center mb-3">Specific Date</h5>
     <div class="d-flex flex-column flex-lg-row w-100">
         <div class="w-100 ">
@@ -28,7 +28,8 @@
             <!-- bg primary -->
             <div class="ml-0 ml-lg-5 mt-1 mt-lg-5">
                 <h6>Schedule for:</h6>
-                <h4>Sep 10, 2:00 PM</h5>
+                <h4 id="date-time-label">Select A Date & Time</h5>
+                <!-- <h4 id="date-time-label">Sep 10, 2:00 PM</h5> -->
                 <button id="btn-page-1" type="button" class="btn btn-lg btn-warning text-white my-2 thicc">
                     Select & Continue
                 </button>
