@@ -332,7 +332,8 @@ $ch = curl_init();
 
                 $.ajax({
                     type : 'POST',
-                    url : "http://localhost/slim3homeheroapi/public/add-address",
+                    // url : "http://localhost/slim3homeheroapi/public/add-address", // Dev
+                    url : "https://slim3api.herokuapp.com/add-address",
                     data : samoka,
                         contentType: false,
                         processData: false,
