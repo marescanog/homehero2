@@ -51,7 +51,7 @@ $ch = curl_init();
     <!-- This HTML displays the head of the modal with title and close X button -->
     <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title" id="signUpModalLabel">Temporary(Enter Address)</h5>
+        <h5 class="modal-title" id="signUpModalLabel">ENTER NEW ADDRESS / CHOOSE EXISTING</h5>
         <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true" style="font-size:1.5em">&times;</span>
         </button>
@@ -66,8 +66,8 @@ $ch = curl_init();
 
     curl_close($ch);
 
-    $output =  json_decode(json_encode($output), true);
-    // $output =  json_decode($output);
+    // $output =  json_decode(json_encode($output), true);
+     $output =  json_decode($output);
 
 
     // ERROR HANDLING - Curl Error
@@ -96,7 +96,7 @@ $ch = curl_init();
     }
 
     // ERROR HANDLING - Server Error
-    if(!$curl_error_message &&  is_object($output)){
+    if(!$curl_error_message &&  is_object($output) && ($output->success == false)){
     ?><!-------------------------------------------------->
     <!-- HTML ZONE : CURL ERROR HANDLING & MESSAGE DISPLAY -->
 
@@ -107,11 +107,7 @@ $ch = curl_init();
                 <div>
                     <h5>
                         <?php
-                            if($output == null){
-                                echo "OUTPUT FROM CURL IS NULL";
-                            } else if ($output == "" || empty($output)){
-                                echo "OUTPUT FROM CURL IS EMPTY";
-                            } else if ($output->response && $output->response->status == 500 ){
+                         if ($output->response && $output->response->status == 500 ){
                                 echo "SERVER ERROR 500";
                             } else if ($output->response && $output->response->status == 401 ){
                                 echo "SERVER ERROR 401: NOT FOUND";
@@ -134,10 +130,46 @@ $ch = curl_init();
                 </div>
             </div>
         </div>
-
-
     <?php //--------------- PHP ZONE ------------------------
     }
+
+    // ERROR HANDLING - Server Error
+    if($output == null || $output == "" || empty($output)){
+        ?><!-------------------------------------------------->
+        <!-- HTML ZONE : CURL ERROR HANDLING & MESSAGE DISPLAY -->
+    
+            <!-- Displays an Alert containing Server issues -->
+                <div class="modal-body">
+                <div class="title-2-container alert alert-danger alert-dismissible fade show" role="alert">
+                    <!-- TITLE -->
+                    <div>
+                        <h5>
+                            <?php
+                                if($output == null){
+                                    echo "OUTPUT FROM CURL IS NULL";
+                                } else if ($output == "" || empty($output)){
+                                    echo "OUTPUT FROM CURL IS EMPTY";
+                                } else {
+                                    echo "OUTPUT IS UNKNOWN";
+                                }
+                            ?>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- BODY -->
+                    <div>
+                        <?php 
+                            if($curl_error_message){
+                                echo $curl_error_message;
+                            }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        <?php //--------------- PHP ZONE ------------------------
+        }
 
     // Format our data variables for modal use
     if($curl_error_message == null && $output !== null && is_object($output) && $output->response !== null && $output->success){
@@ -188,7 +220,7 @@ $ch = curl_init();
                 ?><!-------------------------------------------------->
                 <!-- HTML ZONE -->
 
-                <div class="form-group">
+                <div class="form-group mb-1">
                 <label for="as">Addressess:</label>
                 <select id="saved-add-select" class="custom-select c">
                     <option  selected value="">Choose an address</option>
@@ -202,7 +234,10 @@ $ch = curl_init();
                             }
                         ?>
                 </select>
-                <button id="saved-add" class="btn btn-primary" type="button">Use Saved Address</button>
+                <button id="saved-add" class="btn btn-primary mt-2" type="button">
+                    Use Saved Address
+                </button>
+                
                 <script>
                     const saved_add_This = document.getElementById("saved-add");
                     const AddressText2 = document.getElementById("add-address-text");
@@ -223,7 +258,7 @@ $ch = curl_init();
             </div>
              <!-- HTML ZONE -->
 
-             
+
 
         <!-- Modal body End -->
         </div>
