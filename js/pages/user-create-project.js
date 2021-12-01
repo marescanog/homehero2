@@ -77,6 +77,12 @@ const load_create_project_form = (
                 // Group into Array
                 const buttons = [button_date_3days, button_date_week, button_date_month, button_specific];
 
+                // Grab necessary hidden temporary input
+                const is_exact_sched_field = document.getElementById("is_exact_schedule");
+                const preferred_date_time_field = document.getElementById("preferred_date_time");
+                const days_offset = document.getElementById("days_offset");
+
+
                 // Private helper function to remove highlight class
                 const removeSelected = () => {
                     buttons.forEach(button=>{
@@ -103,12 +109,14 @@ const load_create_project_form = (
                     removeSelected();
                     addHighlight(button_date_3days);
                     console.log("3 days");
+                    days_offset.value = 3;
                 });
 
                 button_date_week.addEventListener("click", ()=>{
                     removeSelected();
                     addHighlight(button_date_week);
                     console.log("1 week");
+                    days_offset.value = 7;
                 });
 
                 button_date_month.addEventListener("click", ()=>{
@@ -149,17 +157,102 @@ const load_create_project_form = (
                     noCalendar: true,
                     dateFormat: "H:i",
                 })
+                // console.log(link_back_general)
+                // ==============
 
-                // Go back to General Date
-                link_back_general.addEventListener("click", ()=>{
-                    is_exact_schedule.value = false;
 
-                    let page1Data = {
-                        is_exact_schedule: false
-                    }
-                    load_create_project_form(1, page1Data);
+                const dateTimeLabel = document.getElementById("date-time-label");
+                const flatPickrTimePickr = document.getElementById("time-picker");
+                flatPickrTimePickr.addEventListener('change', (event) => {
+                    const dayselected_DOM = $( ".flatpickr-day.selected" )[0];
+                    const dayselected = dayselected_DOM.getAttribute("aria-label");
+                    dateTimeLabel.innerText = dayselected;
                 });
+
+                // ===============
+
+                if(link_back_general){
+                    // Go back to General Date
+                    link_back_general.addEventListener("click", ()=>{
+                
+                        const is_exact_schedule = document.getElementById("is_exact_schedule");
+
+                        is_exact_schedule.value = false;
+
+                        let page1Data = {
+                            //is_exact_schedule: false
+                        }
+                        load_create_project_form(1, page1Data);
+                    });
+                }
+
             }
+
+
+
+
+            if(current_page == 3){
+                console.log("You are on the last page!");
+
+                // GRAB THE DOM THAT ARE THE LABELS
+                const projectTitleLabel = document.getElementById("projectTitleLabel");
+                const dateLabel = document.getElementById("dateLabel");
+                const jobSizeLabel = document.getElementById("jobSizeLabel");
+                const descLabel = document.getElementById("descLabel");
+                const rateOfferLabel = document.getElementById("rateOfferLabel");
+                const addressLabel = document.getElementById("addressLabel");
+
+                // GRAB THE DOM THAT ARE THE VALUES
+                const project_name = document.getElementById("project_name");
+                const preferred_date_time = document.getElementById("preferred_date_time");
+                const address_name_label = document.getElementById("address_name_label");
+                const job_size_id = document.getElementById("job_size_id");
+                const job_description = document.getElementById("job_description");
+                const rate_offer = document.getElementById("rate_offer");
+                const rate_type_id = document.getElementById("rate_type_id");
+
+                const rateTypeArr = ["hr","day","week","project-based"];
+                const jobSizeArr = ["Small - Est 1hr", "Medium - Est 4-8 hrs.", "Large - Est 8+hrs"];
+
+                // FILL THE DOM WITH THE INFO
+                projectTitleLabel.innerText = project_name.value;
+                dateLabel.innerText = preferred_date_time.value;
+                jobSizeLabel.innerText = jobSizeArr[job_size_id.value-1];
+                descLabel.innerText = job_description.value;
+                rateOfferLabel.innerText = "P "+rate_offer.value+" "+rateTypeArr[rate_type_id.value-1];
+                addressLabel.innerText = address_name_label.value;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+            
 
             // Grab the DOM elements
             // Next Buttons
@@ -189,7 +282,53 @@ const load_create_project_form = (
                     // load_create_project_form(2, page1Data, page2Data, page3Data);
 
                     //Note: will add logic later, but for now, will jsut proceed to next page.
-                    load_create_project_form(2);
+
+
+            
+
+                    if(current_page == 1 
+                        &&  (page1_Data !== null 
+                            ||  page1_Data?.is_exact_schedule == true)){
+                     console.log("Specific Date");
+                    
+                     const inlineCalender = document.getElementById("inline-calendar");
+                                console.log(inlineCalender)
+                            const dayselected_DOM = $( ".flatpickr-day.selected" )[0];
+                            const time_picker_DOM = document.getElementById("time-picker");
+                            const dayselected = dayselected_DOM.getAttribute("aria-label");
+                            const timeSelected = time_picker_DOM.value+":00";
+                            const myArray = dayselected.split(" ");
+                            console.log(dayselected)
+                            console.log(timeSelected)
+                            const months = ["January", "February", "March", "April", "May", "June", "July",
+                                            "August", "September", "October", "November", "December"];
+                            //2021-12-02 00:00:00
+                            //December 14, 2021
+                            //14:29
+                            function pad(num, size) {
+                                var s = "000000000" + num;
+                                return s.substr(s.length-size);
+                            }
+                            const mon = months.findIndex(elem => {
+                                return myArray[0] == elem;
+                            }) + 1;
+                            //console.log(mon)
+                            let day = myArray[1].replace(",", "");
+                            //day = pad(day,2);
+                            const timestamp = myArray[2]+"-"+mon+"-"+day+" "+timeSelected;
+                            console.log(timestamp);
+
+                            const preferred_date_time = document.getElementById("preferred_date_time");
+                            preferred_date_time.value = timestamp;
+                            //console.log(preferred_date_time );
+                            load_create_project_form(2, );
+                    } else {
+
+                        console.log("general datee")
+                    }
+
+                    // load_create_project_form(2);
+
                 })
             }
 
@@ -233,6 +372,49 @@ const load_create_project_form = (
                     // load_create_project_form(3, page1Data, page2Data, page3Data);
 
                     //Note: will add logic later, but for now, will jsut proceed to next page.
+                    //load_create_project_form(3);
+
+                    // =============================================
+
+                    // Get the feild value DOMS
+                    const project_name_field = document.getElementById("project_name_field");
+                    const project_description_field = document.getElementById("project_description_field");
+                    const ritema = document.getElementById("ritema");
+                    const ritemb = document.getElementById("ritemb");
+                    const ritemc = document.getElementById("ritemc");
+                    const rateValue = document.getElementById("rateValue");
+                    const rateTypeSelect = document.getElementById("rate-type-select");
+
+                    // AddressText2.innerText = saved_add_select.options[saved_add_select.selectedIndex].text;
+                    // Get the Values
+                    // let rate_type = rateTypeSelect.options[rateTypeSelect.selectedIndex].text;
+                    let rate_type = rateTypeSelect.value;
+                    let rate_value = rateValue.value;
+                    let proj_name = project_name_field .value;
+                    let proj_desc = project_description_field .value;
+                    let job_size = "";
+                    job_size = ritema.checked ? 1 : job_size;
+                    job_size = ritemb.checked ? 2 : job_size;
+                    job_size = ritemc.checked ? 3 : job_size;
+
+                    // get the feilds that will hold the values
+                    const project_name = document.getElementById("project_name");
+                    const job_description = document.getElementById("job_description");
+                    const job_size_id = document.getElementById("job_size_id");
+                    const rate_offer= document.getElementById("rate_offer");
+                    const rate_type_id = document.getElementById("rate_type_id");
+
+                    // Assign the values
+                    console.log("proj_name: "+proj_name)
+                    console.log("proj_desc: "+proj_desc)
+                    console.log("job_size: "+job_size)
+                    console.log("rate_type: "+rate_type)
+                    console.log("rate_value: "+rate_value)
+                    project_name.value = proj_name;
+                    job_description.value = proj_desc;
+                    job_size_id.value = job_size;
+                    rate_offer.value =  rate_value;
+                    rate_type_id.value = rate_type;
                     load_create_project_form(3);
                 })
             }
@@ -259,32 +441,139 @@ const load_create_project_form = (
             //     });
             // }
 
-            // // Submit the form
-            // if(button_page3 != null){
-            //     button_page3.addEventListener("click", ()=>{
-            //         const myForm = document.getElementById("form-submission-create-project");
+            // Submit the form
+            if(button_page3 != null){
+                button_page3.addEventListener("click", ()=>{
+                    // const myForm = document.getElementById("form-submission-create-project");
                     
-            //         console.log("Submitted!");  
+                    console.log("Submitted!");  
 
-            //         // Convert Form Data to Object
-            //         let formData = new FormData(myForm);
-            //         let data = {};
-            //         formData.forEach((value, key) => data[key] = value);
+                    // Grab the necessary DOM elements for the information
+                    const homeID_DOM = document.getElementById("home_id");
+                    const jobSize_DOM = document.getElementById("job_size_id");
+                    const projType_DOM = document.getElementById("required_expertise_id");
+                    const jobDesc_DOM = document.getElementById("job_description");
+                    const rateOffer_DOM = document.getElementById("rate_offer");
+                    const rateType_DOM = document.getElementById("rate_type_id");
+                    const projName_DOM = document.getElementById("project_name");
+                    const is_exact_sched =1;
+                    const timestamp = document.getElementById("preferred_date_time");
 
-            //         $.ajax({
-            //             type: 'POST',
-            //             url : 'http://localhost/slim3homeheroapi/public/job-post/create',
-            //             data : data,
-            //             success : function(response) {
-            //                 console.log(response);
-            //             },
-            //             error : function(response) {
-            //                 console.log(response);
-            //             },
-            //         });
+                    // Extract the values & save into an object
+                    const projData = [];
 
-            //     })
-            // }
+                    projData["home_id"] = homeID_DOM.value;
+                    projData["job_size_id"] = jobSize_DOM.value;
+                    projData["required_expertise_id"] = projType_DOM.value;
+                    projData["job_description"] = jobDesc_DOM.value;
+                    projData["rate_offer"] = rateOffer_DOM.value;
+                    projData["rate_type_id"] = rateType_DOM.value;
+                    projData["is_exact_schedule"] = 1;
+                    projData["preferred_date_time"] = timestamp.value;
+                    projData["project_name"] = projName_DOM.value;
+
+                    // GET SESSION VARIABLE
+                    // Then call ajax to save
+
+
+
+                    $.ajaxSetup({cache: false})
+                    $.get(getDocumentLevel()+'/auth/get-register-session.php', function (data) {
+                        console.log(data)
+                        const parsedSession = JSON.parse(data);
+                        const token = parsedSession['token'];
+                        console.log(token);
+                        console.log(projData);
+    
+                                    
+                        // Create new form 
+                        const samoka = new FormData();
+    
+                        // Append 
+                        samoka.append('home_id', projData["home_id"]);
+                        samoka.append('job_size_id', projData["job_size_id"]);
+                        samoka.append('required_expertise_id', projData["required_expertise_id"]);
+                        samoka.append('job_description', projData["job_description"]);
+                        samoka.append('rate_offer', projData["rate_offer"]);
+                        samoka.append('rate_type_id', projData["rate_type_id"]);
+                        samoka.append('is_exact_schedule', projData["is_exact_schedule"]);
+                        samoka.append('preferred_date_time', projData["preferred_date_time"]);
+                        samoka.append('project_name', projData["project_name"]);
+
+
+
+                        // $.ajax({
+                        //     type : 'POST',
+                        //     url : "http://localhost/slim3homeheroapi/public/add-address",
+                        //     data : samoka,
+                        //         contentType: false,
+                        //         processData: false,
+                        //         headers: {
+                        //             "Authorization": `Bearer ${token}`
+                        //         },
+                        //     success : function(response) {
+                        //         console.log(response.response);
+                        //         console.log(response.response.data);
+                        //         console.log(response.response.data.home_id);
+                        //         //$('#enterAddress')[0].reset();
+                        //         const AddressText = document.getElementById("add-address-text");
+                        //         const HomeFeild = document.getElementById("home_address_field");
+                        //         const address_name_label2 = document.getElementById("address_name_label");
+                        //         address_name_label2.value =  addressData["street_name"];
+        
+                        //         AddressText.innerText = addressData["street_name"];
+                        //         HomeFeild.value = response.response.data.home_id;
+                        //         $("#modal").modal('hide');
+                        //     },
+                        //     error: function (response) {
+                        //             console.log(response);
+        
+                        //         }
+                        // });
+
+
+
+
+
+
+
+
+
+
+
+                    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    // // Convert Form Data to Object
+                    // let formData = new FormData(myForm);
+                    // let data = {};
+                    // formData.forEach((value, key) => data[key] = value);
+
+                    // $.ajax({
+                    //     type: 'POST',
+                    //     url : 'http://localhost/slim3homeheroapi/public/job-post/create',
+                    //     data : data,
+                    //     success : function(response) {
+                    //         console.log(response);
+                    //     },
+                    //     error : function(response) {
+                    //         console.log(response);
+                    //     },
+                    // });
+
+                })
+            }
         })
 
         // Grab the DOM elements
