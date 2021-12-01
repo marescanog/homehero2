@@ -10,12 +10,12 @@
 
 <h5 class="text-left">Project Name:</h5>
 <div class="form-group">
-    <input type="text" class="gray form-control" id="project_name" name="project_name" placeholder="Plumbing Repair">
+    <input type="text" class="gray form-control" id="project_name_field" name="project_name_field" placeholder="Plumbing Repair">
 </div>
 
 <h5 class="text-left">Description:</h5>
 <div class="form-group">
-<textarea class="gray-small form-control" id="project_description" name="project_description" rows="5" 
+<textarea class="gray-small form-control" id="project_description_field" name="project_description_field" rows="5" 
 placeholder="Feel free to give a short description or elaborate on specific details. For example, 'I need help assembling a cabinet. Please bring an electric drill.'"></textarea>
 </div>
 
@@ -63,9 +63,9 @@ placeholder="Feel free to give a short description or elaborate on specific deta
 <div class="d-flex flex-column flex-lg-row justify-content-center ">
     <div class="form-group d-flex flex-row justify-content-center align-items-center est-offer-width">
         <label for="rateValue" class="mr-3">P</label>
-        <input type="number" class="form-control" id="rateValue" placeholder="Password" name="rateValue">
+        <input type="number" class="form-control" id="rateValue" placeholder="ex. 300.00" name="rateValue">
     </div>
-    <select class="custom-select est-offer-width ml-0 ml-lg-3">
+    <select id="rate-type-select" class="custom-select est-offer-width ml-0 ml-lg-3">
         <option selected value="1">per hour</option>
         <option value="2">per day</option>
         <option value="3">per week</option>
