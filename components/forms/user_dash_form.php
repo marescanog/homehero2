@@ -21,7 +21,8 @@ $(document).ready(function() {
     // On Page Load, The default falback list is 6 items.
     $.ajax({
         type : 'GET',
-        url : "http://localhost/slim3homeheroapi/public/search-proj",
+        // url : "http://localhost/slim3homeheroapi/public/search-proj", // DEV
+        url : "https://slim3api.herokuapp.com/search-proj", // PROD
         success : function(response) {
             console.log(response.response.data)
             const retreivedProjFromDB = response.response.data;
