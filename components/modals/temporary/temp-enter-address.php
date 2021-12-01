@@ -45,7 +45,30 @@ $ch = curl_init();
     // $output =  json_decode(json_encode($output), true);
     $output =  json_decode($output);
 
-    // Insert Curl output
+    // Populate data from curl output
+    if($output !== FALSE && $output !== null && $output !== "" && !empty($output)){
+        if($output->success == false){
+        ?>
+            <p>Data could not be loaded</p>
+            <!-- <div class="title-2-container alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>  <?php //echo $output->response->status == 500 ? "500 SERVER ERROR": "401 NOT FOUND";?></strong> 
+                <?php //echo $output->response->message;?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> -->
+        <?php
+        } else {
+            if($output->response){
+                $defaultHome = $output->response->defaultHome;
+                $Addressess = $output->response->allAddress;
+                $cities = $output->response->cities;
+                $homeTypes = $output->response->hometype;
+                $barangays = $output->response->barangays;
+            }
+
+        }
+    }
 
 
 ?>
