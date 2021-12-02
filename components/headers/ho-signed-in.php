@@ -11,8 +11,27 @@
                 </button>
                 <div id="header-btn-mobile" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle d-flex justify-content-center align-items-center brownt-text" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="circle mr-1 p-1 d-flex justify-content-center align-items-center"><span class="d-block"><?php echo $initials; ?></span></div>
-                        <?php echo $fistName;?>
+                        <!-- PROFILE PICTURE ON HEADER -->
+                        <?php //--------------- PHP ZONE ------------------------
+                            if($profPic != null){
+                        ?> <!-------------------------------------------------->
+                        <!-- HTML ZONE -->
+    
+                            <img src="<?php echo $profPic; ?>" alt="<?php echo $fistName; ?>'s avatar" class="img-thumbnail  mr-3 p-1" style="width:60px; height:60px; border-radius:30px;background-color: #FFF29F;">
+                        
+                        <?php //--------------- PHP ZONE ------------------------
+                            } else {
+                        ?> <!-------------------------------------------------->
+                        <!-- HTML ZONE -->
+
+                                <!-- If no profile pic, default Circle with initials -->
+                                    <div class="circle mr-3 p-2"><?php echo $initials; ?></div>
+
+                        <?php //--------------- PHP ZONE ------------------------
+                            }; // closing for if else
+                            echo $fistName;
+                        ?><!-------------------------------------------------->
+                        <!-- HTML ZONE -->
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="">Profile</a>
@@ -43,8 +62,27 @@
                         </li>
                         <li id="header-btn-desktop" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex justify-content-center align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="circle mr-3 p-2"><?php echo $initials; ?></div>
-                                <?php echo $fistName;?>
+                                <!-- PROFILE PICTURE ON HEADER -->
+                                <?php //--------------- PHP ZONE ------------------------
+                                    if($profPic != null){
+                                ?> <!-------------------------------------------------->
+                                <!-- HTML ZONE -->
+            
+                                    <img src="<?php echo $profPic; ?>" alt="<?php echo $fistName; ?>'s avatar" class="img-thumbnail  mr-3 p-1" style="width:60px; height:60px; border-radius:30px;background-color: #FFF29F;">
+                                
+                                <?php //--------------- PHP ZONE ------------------------
+                                    } else {
+                                ?> <!-------------------------------------------------->
+                                <!-- HTML ZONE -->
+
+                                        <!-- If no profile pic, default Circle with initials -->
+                                         <div class="circle mr-3 p-2"><?php echo $initials; ?></div>
+
+                                <?php //--------------- PHP ZONE ------------------------
+                                    }; // closing for if else
+                                    echo $fistName;
+                                ?><!-------------------------------------------------->
+                                <!-- HTML ZONE -->
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Profile</a>

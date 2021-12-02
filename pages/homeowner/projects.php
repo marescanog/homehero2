@@ -6,13 +6,23 @@ if(!isset($_SESSION["token"])){
     exit();
 }
 
+// Declare variables to be used in this page
 $level ="../..";
-$fistName = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest";
-$initials = isset($_SESSION["initials"]) ? $_SESSION["initials"] : "GU";
+$fistName = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest"; // used by header
+$initials = isset($_SESSION["initials"]) ? $_SESSION["initials"] : "GU"; // used by header
+$profPic = isset($_SESSION["profPic"]) ? $_SESSION["profPic"] : null; // used by header
+// $profPic = "https://randomuser.me/api/portraits/women/90.jpg";
+
+// Curl request to get data
 
 
+
+
+
+
+
+// HTML STARTS HERE
 require_once dirname(__FILE__)."/$level/components/head-meta.php"; 
-
 ?>
 <!-- === Link your custom CSS pages below here ===-->
 <script src="https://kit.fontawesome.com/d10ff4ba99.js" crossorigin="anonymous"></script>
