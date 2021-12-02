@@ -58,11 +58,11 @@ $ch = curl_init();
     $output =  json_decode($output);
     
     // Declare variables to be used in this page
-    $defaultHome = null;
-    $Addressess = [];
-    $cities = [];
-    $homeTypes = [];
-    $barangays = [];
+    $ongoingProjects = [];
+    // $cities = [];
+    // $homeTypes = [];
+    // $barangays = [];
+    // $defaultHome = null;
 
 
 // HTML STARTS HERE
@@ -196,18 +196,48 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                 </nav>
                 <div class="tab-content pt-1 pb-2 px-2  px-lg-3" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-hire" role="tabpanel" aria-labelledby="nav-hire-tab">
-                        <h5 class="jumbotron-h1 mt-lg-3 mt-0 mt-md-3 mt-lg-0">
-                            You have no projects.
-                        </h5>
+  
+                        <?php //--------------- PHP ZONE ------------------------
+                        // PROJECT DISPLAY - ONGOING
+                        if(count($ongoingProjects) == 0 || $ongoingProjects == null){
+                        ?><!-------------------------------------------------->
+                        <!-- HTML ZONE: PROJECT DISPLAY - ONGOING -->
+
+                            <h5 class="jumbotron-h1 mt-lg-3 mt-0 mt-md-3 mt-lg-0">
+                                You have no projects.
+                            </h5>
+
+                        <?php //--------------- PHP ZONE ------------------------
+                            } else {
+                                for($p = 0 ; $p < count($ongoingProjects); $p++){
+                                    include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
+                                }
+
+                                if( count($ongoingProjects) > 3){
+                                ?><!-------------------------------------------------->
+                                <!-- HTML ZONE: SHOW MORE PROJECTS -->
+                                    <div id="show-more"></div>
+                                    <div  class="d-flex mt-4 justify-content-center text-align-center">
+                                        <button class="btn btn-lg text-white btn-warning">
+                                            SHOW MORE
+                                        </button>
+                                    </div>
+                                <?php //--------------- PHP ZONE ------------------------
+                                }
+                            }
+                        ?>
+
                     </div>
                     <div class="tab-pane fade" id="nav-work" role="tabpanel" aria-labelledby="nav-work-tab">
                         <h5 class="jumbotron-h1 mt-lg-3">
                             You have no projects.
                         </h5>
-  
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="mb-3">
+
         </div>
         <!-- <div class="separator"></div>
         <div class="mx-2 mx-lg">
