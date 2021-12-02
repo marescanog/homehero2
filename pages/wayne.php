@@ -55,37 +55,43 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <?php require_once dirname(__FILE__).'/../components/foot-meta.php'; ?>
 <!-- Custom JS Scripts Below -->
     <script>
+        //loadModal = (modalType, modalTypes, modalFunction = () => {}, level=".", data = {})
+        //check-avail-exact-date
+        //loadModal("sms-verification");
+    
+    var checkAvailEstDate = document.getElementById("check-avail-est-date");
     var checkAvailEstDate = document.getElementById("check-avail-est-date");
     var checkAvailExactDate = document.getElementById("check-avail-exact-date");
     var SMS = document.getElementById("sms-verification");
 
     checkAvailEstDate.addEventListener("click", ()=>{
-        loadModal("check-avail-est-date");
+        //loadModal("check-avail-est-date");
+        loadModal("check-avail-est-date", modalTypes, ()=>{}, getDocumentLevel());
     });
 
     checkAvailExactDate.addEventListener("click", ()=>{
-        loadModal("check-avail-exact-date");
+        loadModal("check-avail-exact-date", modalTypes, ()=>{}, getDocumentLevel());
     });
 
     SMS.addEventListener("click", ()=>{
-        loadModal("sms-verification");
+        loadModal("SMS-verification", modalTypes, ()=>{}, getDocumentLevel());
     });
 
-    const loadModal = (modalType) => {
-    const modalTypes = {
-        "signup" : "../components/modals/homeowner-register.php",
-        "error" : "../components/modals/error.php" ,
-        "check-avail-est-date" : "../components/modals/check-avail-est-date.php" ,
-        "check-avail-exact-date" : "../components/modals/check-avail-exact-date.php", 
-        "sms-verification" : "../components/modals/sms-verification.php"
-    }
+    // const loadModal = (modalType) => {
+    // const modalTypes = {
+    //     "signup" : "../components/modals/homeowner-register.php",
+    //     "error" : "../components/modals/error.php" ,
+    //     "check-avail-est-date" : "../components/modals/check-avail-est-date.php" ,
+    //     "check-avail-exact-date" : "../components/modals/check-avail-exact-date.php", 
+    //     "sms-verification" : "../components/modals/sms-verification.php"
+    // }
 
-    if(modalTypes.hasOwnProperty(modalType)){
-        $("#modal-contents").load(modalTypes[modalType]);
-    } else {
-        $("#modal-contents").load(modalTypes["error"]);
-    }
-}
+    // if(modalTypes.hasOwnProperty(modalType)){
+    //     $("#modal-contents").load(modalTypes[modalType]);
+    // } else {
+    //     $("#modal-contents").load(modalTypes["error"]);
+    // }
+// }
     </script>
 </body>
 </html>

@@ -9,7 +9,7 @@
     // var_dump($_POST);
 ?>
 
-<h5 class="text-center project-title-review">Plumbing repair</h5>
+<h5 id="projectTitleLabel"  class="text-center project-title-review">Plumbing repair</h5>
 
 <hr class="custom"/>
 
@@ -35,7 +35,7 @@
                     include dirname(__FILE__)."/".$level.'/images/svg/today_black_24dp.svg'; 
                 ?>
             </div>
-            <p>Sat, Sep 5 at 2:00pm</p>
+            <p id="dateLabel">Sat, Sep 5 at 2:00pm</p>
         </div>
 
         <div class="d-flex flex-row">
@@ -44,7 +44,7 @@
                     include dirname(__FILE__)."/".$level.'/images/svg/location_on_black_24dp.svg'; 
                 ?>
             </div>
-            <p>99 Caraway Street, Mabolo, Cebu City</p>
+            <p id="addressLabel">99 Caraway Street, Mabolo, Cebu City</p>
         </div>
 
         <div class="d-flex flex-row">
@@ -53,7 +53,7 @@
                     include dirname(__FILE__)."/".$level.'/images/svg/straighten_black_24dp.svg'; 
                 ?>
             </div>
-            <p>Small - Est 1hr</p>
+            <p id="jobSizeLabel">Small - Est 1hr</p>
         </div>
 
         <div class="d-flex flex-row">
@@ -62,7 +62,7 @@
                     include dirname(__FILE__)."/".$level.'/images/svg/description_black_24dp.svg'; 
                 ?>
             </div>
-            <p>I need help fixing a leaky sink. Please bring plumbing tools.</p>
+            <p id="descLabel">I need help fixing a leaky sink. Please bring plumbing tools.</p>
         </div>
 
         <div class="d-flex flex-row">
@@ -75,7 +75,7 @@
                 <h6>Your Est. Offer</h6>
             </div>
             <div>
-                <h6>P 56.8 hr</h6>
+                <h6 id="rateOfferLabel">P 56.8 hr</h6>
             </div>
         </div>
     </div>
@@ -98,12 +98,12 @@
             </div>
         </div>
         <div class="d-flex flex-row">
-            <div class="red-icon">
+            <!-- <div class="red-icon">
                 <?php
-                    include dirname(__FILE__)."/".$level.'/images/svg/error_black_24dp.svg'; 
+                    //include dirname(__FILE__)."/".$level.'/images/svg/error_black_24dp.svg'; 
                 ?>
-            </div>
-            <p>Payment Method</p>
+            </div> -->
+            <p>Cash</p>
         </div>
     </div>  
 </div>

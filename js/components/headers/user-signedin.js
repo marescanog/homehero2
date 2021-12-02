@@ -5,7 +5,20 @@ appendStyleSheet("/css/headers/header-homeowner.css");
 $( document ).ready(()=>{
     const logoutDesktop = document.getElementById("logout-link-desktop");
     const logoutMobile = document.getElementById("logout-link-mobile");
+    // const tempDisabledBrowse = document.getElementById('browse-temp');
+
     // var modal = document.getElementById("modal");
+
+    // Set events for elements
+    // tempDisabledBrowse.addEventListener("click", ()=>{
+    //     // console.log("desktop click")
+    //     Swal.fire({
+    //         title: 'Under Development',
+    //         text: 'This feature is currently under development!',
+    //         icon: 'info',
+    //         confirmButtonText: 'Continue'
+    //     })
+    // });
 
     // Set events for elements
     logoutDesktop.addEventListener("click", ()=>{
