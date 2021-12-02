@@ -594,7 +594,7 @@ const load_create_project_form = (
                         $.ajax({
                             type : 'POST',
                             //url : "http://localhost/slim3homeheroapi/public/add-project", // dev
-                            url : "http://localhost/slim3homeheroapi/add-project", // prod
+                            url : "https://slim3api.herokuapp.com/add-project", // prod
                             data : samoka,
                                 contentType: false,
                                 processData: false,
