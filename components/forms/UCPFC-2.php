@@ -10,7 +10,7 @@
 
 <h5 class="text-left">Project Name:</h5>
 <div class="form-group">
-    <input type="text" class="gray form-control" id="project_name_field" name="project_name_field" placeholder="Plumbing Repair">
+    <input type="text" class="gray form-control" id="project_name_field" name="project_name_field" placeholder="Your Project">
 </div>
 
 <h5 class="text-left">Description:</h5>
@@ -41,19 +41,19 @@ placeholder="Feel free to give a short description or elaborate on specific deta
     </div> -->
     <div class="form-check mb-2 mb-lg-0">
         <div class="radio-item col-12 m-0">
-            <input type="radio" id="ritema" name="job_size" value="0" checked>
+            <input type="radio" id="ritema" name="job_size" value="1" checked>
             <label for="ritema">Small - Est. 1 - 4 hrs.</label>
         </div>
     </div>
     <div class="form-check mb-2 mb-lg-0">
         <div class="radio-item col-12 m-0">
-            <input type="radio" id="ritemb" name="job_size" value="1" >
+            <input type="radio" id="ritemb" name="job_size" value="2" >
             <label for="ritemb">Medium - Est 4 - 8 hrs.</label>
         </div>
     </div>
     <div class="form-check mb-2 mb-lg-0">
         <div class="radio-item col-12 m-0">
-            <input type="radio" id="ritemc" name="job_size" value="2" >
+            <input type="radio" id="ritemc" name="job_size" value="3" >
             <label for="ritemc">Large - Est 8+ hrs.</label>
         </div>
     </div>
@@ -69,15 +69,15 @@ placeholder="Feel free to give a short description or elaborate on specific deta
         <option selected value="1">per hour</option>
         <option value="2">per day</option>
         <option value="3">per week</option>
-        <option value="3">per project</option>
+        <option value="4">per project</option>
     </select>
 </div>
 
 
 <div class="d-flex flex-row justify-content-center mt-4 mt-lg-2">
-    <button type="button" id="btn-back-page-2" class="btn btn-lg btn-outline-warning w-100 bottom-button-max-width thicc">
+    <!-- <button type="button" id="btn-back-page-2" class="btn btn-lg btn-outline-warning w-100 bottom-button-max-width thicc">
     <i class="fas fa-long-arrow-alt-left h4 mt-1"></i> BACK 
-    </button>
+    </button> -->
 
     <button type="button" id="btn-page-2" class="btn btn-lg btn-warning text-white w-100 ml-3 bottom-button-max-width thicc">
         NEXT <i class="fas fa-long-arrow-alt-right h4 mt-1"></i>

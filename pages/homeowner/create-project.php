@@ -62,9 +62,9 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                     </p>
 
                     <div>
-                        <input type="hidden" name="home_id" id="home_id"  value="<?php echo $home_id;?>">
+                        <input type="hidden" name="home_id" id="home_id"  value="<?php echo htmlentities($home_id);?>">
                         <input type="hidden" name="job_size_id" id="job_size_id">
-                        <input type="hidden" name="required_expertise_id" id="required_expertise_id"  value="<?php echo $project_id;?>">
+                        <input type="hidden" name="required_expertise_id" id="required_expertise_id"  value="<?php echo htmlentities($project_id);?>">
                         <input type="hidden" name="job_post_status_id" id="job_post_status_id">
                         <input type="hidden" name="job_description" id="job_description">
                         <input type="hidden" name="rate_offer" id="rate_offer">
@@ -73,11 +73,11 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                         <input type="hidden" name="preferred_date_time" id="preferred_date_time">
                         <input type="hidden" name="days_offset" id="days_offset">
                         <input type="hidden" name="project_name" id="project_name">
-                        <input type="hidden" name="address_name_label" id="address_name_label" value="<?php echo $addr;?>">
+                        <input type="hidden" name="address_name_label" id="address_name_label" value="<?php echo htmlentities($addr);?>">
                     </div>
 
 
-                    <h3 class="info-header" >Create a project for <?php echo $project_type;?></h3>
+                    <h3 class="info-header" >Create a project for <span id="project-labelly"><?php echo htmlentities($project_type);?></span></h3>
 
                     <div class="img-container">
                         <img src="<?php echo $level;?>/images/illustrations/plumbing.jpg" class="img-fluid" alt="Responsive image">
@@ -100,15 +100,31 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             <div class="form-wrapper d-flex justify-content-center min-height col-12 col-lg-9">
                 <div class="w-100 flex-1 mt-4 form-container">
                     <?php 
-                        if($home_id == null && $project_id == null){
-                            echo "you have not selected an address and a project category";
+                        if($home_id == null ||  $project_id == null){
+                            // echo "you have not selected an address and a project category";
+                           ?>
+                           <script>
+                            //  Swal.fire({
+                            //     title: 'Project creation timed-out. You will be redirected to the home page.',
+                            //     icon: 'info',
+                            //     text: 'Click on the calendar to select a date, Click on the gray input box below box below the calendar to set a time.'
+                            //  }).then((result) => {
+                            //     window.location = getDocumentLevel()+'/pages/homeowner/home.php';
+                            // });
+                             window.alert("Project creation timed-out. You will be redirected to the home page.");
+                             window.location ='../../pages/homeowner/home.php';
+                           </script>
+                           <?php
                         }
-                        else if($project_id == null){
-                            echo "you have not selected project category";
-                        }
-                        else if($home_id == null){
-                            echo "you have not selected an address";
-                        }
+                        // else if($project_id == null){
+                        //     // echo "you have not selected project category";
+                        //     echo '<script>alert("Project creation timed-out. You will be redirected to the dashboard.")</script>';
+                  
+                        // }
+                        // else if($home_id == null){
+                        //    // echo "you have not selected an address";
+                        //    echo '<script>alert("Project creation timed-out. You will be redirected to the dashboard.")</script>';
+                        // }
                     ?>
                     <?php //include "../../components/forms/user-create-project-form.php";?>
                     <div id="user-create-project-form">

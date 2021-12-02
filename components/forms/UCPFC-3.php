@@ -17,15 +17,15 @@
     <div class="info-width">
         <div class="d-flex flex-row justify-content-between">
             <h6 class="mt-1 project-subtitle-review">Project Info:</h6>
-            <div class="d-flex flex-row">
+            <!-- <div class="d-flex flex-row">
                 <div class="edit-icon">
                     <?php
-                        include dirname(__FILE__)."/".$level.'/images/svg/edit_black_white24dp.svg'; 
+                        //include dirname(__FILE__)."/".$level.'/images/svg/edit_black_white24dp.svg'; 
                     ?>
                     <div class="edit-icon-square"></div>
                 </div>
                 <p class="edit-icon-text mt-1 ml-1">Edit Project</p>
-            </div>
+            </div> -->
         </div>
 
 
@@ -64,20 +64,21 @@
             </div>
             <p id="descLabel">I need help fixing a leaky sink. Please bring plumbing tools.</p>
         </div>
-
-        <div class="d-flex flex-row">
-            <div class="d-flex flex-row">
-                <div class="gray-icon">
-                    <?php
-                        include dirname(__FILE__)."/".$level.'/images/svg/local_offer_black_24dp.svg'; 
-                    ?>
+        <div style="color:#FFFFFF;" unselectable="on">Banana pancakes so tasty. I love my banana pancakes.</div>
+        <div class="d-flex flex-row justify-content-center">
+            <div class="d-flex flex-column">
+                <div class="d-flex flex-row justify-content-center">
+                    <div class="gray-icon">
+                        <?php
+                            include dirname(__FILE__)."/".$level.'/images/svg/local_offer_black_24dp.svg'; 
+                        ?>
+                    </div>
+                    <h6>Your Est. Offer</h6>
                 </div>
-                <h6>Your Est. Offer</h6>
-            </div>
-            <div>
-                <h6 id="rateOfferLabel">P 56.8 hr</h6>
+                <h6 class="h5 ml-3 text-center" id="rateOfferLabel">P 56.8 hr</h6>
             </div>
         </div>
+        <div style="color:#FFFFFF;" unselectable="on">Banana pancakes so tasty. I love my banana pancakes.</div>
     </div>
 </div>
 
@@ -88,13 +89,13 @@
         <div class="d-flex flex-row justify-content-between">
             <h6 class="mt-1 project-subtitle-review">Payment Option:</h6>
             <div class="d-flex flex-row">
-                <div class="edit-icon">
+                <!-- <div class="edit-icon">
                     <?php
-                        include dirname(__FILE__)."/".$level.'/images/svg/edit_black_white24dp.svg'; 
+                        // include dirname(__FILE__)."/".$level.'/images/svg/edit_black_white24dp.svg'; 
                     ?>
                     <div class="edit-icon-square"></div>
                 </div>
-                <p class="edit-icon-text mt-1 ml-1">Select Option</p>
+                <p class="edit-icon-text mt-1 ml-1">Select Option</p> -->
             </div>
         </div>
         <div class="d-flex flex-row">
