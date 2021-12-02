@@ -9,7 +9,7 @@
 ?>
 
 <div id="this-cal" class="w-100">
-    <a id="link_back_general"><< General Date</a>
+    <!-- <a id="link_back_general"><< General Date</a> -->
     <h5 class="text-center mb-3">Specific Date</h5>
     <div class="d-flex flex-column flex-lg-row w-100">
         <div class="w-100 ">
