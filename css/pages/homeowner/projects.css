@@ -115,3 +115,23 @@
     cursor: pointer;
 }
 
+
+/*==========================================*/
+/*              PROJECT CARD              */
+/*==========================================*/
+// .gray-icon{
+//     background-color: black;
+// }
+
+.gray-icon > svg{
+    fill: #6C7474 ;
+    margin-right: 10px;
+}
+
+.titulo-proj{
+    font-weight: 900;
+    font-family: 'Nunito';
+    font-size: 1.5rem;
+    color: black;
+    margin-bottom: 5px;
+}
