@@ -8,7 +8,7 @@
 
     // For DB meta values
     $job_status =  isset($job_status) ? $job_status: null;
-    // $job_id = null;
+    $job_id =  isset($job_id) ? $job_id: null;
     // $home_id = null;
     // $rate_type_id = null;
     // $job_size_id = null;
@@ -88,9 +88,11 @@
     <div class="card-footer text-muted">
         <div class="d-flex justify-content-between">
             <div class="d-flex">
-                <button class="btn btn-warning text-white">
-                    <b>VIEW</b>
-                </button>
+                <a href="<?php echo $level;?>/pages/homeowner/project-info.php?id=<?php echo $job_id ;?>">
+                    <button class="btn btn-warning text-white">
+                        <b>VIEW</b>
+                    </button>
+                </a>
                 <button class="btn btn btn-outline-warning ml-2">
                     EDIT
                 </button>
