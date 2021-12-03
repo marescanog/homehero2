@@ -10,14 +10,14 @@ if(!isset($_SESSION["token"])){
 $level ="../..";
 $fistName = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest"; // used by header
 $initials = isset($_SESSION["initials"]) ? $_SESSION["initials"] : "GU"; // used by header
-$profPic = isset($_SESSION["profPic"]) ? $_SESSION["profPic"] : null; // used by header
-// $profPic = "https://randomuser.me/api/portraits/women/90.jpg";
+
+
 
 
 // Curl request to get data to fill projects page
 
-// $url = "http://localhost/slim3homeheroapi/public/populate-address-form"; // DEV
- $url = "https://slim3api.herokuapp.com/populate-address-form"; // PROD
+ $url = "http://localhost/slim3homeheroapi/public/homeowner/get-projects"; // DEV
+// $url = "https://slim3api.herokuapp.com//homeowner/get-projects"; // PROD
 
 $headers = array(
     "Authorization: Bearer ".$_SESSION["token"],
@@ -63,6 +63,10 @@ $ch = curl_init();
     // $homeTypes = [];
     // $barangays = [];
     // $defaultHome = null;
+
+    if(is_object($output) && $output->success == true){
+        $ongoingProjects = $output->response->ongoingProjects;
+    }
 
 
 // HTML STARTS HERE
@@ -159,6 +163,9 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         </div>
 
 
+
+
+
         <?php //--------------- PHP ZONE ------------------------
         }// closing bracket for if
 
@@ -166,6 +173,15 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
         ?><!-------------------------------------------------->
         <!-- HTML ZONE - MAIN CONTENT -->
+
+        <div> <!-- FOR TESTING -->
+        <p>
+            <?php 
+                // $test = date($output->response->ongoingProjects[0]->preferred_date_time);
+                // echo var_dump($output->response->ongoingProjects[0]);
+            ?>
+        </p>
+        </div> <!-- FOR TESTING -->
 
 
 
@@ -209,9 +225,68 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
                         <?php //--------------- PHP ZONE ------------------------
                             } else {
+                                // Loop through current data
                                 for($p = 0 ; $p < count($ongoingProjects); $p++){
+                                    
+                                    // Grab address value
+                                    $address = $output->response->ongoingProjects[$p]->complete_address;
+                                    
+                                    // Grab Schedule value
+                                    $pref_sched = $output->response->ongoingProjects[$p]->preferred_date_time;
+                                        // Instantiate a DateTime with microseconds.
+                                        $d = new DateTime($pref_sched);
+                                        // Custom date time formatting
+                                        $d_parsed = $d->format(DateTimeInterface::RFC7231);
+                                        $d_array = explode(" ", $d_parsed);
+                                        $t = $d_array[4];
+                                        $hours = substr($t, 0, 2);
+                                        $minutes = substr($t, 3, 2);
+                                        $end =  $hours >= 12 ? 'PM' : 'AM';
+                                        $hours_formatted =  $hours > 12 ? $hours - 12 : (int) $hours;
+                                        $t_formatted =  $hours_formatted.':'.$minutes.' '.$end;
+                                        $d_formatted = $d_array[0].' '.$d_array[2].' '.$d_array[3].' at '.$t_formatted;
+                                    
+                                    // Grab job order size
+                                    $job_order_size = $output->response->ongoingProjects[$p]->job_order_size;
+                                    // Grab job description
+                                    $job_desc = $output->response->ongoingProjects[$p]->job_description;
+                                    // Grab job title
+                                    $job_title = $output->response->ongoingProjects[$p]->job_post_name;
+                                    // Grab job status
+                                    $job_status = $output->response->ongoingProjects[$p]->job_post_status_id;
+                                    // Grab job id
+                                    $job_id = $output->response->ongoingProjects[$p]->id;
+                                    // Grab home_id
+                                    $home_id = $output->response->ongoingProjects[$p]->home_id;
+                                    // Grab rate_type_id
+                                    $rate_type_id = $output->response->ongoingProjects[$p]->rate_type_id;
+                                    // Grab job_size_id
+                                    $job_size_id = $output->response->ongoingProjects[$p]->job_order_size;
+                                    
+
                                     include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
                                 }
+                                // Clear values;
+                                $address = null;
+                                $d = null;
+                                $d_parsed = null;
+                                $d_array = null;
+                                $t = null;
+                                $hours = null;
+                                $minutes = null;
+                                $end = null;
+                                $hours_formatted = null;
+                                $t_formatted = null;
+                                $d_formatted = null;
+                                $pref_sched = null;
+                                $job_order_size = null;
+                                $job_desc = null;
+                                $job_title = null;
+                                $job_status = null;
+                                $job_id = null;
+                                $home_id = null;
+                                $rate_type_id = null;
+                                $job_size_id = null;
 
                                 if( count($ongoingProjects) > 3){
                                 ?><!-------------------------------------------------->
