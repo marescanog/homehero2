@@ -6,13 +6,69 @@ if(!isset($_SESSION["token"])){
     exit();
 }
 
+// Declare variables to be used in this page
 $level ="../..";
 $fistName = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest";
 $initials = isset($_SESSION["initials"]) ? $_SESSION["initials"] : "GU";
 
+// Curl request to get data to fill projects page
 
+ // $url = "http://localhost/slim3homeheroapi/public/homeowner/get-projects"; // DEV
+ $url = "https://slim3api.herokuapp.com//homeowner/get-projects"; // PROD
+
+$headers = array(
+    "Authorization: Bearer ".$_SESSION["token"],
+    'Content-Type: application/json',
+);
+
+// 1. Initialize
+$ch = curl_init();
+
+// 2. set options
+    // URL to submit to
+    // curl_setopt($ch, CURLOPT_URL, $url);
+
+    // Return output instead of outputting it
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    // Type of request = GET
+    curl_setopt($ch, CURLOPT_HTTPGET, 1);
+
+    // Set headers for auth
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    
+    // Execute the request and fetch the response. Check for errors
+    $output = curl_exec($ch);
+
+    // Moved inside Modal Body for better display of error messages
+    $mode = "PROD"; // DEV to see verbose error messsages, PROD for production build
+    $curl_error_message = null;
+
+    // ERROR HANDLING 
+    if($output === FALSE){
+        $curl_error_message = curl_error($ch);
+    }
+
+    curl_close($ch);
+
+    // $output =  json_decode(json_encode($output), true);
+    $output =  json_decode($output);
+    
+    // Declare variables to be used in this page
+    $ongoingProjects = [];
+    // $cities = [];
+    // $homeTypes = [];
+    // $barangays = [];
+    // $defaultHome = null;
+
+    if(is_object($output) && $output->success == true){
+        $ongoingProjects = $output->response->ongoingProjects;
+    }
+
+
+
+// HTML STARTS HERE
 require_once dirname(__FILE__)."/$level/components/head-meta.php"; 
-
 ?>
 <!-- === Link your custom CSS pages below here ===-->
 <script src="https://kit.fontawesome.com/d10ff4ba99.js" crossorigin="anonymous"></script>
@@ -29,7 +85,106 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     <div class="min-body-height d-flex flex-column justify-content-between <?php echo $hasHeader ?? ""; ?>">
     <!-- === Your Custom Page Content Goes Here below here === -->
 
-    <!-- Main Content -->
+    <!-- ALERT FOR ERROR HANDLING -->
+    <div class="container w-100 m-0 p-0 min-body-height h-100 ml-auto mr-auto gray-font d-flex flex-column">
+        <?php //--------------- PHP ZONE ------------------------
+        // ERROR HANDLING - Curl Error
+        if($curl_error_message !== null){
+        ?><!-------------------------------------------------->
+         <!-- HTML ZONE : CURL ERROR HANDLING & MESSAGE DISPLAY -->
+
+        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+            <div>
+                <strong>Curl Error!</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <p><?php echo $curl_error_message;?></p>
+        </div>
+
+        <?php //--------------- PHP ZONE ------------------------
+        } // closing bracket for if
+
+        // ERROR HANDLING - 404 curl URL
+        if(!$curl_error_message &&  !is_object($output)){
+        ?><!-------------------------------------------------->
+        <!-- HTML ZONE : 404 ERROR HANDLING & MESSAGE DISPLAY -->
+
+
+        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+            <div>
+                <b>SERVER ERROR!</b>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <p>Server issue or API link not found!</p>
+        </div>
+    
+
+        <?php //--------------- PHP ZONE ------------------------
+        }// closing bracket for if
+
+        // ERROR HANDLING - SERVER ERRORS
+        if(!$curl_error_message &&  is_object($output) && ($output->success == false)){
+        ?><!-------------------------------------------------->
+        <!-- HTML ZONE : SERVER ERROR HANDLING & MESSAGE DISPLAY -->
+
+
+        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+            <!-- TITLE -->
+            <div>
+                <h5>
+                    <?php
+                        if ($output->response && $output->response->status == 500 ){
+                            echo "SERVER ERROR 500";
+                        } else if ($output->response && $output->response->status == 401 ){
+                            echo "SERVER ERROR 401: NOT FOUND";
+                        } else {
+                            echo "SERVER ERROR";
+                        }
+                    ?>
+                </h5>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- BODY -->
+            <div>
+                <?php 
+                    if($output->response->status){
+                        echo $output->response->message;
+                    }
+                ?>
+                </div>
+        </div>
+
+
+
+
+
+        <?php //--------------- PHP ZONE ------------------------
+        }// closing bracket for if
+
+        //echo var_dump($output);
+
+        ?><!-------------------------------------------------->
+        <!-- HTML ZONE - MAIN CONTENT -->
+
+        <div> <!-- FOR TESTING -->
+        <p>
+            <?php 
+                // $test = date($output->response->ongoingProjects[0]->preferred_date_time);
+                // echo var_dump($output->response->ongoingProjects[0]);
+            ?>
+        </p>
+        </div> <!-- FOR TESTING -->
+
+
+
+
+    <!-- MAIN CONTENT -->
     <div class="container w-100 m-0 p-0 min-body-height h-100 ml-auto mr-auto gray-font d-flex flex-column">
         <div class="h-100">
             <nav aria-label="breadcrumb">
