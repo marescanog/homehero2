@@ -111,6 +111,12 @@
     margin-bottom: 1em;
 }
 
+.separator.yellow{
+    border-bottom: 5px solid #FCEBBF !important;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
 .sidelink{
     cursor: pointer;
 }
@@ -135,3 +141,31 @@
     color: black;
     margin-bottom: 5px;
 }
+
+/*==========================================*/
+/*              PROJECT CARD INFO           */
+/*==========================================*/
+
+.cardigan{
+    width: 100% !important;
+}
+
+.list-group-item{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@media only screen and (min-width: 992px) {
+
+    .cardigan{
+        width: 50% !important;
+    }
+}
+
+.clicky{
+    color: #2699FB;
+}
+.clicky:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+

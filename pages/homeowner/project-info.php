@@ -35,46 +35,72 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mx-2 mx-lg">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Library</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Data</li>
+                    <li class="breadcrumb-item"><a href="#">Ongoing</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Project Name</li>
                 </ol>
             </nav>
             <div class="mt-0 mb-2 d-flex align-items-center justify-content-between">
                 <div>
-                    <h1 class="h3 mx-2 mx-lg-0 mt-0 mb-2">Your current projects</h1>
+                    <h1 class="h3 mx-2 mx-lg-0 mt-0 mb-0">Your Project Name</h1>
                 </div>
-                <!-- <div class="sidelink">
+                <div class="sidelink">
                     <p class="mt-3 mr-3 mr-lg-0 text-danger">CANCEL</p>
-                </div> -->
-            </div>
-        </div>
-        <div class="h-100">
-            <div  id="tabs" class="card-body">
-                <nav>
-                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <p class="nav-item nav-link active " id="nav-hire-tab" data-toggle="tab" href="#nav-hire" role="tab" aria-controls="nav-hire" aria-selected="true">Hire a Hero</p>
-                        <p class="nav-item nav-link" id="nav-work-tab" data-toggle="tab" href="#nav-work" role="tab" aria-controls="nav-work" aria-selected="false">Find Work</p>
-                    </div>
-                </nav>
-                <div class="tab-content pt-1 pb-2 px-2  px-lg-3" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-hire" role="tabpanel" aria-labelledby="nav-hire-tab">
-                        <h5 class="jumbotron-h1 mt-lg-3 mt-0 mt-md-3 mt-lg-0">
-                            You have no projects.
-                        </h5>
-                    </div>
-                    <div class="tab-pane fade" id="nav-work" role="tabpanel" aria-labelledby="nav-work-tab">
-                        <h5 class="jumbotron-h1 mt-lg-3">
-                            You have no projects.
-                        </h5>
-  
-                    </div>
                 </div>
             </div>
         </div>
-        <div class="separator"></div>
-        <div class="mx-2 mx-lg">
-            <h4>Recommended HomeHeroes</h4>
-            <p>You have no current projects. Add a project to get recommendations!</p>
+        <div class="separator yellow mt-0"></div>
+        <div class="h-100">
+           <h4 class="mb-4 mx-2">Project Summary</h4>
+           <div class="card cardigan shadow-sm mb-3">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex flex-row justify-content-between">
+                        <h5>Project Name</h5>
+                        <p class="mb-0 clicky">Edit</p>
+                    </li>
+                    <li class="list-group-item"><b class="mr-1">Status:</b> Ongoing - Not Assigned</li>
+                    <li class="list-group-item"><b class="mr-1">Schedule:</b> Thu, Dec 2021 at 8:00 AM</li>
+                    <li class="list-group-item"><b class="mr-1">Address:</b> 12 Apple River Road, Apas, Cebu City city</li>
+                    <li class="list-group-item"><b class="mr-1">Job Size:</b> Medium (4-8 hours)</li>
+                    <li class="list-group-item"><b class="mr-1">Category:</b> Carpentry</li>
+                    <li class="list-group-item"><b class="mr-1">SubCategory:</b> General Plumbing</li>
+                    <li class="list-group-item"><b class="mr-1">Description:</b> My shower is not working.</li>
+                    <li class="list-group-item"><b class="mr-1">Your Offer:</b> My shower is not working.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="separator yellow"></div>
+            <h4 class="mb-4 mt-2 mx-2">Job Order Summary</h4>
+            <div class="card cardigan shadow-sm mb-3">
+                <ul class="list-group list-group-flush"> 
+                    <li class="list-group-item"><b>Job Order ID:</b> #0000001</li>
+                    <li class="list-group-item"><b>Assigned On:</b> Thu, Dec 2021 at 8:00 AM</li>
+                    <li class="list-group-item"><b>Assigned Worker:</b> Flex natividad</li>
+                </ul>
+            </div>
+        <div class="separator yellow"></div>
+            <h4 class="mb-4 mt-2 mx-2">Billing Summary</h4>
+            <div class="card cardigan shadow-sm mb-3">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><b>Bill ID:</b> #0000001</li>
+                    <li class="list-group-item"><b>Payment Method:</b> Cash</li>
+                    <li class="list-group-item"><b>Billed On:</b> Thu, Dec 2021 at 8:00 AM</li>
+                    <li class="list-group-item"><b>Paid On:</b> Thu, Dec 2021 at 8:00 AM</li>
+                </ul>
+            </div>
+            <div class="separator yellow"></div>
+            <h4 class="mb-4 mt-2 mx-2">Your Rating & Review</h4>
+            <div class="card cardigan shadow-sm mb-3">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><b>Overall Quality:</b> 5 0 0 0 0 0 </li>
+                    <li class="list-group-item"><b>Professionalism:</b> 5 0 0 0 0 0 </li>
+                    <li class="list-group-item"><b>Reliability:</b> 5 0 0 0 0 0 </li>
+                    <li class="list-group-item"><b>Punctuality:</b> 5 0 0 0 0 0 </li>
+                    <li class="list-group-item"><b>Comment:</b> Great Job!</li>
+                    <li class="list-group-item"><b>Rated On:</b> Thu, Dec 2021 at 8:00 AM</li>
+                </ul>
+            </div>
+            <div class="separator yellow"></div>
+            <h4 class="yellow mb-5">Recommended HomeHeroes</h4>
         </div>
     </div>
     <!-- Footer Links -->
