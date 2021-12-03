@@ -19,8 +19,8 @@ if($project_id == null){
 
 // Curl request to get data to fill projects page
 
- $url = "http://localhost/slim3homeheroapi/public/homeowner/get-single-project-complete-info/".$project_id; // DEV
-// $url = "https://slim3api.herokuapp.com//homeowner/get-projects"; // PROD
+ //$url = "http://localhost/slim3homeheroapi/public/homeowner/get-single-project-complete-info/".$project_id; // DEV
+ $url = "https://slim3api.herokuapp.com/homeowner/get-single-project-complete-info/".$project_id; // PROD
 
 $headers = array(
     "Authorization: Bearer ".$_SESSION["token"],
