@@ -8,13 +8,19 @@ if(!isset($_SESSION["token"])){
 
 // Declare variables to be used in this page
 $level ="../..";
-$fistName = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest";
-$initials = isset($_SESSION["initials"]) ? $_SESSION["initials"] : "GU";
+$fistName = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest"; // used by header
+$initials = isset($_SESSION["initials"]) ? $_SESSION["initials"] : "GU"; // used by header
+$project_id = isset($_GET["id"]) ? $_GET["id"] : null;
+
+// redirect back to projects when no project ID is given
+if($project_id == null){
+    header("Location: ../homeowner/projects.php");
+}
 
 // Curl request to get data to fill projects page
 
- // $url = "http://localhost/slim3homeheroapi/public/homeowner/get-projects"; // DEV
- $url = "https://slim3api.herokuapp.com//homeowner/get-projects"; // PROD
+ $url = "http://localhost/slim3homeheroapi/public/homeowner/get-single-project-complete-info/".$project_id; // DEV
+// $url = "https://slim3api.herokuapp.com//homeowner/get-projects"; // PROD
 
 $headers = array(
     "Authorization: Bearer ".$_SESSION["token"],
@@ -26,7 +32,7 @@ $ch = curl_init();
 
 // 2. set options
     // URL to submit to
-    // curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_URL, $url);
 
     // Return output instead of outputting it
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -55,14 +61,15 @@ $ch = curl_init();
     $output =  json_decode($output);
     
     // Declare variables to be used in this page
-    $ongoingProjects = [];
-    // $cities = [];
-    // $homeTypes = [];
-    // $barangays = [];
-    // $defaultHome = null;
+    $singleJobPost = false;
+    // // $cities = [];
+    // // $homeTypes = [];
+    // // $barangays = [];
+    // // $defaultHome = null;
 
     if(is_object($output) && $output->success == true){
-        $ongoingProjects = $output->response->ongoingProjects;
+        $singleJobPost = $output->response->singleJobPost;
+        $singleJobOrder = $output->response->singleJobOrder;
     }
 
 
@@ -167,8 +174,29 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         <?php //--------------- PHP ZONE ------------------------
         }// closing bracket for if
 
-        //echo var_dump($output);
+        echo var_dump($singleJobPost);
+        $project_name = $singleJobPost->job_post_name;
+        $status = $singleJobPost->job_post_status_id;
+        $schedule = $singleJobPost->preferred_date_time;
+        $address = $singleJobPost->complete_address;
+        $job_size = $singleJobPost->job_order_size;
+        $category = $singleJobPost->expertise;
+        $subcategory = $singleJobPost->project_type;
+        $description = $singleJobPost->job_description;
+        $rate_offer = $singleJobPost->rate_offer;
+        $rate_type = $singleJobPost->rate_type;
+        $your_offer = $rate_offer." /".$rate_type;
+        $date_booked = $singleJobPost->date_time_closed;
+        $cancellation_reason = $singleJobPost->cancellation_reason;
 
+        $job_order_id =  $singleJobOrder->id;
+        $assigned_on =  $singleJobOrder->assigned_on;
+        $assigned_worker =  $singleJobOrder->assigned_worker;
+        $date_time_start =  $singleJobOrder->date_time_start;
+        $date_time_closed =  $singleJobOrder->date_time_closed;
+
+        
+        //date_time_closed
         ?><!-------------------------------------------------->
         <!-- HTML ZONE - MAIN CONTENT -->
 
@@ -177,6 +205,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             <?php 
                 // $test = date($output->response->ongoingProjects[0]->preferred_date_time);
                 // echo var_dump($output->response->ongoingProjects[0]);
+                // echo var_dump($project_id);
             ?>
         </p>
         </div> <!-- FOR TESTING -->
@@ -191,12 +220,16 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                 <ol class="breadcrumb mx-2 mx-lg">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item"><a href="#">Ongoing</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Project Name</li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <?php echo $project_name == null ? "Project Name" : htmlentities($project_name);?>
+                    </li>
                 </ol>
             </nav>
             <div class="mt-0 mb-2 d-flex align-items-center justify-content-between">
                 <div>
-                    <h1 class="h3 mx-2 mx-lg-0 mt-0 mb-0">Your Project Name</h1>
+                    <h1 class="h3 mx-2 mx-lg-0 mt-0 mb-0">
+                        Your Project: <?php echo $project_name == null ? "Project Name" : htmlentities($project_name);?>
+                    </h1>
                 </div>
                 <div class="sidelink">
                     <p class="mt-3 mr-3 mr-lg-0 text-danger">CANCEL</p>
@@ -208,18 +241,147 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
            <h4 class="mb-4 mx-2">Project Summary</h4>
            <div class="card cardigan shadow-sm mb-3">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex flex-row justify-content-between">
-                        <h5>Project Name</h5>
-                        <p class="mb-0 clicky">Edit</p>
+                    <!-- DYNAMIC BACKGROUND COLOR CHANGE BASED ON STATUS-->
+                    <li class="list-group-item d-flex flex-row justify-content-between"
+                        style="background-color:<?php 
+                            if ($status != null){
+                                switch($status){
+                                    case 1: // Active
+                                        echo "#FCEBBF";
+                                        break;
+                                    case 2: // Filled
+                                        echo $date_time_closed == null ? "#d9f2d9" : "rgba(0,0,0,.04)";
+                                        break;
+                                    case 3: // Expired
+                                        echo "#e0e0eb";
+                                        break;
+                                    case 4: // Cancelled
+                                        echo "#ffe6e6";
+                                        break;
+                                    default: 
+                                        echo "rgba(0,0,0,.04)";
+                                }
+                            } else {
+                                echo "rgba(0,0,0,.04)";
+                            }
+                        ?>;"
+                    >
+                        <h5>
+                            Job Post Details
+                        </h5>
+                        <!-- If the job post has not been filled, cancelled yet, we can edit. If expired we can re-post -->
+                        <?php 
+                            if ($status != null){
+                                switch($status){
+                                    case 1: // Active
+                                        echo "<p class='mb-0 clicky'><b>EDIT</b></p>";
+                                        break;
+                                    case 2: // Filled
+                                        break;
+                                    case 3: // Expired
+                                        echo "<p class='mb-0 clicky'><b>RE-POST</b></p>";
+                                        break;
+                                    case 4: // Cancelled
+                                        echo "<p class='mb-0 clicky'><b>DISPUTE</b></p>";
+                                        break;
+                                    default: 
+                                        echo "rgba(0,0,0,.04)";
+                                }
+                            }
+                        ?>                        
                     </li>
-                    <li class="list-group-item"><b class="mr-1">Status:</b> Ongoing - Not Assigned</li>
-                    <li class="list-group-item"><b class="mr-1">Schedule:</b> Thu, Dec 2021 at 8:00 AM</li>
-                    <li class="list-group-item"><b class="mr-1">Address:</b> 12 Apple River Road, Apas, Cebu City city</li>
-                    <li class="list-group-item"><b class="mr-1">Job Size:</b> Medium (4-8 hours)</li>
-                    <li class="list-group-item"><b class="mr-1">Category:</b> Carpentry</li>
-                    <li class="list-group-item"><b class="mr-1">SubCategory:</b> General Plumbing</li>
-                    <li class="list-group-item"><b class="mr-1">Description:</b> My shower is not working.</li>
-                    <li class="list-group-item"><b class="mr-1">Your Offer:</b> My shower is not working.</li>
+
+                    <!-- STATUS -->
+                    <li class="list-group-item"><b class="mr-1">Status: </b>
+                    <span class="<?php  
+                        switch($status){
+                            case 2: // Filled
+                                echo "text-success font-weight-bold";
+                                break;
+                            case 3: // Expired
+                                echo "text-danger font-weight-bold";
+                                break;
+                            case 4: // Cancelled
+                                echo "text-danger font-weight-bold";
+                                break;
+                        }
+                    ?>">
+                        <?php 
+                            if ($status != null){
+                                switch($status){
+                                    case 1: // Active
+                                        echo "Ongoing - No worker assigned";
+                                        break;
+                                    case 2: // Filled
+                                        echo "Assigned to Homehero ".htmlentities($assigned_worker);
+                                        break;
+                                    case 3: // Expired
+                                        echo "EXPIRED";
+                                        break;
+                                    case 4: // Cancelled
+                                        echo "CANCELLED";
+                                        break;
+                                }
+                            }
+                        ?>
+                    </span>
+                    </li>
+                    <li class="list-group-item"><b class="mr-1">Schedule: </b>
+                    <?php echo $schedule == null ? "" : htmlentities($schedule);?>
+                    </li>
+                    <li class="list-group-item"><b class="mr-1">Address: </b>
+                        <?php echo $address == null ? "" : htmlentities($address);?>
+                    </li>
+                    <li class="list-group-item"><b class="mr-1">Job Size: </b>
+                        <?php echo $job_size == null ? "Project Name" : htmlentities($job_size);?>
+                    </li>
+                    <li class="list-group-item"><b class="mr-1">Category: </b>
+                        <?php echo $category  == null ? "" : htmlentities($category );?>
+                    </li>
+                    <li class="list-group-item"><b class="mr-1">SubCategory: </b>
+                        <?php echo $subcategory == null ? "" : htmlentities($subcategory);?>
+                    </li>
+                    <li class="list-group-item"><b class="mr-1">Description: </b>
+                        <?php echo $description == null ? "" : htmlentities($description);?>
+                    </li>
+                    <li class="list-group-item"><b class="mr-1">Your Offer: </b>
+                    <?php echo $your_offer == null ? "" : htmlentities($your_offer);?>
+                    </li>
+
+                    <!-- If the status is active, there is no need to display this list item -->
+                    <?php 
+                        if($status !== 1 && $status !== 3){
+                    ?> 
+                        <li class="list-group-item">
+                            <b class="mr-1">
+                                <?php 
+                                    switch($status){
+                                        case 2:
+                                            echo "Date Booked:";
+                                            break;
+                                        case 4:
+                                            echo "Date Cancelled:";
+                                            break;
+                                    }
+                                ?>
+                            </b>
+                            <?php echo $date_booked == null ? "" : htmlentities($date_booked);?>
+                        </li>
+                    <?php
+                        }
+                    ?>
+                    
+                    <!-- If the status is acnot cancelled, there is no need to display this list item -->
+                    <?php 
+                        if($status == 4){
+                    ?>
+                        <li class="list-group-item"><b class="mr-1">Cancellation reason: </b>
+                            <?php echo $cancellation_reason == null ? "" : htmlentities($cancellation_reason);?>
+                        </li>
+                    <?php
+                        }
+                    ?>
+
                 </ul>
             </div>
         </div>
