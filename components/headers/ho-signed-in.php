@@ -1,4 +1,10 @@
-<?php $hasHeader = "header";?>
+
+
+<?php 
+    $hasHeader = "header";
+    $profPic = isset($_SESSION["profPic"]) ? $_SESSION["profPic"] : null;
+    // $profPic = "https://randomuser.me/api/portraits/women/90.jpg";
+?>
 <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top w-100 p-0">
         <d class="flex flex-column w-100 pt-3 pt-lg-0">
         <div class="d-flex justify-content-between px-3 nav-container" id="header-mobile-container">
