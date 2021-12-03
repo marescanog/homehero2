@@ -16,8 +16,8 @@ $initials = isset($_SESSION["initials"]) ? $_SESSION["initials"] : "GU"; // used
 
 // Curl request to get data to fill projects page
 
- $url = "http://localhost/slim3homeheroapi/public/homeowner/get-projects"; // DEV
-// $url = "https://slim3api.herokuapp.com//homeowner/get-projects"; // PROD
+ // $url = "http://localhost/slim3homeheroapi/public/homeowner/get-projects"; // DEV
+ $url = "https://slim3api.herokuapp.com//homeowner/get-projects"; // PROD
 
 $headers = array(
     "Authorization: Bearer ".$_SESSION["token"],
