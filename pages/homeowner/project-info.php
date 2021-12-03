@@ -60,16 +60,85 @@ $ch = curl_init();
     // $output =  json_decode(json_encode($output), true);
     $output =  json_decode($output);
     
-    // Declare variables to be used in this page
+    // Declare & initialize variables to be used in this page
     $singleJobPost = false;
-    // // $cities = [];
-    // // $homeTypes = [];
-    // // $barangays = [];
-    // // $defaultHome = null;
+    $singleJobOrder = false;
+    $singleBill = false;
+    $singleReview = false;
+
+    $project_name = null;
+    $status = null;
+    $schedule = null;
+    $address = null;
+    $job_size = null;
+    $category = null;
+    $subcategory = null;
+    $description = null;
+    $rate_offer = null;
+    $rate_type = null;
+    $your_offer = null;
+    $date_time_closed = null;
+    $cancellation_reason = null;
+
+    $job_order_id =  null;
+    $assigned_on =  null;
+    $assigned_worker =  null;
+    $date_time_start =  null;
+    $date_time_closed =  null;
+
+    $bill_id =  null;
+    $bill_status =  null;
+    $bill_pay_complete_date =  null;
+    $bill_on =  null;
+    $bill_payment_method =  null;
+    $bill_total_price_billed =  null;
 
     if(is_object($output) && $output->success == true){
         $singleJobPost = $output->response->singleJobPost;
         $singleJobOrder = $output->response->singleJobOrder;
+        $singleBill = $output->response->singleBill;
+        $singleReview = $output->response->singleReview;
+
+        $project_name = $singleJobPost->job_post_name;
+        $status = $singleJobPost->job_post_status_id;
+        $schedule = $singleJobPost->preferred_date_time;
+        $address = $singleJobPost->complete_address;
+        $job_size = $singleJobPost->job_order_size;
+        $category = $singleJobPost->expertise;
+        $subcategory = $singleJobPost->project_type;
+        $description = $singleJobPost->job_description;
+        $rate_offer = $singleJobPost->rate_offer;
+        $rate_type = $singleJobPost->rate_type;
+        $your_offer = $rate_offer." /".$rate_type;
+        $date_time_closed = $singleJobPost->date_time_closed;
+        $cancellation_reason = $singleJobPost->cancellation_reason;
+
+        if( $singleJobOrder !== false){
+            $job_order_id =  $singleJobOrder->id;
+            $assigned_on =  $singleJobOrder->assigned_on;
+            $assigned_worker =  $singleJobOrder->assigned_worker;
+            $date_time_start =  $singleJobOrder->date_time_start;
+            $date_time_closed =  $singleJobOrder->date_time_closed;
+        }
+
+        if($singleBill != false){
+            $bill_id = $singleBill->id;
+            $bill_status = $singleBill->status;
+            $bill_pay_complete_date = $singleBill->date_time_completion_paid;
+            $bill_on = $singleBill->billed_on;
+            $bill_payment_method = $singleBill->payment_method;
+            $bill_total_price_billed = $singleBill->total_price_billed;
+        }
+
+        if($singleReview != false){
+            $overall = $singleReview->overall_quality;
+            $professionalism = $singleReview->professionalism;
+            $reliability = $singleReview->reliability;
+            $punctuality = $singleReview->punctuality;
+            $comment = $singleReview->comment;
+            $created_on = $singleReview->created_on;
+            $computedRating = ($overall + $professionalism + $reliability +  $punctuality ) / 4;
+        }
     }
 
 
@@ -146,8 +215,10 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                     <?php
                         if ($output->response && $output->response->status == 500 ){
                             echo "SERVER ERROR 500";
-                        } else if ($output->response && $output->response->status == 401 ){
-                            echo "SERVER ERROR 401: NOT FOUND";
+                        } else if ($output->response && $output->response->status == 404 ){
+                            echo "ERROR 404: NOT FOUND";
+                        } else if ($output->response && $output->response->status == 401){
+                            echo "ERROR 401: NOT AUTHORIZED";
                         } else {
                             echo "SERVER ERROR";
                         }
@@ -174,26 +245,8 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         <?php //--------------- PHP ZONE ------------------------
         }// closing bracket for if
 
-        echo var_dump($singleJobPost);
-        $project_name = $singleJobPost->job_post_name;
-        $status = $singleJobPost->job_post_status_id;
-        $schedule = $singleJobPost->preferred_date_time;
-        $address = $singleJobPost->complete_address;
-        $job_size = $singleJobPost->job_order_size;
-        $category = $singleJobPost->expertise;
-        $subcategory = $singleJobPost->project_type;
-        $description = $singleJobPost->job_description;
-        $rate_offer = $singleJobPost->rate_offer;
-        $rate_type = $singleJobPost->rate_type;
-        $your_offer = $rate_offer." /".$rate_type;
-        $date_booked = $singleJobPost->date_time_closed;
-        $cancellation_reason = $singleJobPost->cancellation_reason;
+        // echo var_dump($singleReview);
 
-        $job_order_id =  $singleJobOrder->id;
-        $assigned_on =  $singleJobOrder->assigned_on;
-        $assigned_worker =  $singleJobOrder->assigned_worker;
-        $date_time_start =  $singleJobOrder->date_time_start;
-        $date_time_closed =  $singleJobOrder->date_time_closed;
 
         
         //date_time_closed
@@ -214,12 +267,20 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
 
     <!-- MAIN CONTENT -->
-    <div class="container w-100 m-0 p-0 min-body-height h-100 ml-auto mr-auto gray-font d-flex flex-column">
-        <div class="h-100">
+<div class="container w-100 m-0 p-0 min-body-height h-100 ml-auto mr-auto gray-font d-flex flex-column">
+    <div class="h-100">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mx-2 mx-lg">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Ongoing</a></li>
+                    <li class="breadcrumb-item">
+                        <a href="<?php echo $level;?>/pages/homeowner/projects.php">
+                            Projects
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="<?php echo $level;?>/pages/homeowner/projects.php">
+                            Ongoing
+                        </a>
+                    </li>
                     <li class="breadcrumb-item active" aria-current="page">
                         <?php echo $project_name == null ? "Project Name" : htmlentities($project_name);?>
                     </li>
@@ -238,6 +299,29 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         </div>
         <div class="separator yellow mt-0"></div>
         <div class="h-100">
+        <!-- ================= -->
+        <!-- 404 JOB NOT FOUND -->
+        <!-- ================= -->
+        <?php
+            if ($singleJobPost == false && $output->response && $output->response->status == 404 ){
+                echo "<h1>404 NOT FOUND</h1>";
+            }
+        ?>
+        <!-- ================= -->
+        <!-- 401 JOB NOT FOUND -->
+        <!-- ================= -->
+        <?php
+            if ($singleJobPost == false && $output->response && $output->response->status == 401 ){
+                echo "<h1>401 UNAUTHORIZED ACCESS</h1>";
+            }
+        ?>
+
+        <!-- ================= -->
+        <!-- JOB POST SUMMARY -->
+        <!-- ================= -->
+        <?php
+            if( $singleJobPost !== false){
+        ?>
            <h4 class="mb-4 mx-2">Project Summary</h4>
            <div class="card cardigan shadow-sm mb-3">
                 <ul class="list-group list-group-flush">
@@ -349,29 +433,24 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                     </li>
 
                     <!-- If the status is active, there is no need to display this list item -->
-                    <?php 
-                        if($status !== 1 && $status !== 3){
-                    ?> 
-                        <li class="list-group-item">
-                            <b class="mr-1">
-                                <?php 
-                                    switch($status){
-                                        case 2:
-                                            echo "Date Booked:";
-                                            break;
-                                        case 4:
-                                            echo "Date Cancelled:";
-                                            break;
-                                    }
-                                ?>
-                            </b>
-                            <?php echo $date_booked == null ? "" : htmlentities($date_booked);?>
+                    <?php
+                        if( $singleJobOrder !== false){
+                    ?>
+                        <li class="list-group-item"><b class="mr-1">Date Booked: </b>
+                            <?php echo $assigned_on == null ? "" : htmlentities($assigned_on);?>
                         </li>
+                    <?php 
+                        } else if ($status == 4){
+                    ?>
+                        <li class="list-group-item"><b class="mr-1">Date Cancelled: </b>
+                            <?php echo $date_time_closed == null ? "" : htmlentities($date_time_closed);?>
+                        </li>
+                        
                     <?php
                         }
                     ?>
                     
-                    <!-- If the status is acnot cancelled, there is no need to display this list item -->
+                    <!-- If the status is not cancelled, there is no need to display this list item -->
                     <?php 
                         if($status == 4){
                     ?>
@@ -385,41 +464,151 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                 </ul>
             </div>
         </div>
-        <div class="separator yellow"></div>
+        <?php
+            }
+        ?>
+
+        <!-- ================= -->
+        <!-- JOB ORDER SUMMARY -->
+        <!-- ================= -->
+        <!-- No need to display when there is no job order assigned to this post -->
+        <?php 
+            if( $singleJobOrder !== false){
+        ?>
+            <div class="separator yellow"></div>
             <h4 class="mb-4 mt-2 mx-2">Job Order Summary</h4>
             <div class="card cardigan shadow-sm mb-3">
                 <ul class="list-group list-group-flush"> 
-                    <li class="list-group-item"><b>Job Order ID:</b> #0000001</li>
-                    <li class="list-group-item"><b>Assigned On:</b> Thu, Dec 2021 at 8:00 AM</li>
-                    <li class="list-group-item"><b>Assigned Worker:</b> Flex natividad</li>
+                    <li class="list-group-item"><b>Job Order ID:</b> #<?php
+                        echo $job_order_id == null ? "" : sprintf("%08d", $job_order_id);
+                    ?></li>
+                    <li class="list-group-item"><b>Assigned On:</b>
+                        <?php echo $assigned_on == null ? "" : htmlentities($assigned_on);?>
+                    </li>
+                    <li class="list-group-item"><b>Assigned Worker:</b>
+                         <?php echo $assigned_worker == null ? "" : htmlentities($assigned_worker);?>
+                    </li>
+                    <?php
+                        if($date_time_start !== null){
+                    ?>
+                        <li class="list-group-item"><b>Date & Time Started:</b>
+                            <?php echo $date_time_start == null ? "" : htmlentities($date_time_start);?>
+                        </li>
+                    <?php
+                        }
+                    ?>
+                                        <?php
+                        if($date_time_closed !== null){
+                    ?>
+                        <li class="list-group-item"><b>Date & Time Completed:</b>
+                            <?php echo $date_time_closed == null ? "" : htmlentities($date_time_closed);?>
+                        </li>
+                    <?php
+                        }
+                    ?>
                 </ul>
             </div>
-        <div class="separator yellow"></div>
+        <?php 
+           }
+        ?>
+
+        <!-- ================= -->
+        <!-- BILLING SUMMARY -->
+        <!-- ================= -->
+        <!-- No need to display when there is no bill assigned to this post -->
+        <?php 
+            if( $singleBill !== false){
+        ?>
+            <div class="separator yellow"></div>
             <h4 class="mb-4 mt-2 mx-2">Billing Summary</h4>
             <div class="card cardigan shadow-sm mb-3">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><b>Bill ID:</b> #0000001</li>
-                    <li class="list-group-item"><b>Payment Method:</b> Cash</li>
-                    <li class="list-group-item"><b>Billed On:</b> Thu, Dec 2021 at 8:00 AM</li>
-                    <li class="list-group-item"><b>Paid On:</b> Thu, Dec 2021 at 8:00 AM</li>
+                    <li class="list-group-item"><b>Bill ID:</b> #<?php
+                        echo $job_order_id == null ? "" : sprintf("%08d", $bill_id);
+                    ?></li>
+                    <li class="list-group-item"><b>Payment Method:</b>
+                        <?php echo $bill_payment_method == null ? "" : htmlentities($bill_payment_method);?>
+                    </li>
+                    <li class="list-group-item"><b>Bill Status:</b>
+                        <?php echo $bill_status == null ? "" : htmlentities($bill_status);?>
+                    </li>
+                    <li class="list-group-item"><b>Billed On:</b>
+                        <?php echo $bill_on == null ? "" : htmlentities($bill_on);?>
+                    </li>
+                    <li class="list-group-item"><b>Paid On:</b> 
+                        <?php echo $bill_pay_complete_date == null ? "" : htmlentities($bill_pay_complete_date);?>
+                    </li>
+                    <li class="list-group-item"><b>Total Price Billed:</b>
+                        <?php echo  $bill_total_price_billed == null ? "" : htmlentities( $bill_total_price_billed);?>
+                    </li>
                 </ul>
             </div>
+        <?php 
+           }
+        ?>
+
+
+        <!-- ================= -->
+        <!-- REVIEW SUMMARY -->
+        <!-- ================= -->
+        <!-- No need to display when there is no review assigned to this post -->
+        <?php 
+            if( $singleReview !== false){
+        ?>
             <div class="separator yellow"></div>
             <h4 class="mb-4 mt-2 mx-2">Your Rating & Review</h4>
             <div class="card cardigan shadow-sm mb-3">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><b>Overall Quality:</b> 5 0 0 0 0 0 </li>
-                    <li class="list-group-item"><b>Professionalism:</b> 5 0 0 0 0 0 </li>
-                    <li class="list-group-item"><b>Reliability:</b> 5 0 0 0 0 0 </li>
-                    <li class="list-group-item"><b>Punctuality:</b> 5 0 0 0 0 0 </li>
-                    <li class="list-group-item"><b>Comment:</b> Great Job!</li>
-                    <li class="list-group-item"><b>Rated On:</b> Thu, Dec 2021 at 8:00 AM</li>
+                    <li class="list-group-item"><b>Overall Rating</b>
+                        <?php echo $computedRating == null ? "" : htmlentities($computedRating);?>
+                    </li>
+                    <li class="list-group-item"><b>Overall Quality:</b>
+                        <?php echo $overall == null ? "" : htmlentities($overall);?>
+                    </li>
+                    <li class="list-group-item"><b>Professionalism:</b>
+                        <?php echo $professionalism == null ? "" : htmlentities($professionalism);?>
+                    </li>
+                    <li class="list-group-item"><b>Reliability:</b> 
+                        <?php echo $reliability == null ? "" : htmlentities($reliability);?>
+                    </li>
+                    <li class="list-group-item"><b>Punctuality:</b>
+                        <?php echo $punctuality == null ? "" : htmlentities($punctuality);?> 
+                    </li>
+                    <li class="list-group-item"><b>Comment:</b>
+                        <?php echo $comment == null ? "" : htmlentities($comment);?>
+                    </li>
+                    <li class="list-group-item"><b>Rated On:</b> 
+                        <?php echo $created_on == null ? "" : htmlentities($created_on);?>
+                    </li>
                 </ul>
             </div>
+        <?php 
+           }
+        ?>
+
+
+        <!-- ================= -->
+        <!-- RECOMMENDED HEROES -->
+        <!-- ================= -->
+        <!-- No need for recommendation when job has been cancelled, expired or filled -->
+        <?php 
+            if( $output->response){ 
+                if($singleJobOrder == false && $status !== null && $status !== 3 && $status !== 4){
+        ?>
             <div class="separator yellow"></div>
             <h4 class="yellow mb-5">Recommended HomeHeroes</h4>
+        <?php 
+           } else {
+        ?>
+            <div class="mb-5"></div>
+        <?php
+           }}
+        ?>
+
+
         </div>
     </div>
+
     <!-- Footer Links -->
     <?php 
         require_once dirname(__FILE__)."/$level/components/footer.php"; 
