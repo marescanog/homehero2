@@ -11,13 +11,12 @@ $level ="../..";
 $fistName = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest"; // used by header
 $initials = isset($_SESSION["initials"]) ? $_SESSION["initials"] : "GU"; // used by header
 
-
-
+$currentTab = isset($_GET['tab']) ? $_GET['tab'] : "open"; // used to direct to closed tab
 
 // Curl request to get data to fill projects page
 
  // $url = "http://localhost/slim3homeheroapi/public/homeowner/get-projects"; // DEV
- $url = "https://slim3api.herokuapp.com//homeowner/get-projects"; // PROD
+  $url = "https://slim3api.herokuapp.com//homeowner/get-projects"; // PROD
 
 $headers = array(
     "Authorization: Bearer ".$_SESSION["token"],
@@ -58,14 +57,14 @@ $ch = curl_init();
     $output =  json_decode($output);
     
     // Declare variables to be used in this page
+    $ongoingJobPosts = [];
     $ongoingProjects = [];
-    // $cities = [];
-    // $homeTypes = [];
-    // $barangays = [];
-    // $defaultHome = null;
+    $closedProjects = [];
 
     if(is_object($output) && $output->success == true){
+        $ongoingJobPosts = $output->response->ongoingJobPosts;
         $ongoingProjects = $output->response->ongoingProjects;
+        $closedProjects = $output->response->closedProjects;
     }
 
 
@@ -178,7 +177,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         <p>
             <?php 
                 // $test = date($output->response->ongoingProjects[0]->preferred_date_time);
-                // echo var_dump($output->response->ongoingProjects[0]);
+                 // echo var_dump($output->response->closedProjects);
             ?>
         </p>
         </div> <!-- FOR TESTING -->
@@ -206,33 +205,125 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             <div  id="tabs" class="card-body">
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <p class="nav-item nav-link active " id="nav-hire-tab" data-toggle="tab" href="#nav-hire" role="tab" aria-controls="nav-hire" aria-selected="true">Ongoing Projects</p>
-                        <p class="nav-item nav-link" id="nav-work-tab" data-toggle="tab" href="#nav-work" role="tab" aria-controls="nav-work" aria-selected="false">Closed Projects</p>
+                        <!-- ============= -->
+                        <!-- Job Posts Tab -->
+                        <!-- ============= -->
+                        <p class="nav-item nav-link 
+                        <?php 
+                            if($currentTab != null){
+                                switch($currentTab){
+                                    case "closed":
+                                    break;
+                                    case "orders":
+                                    break;
+                                    default:
+                                        echo "active";
+                                }
+                            } else {
+                                echo "active";
+                            }
+                        ?>" 
+                            id="nav-hire-tab" data-toggle="tab" href="#nav-hire" role="tab" aria-controls="nav-hire" 
+                            aria-selected="<?php 
+                            if($currentTab != null){
+                                switch($currentTab){
+                                    case "closed":
+                                    break;
+                                    case "orders":
+                                    break;
+                                    default:
+                                        echo "true";
+                                }
+                            } else {
+                                echo "true";
+                            }
+                            ?>">
+                            Job Posts
+                        </p>
+                        <!-- ============= -->
+                        <!-- Job Orders Tab -->
+                        <!-- ============= -->
+                        <p class="nav-item nav-link 
+                            <?php 
+                                if($currentTab != null){
+                                    if($currentTab == "orders"){
+                                        echo "active";
+                                    }
+                                }
+                            ?>" 
+                            id="nav-work-tab" data-toggle="tab" href="#nav-orders" role="tab" aria-controls="nav-orders" aria-selected="
+                            <?php 
+                                if($currentTab != null){
+                                    if($currentTab == "orders"){
+                                        echo "true";
+                                    }
+                                }
+                            ?>">
+                            Ongoing Projects
+                        </p>
+                        <!-- ==================== -->
+                        <!-- Closed Projects Tab -->
+                        <!-- ==================== -->
+                        <p class="nav-item nav-link 
+                            <?php 
+                                if($currentTab != null){
+                                    if($currentTab == "closed"){
+                                        echo "active";
+                                    }
+                                }
+                            ?>" 
+                            id="nav-work-tab" data-toggle="tab" href="#nav-work" role="tab" aria-controls="nav-work" aria-selected="
+                            <?php 
+                                if($currentTab != null){
+                                    if($currentTab == "closed"){
+                                        echo "true";
+                                    }
+                                }
+                            ?>">
+                            Closed Projects
+                        </p>
                     </div>
                 </nav>
                 <div class="tab-content pt-1 pb-2 px-2  px-lg-3" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-hire" role="tabpanel" aria-labelledby="nav-hire-tab">
-  
+<!-- ==================== -->
+<!-- Job Posts DISPLAY -->
+<!-- ==================== -->
+                    <div class="tab-pane fade 
+                        <?php 
+                            if($currentTab != null){
+                                switch($currentTab){
+                                    case "closed":
+                                    break;
+                                    case "orders":
+                                    break;
+                                    default:
+                                        echo " show active";
+                                }
+                            } else {
+                                echo " show active";
+                            }
+                        ?>" 
+                        id="nav-hire" role="tabpanel" aria-labelledby="nav-hire-tab">
                         <?php //--------------- PHP ZONE ------------------------
-                        // PROJECT DISPLAY - ONGOING
-                        if(count($ongoingProjects) == 0 || $ongoingProjects == null){
+                        // JOB POSTS DISPLAY - ONGOING
+                        if(count($ongoingJobPosts) == 0 || $ongoingJobPosts == null){
                         ?><!-------------------------------------------------->
                         <!-- HTML ZONE: PROJECT DISPLAY - ONGOING -->
 
                             <h5 class="jumbotron-h1 mt-lg-3 mt-0 mt-md-3 mt-lg-0">
-                                You have no projects.
+                                You have no job posts.
                             </h5>
 
                         <?php //--------------- PHP ZONE ------------------------
                             } else {
                                 // Loop through current data
-                                for($p = 0 ; $p < count($ongoingProjects); $p++){
+                                for($p = 0 ; $p < count($ongoingJobPosts); $p++){
                                     
                                     // Grab address value
-                                    $address = $output->response->ongoingProjects[$p]->complete_address;
+                                    $address = $ongoingJobPosts[$p]->complete_address;
                                     
                                     // Grab Schedule value
-                                    $pref_sched = $output->response->ongoingProjects[$p]->preferred_date_time;
+                                    $pref_sched = $ongoingJobPosts[$p]->preferred_date_time;
                                         // Instantiate a DateTime with microseconds.
                                         $d = new DateTime($pref_sched);
                                         // Custom date time formatting
@@ -245,24 +336,27 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                         $hours_formatted =  $hours > 12 ? $hours - 12 : (int) $hours;
                                         $t_formatted =  $hours_formatted.':'.$minutes.' '.$end;
                                         $d_formatted = $d_array[0].' '.$d_array[2].' '.$d_array[1].' at '.$t_formatted;
-                                    
+
                                     // Grab job order size
-                                    $job_order_size = $output->response->ongoingProjects[$p]->job_order_size;
+                                    $job_order_size = $ongoingJobPosts[$p]->job_order_size;
                                     // Grab job description
-                                    $job_desc = $output->response->ongoingProjects[$p]->job_description;
+                                    $job_desc = $ongoingJobPosts[$p]->job_description;
                                     // Grab job title
-                                    $job_title = $output->response->ongoingProjects[$p]->job_post_name;
+                                    $job_title = $ongoingJobPosts[$p]->job_post_name;
                                     // Grab job status
-                                    $job_status = $output->response->ongoingProjects[$p]->job_post_status_id;
+                                    $job_status = $ongoingJobPosts[$p]->job_post_status_id;
                                     // Grab job id
-                                    $job_id = $output->response->ongoingProjects[$p]->id;
+                                    $job_id = $ongoingJobPosts[$p]->id;
                                     // Grab home_id
-                                    $home_id = $output->response->ongoingProjects[$p]->home_id;
+                                    $home_id = $ongoingJobPosts[$p]->home_id;
                                     // Grab rate_type_id
-                                    $rate_type_id = $output->response->ongoingProjects[$p]->rate_type_id;
+                                    $rate_type_id = $ongoingJobPosts[$p]->rate_type_id;
                                     // Grab job_size_id
-                                    $job_size_id = $output->response->ongoingProjects[$p]->job_order_size;
-                                    
+                                    $job_size_id = $ongoingJobPosts[$p]->job_order_size;
+                                        
+                                    $is_rated = null;
+                                    $job_order_id = null;
+                                    $cancellation_reason = null;
 
                                     include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
                                 }
@@ -301,12 +395,258 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                 }
                             }
                         ?>
-
                     </div>
-                    <div class="tab-pane fade" id="nav-work" role="tabpanel" aria-labelledby="nav-work-tab">
-                        <h5 class="jumbotron-h1 mt-lg-3">
-                            You have no projects.
-                        </h5>
+
+
+<!-- =================== -->
+<!-- Job orders display -->
+<!-- =================== -->
+                    <div class="tab-pane fade 
+                    <?php 
+                        if($currentTab != null){
+                            if($currentTab == "orders"){
+                                echo " show active";
+                            }
+                        }
+                    ?>" 
+                    id="nav-orders" role="tabpanel" aria-labelledby="nav-orders-tab">
+                        <?php //--------------- PHP ZONE ------------------------
+                        // PROJECT DISPLAY - CLOSED
+                        if(count( $ongoingProjects) == 0 ||  $ongoingProjects == null){
+                        ?><!-------------------------------------------------->
+                        <!-- HTML ZONE: PROJECT DISPLAY - ONGOING -->
+
+                            <h5 class="jumbotron-h1 mt-lg-3 mt-0 mt-md-3 mt-lg-0">
+                                You have no closed/cancelled projects.
+                            </h5>
+
+                        <?php //--------------- PHP ZONE ------------------------
+                            } else {
+                                // Loop through current data
+                                for($p = 0 ; $p < count( $ongoingProjects); $p++){
+                                    
+                                    // Grab address value
+                                    $address =  $ongoingProjects[$p]->complete_address;
+                                    
+                                    // Grab Schedule value
+                                    $pref_sched =  $ongoingProjects[$p]->preferred_date_time;
+                                        // Instantiate a DateTime with microseconds.
+                                        $d = new DateTime($pref_sched);
+                                        // Custom date time formatting
+                                        $d_parsed = $d->format(DateTimeInterface::RFC7231);
+                                        $d_array = explode(" ", $d_parsed);
+                                        $t = $d_array[4];
+                                        $hours = substr($t, 0, 2);
+                                        $minutes = substr($t, 3, 2);
+                                        $end =  $hours >= 12 ? 'PM' : 'AM';
+                                        $hours_formatted =  $hours > 12 ? $hours - 12 : (int) $hours;
+                                        $t_formatted =  $hours_formatted.':'.$minutes.' '.$end;
+                                        $d_formatted = $d_array[0].' '.$d_array[2].' '.$d_array[1].' at '.$t_formatted;
+
+                                    // Grab job order size
+                                    $job_order_size =  $ongoingProjects[$p]->job_order_size;
+                                    // Grab job description
+                                    $job_desc =  $ongoingProjects[$p]->job_description;
+                                    // Grab job title
+                                    $job_title =  $ongoingProjects[$p]->job_post_name;
+                                    // Grab job status
+                                    $job_status =  $ongoingProjects[$p]->job_post_status_id;
+                                    // Grab job id
+                                    $job_id =  $ongoingProjects[$p]->id;
+                                    // Grab home_id
+                                    $home_id = $ongoingProjects[$p]->home_id;
+                                    // Grab rate_type_id
+                                    $rate_type_id =  $ongoingProjects[$p]->rate_type_id;
+                                    // Grab job_size_id
+                                    $job_size_id = $ongoingProjects[$p]->job_order_size;
+
+                                    // Grab job_orderid
+                                    $job_order_id = $closedProjects[$p]->job_order_id;
+
+                                    // Grab job order status
+                                    $job_order_status_id =  $ongoingProjects[$p]->job_order_status_id;
+                                     // Grab assigned to
+                                     $assigned_to =  $ongoingProjects[$p]->assigned_to;
+
+
+
+                                    // Check if the date is beyond today's date. Otherwise mark it as expired.
+                                    // echo ($job_status);
+
+                                    // if($job_status != 2){
+                                    //     echo "Not fulfilled";
+                                    // }
+                        
+                                    
+
+                                    include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
+                                }
+                                // Clear values;
+                                $address = null;
+                                $d = null;
+                                $d_parsed = null;
+                                $d_array = null;
+                                $t = null;
+                                $hours = null;
+                                $minutes = null;
+                                $end = null;
+                                $hours_formatted = null;
+                                $t_formatted = null;
+                                $d_formatted = null;
+                                $pref_sched = null;
+                                $job_order_size = null;
+                                $job_desc = null;
+                                $job_title = null;
+                                $job_status = null;
+                                $job_id = null;
+                                $home_id = null;
+                                $rate_type_id = null;
+                                $job_size_id = null;
+                                $is_rated = null;
+                                $job_order_id = null;
+
+                                if( count($closedProjects) > 3){
+                                ?><!-------------------------------------------------->
+                                <!-- HTML ZONE: SHOW MORE PROJECTS -->
+                                    <div id="show-more"></div>
+                                    <div  class="d-flex mt-4 justify-content-center text-align-center">
+                                        <button class="btn btn-lg text-white btn-warning">
+                                            SHOW MORE
+                                        </button>
+                                    </div>
+                                <?php //--------------- PHP ZONE ------------------------
+                                }
+                            }
+                        ?>
+                    </div>
+
+
+
+                        <!-- ========================== -->
+                        <!-- Closed/ Cancelled display -->
+                        <!-- ========================== -->
+                    <div class="tab-pane fade 
+                    <?php 
+                        if($currentTab != null){
+                            if($currentTab == "closed"){
+                                echo " show active";
+                            }
+                        }
+                    ?>" 
+                    id="nav-work" role="tabpanel" aria-labelledby="nav-work-tab">
+                    <?php //--------------- PHP ZONE ------------------------
+                        // PROJECT DISPLAY - CLOSED
+                        if(count($closedProjects) == 0 || $closedProjects == null){
+                        ?><!-------------------------------------------------->
+                        <!-- HTML ZONE: PROJECT DISPLAY - ONGOING -->
+
+                            <h5 class="jumbotron-h1 mt-lg-3 mt-0 mt-md-3 mt-lg-0">
+                                You have no closed/cancelled projects.
+                            </h5>
+
+                        <?php //--------------- PHP ZONE ------------------------
+                            } else {
+                                // Loop through current data
+                                for($p = 0 ; $p < count($closedProjects); $p++){
+                                    
+                                    // Grab address value
+                                    $address = $closedProjects[$p]->complete_address;
+                                    
+                                    // Grab Schedule value
+                                    $pref_sched = $closedProjects[$p]->preferred_date_time;
+                                        // Instantiate a DateTime with microseconds.
+                                        $d = new DateTime($pref_sched);
+                                        // Custom date time formatting
+                                        $d_parsed = $d->format(DateTimeInterface::RFC7231);
+                                        $d_array = explode(" ", $d_parsed);
+                                        $t = $d_array[4];
+                                        $hours = substr($t, 0, 2);
+                                        $minutes = substr($t, 3, 2);
+                                        $end =  $hours >= 12 ? 'PM' : 'AM';
+                                        $hours_formatted =  $hours > 12 ? $hours - 12 : (int) $hours;
+                                        $t_formatted =  $hours_formatted.':'.$minutes.' '.$end;
+                                        $d_formatted = $d_array[0].' '.$d_array[2].' '.$d_array[1].' at '.$t_formatted;
+
+                                    // Grab job order size
+                                    $job_order_size = $closedProjects[$p]->job_order_size;
+                                    // Grab job description
+                                    $job_desc = $closedProjects[$p]->job_description;
+                                    // Grab job title
+                                    $job_title = $closedProjects[$p]->job_post_name;
+                                    // Grab job status
+                                    $job_status = $closedProjects[$p]->job_post_status_id;
+                                    // Grab job id
+                                    $job_id = $closedProjects[$p]->id;
+                                    // Grab home_id
+                                    $home_id = $closedProjects[$p]->home_id;
+                                    // Grab rate_type_id
+                                    $rate_type_id = $closedProjects[$p]->rate_type_id;
+                                    // Grab job_size_id
+                                    $job_size_id = $closedProjects[$p]->job_order_size;
+
+
+                                    // Grab is_rated
+                                    $isRated = $closedProjects[$p]->isRated;
+                                    // Grab job_orderid
+                                    $job_order_id = $closedProjects[$p]->job_order_id;
+                                    // Grab cancellation reason
+                                    $cancellation_reason =  $closedProjects[$p]->cancellation_reason;
+                                    // Grab job order status
+                                    $job_order_status_id = $closedProjects[$p]->job_order_status_id;
+                                     // Grab assigned to
+                                     $assigned_to = $closedProjects[$p]->assigned_to;
+                                     // Grab bill status
+                                     $bill_status_id = $closedProjects[$p]->bill_status_id;
+
+
+                                    // Check if the date is beyond today's date. Otherwise mark it as expired.
+                                    // echo ($job_status);
+
+                                    // if($job_status != 2){
+                                    //     echo "Not fulfilled";
+                                    // }
+                        
+                                    
+
+                                    include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
+                                }
+                                // Clear values;
+                                $address = null;
+                                $d = null;
+                                $d_parsed = null;
+                                $d_array = null;
+                                $t = null;
+                                $hours = null;
+                                $minutes = null;
+                                $end = null;
+                                $hours_formatted = null;
+                                $t_formatted = null;
+                                $d_formatted = null;
+                                $pref_sched = null;
+                                $job_order_size = null;
+                                $job_desc = null;
+                                $job_title = null;
+                                $job_status = null;
+                                $job_id = null;
+                                $home_id = null;
+                                $rate_type_id = null;
+                                $job_size_id = null;
+                                $is_rated = null;
+                                $job_order_id = null;
+
+                                if( count($closedProjects) > 3){
+                                ?><!-------------------------------------------------->
+                                <!-- HTML ZONE: SHOW MORE PROJECTS -->
+                                    <div id="show-more"></div>
+                                    <div  class="d-flex mt-4 justify-content-center text-align-center">
+                                        <button class="btn btn-lg text-white btn-warning">
+                                            SHOW MORE
+                                        </button>
+                                    </div>
+                                <?php //--------------- PHP ZONE ------------------------
+                                }
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
