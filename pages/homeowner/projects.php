@@ -177,7 +177,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         <p>
             <?php 
                 // $test = date($output->response->ongoingProjects[0]->preferred_date_time);
-                 echo var_dump($output->response->closedProjects);
+                 // echo var_dump($output->response->closedProjects);
             ?>
         </p>
         </div> <!-- FOR TESTING -->

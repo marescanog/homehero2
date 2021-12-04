@@ -33,10 +33,10 @@
                 if ($job_status == 1){
                     echo 'Not Assigned';
                 } else if  ($job_status == 2){
-                    if($job_order_status_id = 3){
-                        echo 'Completed by '.$assigned_to;
-                    } else {
+                    if($job_order_status_id == 1){
                         echo 'Assigned To '.$assigned_to;
+                    } else {
+                        echo 'Completed by '.$assigned_to;
                     }
                 } else if  ($job_status == 3){
                     echo 'Expired';
