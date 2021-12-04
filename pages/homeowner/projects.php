@@ -244,7 +244,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                         $end =  $hours >= 12 ? 'PM' : 'AM';
                                         $hours_formatted =  $hours > 12 ? $hours - 12 : (int) $hours;
                                         $t_formatted =  $hours_formatted.':'.$minutes.' '.$end;
-                                        $d_formatted = $d_array[0].' '.$d_array[2].' '.$d_array[3].' at '.$t_formatted;
+                                        $d_formatted = $d_array[0].' '.$d_array[2].' '.$d_array[1].' at '.$t_formatted;
                                     
                                     // Grab job order size
                                     $job_order_size = $output->response->ongoingProjects[$p]->job_order_size;
