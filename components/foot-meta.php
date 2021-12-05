@@ -10,7 +10,7 @@
 <!-- =============================================== -->
 <!--                    MODAL                        -->
 <!-- =============================================== -->
-<div class="modal fade" id="modal"  role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade" id="modal"  role="dialog" aria-labelledby="modalLabel" aria-hidden="true" data-backdrop="static">
     <div id="modal-contents" class="modal-dialog modal-dialog-centered" role="document">
         <?php
 
