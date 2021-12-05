@@ -819,6 +819,48 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
+        const cancelandRepost = (projectID) => {
+            console.log(projectID);
+            let data={};
+            data['projectID'] = projectID;
+            loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
+        }
+
+        const reportNoShow = (projectID) => {
+            console.log(projectID);
+            let data={};
+            data['projectID'] = projectID;
+            loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
+        }
+
+        const reportProject = (projectID) => {
+            console.log(projectID);
+            let data={};
+            data['projectID'] = projectID;
+            loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
+        }
+
+        const completePayment = (projectID) => {
+            console.log(projectID);
+            let data={};
+            data['projectID'] = projectID;
+            loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
+        }
+
+        const reschedule = (projectID) => {
+            console.log(projectID);
+            let data={};
+            data['projectID'] = projectID;
+            loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
+        }
+
+        const rateProject = (projectID) => {
+            console.log(projectID);
+            let data={};
+            data['projectID'] = projectID;
+            loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
+        }
+
 
 
 
