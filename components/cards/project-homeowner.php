@@ -5,6 +5,7 @@
     $pref_sched = isset($pref_sched) ? $pref_sched : null;
     $job_desc = isset($job_desc) ? $job_desc : null;
     $job_title = isset($job_title) ? $job_title: null;
+    $project_type = isset($project_type) ? $project_type : $project_type;
 
     // For DB meta values
     $job_status =  isset($job_status) ? $job_status: null;
@@ -22,10 +23,13 @@
     $jo_start_time = isset( $jo_start_time) ?  $jo_start_time : null;
 
     $date_paid = isset($date_paid) ? $date_paid : null;
+    $rate_offer = isset($rate_offer ) ? $rate_offer  : null;
+    $rate_type_id = isset(  $rate_type_id) ?  $rate_type_id  : null;
+    $rt_array = ['/hr', '/day','/week','/project'];
 ?>
 <div class="card mt-3 mb-4 shadow ">
     <div class="card-header" style="background-color:#FCEBBF;">
-        <h5 class="card-title titulo-proj"><?php echo $job_title  ?? 'Project Name'; ?></h5>
+        <h5 class="card-title titulo-proj"><?php echo $job_title  ?? ( $project_type?? 'Project Name'); ?></h5>
         <h6 class="mb-0 mt-0">Status: 
             <span class="
                 <?php
@@ -76,7 +80,13 @@
                     include dirname(__FILE__)."/".$level.'/images/svg/local_offer_black_24dp.svg';  
                 ?>
             </div>
-            <h6 class="card-subtitle mb-2 text-muted mt-1"><b>Your offer: 50 /hr</b></h6>
+            <h6 class="card-subtitle mb-2 text-muted mt-1"><b>Your offer:
+                <?php 
+                    if(  $rate_offer != null &&  $rate_type_id != null){
+                        echo $rate_offer.$rt_array[$rate_type_id-1];
+                    }
+                ?>
+            </b></h6>
         </div>
         
         <div class="d-flex flex-row">
@@ -168,7 +178,7 @@
                         // You can only edit a project when it is not filled
                         if($job_status == 1){
                     ?>
-                        <button class="btn btn-outline-warning ml-2">
+                        <button class="btn btn-outline-warning ml-2" data-toggle="modal" data-target="#modal" onclick="editProject(<?php echo $job_id.',\''.$job_title.'\',\''.$pref_sched.'\',\''.$job_size_id.'\',\''.$rate_offer.'\''; ?>)">
                             <b>EDIT</b>
                         </button>
                     <?php 
@@ -267,7 +277,7 @@
                 <?php 
                     if($job_status == 1 || $job_order_status_id == 1){
                 ?>
-                    <button class="btn btn-danger">
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="cancelProject(<?php echo $job_id;?>)">
                         CANCEL
                     </button>
                 <?php 
