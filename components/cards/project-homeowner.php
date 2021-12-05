@@ -55,7 +55,7 @@
                         if($today!= null && $d != null && $today>$d && $jo_start_time == null){
                             echo 'Assigned To '.$assigned_to;
                             echo '</br>';
-                            echo "<span class='small-warn'>** This worker has not started the job and the scheduled date has already passed. Please cancel and repost in the event the worker does not show.</span>";
+                            echo "<span class='small-warn'>** This worker has not started the job and the scheduled time has already passed. Please cancel and repost in the event the worker does not show.</span>";
                         } else {
                             echo 'Assigned To '.$assigned_to;
                         }
@@ -124,7 +124,7 @@
             <p id="descLabel"><b>Description:</b> <?php echo $job_desc ?? 'Job description'; ?></p>
         </div>
 
-        <?php if($job_status == 4){?>
+        <?php if($job_status == 4 || $job_order_status_id == 3){?>
             <div class="d-flex flex-row">
                 <div class="gray-icon">
                     <?php
@@ -132,6 +132,42 @@
                     ?>
                 </div>
                 <p id="descLabel"><b>Cancellation Reason:</b> <?php echo $cancellation_reason ?? ''; ?></p>
+            </div>
+        <?php }?>
+
+        <?php if($job_status == 2 && $job_order_status_id  == 1 ){?>
+            <div class="d-flex flex-row">
+                <div class="gray-icon">
+                    <div class="status-circle 
+                    <?php
+                        if($today!= null && $d != null && $today>$d && $jo_start_time == null){
+                            echo 'bg-danger ';
+                        } else if ($jo_start_time != null) {
+                            echo 'bg-success ';
+                        }
+                    ?>"></div>
+                </div>
+                <p id="descLabel"><b>Job Order Status:</b> 
+                    <span class="
+                    <?php
+                        if($today!= null && $d != null && $today>$d && $jo_start_time == null){
+                            echo 'text-danger font-weight-bold font-italic';
+                        } else if ($jo_start_time != null) {
+                            echo 'text-success font-weight-bold';
+                        }
+                    ?>
+                    ">
+                        <?php
+                            if($today!= null && $d != null && $today>$d && $jo_start_time == null){
+                                echo 'Not Started By worker - Past Schedule';
+                            } else if ($jo_start_time != null) {
+                                echo 'In Progress';
+                            } else {
+                                echo 'Pending';
+                            }
+                        ?>
+                    </span>
+                </p>
             </div>
         <?php }?>
 
@@ -178,14 +214,14 @@
                         // You can only edit a project when it is not filled
                         if($job_status == 1){
                     ?>
-                        <button class="btn btn-outline-warning ml-2" data-toggle="modal" data-target="#modal" onclick="editProject(<?php echo $job_id.',\''.$job_title.'\',\''.$pref_sched.'\',\''.$job_size_id.'\',\''.$rate_offer.'\',\''.$rate_type_id.'\',\''.$job_desc.'\',\''.$home_id.'\',\''.$address.'\''; ?>)">
+                        <button class="btn btn-outline-warning ml-2" style="border: 2px solid #f0ad4e" data-toggle="modal" data-target="#modal" onclick="editProject(<?php echo $job_id.',\''.$job_title.'\',\''.$pref_sched.'\',\''.$job_size_id.'\',\''.$rate_offer.'\',\''.$rate_type_id.'\',\''.$job_desc.'\',\''.$home_id.'\',\''.$address.'\''; ?>)">
                             <b>EDIT</b>
                         </button>
                     <?php 
                         // user can reshedule but not edit only if the post expired
                         } else if ($job_status == 3) {
                     ?>
-                        <button class="btn btn-secondary text-white ml-2">
+                        <button class="btn btn-secondary text-white ml-2" data-toggle="modal" data-target="#modal" onclick="reschedule(<?php echo $job_id;?>)">
                             <b>RESCHEDULE</b>
                         </button>
                     <?php 
@@ -218,7 +254,7 @@
                             <?php
                                 if($job_order_status_id == 1 && $today!= null && $d != null && $today>$d && $jo_start_time == null){
                             ?>
-                                <button class="btn btn-danger text-white ml-2">
+                                <button class="btn btn-danger text-white ml-2" data-toggle="modal" data-target="#modal" onclick="cancelandRepost(<?php echo $job_id;?>)">
                                     <b>CANCEL & REPOST</b>
                                 </button>
                             <?php
@@ -236,7 +272,7 @@
                             <?php
                                 if($date_paid == null){
                             ?>
-                                <button class="btn btn-success text-white ml-2">
+                                <button class="btn btn-success text-white ml-2" data-toggle="modal" data-target="#modal" onclick="completePayment(<?php echo $job_id;?>)">
                                     <b>COMPLETE PAYMENT</b>
                                 </button>
                             <?php 
@@ -246,7 +282,7 @@
                             <?php
                                 if($isRated != null && $isRated == 0){
                             ?>
-                                <button class="btn btn-success text-white ml-2">
+                                <button class="btn btn-outline-success ml-2" style="border: 3px solid #5cb85c" data-toggle="modal" data-target="#modal" onclick="rateProject(<?php echo $job_id;?>)">
                                     <b>RATE</b>
                                 </button>
                             <?php 
@@ -268,7 +304,7 @@
            <?php
                 if($job_order_status_id == 1 && $today!= null && $d != null && $today>$d && $jo_start_time == null){
            ?>
-            <button class="btn btn-danger">
+            <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportNoShow(<?php echo $job_id;?>)">
                     REPORT
                 </button>
            <?php
@@ -283,7 +319,7 @@
                 <?php 
                     } else {
                 ?>
-                    <button class="btn btn-danger">
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportProject(<?php echo $job_id;?>)">
                          REPORT
                     </button>
                 <?php
