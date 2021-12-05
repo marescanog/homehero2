@@ -345,14 +345,10 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                     $job_title = $ongoingJobPosts[$p]->job_post_name;
                                     // Grab job status
                                     $job_status = $ongoingJobPosts[$p]->job_post_status_id;
-                                    // Grab job id
-                                    $job_id = $ongoingJobPosts[$p]->id;
-                                    // Grab home_id
-                                    $home_id = $ongoingJobPosts[$p]->home_id;
-                                    // Grab rate_type_id
-                                    $rate_type_id = $ongoingJobPosts[$p]->rate_type_id;
-                                    // Grab job_size_id
-                                    $job_size_id = $ongoingJobPosts[$p]->job_order_size;
+                                    // Grab rate_offer 
+                                    $rate_offer = $ongoingJobPosts[$p]->rate_offer;
+                                    // Grab project type 
+                                    $project_type = $ongoingJobPosts[$p]->project_type;
                                         
                                     $is_rated = null;
                                     $job_order_id = null;
@@ -360,6 +356,15 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
                                     $tab_link = "";
 
+                                    // For edit modal
+                                        // Grab rate_type_id
+                                        $rate_type_id = $ongoingJobPosts[$p]->rate_type_id;
+                                        // Grab job_size_id
+                                        $job_size_id = $ongoingJobPosts[$p]->job_size_id;
+                                        // Grab home_id
+                                        $home_id = $ongoingJobPosts[$p]->home_id;
+                                        // Grab job id
+                                        $job_id = $ongoingJobPosts[$p]->id;
 
                                     include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
                                 }
@@ -461,10 +466,10 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                     // Grab rate_type_id
                                     $rate_type_id =  $ongoingProjects[$p]->rate_type_id;
                                     // Grab job_size_id
-                                    $job_size_id = $ongoingProjects[$p]->job_order_size;
+                                    $job_size_id = $ongoingProjects[$p]->job_size_id;
 
                                     // Grab job_orderid
-                                    $job_order_id = $closedProjects[$p]->job_order_id;
+                                    $job_order_id = $ongoingProjects[$p]->job_order_id;
 
                                     // Grab job order status
                                     $job_order_status_id =  $ongoingProjects[$p]->job_order_status_id;
@@ -473,6 +478,11 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
                                      $jo_start_time = $ongoingProjects[$p]->date_time_start;
 
+                                    // Grab rate_offer 
+                                    $rate_offer = $ongoingProjects[$p]->rate_offer;
+
+                                    // Grab project type 
+                                    $project_type = $ongoingProjects[$p]->project_type;
 
                                      $today = new \DateTime();
                                     // Check if the date is beyond today's date & not have job order. Otherwise mark it as expired.
@@ -585,7 +595,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                     // Grab rate_type_id
                                     $rate_type_id = $closedProjects[$p]->rate_type_id;
                                     // Grab job_size_id
-                                    $job_size_id = $closedProjects[$p]->job_order_size;
+                                    $job_size_id = $closedProjects[$p]->job_size_id;
 
 
                                     // Grab is_rated
@@ -600,6 +610,8 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                      $assigned_to = $closedProjects[$p]->assigned_to;
                                      // Grab bill status
                                      $bill_status_id = $closedProjects[$p]->bill_status_id;
+                                     // Grab project type 
+                                    $project_type = $closedProjects[$p]->project_type;
 
                                      $today = new \DateTime();
                                     // Check if the date is beyond today's date & not have job order. Otherwise mark it as expired.
@@ -611,6 +623,9 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                   
                                     // Grab date time completion paid status
                                     $date_paid = $closedProjects[$p]->date_time_completion_paid;
+
+                                    // Grab rate_offer 
+                                    $rate_offer = $closedProjects[$p]->rate_offer;
                         
                                     include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
                                 }
@@ -673,5 +688,92 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <?php require_once dirname(__FILE__)."/$level/components/foot-meta.php"; ?>
 <!-- Custom JS Scripts Below -->
     <!-- <script src="../../js/pages/user-projects.js"></script> -->
+    <script>
+        const summonZeSpinner = () => {
+            Swal.fire({
+                title: "",
+                imageUrl: getDocumentLevel()+"/images/svg/Spinner-1s-200px.svg",
+                imageWidth: 200,
+                imageHeight: 200,
+                imageAlt: 'Custom image',
+                showCancelButton: false,
+                showConfirmButton: false,
+                background: 'transparent',
+                allowOutsideClick: false
+            });
+        }
+        const killZeSpinner = () => {
+            swal.close();
+        }
+
+        function resetSelection() {
+            document.getElementById("category").selectedIndex = 0;
+            document.getElementById("categorySelect").selectedIndex = 0;
+        }
+
+        function makeSubmenu(value) {
+            // console.log(value)
+            let cat = document.getElementById("category")
+            let subcat = document.getElementById("categorySelect");
+            subcat.removeAttribute("disabled");
+            subcat.selectedIndex = 0;
+            // reset to d-none for all
+            // $('.A').each((index, element)=>{
+            //     console.log(element)
+            // });
+
+            // A BG-1
+            if( cat.getAttribute("data-prev") == "0"){
+                let className = ".A.BG-"+value
+                $(className).each((index, element)=>{
+                    element.classList.remove("d-none");
+                });
+            } else {
+                //console.log( cat.getAttribute("data-prev"));
+                // disable previous
+                let previous = ".A.BG-"+cat.getAttribute("data-prev");
+                $(previous).each((index, element)=>{
+                    element.classList.add("d-none");
+                });
+
+                let current = ".A.BG-"+value
+                // enable current
+                $(current).each((index, element)=>{
+                    element.classList.remove("d-none");
+                });
+            }
+
+            cat.setAttribute("data-prev", value);
+
+    
+        }
+
+// ====================
+// Modal Code & Data
+// ====================
+
+        const editProject = (projectID, jobPostName, prefSched, jobSize, rateOffer) => {
+            summonZeSpinner();
+            let data={};
+            data['projectID'] = projectID;
+            data['job_post_name'] = jobPostName;
+            data['preferred_date_time'] = prefSched;
+            data['job_size_id'] = jobSize;
+            data['rate_offer'] = rateOffer;
+            console.log(data);
+            loadModal("edit-project", modalTypes,()=>{
+                killZeSpinner();
+            }, getDocumentLevel(),  data);
+        }
+
+        const cancelProject = (projectID) => {
+            console.log(projectID);
+            let data={};
+            data['projectID'] = projectID;
+            loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
+        }
+
+
+    </script>
 </body>
 </html>
