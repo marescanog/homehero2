@@ -146,8 +146,17 @@
     font-size: small;
 }
 
+.status-circle  {
+    width: 22px;
+    height: 22px;
+    background-color: #6C7474 ;
+    border-radius: 30px;
+    margin-right: 10px;
+}
+
+
 /*==========================================*/
-/*              PROJECT CARD INFO           */
+/*              PROJECT PAGE INFO           */
 /*==========================================*/
 
 .cardigan{
