@@ -471,6 +471,8 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                      // Grab assigned to
                                      $assigned_to =  $ongoingProjects[$p]->assigned_to;
 
+                                     $jo_start_time = $ongoingProjects[$p]->date_time_start;
+
 
                                      $today = new \DateTime();
                                     // Check if the date is beyond today's date & not have job order. Otherwise mark it as expired.
@@ -607,6 +609,8 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
                                     $tab_link = "&tab=closed";
                   
+                                    // Grab date time completion paid status
+                                    $date_paid = $closedProjects[$p]->date_time_completion_paid;
                         
                                     include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
                                 }

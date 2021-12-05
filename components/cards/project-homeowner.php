@@ -15,6 +15,13 @@
     $job_order_status_id = isset($job_order_status_id) ? $job_order_status_id: null;
     $assigned_to = isset($assigned_to) ?   $assigned_to: null;
     $bill_status_id = isset($bill_status_id) ?   $bill_status_id: null;
+
+    $tab_link = isset($tab_link) ?   $tab_link: "";
+    $tomorrow = new DateTime('tomorrow'); 
+    $today =  isset( $today) ?  $today: null;
+    $jo_start_time = isset( $jo_start_time) ?  $jo_start_time : null;
+
+    $date_paid = isset($date_paid) ? $date_paid : null;
 ?>
 <div class="card mt-3 mb-4 shadow ">
     <div class="card-header" style="background-color:#FCEBBF;">
@@ -22,10 +29,17 @@
         <h6 class="mb-0 mt-0">Status: 
             <span class="
                 <?php
+                    if ($job_order_status_id == 1 && $today!= null && $d != null && $today>$d && $jo_start_time == null) {
+                            echo "text-danger";
+                    } else 
                     if($job_status == 2){
                         echo "text-success";
-                    } else if ( $job_status == 3 || $job_status == 4){
+                    } else if ($job_status == 4){ // cancelled 
                         echo "text-danger";
+                    } else if ($job_status == 3){ // expired
+                        if($job_order_status_id == null || $job_order_status_id  != 1){ // not assigned
+                            echo "text-danger";
+                        } 
                     }
                 ?>
             ">
@@ -34,13 +48,21 @@
                     echo 'Not Assigned';
                 } else if  ($job_status == 2){
                     if($job_order_status_id == 1){
-                        echo 'Assigned To '.$assigned_to;
+                        if($today!= null && $d != null && $today>$d && $jo_start_time == null){
+                            echo 'Assigned To '.$assigned_to;
+                            echo '</br>';
+                            echo "<span class='small-warn'>** This worker has not started the job and the scheduled date has already passed. Please cancel and repost in the event the worker does not show.</span>";
+                        } else {
+                            echo 'Assigned To '.$assigned_to;
+                        }
                     } else {
                         echo 'Completed by '.$assigned_to;
                     }
                 } else if  ($job_status == 3){
-                    echo 'Expired';
-                } else if  ($job_status == 4){
+                    if($job_order_status_id == null || $job_order_status_id  != 1){ // not assigned
+                        echo "Expired";
+                    } 
+                } else if  ($job_status == 4 || $job_order_status_id  == 1){
                     echo 'Cancelled';
                 }
                 ?>
@@ -136,60 +158,132 @@
     </div>
     <div class="card-footer text-muted">
         <div class="d-flex justify-content-between">
-            <?php
-                if($job_status == 1){
-            ?>
-                <div class="d-flex">
-                    <a href="<?php echo $level;?>/pages/homeowner/project-info.php?id=<?php echo $job_id ;?>">
-                        <button class="btn btn-warning text-white">
-                            <b>VIEW</b>
-                        </button>
-                    </a>
-                    <button class="btn btn btn-outline-warning ml-2">
-                        EDIT
+           <div class="d-flex">
+                <a href="<?php echo $level;?>/pages/homeowner/project-info.php?id=<?php echo $job_id.$tab_link ;?>">
+                    <button class="btn btn-warning text-white">
+                        <b>VIEW</b>
                     </button>
-                </div>
-                <button class="btn btn-danger">
-                        CANCEL
-                </button>
-            <?php
-                }
-            ?>
-
-            <!-- If the job is completed, a bill should be generated -->
-            <!-- job status complete && bill generated -->
-            <!-- if the bill is generated & bill is not paid, there should be a complete payment -->
-            <!-- if the bill has been completed, there should be a rate option -->
-            <?php
-                if($job_status != 1){
-            ?>
-                <div class="d-flex">
-                    <?php 
-                        if($job_order_status_id != null && $job_order_status_id == 2){
-                            if($bill_status_id != null && $bill_status_id == 1){
+                </a>
+                    <?php
+                        // You can only edit a project when it is not filled
+                        if($job_status == 1){
                     ?>
-                        <button class="btn btn-success text-white">
-                            <b>COMPLETE PAYMENT</b>
+                        <button class="btn btn-outline-warning ml-2">
+                            <b>EDIT</b>
                         </button>
                     <?php 
-                            }else{
-                                if($isRated != null && $isRated != 1){
-                    ?>  
-                                <button class="btn btn-success text-white">
+                        // user can reshedule but not edit only if the post expired
+                        } else if ($job_status == 3) {
+                    ?>
+                        <button class="btn btn-secondary text-white ml-2">
+                            <b>RESCHEDULE</b>
+                        </button>
+                    <?php 
+                        } else {                            
+                            // Edit button also appears when project is filled
+                            // but it is not one day before the scheduled date
+                            // decided to change that cannot edit when post is filled, just comment out
+                            // Rebook instead
+                    ?>
+                        <?php if($job_order_status_id != 2 && $job_order_status_id != 3 && $job_status != 4){?>
+                            <!-- <button class="btn text-white ml-1
+                                <?php 
+                                    // if($today!= null && $d != null && $tomorrow>$d){
+                                    //     echo "disabled btn-secondary";
+                                    // } else {
+                                    //     echo "btn-warning";
+                                    // }
+                                    // ?>"
+                                    // <?php 
+                                    // if($today!= null && $d != null && $tomorrow>$d){
+                                    // ?>
+                                    //     data-toggle="tooltip" data-placement="top" title="Editing disabled 1 day before scheduled date"
+                                    // <?php
+                                    // } 
+                                ?> 
+                            >
+                                <b>EDIT</b>
+                            </button> -->
+
+                            <?php
+                                if($job_order_status_id == 1 && $today!= null && $d != null && $today>$d && $jo_start_time == null){
+                            ?>
+                                <button class="btn btn-danger text-white ml-2">
+                                    <b>CANCEL & REPOST</b>
+                                </button>
+                            <?php
+                                }
+                            ?>
+
+
+                        <?php } 
+                        
+                        
+                        
+                        // You can only complete payment & rate if the job order is complete
+                            if($job_order_status_id == 2){
+                        ?>
+                            <?php
+                                if($date_paid == null){
+                            ?>
+                                <button class="btn btn-success text-white ml-2">
+                                    <b>COMPLETE PAYMENT</b>
+                                </button>
+                            <?php 
+                                }
+                            ?>
+
+                            <?php
+                                if($isRated != null && $isRated == 0){
+                            ?>
+                                <button class="btn btn-success text-white ml-2">
                                     <b>RATE</b>
                                 </button>
-                    <?php     
+                            <?php 
                                 }
+                            ?>
+                        <?php 
                             }
-                        } 
+                        ?>
+
+
+                    <?php 
+                        }
                     ?>
-                </div>
-                <button class="btn btn-danger">
-                        REPORT
+           </div>
+
+
+
+           <!-- RIGHT SIDE BUTTONS -->
+           <?php
+                if($job_order_status_id == 1 && $today!= null && $d != null && $today>$d && $jo_start_time == null){
+           ?>
+            <button class="btn btn-danger">
+                    REPORT
                 </button>
-            <?php
+           <?php
+                } else {
+           ?>
+                <?php 
+                    if($job_status == 1 || $job_order_status_id == 1){
+                ?>
+                    <button class="btn btn-danger">
+                        CANCEL
+                    </button>
+                <?php 
+                    } else {
+                ?>
+                    <button class="btn btn-danger">
+                         REPORT
+                    </button>
+                <?php
+                    }
+                ?>
+           <?php 
                 }
-            ?>
+           ?>
+
+            
         </div>
     </div>
 </div>
