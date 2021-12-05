@@ -178,7 +178,7 @@
                         // You can only edit a project when it is not filled
                         if($job_status == 1){
                     ?>
-                        <button class="btn btn-outline-warning ml-2" data-toggle="modal" data-target="#modal" onclick="editProject(<?php echo $job_id.',\''.$job_title.'\',\''.$pref_sched.'\',\''.$job_size_id.'\',\''.$rate_offer.'\''; ?>)">
+                        <button class="btn btn-outline-warning ml-2" data-toggle="modal" data-target="#modal" onclick="editProject(<?php echo $job_id.',\''.$job_title.'\',\''.$pref_sched.'\',\''.$job_size_id.'\',\''.$rate_offer.'\',\''.$rate_type_id.'\',\''.$job_desc.'\',\''.$home_id.'\',\''.$address.'\''; ?>)">
                             <b>EDIT</b>
                         </button>
                     <?php 

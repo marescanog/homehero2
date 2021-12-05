@@ -748,11 +748,52 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     
         }
 
+        const getTodayDate = () => {
+            let today = new Date();
+            let dd = today.getDate();
+            let mm = today.getMonth() + 1; //January is 0!
+            let yyyy = today.getFullYear();
+
+            if (dd < 10) {
+            dd = '0' + dd;
+            }
+
+            if (mm < 10) {
+            mm = '0' + mm;
+            } 
+                
+            today = yyyy + '-' + mm + '-' + dd;
+
+            return today;
+        }
+
 // ====================
 // Modal Code & Data
 // ====================
 
-        const editProject = (projectID, jobPostName, prefSched, jobSize, rateOffer) => {
+    const changeAddress = (projectID) =>{
+        console.log(`Your current home is ${projectID} and you want to change to a new address.`);
+        let submitButton = document.getElementById("RU-submit-btn")
+
+        // set to load while ajax fetch
+        $("#address-change-content").load("../../components/cards/spinner.php");
+        // disable submit button while fetching
+        submitButton.setAttribute("disabled", "true");
+        submitButton.classList.remove("btn-warning");
+        submitButton.classList.add("btn-secondary");
+
+        // Ajax to get list of addresses
+
+        // // set to load select form with list of addresses
+        // $("#address-change-content").load("../../components/forms/change-add-small.php");
+
+        // // enable submit button
+        // button.removeAttribute("disabled");
+        // submitButton.classList.remove("btn-secondary");
+        // submitButton.classList.add("btn-warning");
+    };
+
+        const editProject = (projectID, jobPostName, prefSched, jobSize, rateOffer, rateType, description, home_id, address) => {
             summonZeSpinner();
             let data={};
             data['projectID'] = projectID;
@@ -760,9 +801,14 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             data['preferred_date_time'] = prefSched;
             data['job_size_id'] = jobSize;
             data['rate_offer'] = rateOffer;
+            data['rate_type_id'] = rateType;
+            data['job_description'] = description;
+            data['home_id'] = home_id;
+            data['home_address_label'] = address;
             console.log(data);
             loadModal("edit-project", modalTypes,()=>{
                 killZeSpinner();
+                document.getElementById("date").setAttribute("min", getTodayDate());
             }, getDocumentLevel(),  data);
         }
 
@@ -772,6 +818,9 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             data['projectID'] = projectID;
             loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
+
+
+
 
 
     </script>
