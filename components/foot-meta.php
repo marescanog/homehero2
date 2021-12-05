@@ -17,3 +17,9 @@
         ?>
     </div>
 </div>
+<script>
+    // This script clears the modal contents on hide by loading an empty php page.
+    $('#modal').on('hidden.bs.modal', function () {
+        $("#modal-contents").load(modalTypes["clear"]);
+    });
+</script>
