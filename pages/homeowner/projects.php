@@ -358,6 +358,9 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                     $job_order_id = null;
                                     $cancellation_reason = null;
 
+                                    $tab_link = "";
+
+
                                     include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
                                 }
                                 // Clear values;
@@ -469,15 +472,13 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                      $assigned_to =  $ongoingProjects[$p]->assigned_to;
 
 
-
-                                    // Check if the date is beyond today's date. Otherwise mark it as expired.
-                                    // echo ($job_status);
-
-                                    // if($job_status != 2){
-                                    //     echo "Not fulfilled";
-                                    // }
-                        
+                                     $today = new \DateTime();
+                                    // Check if the date is beyond today's date & not have job order. Otherwise mark it as expired.
+                                    if(  $job_status != 2 && $today>$d){
+                                        $job_status = 3;
+                                    }
                                     
+                                    $tab_link = "&tab=orders";
 
                                     include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
                                 }
@@ -598,16 +599,15 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                      // Grab bill status
                                      $bill_status_id = $closedProjects[$p]->bill_status_id;
 
+                                     $today = new \DateTime();
+                                    // Check if the date is beyond today's date & not have job order. Otherwise mark it as expired.
+                                    if(  $job_status != 2 && $today>$d){
+                                        $job_status = 3;
+                                    }
 
-                                    // Check if the date is beyond today's date. Otherwise mark it as expired.
-                                    // echo ($job_status);
-
-                                    // if($job_status != 2){
-                                    //     echo "Not fulfilled";
-                                    // }
+                                    $tab_link = "&tab=closed";
+                  
                         
-                                    
-
                                     include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
                                 }
                                 // Clear values;
