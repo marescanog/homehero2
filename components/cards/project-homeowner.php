@@ -367,7 +367,7 @@
                     <?php 
                         if( $jo_start_time == null){
                     ?>
-                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="cancelProject(<?php echo $job_id;?>)">
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="cancelProject(<?php echo $job_id.',\''.$job_title.'\',\''.$project_type.'\',\''.$address.'\',\''.$assigned_to.'\'';?>)">
                             CANCEL JOB ORDER
                         </button>
                     <?php 

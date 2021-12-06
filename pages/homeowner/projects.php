@@ -830,10 +830,14 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             loadModal("cancel-post", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
-        const cancelProject = (projectID) => {
+        const cancelProject = (projectID, jobPostName, project_type_name, address, assigned_to) => {
             console.log(projectID);
             let data={};
             data['projectID'] = projectID;
+            data['job_post_name'] = jobPostName;
+            data['project_type_name'] = project_type_name;
+            data['home_address_label'] = address;
+            data['assigned_to'] = assigned_to;
             loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
