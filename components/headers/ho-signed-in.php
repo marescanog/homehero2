@@ -57,14 +57,14 @@
                 <div class="collapse navbar-collapse pr-3 " id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto align-items-center">
                         <li class="nav-item pr-lg-5">
-                            <a class="nav-link custom-a" href="<?php echo $level;?>/pages/homeowner/home.php">BROWSE</a>
+                            <a class="nav-link custom-a" href="<?php echo $level;?>/pages/homeowner/home.php">CREATE</a>
                             <!-- <a id="browse-temp" class="nav-link custom-a" >BROWSE</a> -->
                         </li>
                         <li class="nav-item pr-lg-5">
                             <a class="nav-link custom-a" href="<?php echo $level;?>/pages/homeowner/projects.php">PROJECTS</a>
                         </li>
                         <li class="nav-item pr-lg-5">
-                            <a class="nav-link custom-a" href="<?php echo $level;?>/pages/homeowner/inbox.php">INBOX</a>
+                            <a class="nav-link custom-a" href="<?php echo $level;?>/pages/homeowner/inbox.php">BROWSE</a>
                         </li>
                         <li id="header-btn-desktop" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex justify-content-center align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -92,7 +92,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Profile</a>
-                            <a class="dropdown-item" href="#">Settings</a>
+                            <a class="dropdown-item" href="#">Help Center</a>
                             <div class="dropdown-divider"></div>
                             <a id="logout-link-desktop" class="dropdown-item" >Logout</a>
                             </div>
