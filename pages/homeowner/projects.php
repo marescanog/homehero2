@@ -813,14 +813,14 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             }, getDocumentLevel(),  data);
         }
 
-        const cancelJobPost = (projectID, jobPostName, projectType, address) => {
+        const cancelJobPost = (projectID) => {
             console.log(projectID);
             let data={};
             data['projectID'] = projectID;
-            data['job_post_name'] = jobPostName;
-            data['project_type_name'] = jobPostName;
-            data['home_address_label'] = address;
-            loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
+            // data['job_post_name'] = jobPostName;
+            // data['project_type_name'] = jobPostName;
+            // data['home_address_label'] = address;
+            loadModal("cancel-post", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
         const cancelProject = (projectID) => {

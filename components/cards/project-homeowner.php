@@ -315,7 +315,7 @@
                     // Case when it is still a post
                     if($job_status == 1 && $job_order_status_id == null){
                 ?>
-                    <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="cancelProject(<?php echo $job_id;?>)">
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="cancelJobPost(<?php echo $job_id;?>)">
                         CANCEL POST
                     </button>
                 <?php 
