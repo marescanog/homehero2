@@ -221,7 +221,7 @@
                         // user can reshedule but not edit only if the post expired
                         } else if ($job_status == 3) {
                     ?>
-                        <button class="btn btn-secondary text-white ml-2" data-toggle="modal" data-target="#modal" onclick="reschedule(<?php echo $job_id;?>)">
+                        <button class="btn btn-secondary text-white ml-2" data-toggle="modal" data-target="#modal" onclick="reschedule(<?php echo $job_id.',\''.$pref_sched.'\'';?>)">
                             <b>RESCHEDULE</b>
                         </button>
                     <?php 

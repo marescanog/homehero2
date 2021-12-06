@@ -865,11 +865,15 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             loadModal("template", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
-        const reschedule = (projectID) => {
+        // DONE UI/UX, lacks ajax, disable close on submit
+        const reschedule = (projectID, date) => {
             console.log(projectID);
             let data={};
             data['projectID'] = projectID;
-            loadModal("reschedule", modalTypes,()=>{}, getDocumentLevel(),  data);
+            data['old_date_time'] = date;
+            loadModal("reschedule", modalTypes,()=>{
+                document.getElementById("date").setAttribute("min", getTodayDate());
+            }, getDocumentLevel(),  data);
         }
 
         const rateProject = (projectID) => {
