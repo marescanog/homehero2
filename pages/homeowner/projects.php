@@ -851,6 +851,13 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             loadModal("template", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
+        const reportProblem = (projectID) => {
+            console.log(projectID);
+            let data={};
+            data['projectID'] = projectID;
+            loadModal("template", modalTypes,()=>{}, getDocumentLevel(),  data);
+        }
+
         const completePayment = (projectID) => {
             console.log(projectID);
             let data={};

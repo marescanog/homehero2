@@ -306,7 +306,7 @@
                 if($job_order_status_id == 1 && $today!= null && $d != null && $today>$d && $jo_start_time == null){
            ?>
             <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportNoShow(<?php echo $job_id;?>)">
-                    REPORT
+                    REPORT WORKER
                 </button>
            <?php
                 } else {
@@ -321,10 +321,24 @@
                 <?php 
                     // Case when it is a job order
                     } else if ($job_status == 2 && $job_order_status_id == 1){
+                        // Cannnot cancel a job order when it has started but can report to admin to close job order
+                        // In event homehero doesn't stop job
                 ?>
-                    <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="cancelProject(<?php echo $job_id;?>)">
-                        CANCEL JOB ORDER
-                    </button>
+                    <?php 
+                        if( $jo_start_time == null){
+                    ?>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="cancelProject(<?php echo $job_id;?>)">
+                            CANCEL JOB ORDER
+                        </button>
+                    <?php 
+                        } else {
+                    ?>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportProblem(<?php echo $job_id;?>)">
+                            REPORT PROBLEM
+                        </button>
+                    <?php 
+                        }
+                    ?>
                 <?php 
                     } else {
                     // All other cases
