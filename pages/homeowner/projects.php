@@ -793,7 +793,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         // submitButton.classList.add("btn-warning");
     };
 
-        // DONE UI/UX, lacks ajax, TODO ADD PROJECT TYPE FOR BLANK JOB DESC
+        // DONE UI/UX, lacks ajax, TODO ADD PROJECT TYPE FOR BLANK JOB DESC, disable close on submit
         const editProject = (projectID, jobPostName, prefSched, jobSize, rateOffer, rateType, description, home_id, address) => {
             summonZeSpinner();
             let data={};
@@ -813,13 +813,13 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             }, getDocumentLevel(),  data);
         }
 
-        const cancelJobPost = (projectID) => {
-            console.log(projectID);
+        // DONE UI/UX, lacks ajax, disable close on submit
+        const cancelJobPost = (projectID, jobPostName, project_type_name, address) => {
             let data={};
             data['projectID'] = projectID;
-            // data['job_post_name'] = jobPostName;
-            // data['project_type_name'] = jobPostName;
-            // data['home_address_label'] = address;
+            data['job_post_name'] = jobPostName;
+            data['project_type_name'] = project_type_name;
+            data['home_address_label'] = address;
             loadModal("cancel-post", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
