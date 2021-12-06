@@ -8,7 +8,7 @@
 ?>
 <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title" id="signUpModalLabel">CANCEL JOB POST</h5>
+        <h5 class="modal-title" id="signUpModalLabel">CANCEL JOB ORDER</h5>
         <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true" style="font-size:1.5em">&times;</span>
         </button>
@@ -22,6 +22,8 @@
                 <h5 class="card-title">Post Name</h5>
                 <h6 class="card-subtitle mb-2 text-muted">for the address at</h6>
                 <p class="card-text">The address</p>
+                <h6 class="card-subtitle mb-2 text-muted">assigned to homehero </h6>
+                <p class="card-text">homehero name</p>
             </div>
         </div>
         <div class="form-group mt-3">
@@ -35,7 +37,8 @@
                 ?>
             </p>
         </div>
-        <h5 class="text-center mb-2 mt-0">Are you sure your want to cancel this job post?</h5>
+        <h5 class="text-center mb-2 mt-0">Are you sure your want to cancel this job order?</h5>
+        <h6>The homehero will be notified of this cancellation</h6>
     </div>
         
         <div class="modal-footer d-flex flex-row justify-content-between">
