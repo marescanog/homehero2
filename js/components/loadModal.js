@@ -17,7 +17,9 @@ const modalTypes = {
     "SMS-verification-worker":  docLevelModal+"/components/modals/sms-verification-worker.php",
     "SMS-verification-homeowner":  docLevelModal+"/components/modals/sms-verification.php",
     "edit-project":  docLevelModal+"/components/modals/ho-edit-project.php",
-    "cancel-project":  docLevelModal+"/components/modals/ho-project-cancel.php"
+    "cancel-project":  docLevelModal+"/components/modals/ho-project-cancel.php",
+    "cancel-post":  docLevelModal+"/components/modals/ho-project-cancel.php",
+    "template": docLevelModal+"/components/modals/temporary/template.php",
 }
 
 // This function loads the
