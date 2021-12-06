@@ -830,11 +830,18 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
-        const cancelandRepost = (projectID) => {
+        // DONE UI/UX, lacks ajax, disable close on submit
+        const cancelandRepost = (projectID, date, jobPostName, project_type_name, address) => {
             console.log(projectID);
             let data={};
             data['projectID'] = projectID;
-            loadModal("cancel-and-repost", modalTypes,()=>{}, getDocumentLevel(),  data);
+            data['old_date_time'] = date;
+            data['job_post_name'] = jobPostName;
+            data['project_type_name'] = project_type_name;
+            data['home_address_label'] = address;
+            loadModal("cancel-and-repost", modalTypes,()=>{
+                document.getElementById("date").setAttribute("min", getTodayDate());
+            }, getDocumentLevel(),  data);
         }
 
         const reportNoShow = (projectID) => {
@@ -867,7 +874,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
         // DONE UI/UX, lacks ajax, disable close on submit
         const reschedule = (projectID, date) => {
-            console.log(projectID);
+            //console.log(projectID);
             let data={};
             data['projectID'] = projectID;
             data['old_date_time'] = date;

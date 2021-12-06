@@ -101,7 +101,7 @@
 <!-- ========== -->
     <form id="modal-edit-project" type="POST"  name="hoLoginForm">
         <div class="modal-body">
-            <input type="hidden" value="<?php echo $projectID;?>" name="project_id">
+            <input type="hidden" value="<?php echo $projectID;?>" name="id">
             <div class="form-group">
                 <label for="job_post_name">Project Name</label>
                 <input type="text" class="form-control" id="job_post_name" name="job_post_name" value="<?php echo $job_post_name ?? "Your Project";?>">

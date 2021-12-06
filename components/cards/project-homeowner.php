@@ -73,6 +73,9 @@
             </span>
         </h6>
     </div>
+<!-- ====================================== -->
+<!-- POST INFORMATION - CARD BODY  -->
+<!-- ====================================== -->
     <div class="card-body">
         <div class="d-flex flex-row align-items-center">
             <div class="gray-icon">
@@ -134,7 +137,9 @@
                 <p id="descLabel"><b>Cancellation Reason:</b> <?php echo $cancellation_reason ?? ''; ?></p>
             </div>
         <?php }?>
-
+<!-- ====================================== -->
+<!-- JOB ORDER STATUSES - TYPE NOT COMPLETE -->
+<!-- ====================================== -->
         <?php if($job_status == 2 && $job_order_status_id  == 1 ){?>
             <div class="d-flex flex-row">
                 <div class="gray-icon">
@@ -171,6 +176,9 @@
             </div>
         <?php }?>
 
+<!-- ====================================== -->
+<!-- PAYMENT DISPLAY - TYPE NOT COMPLETE -->
+<!-- ====================================== -->
         <!-- <?php if($job_order_status_id == 3){?>
             <div class="d-flex flex-row">
                 <div class="gray-icon">
@@ -182,6 +190,9 @@
             </div>
         <?php }?> -->
 
+<!-- ====================================== -->
+<!-- RATINGS DISPLAY - TYPE NOT COMPLETE -->
+<!-- ====================================== -->
         <!-- <?php if($job_order_status_id == 3){?>
             <div class="d-flex flex-row">
                 <div class="gray-icon">
@@ -202,6 +213,12 @@
             </div>
         <?php }?> -->
     </div>
+
+
+<!-- ====================================== -->
+<!-- BUTTONS DISPLAY - LEFT SIDE -->
+<!-- ====================================== -->
+
     <div class="card-footer text-muted">
         <div class="d-flex justify-content-between">
            <div class="d-flex">
@@ -254,7 +271,7 @@
                             <?php
                                 if($job_order_status_id == 1 && $today!= null && $d != null && $today>$d && $jo_start_time == null){
                             ?>
-                                <button class="btn btn-danger text-white ml-2" data-toggle="modal" data-target="#modal" onclick="cancelandRepost(<?php echo $job_id;?>)">
+                                <button class="btn btn-danger text-white ml-2" data-toggle="modal" data-target="#modal" onclick="cancelandRepost(<?php echo $job_id.',\''.$pref_sched.'\',\''. $job_title.'\',\''. $project_type.'\',\''.$address.'\'';?>)">
                                     <b>CANCEL & REPOST</b>
                                 </button>
                             <?php
@@ -299,8 +316,9 @@
            </div>
 
 
-
-           <!-- RIGHT SIDE BUTTONS -->
+<!-- ====================================== -->
+<!-- BUTTONS DISPLAY - RIGHT SIDE -->
+<!-- ====================================== -->
            <?php
                 // Case when worker does not show, user can report the worker
                 if($job_order_status_id == 1 && $today!= null && $d != null && $today>$d && $jo_start_time == null){
