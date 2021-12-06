@@ -793,6 +793,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         // submitButton.classList.add("btn-warning");
     };
 
+        // DONE UI/UX, lacks ajax, TODO ADD PROJECT TYPE FOR BLANK JOB DESC
         const editProject = (projectID, jobPostName, prefSched, jobSize, rateOffer, rateType, description, home_id, address) => {
             summonZeSpinner();
             let data={};
@@ -812,6 +813,16 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             }, getDocumentLevel(),  data);
         }
 
+        const cancelJobPost = (projectID, jobPostName, projectType, address) => {
+            console.log(projectID);
+            let data={};
+            data['projectID'] = projectID;
+            data['job_post_name'] = jobPostName;
+            data['project_type_name'] = jobPostName;
+            data['home_address_label'] = address;
+            loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
+        }
+
         const cancelProject = (projectID) => {
             console.log(projectID);
             let data={};
@@ -823,42 +834,42 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             console.log(projectID);
             let data={};
             data['projectID'] = projectID;
-            loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
+            loadModal("template", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
         const reportNoShow = (projectID) => {
             console.log(projectID);
             let data={};
             data['projectID'] = projectID;
-            loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
+            loadModal("template", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
         const reportProject = (projectID) => {
             console.log(projectID);
             let data={};
             data['projectID'] = projectID;
-            loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
+            loadModal("template", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
         const completePayment = (projectID) => {
             console.log(projectID);
             let data={};
             data['projectID'] = projectID;
-            loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
+            loadModal("template", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
         const reschedule = (projectID) => {
             console.log(projectID);
             let data={};
             data['projectID'] = projectID;
-            loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
+            loadModal("template", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
         const rateProject = (projectID) => {
             console.log(projectID);
             let data={};
             data['projectID'] = projectID;
-            loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
+            loadModal("template", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
 
