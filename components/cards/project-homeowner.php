@@ -5,7 +5,7 @@
     $pref_sched = isset($pref_sched) ? $pref_sched : null;
     $job_desc = isset($job_desc) ? $job_desc : null;
     $job_title = isset($job_title) ? $job_title: null;
-    $project_type = isset($project_type) ? $project_type : $project_type;
+    $project_type = isset($project_type) ? $project_type : null;
 
     // For DB meta values
     $job_status =  isset($job_status) ? $job_status: null;
@@ -302,6 +302,7 @@
 
            <!-- RIGHT SIDE BUTTONS -->
            <?php
+                // Case when worker does not show, user can report the worker
                 if($job_order_status_id == 1 && $today!= null && $d != null && $today>$d && $jo_start_time == null){
            ?>
             <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportNoShow(<?php echo $job_id;?>)">
@@ -311,13 +312,22 @@
                 } else {
            ?>
                 <?php 
-                    if($job_status == 1 || $job_order_status_id == 1){
+                    // Case when it is still a post
+                    if($job_status == 1 && $job_order_status_id == null){
                 ?>
                     <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="cancelProject(<?php echo $job_id;?>)">
-                        CANCEL
+                        CANCEL POST
+                    </button>
+                <?php 
+                    // Case when it is a job order
+                    } else if ($job_status == 2 && $job_order_status_id == 1){
+                ?>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="cancelProject(<?php echo $job_id;?>)">
+                        CANCEL JOB ORDER
                     </button>
                 <?php 
                     } else {
+                    // All other cases
                 ?>
                     <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportProject(<?php echo $job_id;?>)">
                          REPORT
