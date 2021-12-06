@@ -31,6 +31,10 @@
      $cancelled_by = isset($cancelled_by ) ? $cancelled_by  : null;
      $homeowner_id = isset($homeowner_id) ? $homeowner_id : null;
      $order_cancellation_reason = isset($order_cancellation_reason) ? $order_cancellation_reason : null;
+
+     // must parse because the 's create an error if unescaped
+     $job_desc = $job_desc != null ? addslashes($job_desc) : null;
+     $job_title = $job_title != null ? addslashes($job_title) : null;
 ?>
 <div class="card mt-3 mb-4 shadow ">
     <div class="card-header" style="background-color:#FCEBBF;">
