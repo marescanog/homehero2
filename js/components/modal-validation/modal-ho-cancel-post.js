@@ -1,4 +1,4 @@
-$("#cancel-Project-form").validate({
+$("#cancel-Post-form").validate({
     rules: {
         cancellation_reason:{
             required: true,

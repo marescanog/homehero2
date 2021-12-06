@@ -38,7 +38,7 @@
         </button>
     </div>
     <div name="modalForm">
-    <form id="cancel-Project-form" type="POST"  name="cancelProjectForm">
+    <form id="cancel-Post-form" type="POST" >
     <div class="modal-body">
         <div class="card">
             <div class="card-body">

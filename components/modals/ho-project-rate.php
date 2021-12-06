@@ -7,7 +7,7 @@
 ?>
 <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title" id="signUpModalLabel">RATE</h5>
+        <h5 class="modal-title" id="signUpModalLabel">Rate the project </h5>
         <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true" style="font-size:1.5em">&times;</span>
         </button>
