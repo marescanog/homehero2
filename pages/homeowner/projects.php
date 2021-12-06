@@ -834,28 +834,28 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             console.log(projectID);
             let data={};
             data['projectID'] = projectID;
-            loadModal("template", modalTypes,()=>{}, getDocumentLevel(),  data);
+            loadModal("cancel-and-repost", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
         const reportNoShow = (projectID) => {
             console.log(projectID);
             let data={};
             data['projectID'] = projectID;
-            loadModal("template", modalTypes,()=>{}, getDocumentLevel(),  data);
+            loadModal("report-worker", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
         const reportProject = (projectID) => {
             console.log(projectID);
             let data={};
             data['projectID'] = projectID;
-            loadModal("template", modalTypes,()=>{}, getDocumentLevel(),  data);
+            loadModal("report", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
         const reportProblem = (projectID) => {
             console.log(projectID);
             let data={};
             data['projectID'] = projectID;
-            loadModal("template", modalTypes,()=>{}, getDocumentLevel(),  data);
+            loadModal("report-problem", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
         const completePayment = (projectID) => {
@@ -869,14 +869,14 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             console.log(projectID);
             let data={};
             data['projectID'] = projectID;
-            loadModal("template", modalTypes,()=>{}, getDocumentLevel(),  data);
+            loadModal("reschedule", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
         const rateProject = (projectID) => {
             console.log(projectID);
             let data={};
             data['projectID'] = projectID;
-            loadModal("template", modalTypes,()=>{}, getDocumentLevel(),  data);
+            loadModal("rate", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
 
