@@ -26,6 +26,11 @@
     $rate_offer = isset($rate_offer ) ? $rate_offer  : null;
     $rate_type_id = isset(  $rate_type_id) ?  $rate_type_id  : null;
     $rt_array = ['/hr', '/day','/week','/project'];
+
+    // order cancellation varilables
+     $cancelled_by = isset($cancelled_by ) ? $cancelled_by  : null;
+     $homeowner_id = isset($homeowner_id) ? $homeowner_id : null;
+     $order_cancellation_reason = isset($order_cancellation_reason) ? $order_cancellation_reason : null;
 ?>
 <div class="card mt-3 mb-4 shadow ">
     <div class="card-header" style="background-color:#FCEBBF;">
@@ -36,11 +41,13 @@
                     if ($job_order_status_id == 1 && $today!= null && $d != null && $today>$d && $jo_start_time == null) {
                             echo "text-danger";
                     } else 
-                    if($job_status == 2){
+                    if($job_status == 2 && $job_order_status_id != 3){
                         echo "text-success";
-                    } else if ($job_status == 4){ // cancelled 
+                    } else if ($job_status == 4){ // cancelled post
                         echo "text-danger";
-                    } else if ($job_status == 3){ // expired
+                    } else if ($job_order_status_id == 3){ // cancelled order
+                        // echo nothing
+                    }else if ($job_status == 3){ // expired
                         if($job_order_status_id == null || $job_order_status_id  != 1){ // not assigned
                             echo "text-danger";
                         } 
@@ -59,6 +66,14 @@
                         } else {
                             echo 'Assigned To '.$assigned_to;
                         }
+                    } else if ($job_order_status_id == 3){
+                        $nameWhoCancelled = "";
+                        if ($cancelled_by != null && $homeowner_id != null){
+                            $nameWhoCancelled = $cancelled_by  == $homeowner_id ? " You" : $assigned_to;
+                        }
+                        echo 'Assigned To '.$assigned_to;
+                        echo '</br>';
+                        echo "<span class='text-danger mt-1'>Cancelled by: ".$nameWhoCancelled."</span>";
                     } else {
                         echo 'Completed by '.$assigned_to;
                     }
@@ -134,7 +149,14 @@
                         include dirname(__FILE__)."/".$level.'/images/svg/close_black_24dp.svg'; 
                     ?>
                 </div>
-                <p id="descLabel"><b>Cancellation Reason:</b> <?php echo $cancellation_reason ?? ''; ?></p>
+                <p id="descLabel"><b>Cancellation Reason:</b> 
+                    <?php 
+                        if($job_status == 4){
+                            echo $cancellation_reason ?? ''; 
+                        } else if ($job_order_status_id == 3){
+                            echo $order_cancellation_reason ?? ''; 
+                        }
+                    ?></p>
             </div>
         <?php }?>
 <!-- ====================================== -->

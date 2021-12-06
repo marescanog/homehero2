@@ -15,8 +15,8 @@ $currentTab = isset($_GET['tab']) ? $_GET['tab'] : "open"; // used to direct to 
 
 // Curl request to get data to fill projects page
 
- // $url = "http://localhost/slim3homeheroapi/public/homeowner/get-projects"; // DEV
-  $url = "https://slim3api.herokuapp.com//homeowner/get-projects"; // PROD
+  $url = "http://localhost/slim3homeheroapi/public/homeowner/get-projects"; // DEV
+  // $url = "https://slim3api.herokuapp.com//homeowner/get-projects"; // PROD
 
 $headers = array(
     "Authorization: Bearer ".$_SESSION["token"],
@@ -535,9 +535,9 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
 
 
-                        <!-- ========================== -->
-                        <!-- Closed/ Cancelled display -->
-                        <!-- ========================== -->
+<!-- ========================== -->
+<!-- Closed/ Cancelled display -->
+<!-- ========================== -->
                     <div class="tab-pane fade 
                     <?php 
                         if($currentTab != null){
@@ -626,7 +626,14 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
                                     // Grab rate_offer 
                                     $rate_offer = $closedProjects[$p]->rate_offer;
-                        
+
+                                    // Grab cancelled_by 
+                                    $cancelled_by = $closedProjects[$p]->cancelled_by;
+                                    // Grab homeowner_id
+                                    $homeowner_id = $closedProjects[$p]->homeowner_id;
+                                    // Grab order_cancellation_reason
+                                    $order_cancellation_reason = $closedProjects[$p]->order_cancellation_reason;
+                                   
                                     include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
                                 }
                                 // Clear values;
