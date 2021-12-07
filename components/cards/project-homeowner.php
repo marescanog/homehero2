@@ -256,8 +256,8 @@
                     <?php
                         // You can only edit a project when it is not filled
                         if($job_status == 1){
-                    ?>
-                        <button class="btn btn-outline-warning ml-2" style="border: 2px solid #f0ad4e" data-toggle="modal" data-target="#modal" onclick="editProject(<?php echo htmlentities($job_id).',\''.htmlentities($job_title).'\',\''.$pref_sched.'\',\''.$job_size_id.'\',\''.$rate_offer.'\',\''.$rate_type_id.'\',\''.htmlentities($job_desc).'\',\''.$home_id.'\',\''.htmlentities($address).'\''; ?>)">
+                    ?> 
+                        <button class="btn btn-outline-warning ml-2" style="border: 2px solid #f0ad4e" data-toggle="modal" data-target="#modal" onclick="editProject(<?php echo addslashes(htmlentities($job_id)).',\''.addslashes(htmlentities($job_title)).'\',\''.addslashes($pref_sched).'\',\''.addslashes($job_size_id).'\',\''.addslashes($rate_offer).'\',\''.addslashes($rate_type_id).'\',\''.addslashes(htmlentities($job_desc)).'\',\''.addslashes($home_id).'\',\''.addslashes(htmlentities($address)).'\''; ?>)">
                             <b>EDIT</b>
                         </button>
                     <?php 

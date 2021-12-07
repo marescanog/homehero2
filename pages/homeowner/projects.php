@@ -781,7 +781,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 // Modal Code & Data
 // ====================
 
-    const changeAddress = (projectID) =>{
+    const changeAddress = (projectID, homeaddr, homeaddr_id) =>{
         console.log(`Your current home is ${projectID} and you want to change to a new address.`);
         let submitButton = document.getElementById("RU-submit-btn")
 
@@ -792,15 +792,89 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         submitButton.classList.remove("btn-warning");
         submitButton.classList.add("btn-secondary");
 
-        // Ajax to get list of addresses
+        // Ajax to get the bearer token
+        $.ajaxSetup({cache: false})
+        $.get(getDocumentLevel()+'/auth/get-register-session.php', function (data) {
+            // console.log(data)
+            const parsedSession = JSON.parse(data);
+            const token = parsedSession['token'];
+            console.log(token);
+                // Ajax to get list of addresses
+                // Attach JWT token
+                $.ajax({
+                    type: 'GET',
+                    // url : 'https://slim3api.herokuapp.com/homeowner/get-all-addresses', // prod
+                    url: 'http://localhost/slim3homeheroapi/public/homeowner/get-all-addresses', // dev
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    },
+                    success : function(response) {
+                        console.log(response);
+                        // console.log(response.response.allAddress);
+                        let obj = {};
+                        obj['addr_arr'] = response.response.allAddress;
+                        obj['home_address'] = homeaddr;
+                        obj['home_id'] = homeaddr_id;
 
-        // // set to load select form with list of addresses
-        // $("#address-change-content").load("../../components/forms/change-add-small.php");
+                        // Load the address data into select box
+                        $("#address-change-content").load("../../components/forms/change-add-small.php",obj);
 
-        // // enable submit button
-        // button.removeAttribute("disabled");
-        // submitButton.classList.remove("btn-secondary");
-        // submitButton.classList.add("btn-warning");
+                        // enable submit button
+                        submitButton.removeAttribute("disabled");
+                        submitButton.classList.remove("btn-secondary");
+                        submitButton.classList.add("btn-warning");
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        // console.log(response.responseJSON);
+                        //   console.log(response.responseJSON['message']);
+                        if(response.responseJSON['success'] == false){
+                            let message = response.responseJSON['response']['message'];
+                            let JWTisssue = false;
+                            if(message.substring(0, 3) == "JWT"){
+                                message = "Token expired or not recognized. Please try logging into your account again.";
+                                JWTisssue = true;
+                            }
+                            Swal.fire({
+                            title: 'An error occurred',
+                            text: message,
+                            icon: 'error'
+                            }).then((result) => {
+                                // logout if token expired
+                                if(JWTisssue == true){
+                                    $.ajax({
+                                    type : 'GET',
+                                    url : '../../auth/signout_action.php',
+                                    success : function(response) {
+                                        var res = JSON.parse(response);
+                                        if(res["status"] == 200){
+                                            window.location = '../../';
+                                        }
+                                    }
+                                    });
+                                } else {
+                                    // Enable buttons & close Modal
+                                    $('#modal').modal('hide');
+                                }
+                            })
+                        } else {
+                            // Inform user
+                            Swal.fire({
+                            title: 'An error occurred',
+                            text: 'Please try again',
+                            icon: 'error'
+                            });
+                            // Enable buttons & close Modal
+                            $('#modal').modal('hide');
+                        }
+                    }
+                });
+
+        });
+
+
     };
 
         // DONE UI/UX, lacks ajax, TODO ADD PROJECT TYPE FOR BLANK JOB DESC, disable close on submit

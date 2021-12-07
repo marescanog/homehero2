@@ -9,16 +9,18 @@
     $rate_type_id = null;
     $home_id = null;
     $home_address = null;
+    $project_type = null;
     if($data != null){
-        $projectID = $_POST['data']['projectID'];
-        $job_description = $_POST['data']['job_description'];
-        $job_post_name = $_POST['data']['job_post_name'];
-        $job_size_id = $_POST['data']['job_size_id'];
-        $preferred_date_time = $_POST['data']['preferred_date_time'];
-        $rate_offer = $_POST['data']['rate_offer'];
-        $rate_type_id = $_POST['data']['rate_type_id'];
-        $home_id = $_POST['data']['home_id'];
-        $home_address = $_POST['data']['home_address_label'];
+        $projectID = isset($_POST['data']['projectID']) ? $_POST['data']['projectID'] : null;
+        $job_description = isset($_POST['data']['job_description']) ? $_POST['data']['job_description'] : null;
+        $job_post_name = isset($_POST['data']['job_post_name']) ? $_POST['data']['job_post_name'] : null;
+        $job_size_id = isset($_POST['data']['job_size_id']) ? $_POST['data']['job_size_id'] : null;
+        $preferred_date_time = isset($_POST['data']['preferred_date_time']) ? $_POST['data']['preferred_date_time'] : null;
+        $rate_offer = isset($_POST['data']['rate_offer']) ?  $_POST['data']['rate_offer'] : null;
+        $rate_type_id = isset($_POST['data']['rate_type_id'] ) ? $_POST['data']['rate_type_id'] : null;
+        $home_id = isset($_POST['data']['home_id']) ? $_POST['data']['home_id'] : null;
+        $home_address = isset($_POST['data']['home_address_label']) ? $_POST['data']['home_address_label'] : null;
+        $project_type = isset($_POST['data']['project_type']) ? $_POST['data']['project_type'] : null;
     }
 
     $curl_err = null;
@@ -104,7 +106,8 @@
             <input type="hidden" value="<?php echo $projectID;?>" name="id">
             <div class="form-group">
                 <label for="job_post_name">Project Name</label>
-                <input type="text" class="form-control" id="job_post_name" name="job_post_name" value="<?php echo $job_post_name ?? "Your Project";?>">
+                <input type="text" class="form-control" id="job_post_name" name="job_post_name" 
+                value="<?php echo htmlentities($job_post_name) ?? "Your Project";?>">
             </div>
 
         <!-- Expertise Select Box - Disabled -->
@@ -147,10 +150,10 @@
 
         <div class="card">
             <div class="card-body" id="address-change-content">
-                <input type="hidden" value="<?php echo $projectID;?>" name="home_id">
+                <input type="hidden" value="<?php echo $home_id;?>" name="home_id">
                 <div class="d-flex justify-content-between align-items-center">
                     <h6 class="card-subtitle mb-2 text-muted">Address: </h6>
-                    <button class="btn btn-secondary btn-sm" type="button" onclick="changeAddress(<?php echo $projectID;?>)">
+                    <button class="btn btn-secondary btn-sm" type="button" onclick="changeAddress(<?php echo $projectID.',\'',addslashes(htmlentities($home_address)),'\',\'',addslashes($home_id),'\'';?>)">
                             CHANGE
                     </button>
                 </div>

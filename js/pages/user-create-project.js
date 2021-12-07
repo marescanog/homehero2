@@ -611,8 +611,13 @@ const load_create_project_form = (
 
                             },
                             error: function (response) {
-                                    console.log(response);
-                                }
+                                console.log(response);
+                                Swal.fire({
+                                    title: 'An error occurred',
+                                    text: 'Please try again',
+                                    icon: 'error'
+                                });
+                            }
                         });
 
 
