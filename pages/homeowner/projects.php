@@ -830,6 +830,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             loadModal("cancel-post", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
+        // DONE UI/UX, lacks ajax, disable close on submit
         const cancelProject = (projectID, jobPostName, project_type_name, address, assigned_to) => {
             console.log(projectID);
             let data={};
@@ -862,11 +863,19 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             loadModal("report-worker", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
-        const reportProject = (projectID) => {
+        // Disabled for now
+        // const reportProject = (projectID) => {
+        //     console.log(projectID);
+        //     let data={};
+        //     data['projectID'] = projectID;
+        //     loadModal("report", modalTypes,()=>{}, getDocumentLevel(),  data);
+        // }
+
+        const reportBill = (projectID) => {
             console.log(projectID);
             let data={};
             data['projectID'] = projectID;
-            loadModal("report", modalTypes,()=>{}, getDocumentLevel(),  data);
+            loadModal("report-bill", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
         const reportProblem = (projectID) => {
@@ -893,7 +902,8 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                 document.getElementById("date").setAttribute("min", getTodayDate());
             }, getDocumentLevel(),  data);
         }
-
+        
+        // DONE UI/UX, lacks ajax, disable close on submit
         const rateProject = (projectID) => {
             console.log(projectID);
             let data={};

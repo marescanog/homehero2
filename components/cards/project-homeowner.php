@@ -387,9 +387,16 @@
                     } else {
                     // All other cases
                 ?>
-                    <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportProject(<?php echo $job_id;?>)">
-                         REPORT
-                    </button>
+                    <!-- For now just billing issues instead of all other cases -->
+                    <?php
+                        if($job_order_status_id == 2 && $date_paid == null){
+                    ?>
+                         <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportBill(<?php echo $job_id;?>)">
+                            DISPUTE BILL
+                        </button>
+                    <?php 
+                        }
+                    ?>
                 <?php
                     }
                 ?>

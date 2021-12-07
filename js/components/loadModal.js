@@ -26,6 +26,7 @@ const modalTypes = {
     "reschedule":  docLevelModal+"/components/modals/ho-project-reschedule.php",
     "report":  docLevelModal+"/components/modals/ho-project-report.php",
     "rate":  docLevelModal+"/components/modals/ho-project-rate.php",
+    "report-bill":  docLevelModal+"/components/modals/ho-project-report-bill.php"
 }
 
 // This function loads the
