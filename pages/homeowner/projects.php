@@ -878,11 +878,14 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         //     loadModal("report", modalTypes,()=>{}, getDocumentLevel(),  data);
         // }
 
-        const reportBill = (projectID) => {
-            console.log(projectID);
+        const reportBill = (job_order_id) => {
+            console.log(job_order_id);
+            summonZeSpinner();
             let data={};
-            data['projectID'] = projectID;
-            loadModal("report-bill", modalTypes,()=>{}, getDocumentLevel(),  data);
+            data['job_order_id'] = job_order_id;
+            loadModal("report-bill", modalTypes,()=>{
+                killZeSpinner();
+            }, getDocumentLevel(),  data);
         }
 
         const reportProblem = (job_order_id, jobPostName, project_type_name, address, assigned_to) => {
