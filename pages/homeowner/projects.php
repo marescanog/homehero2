@@ -898,7 +898,224 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             console.log(projectID);
             let data={};
             data['projectID'] = projectID;
-            loadModal("rate", modalTypes,()=>{}, getDocumentLevel(),  data);
+            loadModal("rate", modalTypes,()=>{
+                const er1 = document.getElementById("Ov-error");
+                const er2 = document.getElementById("Pr-error");
+                const er3 = document.getElementById("Re-error");
+                const er4 = document.getElementById("Pu-error");
+
+                // =================================================================
+                // OVERALL QUALITY CODE
+                // =================================================================
+                let ovRatedIndex = -1;
+                const overall_qual_feild = document.getElementById("overall_quality_feild");
+                const ov = document.getElementsByClassName("Ov");
+                const ov_arr = Array.from(ov);
+                const resetOverall = () => {
+                    ov_arr.forEach(el=>{
+                        if( el.classList.contains("star-green")){
+                            el.classList.remove("star-green")
+                        }
+                        el.classList.add("star-gray");
+                    });
+                }
+
+                resetOverall();
+
+                ov_arr.forEach(el=>{
+                    el.addEventListener("mouseover", ()=>{
+                        resetOverall();
+                        let currentIndex = parseInt(el.getAttribute("data-index"));
+                        ov_arr.forEach(el2=>{
+                            let otherIndex = parseInt(el2.getAttribute("data-index"));
+                            if(otherIndex <= currentIndex){
+                                el2.classList.add("star-green");
+                            }
+                        });
+
+                    });
+
+                    el.addEventListener("mouseleave", ()=>{
+                        resetOverall();
+                        if (ovRatedIndex != -1){
+                            ov_arr.forEach(el2=>{
+                            let otherIndex = parseInt(el2.getAttribute("data-index"));
+                            if(otherIndex <= ovRatedIndex){
+                                el2.classList.add("star-green");
+                            }
+                        });
+                        }
+                    });
+
+                    el.addEventListener("click", ()=>{
+                        ovRatedIndex = parseInt(el.getAttribute("data-index"));
+                        overall_qual_feild.value = ovRatedIndex;
+                        if( !er1.classList.contains("d-none")){
+                            er1.classList.add("d-none")
+                        }
+                    });
+                });
+                
+                
+                // =================================================================
+                // Professionalism CODE
+                // =================================================================
+                let prRatedIndex = -1;
+                const prof_feild = document.getElementById("professionalism_feild");
+                const pr = document.getElementsByClassName("Pr");
+                const pr_arr = Array.from(pr);
+                const resetProf = () => {
+                    pr_arr.forEach(el=>{
+                        if( el.classList.contains("star-green")){
+                            el.classList.remove("star-green")
+                        }
+                        el.classList.add("star-gray");
+                    });
+                }
+
+                resetProf();
+
+                pr_arr.forEach(el=>{
+                    el.addEventListener("mouseover", ()=>{
+                        resetProf();
+                        let currentIndex = parseInt(el.getAttribute("data-index"));
+                        pr_arr.forEach(el2=>{
+                            let otherIndex = parseInt(el2.getAttribute("data-index"));
+                            if(otherIndex <= currentIndex){
+                                el2.classList.add("star-green");
+                            }
+                        });
+
+                    });
+
+                    el.addEventListener("mouseleave", ()=>{
+                        resetProf();
+                        if (prRatedIndex != -1){
+                            pr_arr.forEach(el2=>{
+                            let otherIndex = parseInt(el2.getAttribute("data-index"));
+                            if(otherIndex <= prRatedIndex){
+                                el2.classList.add("star-green");
+                            }
+                        });
+                        }
+                    });
+
+                    el.addEventListener("click", ()=>{
+                        prRatedIndex = parseInt(el.getAttribute("data-index"));
+                        prof_feild.value = prRatedIndex;
+                        if( !er2.classList.contains("d-none")){
+                            er2.classList.add("d-none")
+                        }
+                    });
+                });
+
+
+                // =================================================================
+                // Reliability CODE
+                // =================================================================
+                let reRatedIndex = -1;
+                const rel_feild = document.getElementById("reliability_feild");
+                const re = document.getElementsByClassName("Re");
+                const re_arr = Array.from(re);
+                const resetRel = () => {
+                    re_arr.forEach(el=>{
+                        if( el.classList.contains("star-green")){
+                            el.classList.remove("star-green")
+                        }
+                        el.classList.add("star-gray");
+                    });
+                }
+                resetRel();
+
+                re_arr.forEach(el=>{
+                    el.addEventListener("mouseover", ()=>{
+                        resetRel();
+                        let currentIndex = parseInt(el.getAttribute("data-index"));
+                        re_arr.forEach(el2=>{
+                            let otherIndex = parseInt(el2.getAttribute("data-index"));
+                            if(otherIndex <= currentIndex){
+                                el2.classList.add("star-green");
+                            }
+                        });
+
+                    });
+
+                    el.addEventListener("mouseleave", ()=>{
+                        resetRel();
+                        if (reRatedIndex != -1){
+                            re_arr.forEach(el2=>{
+                            let otherIndex = parseInt(el2.getAttribute("data-index"));
+                            if(otherIndex <= reRatedIndex){
+                                el2.classList.add("star-green");
+                            }
+                        });
+                        }
+                    });
+
+                    el.addEventListener("click", ()=>{
+                        reRatedIndex = parseInt(el.getAttribute("data-index"));
+                        rel_feild.value = reRatedIndex;
+                        if( !er3.classList.contains("d-none")){
+                            er3.classList.add("d-none")
+                        }
+                    });
+                    
+                });
+
+                // =================================================================
+                // Punctuality CODE
+                // =================================================================
+                let puRatedIndex = -1;
+                const punc_feild = document.getElementById("punctuality_feild");
+                const pu = document.getElementsByClassName("Pu");
+                const pu_arr = Array.from(pu);
+                const resetPunc = () => {
+                    pu_arr.forEach(el=>{
+                        if( el.classList.contains("star-green")){
+                            el.classList.remove("star-green")
+                        }
+                        el.classList.add("star-gray");
+                    });
+                }
+                resetPunc();
+                
+                pu_arr.forEach(el=>{
+                    el.addEventListener("mouseover", ()=>{
+                        resetPunc();
+                        let currentIndex = parseInt(el.getAttribute("data-index"));
+                        pu_arr.forEach(el2=>{
+                            let otherIndex = parseInt(el2.getAttribute("data-index"));
+                            if(otherIndex <= currentIndex){
+                                el2.classList.add("star-green");
+                            }
+                        });
+
+                    });
+
+                    el.addEventListener("mouseleave", ()=>{
+                        resetPunc();
+                        if (puRatedIndex != -1){
+                            pu_arr.forEach(el2=>{
+                            let otherIndex = parseInt(el2.getAttribute("data-index"));
+                            if(otherIndex <= puRatedIndex){
+                                el2.classList.add("star-green");
+                            }
+                        });
+                        }
+                    });
+
+                    el.addEventListener("click", ()=>{
+                        puRatedIndex = parseInt(el.getAttribute("data-index"));
+                        punc_feild.value = puRatedIndex;
+                        if( !er4.classList.contains("d-none")){
+                            er4.classList.add("d-none")
+                        }
+                    });
+                });
+
+
+
+            }, getDocumentLevel(),  data);
         }
 
 
