@@ -4,9 +4,10 @@ session_start();
 // http://localhost/slim3homeheroapi/public/registration/save-general-schedule
 // http://localhost/slim3homeheroapi/public/registration/general-schedule
 
+// CHANGELINKDEVPROD
 // Make curl for the general schedule info
-// $url = "http://localhost/slim3homeheroapi/public/registration/general-schedule"; // DEV
- $url = "https://slim3api.herokuapp.com/registration/general-schedule"; // PROD
+ $url = "http://localhost/slim3homeheroapi/public/registration/general-schedule"; // DEV
+// $url = "https://slim3api.herokuapp.com/registration/general-schedule"; // PROD
 
 $headers = array(
     "Authorization: Bearer ".$_SESSION["registration_token"],

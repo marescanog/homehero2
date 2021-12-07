@@ -130,7 +130,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <!-- Custom JS Scripts Below -->
     <script>
 
-
+ // CHANGELINKDEVPROD
 $(document).ready(()=>{
     var tester = document.getElementById("tester");
 
@@ -139,7 +139,8 @@ $(document).ready(()=>{
         console.log("click")
             let data = $.ajax({
             type: 'GET',
-            url: 'https://slim3api.herokuapp.com/create-guest',
+            // url: 'https://slim3api.herokuapp.com/create-guest', // PROD
+            url: 'http://localhost/slim3homeheroapi/public/create-guest', // DEV
             success: response => {
                 console.log(response)
             }, 
@@ -152,7 +153,8 @@ $(document).ready(()=>{
     const loadData = () => {
         $.ajax({
             type: 'GET',
-            url: 'https://slim3api.herokuapp.com/create-guest',
+            // url: 'https://slim3api.herokuapp.com/create-guest', // PROD
+            url: 'http://localhost/slim3homeheroapi/public/create-guest', // DEV
             success: response => {
                 // convert response to javascript object
                 let data = JSON.parse(response);

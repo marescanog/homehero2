@@ -42,6 +42,7 @@ const save_preferred_cities = (form) => {
 
         form['token'] = token;
 
+         // CHANGELINKDEVPROD
         console.log(form);
         $.ajax({
             type : 'POST',
@@ -93,10 +94,11 @@ const save_preferred_workSchedule = (form) => {
         // console.log(token);
         //console.log(form);
 
+         // CHANGELINKDEVPROD
         $.ajax({
             type : 'POST',
-            // url : 'http://localhost/slim3homeheroapi/public/registration/save-general-schedule', // DEV
-             url : 'https://slim3api.herokuapp.com/registration/save-general-schedule', // PROD
+             url : 'http://localhost/slim3homeheroapi/public/registration/save-general-schedule', // DEV
+            // url : 'https://slim3api.herokuapp.com/registration/save-general-schedule', // PROD
             data : samoka,
             contentType: false,
             processData: false,
@@ -160,11 +162,12 @@ const uploadForm = (form, session) => {
         samoka.append('file_id', form["old_file_id"]);
     }
 
+     // CHANGELINKDEVPROD
     // samok ajax di gnhan object kapoy nimu ui
     $.ajax({
         type : 'POST',
-        // url : 'http://localhost/slim3homeheroapi/public/registration/save-personal-info', // DEV
-        url : 'https://slim3api.herokuapp.com/registration/save-personal-info', // PROD
+        url : 'http://localhost/slim3homeheroapi/public/registration/save-personal-info', // DEV
+        // url : 'https://slim3api.herokuapp.com/registration/save-personal-info', // PROD
         data : samoka,
         contentType: false,
         processData: false,
@@ -203,12 +206,13 @@ const uploadForm = (form, session) => {
     });
 }
 
+ // CHANGELINKDEVPROD
 const uploadForm_withSingleImage = (form, imageForm) => {
     console.log("Calling google api...");
     $.ajax({
         type : 'POST',
-        //url : 'http://localhost/IM2/hh-thirdparty/google-cloud-api/upload-single', // DEV
-        url : 'https://hh-thirdparty.herokuapp.com/google-cloud-api/upload-single', // PROD
+        url : 'http://localhost/IM2/hh-thirdparty/google-cloud-api/upload-single', // DEV
+        // url : 'https://hh-thirdparty.herokuapp.com/google-cloud-api/upload-single', // PROD
         data : imageForm,
         contentType: false,
         processData: false,

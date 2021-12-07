@@ -60,11 +60,12 @@ $( document ).ready(()=>{
         let data = {};
         formData.forEach((value, key) => data[key] = value);
 
+        // CHANGELINKDEVPROD
         // Send Post Request to API
         $.ajax({
             type: 'POST',
-            url : 'https://slim3api.herokuapp.com/auth/login',
-            // url: 'http://localhost/slim3homeheroapi/public/auth/login',
+            // url : 'https://slim3api.herokuapp.com/auth/login', // PROD
+             url: 'http://localhost/slim3homeheroapi/public/auth/login', // DEV
             data : data,
             success : function(response) {
                 // Enable and hide loading

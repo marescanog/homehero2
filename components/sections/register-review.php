@@ -1,9 +1,10 @@
 <?php
     session_start();
     
+    // CHANGELINKDEVPROD
     // Make curl for the general schedule info
-    // $url = "http://localhost/slim3homeheroapi/public/registration/review-information"; // DEV
-     $url = "https://slim3api.herokuapp.com/registration/review-information"; // PROD
+     $url = "http://localhost/slim3homeheroapi/public/registration/review-information"; // DEV
+    // $url = "https://slim3api.herokuapp.com/registration/review-information"; // PROD
     
     $headers = array(
         "Authorization: Bearer ".$_SESSION["registration_token"],

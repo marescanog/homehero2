@@ -18,8 +18,10 @@
     $curl_error = null;
     // Check if a report has already been filed
     if($job_order_id !== null){
+        // CHANGELINKDEVPROD
         // DO A CURL REQUEST TO check if A Report has already been filed
-        $url = "https://slim3api.herokuapp.com/search-proj";
+        // $url = "https://slim3api.herokuapp.com/search-proj"; // PROD
+        $url = "http://localhost/slim3homeheroapi/public/search-proj"; // DEV
             
         // 1. Initialize
         $ch = curl_init();

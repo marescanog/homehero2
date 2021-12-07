@@ -13,10 +13,11 @@ $initials = isset($_SESSION["initials"]) ? $_SESSION["initials"] : "GU"; // used
 
 $currentTab = isset($_GET['tab']) ? $_GET['tab'] : "open"; // used to direct to closed tab
 
+ // CHANGELINKDEVPROD
 // Curl request to get data to fill projects page
 
-  // $url = "http://localhost/slim3homeheroapi/public/homeowner/get-projects"; // DEV
-   $url = "https://slim3api.herokuapp.com//homeowner/get-projects"; // PROD
+   $url = "http://localhost/slim3homeheroapi/public/homeowner/get-projects"; // DEV
+  // $url = "https://slim3api.herokuapp.com//homeowner/get-projects"; // PROD
 
 $headers = array(
     "Authorization: Bearer ".$_SESSION["token"],
@@ -792,6 +793,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         submitButton.classList.remove("btn-warning");
         submitButton.classList.add("btn-secondary");
 
+         // CHANGELINKDEVPROD
         // Ajax to get the bearer token
         $.ajaxSetup({cache: false})
         $.get(getDocumentLevel()+'/auth/get-register-session.php', function (data) {

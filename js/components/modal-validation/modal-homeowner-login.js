@@ -27,11 +27,12 @@ $("#modal-login-form").validate({
         const buttonLoadSpinner = document.getElementById("RU-submit-btn-load");
         disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
         
+        // CHANGELINKDEVPROD
         // Ajax request to login
         $.ajax({
             type: 'POST',
-            url : 'https://slim3api.herokuapp.com/auth/client-login',
-            // url: 'http://localhost/slim3homeheroapi/public/auth/client-login',
+            // url : 'https://slim3api.herokuapp.com/auth/client-login', //prod
+             url: 'http://localhost/slim3homeheroapi/public/auth/client-login', //dev
             data : submitformData,
             success : function(response) {
                 // console.log("your response after account login is:")

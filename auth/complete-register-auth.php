@@ -20,8 +20,9 @@ if($registrationToken == null){
 // If token still valid, send a request to mark user as registered and submit a support ticket so agent can review worker's records
 if($isValid){
     // Curl pre-initialization - Api Call to mark worker as registered and submit a ticket
-    // $url = "http://localhost/slim3homeheroapi/public/registration/submit-application"; // DEV
-    $url = "https://slim3api.herokuapp.com/registration/submit-application"; // PROD
+    // CHANGELINKDEVPROD
+    $url = "http://localhost/slim3homeheroapi/public/registration/submit-application"; // DEV
+    // $url = "https://slim3api.herokuapp.com/registration/submit-application"; // PROD
     
     $headers = array(
         "Authorization: Bearer ".$_SESSION["registration_token"],

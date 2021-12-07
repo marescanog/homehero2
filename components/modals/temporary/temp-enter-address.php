@@ -4,9 +4,10 @@ $output = null;
 
 // curl to get the needed modal information
 
+// CHANGELINKDEVPROD
 // Make curl for the personal inforation pagge information vv
-// $url = "http://localhost/slim3homeheroapi/public/populate-address-form"; // DEV
- $url = "https://slim3api.herokuapp.com/populate-address-form"; // PROD
+ $url = "http://localhost/slim3homeheroapi/public/populate-address-form"; // DEV
+// $url = "https://slim3api.herokuapp.com/populate-address-form"; // PROD
 
 $headers = array(
     "Authorization: Bearer ".$_SESSION["token"],

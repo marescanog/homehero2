@@ -590,11 +590,11 @@ const load_create_project_form = (
                         samoka.append('project_name', projData["project_name"]);
 
 
-
+ // CHANGELINKDEVPROD
                         $.ajax({
                             type : 'POST',
-                            //url : "http://localhost/slim3homeheroapi/public/add-project", // dev
-                            url : "https://slim3api.herokuapp.com/add-project", // prod
+                            url : "http://localhost/slim3homeheroapi/public/add-project", // dev
+                            // url : "https://slim3api.herokuapp.com/add-project", // prod
                             data : samoka,
                                 contentType: false,
                                 processData: false,

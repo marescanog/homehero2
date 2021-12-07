@@ -64,7 +64,8 @@ $("#registerForm").validate({
 
         const phoneCheckInDatabase = {}
         phoneCheckInDatabase["phone"] = formData["phone"];
-           
+        
+         // CHANGELINKDEVPROD x5
         // Send Post Request to API
         // Ajax to check phone number;
         $.ajax({
@@ -76,10 +77,11 @@ $("#registerForm").validate({
                 // console.log(response);
                 // Proceed to SMS verification to submit with Ajax for worker creation.
                 // Verify password and get a hashed password
+                 // CHANGELINKDEVPROD
                 $.ajax({
                     type: 'POST',
-                    url : 'https://slim3api.herokuapp.com/auth/verify-password', // PROD
-                    //url: 'http://localhost/slim3homeheroapi/public/auth/verify-password', // DEV
+                    // url : 'https://slim3api.herokuapp.com/auth/verify-password', // PROD
+                    url: 'http://localhost/slim3homeheroapi/public/auth/verify-password', // DEV
                     data : formData,
                     success : function(response) {
                         // Note: if we were to skip the step of SMS verification, we would remove/comment out loadModal Code
@@ -95,12 +97,13 @@ $("#registerForm").validate({
                         const dataToPassToSMSGeneration = {};
                         dataToPassToSMSGeneration["phone"] = formData["phone"];
 
+                         // CHANGELINKDEVPROD
                         // Before passing, we call api to generate an SMS code. If the number is inavlid, we display the error
                         // message here, otherwise if valid proceed to show SMS modal
                         $.ajax({
                             type: "POST",
-                            url : 'https://slim3api.herokuapp.com//auth/generate-SMS-dummy', // PROD-DUMMY
-                            // url: 'http://localhost/slim3homeheroapi/public/auth/generate-SMS-dummy', // DEV-DUMMY,
+                            // url : 'https://slim3api.herokuapp.com//auth/generate-SMS-dummy', // PROD-DUMMY
+                            url: 'http://localhost/slim3homeheroapi/public/auth/generate-SMS-dummy', // DEV-DUMMY,
                             //url : 'https://slim3api.herokuapp.com/auth/verify-password', // PROD-API
                             // url: 'http://localhost/slim3homeheroapi/public/auth/verify-password', // DEV-API,
                             data: dataToPassToSMSGeneration,
@@ -167,14 +170,15 @@ $("#registerForm").validate({
                 const formatDataForHasRegistered = {};
                 formatDataForHasRegistered["phone"] = formData["phone"];
 
+                 // CHANGELINKDEVPROD
                 // CLEANUP TO DO : CHECK IF WORKER HAS FINISHED REGISTRATION
                 // IF NOT FINISHED, REDIRECT TO REGISTRATION PAGES
                 // Check if the phone number already has an existing user or support account
                 if(data.isWorker == true){
                     $.ajax({
                         type: "GET",
-                        url: "https://slim3api.herokuapp.com/auth/worker/hasRegistered", // PROD
-                        // url: "http://localhost/slim3homeheroapi/public/auth/worker/hasRegistered", // DEV
+                        // url: "https://slim3api.herokuapp.com/auth/worker/hasRegistered", // PROD
+                        url: "http://localhost/slim3homeheroapi/public/auth/worker/hasRegistered", // DEV
                         data: formatDataForHasRegistered,
                         success: function (response) {
                             console.log(response)
@@ -204,10 +208,11 @@ $("#registerForm").validate({
                                     onClose: enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form),
                                     preConfirm: (password) => {
                                         registrationTokenData['password'] = password;
+                                         // CHANGELINKDEVPROD
                                         let result = $.ajax({
                                             type: "POST",
-                                             url: "https://slim3api.herokuapp.com/auth/worker/create-registration-token", // PROD
-                                             // url: "http://localhost/slim3homeheroapi/public/auth/worker/create-registration-token", // DEV
+                                             // url: "https://slim3api.herokuapp.com/auth/worker/create-registration-token", // PROD
+                                             url: "http://localhost/slim3homeheroapi/public/auth/worker/create-registration-token", // DEV
                                             data: registrationTokenData,
                                             success: (result)=>{
                                                 // console.log(result)

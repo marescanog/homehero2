@@ -32,9 +32,12 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <?php
 //  add a curl request to get if the user already has a list of addresses and other data.
 
+ // CHANGELINKDEVPROD
 // Make curl for the personal inforation pagge information vv
-// $url = "http://localhost/slim3homeheroapi/public/search-proj"; // DEV
- $url = "https://slim3api.herokuapp.com/search-proj"; // PROD
+ $url = "http://localhost/slim3homeheroapi/public/search-proj"; // DEV
+// $url = "https://slim3api.herokuapp.com/search-proj"; // PROD
+
+
 // $post_data = array(
 //     'query' => 'some stuff',
 //     'method' => 'post',

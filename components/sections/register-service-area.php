@@ -1,9 +1,9 @@
 <?php
     session_start();
-    
+    // CHANGELINKDEVPROD
     // Make curl for the general schedule info
-    // $url = "http://localhost/slim3homeheroapi/public/registration/preferred-cities"; // DEV
-     $url = "https://slim3api.herokuapp.com/registration/preferred-cities"; // PROD
+     $url = "http://localhost/slim3homeheroapi/public/registration/preferred-cities"; // DEV
+    // $url = "https://slim3api.herokuapp.com/registration/preferred-cities"; // PROD
     
     $headers = array(
         "Authorization: Bearer ".$_SESSION["registration_token"],

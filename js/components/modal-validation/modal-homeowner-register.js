@@ -61,21 +61,23 @@ $("#registerForm").validate({
         // Freeze Form & Disable
         disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
            
+        // CHANGELINKDEVPROD x3
         // Use new route to check user's phone number in DB
         // First ajax checks if phone number is in DB
         $.ajax({
             type: 'GET',
-            url : 'https://slim3api.herokuapp.com/auth/check-phone', // PROD
-            // url: 'http://localhost/slim3homeheroapi/public/auth/check-phone', // DEV
+            // url : 'https://slim3api.herokuapp.com/auth/check-phone', // PROD
+             url: 'http://localhost/slim3homeheroapi/public/auth/check-phone', // DEV
             data : phoneCheckInDatabase,
             success : function(response) {
                 // console.log(response);
                 // Second step verifies the password and returns a hashed pass
                 // Verify password and get a hashed password
+                 // CHANGELINKDEVPROD
                 $.ajax({
                     type: 'POST',
-                    url : 'https://slim3api.herokuapp.com/auth/verify-password', // PROD
-                    //url: 'http://localhost/slim3homeheroapi/public/auth/verify-password', // DEV
+                    // url : 'https://slim3api.herokuapp.com/auth/verify-password', // PROD
+                    url: 'http://localhost/slim3homeheroapi/public/auth/verify-password', // DEV
                     data : formData,
                     success : function(response) {
                         // Note: if we were to skip the step of SMS verification, we would remove/comment out loadModal Code
@@ -92,12 +94,13 @@ $("#registerForm").validate({
                         const dataToPassToSMSGeneration = {};
                         dataToPassToSMSGeneration["phone"] = formData["phone"];
 
+                         // CHANGELINKDEVPROD
                         // Before passing, we call api to generate an SMS code. If the number is inavlid, we display the error
                         // message here, otherwise if valid proceed to show SMS modal
                         $.ajax({
                             type: "POST",
-                            url : 'https://slim3api.herokuapp.com//auth/generate-SMS-dummy', // PROD-DUMMY
-                            // url: 'http://localhost/slim3homeheroapi/public/auth/generate-SMS-dummy', // DEV-DUMMY,
+                            // url : 'https://slim3api.herokuapp.com//auth/generate-SMS-dummy', // PROD-DUMMY
+                             url: 'http://localhost/slim3homeheroapi/public/auth/generate-SMS-dummy', // DEV-DUMMY,
                             //url : 'https://slim3api.herokuapp.com/auth/verify-password', // PROD-API
                             // url: 'http://localhost/slim3homeheroapi/public/auth/verify-password', // DEV-API,
                             data: dataToPassToSMSGeneration,

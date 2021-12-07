@@ -54,12 +54,13 @@ $("#SMSVerification").validate({
         const buttonLoadSpinner = document.getElementById("WSMS-submit-btn-load");
         const SMSForm = document.getElementById("SMSVerification"); // This is our form to disable
 
+         // CHANGELINKDEVPROD x2
         // Send Post Request to API
         // Ajax to verify SMS PIN;
         $.ajax({
             type: 'POST',
-            url : 'https://slim3api.herokuapp.com/auth/verify-SMS-dummy', // PROD - DUMMY
-            // url: 'http://localhost/slim3homeheroapi/public/auth/verify-SMS-dummy', // DEV - DUMMY
+            // url : 'https://slim3api.herokuapp.com/auth/verify-SMS-dummy', // PROD - DUMMY
+             url: 'http://localhost/slim3homeheroapi/public/auth/verify-SMS-dummy', // DEV - DUMMY
             // url: 'http://localhost/slim3homeheroapi/public/auth/check-phone', // PROD - API
             // url: 'http://localhost/slim3homeheroapi/public/auth/check-phone', // DEV - API
             data : dataToSendToSMSVerification,
@@ -75,11 +76,12 @@ $("#SMSVerification").validate({
                 console.log("Submit form data is (fnmae,lname, etc)")
                 console.log(submitformData);
 
+                 // CHANGELINKDEVPROD
                 // ajax call to submit data and make a new homeowner, submitformData is the data
                 $.ajax({
                     type: 'POST',
-                    url : 'https://slim3api.herokuapp.com/auth/homeowner/create-account', // PROD 
-                    //url: 'http://localhost/slim3homeheroapi/public/auth/homeowner/create-account', // DEV
+                    // url : 'https://slim3api.herokuapp.com/auth/homeowner/create-account', // PROD 
+                    url: 'http://localhost/slim3homeheroapi/public/auth/homeowner/create-account', // DEV
                     data : submitformData,
                     success : function(response) {
                         // console.log("your response after account creation is:")

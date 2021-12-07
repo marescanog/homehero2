@@ -25,9 +25,11 @@
 
     $curl_err = null;
 
+    // CHANGELINKDEVPROD
     // DO A CURL REQUEST TO GRAB PROJECT TYPES
-    $url = "https://slim3api.herokuapp.com/search-proj";
-    
+    // $url = "https://slim3api.herokuapp.com/search-proj"; // PROD
+    $url = "http://localhost/slim3homeheroapi/public/search-proj"; // DEV
+
     // 1. Initialize
     $ch = curl_init();
     
