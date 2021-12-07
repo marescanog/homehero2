@@ -393,12 +393,13 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                 if( count($ongoingProjects) > 3){
                                 ?><!-------------------------------------------------->
                                 <!-- HTML ZONE: SHOW MORE PROJECTS -->
-                                    <div id="show-more"></div>
+                                 <!-- Used for pagination / show more ajax (Disabled for now) -->
+                                    <!-- <div id="show-more"></div>
                                     <div  class="d-flex mt-4 justify-content-center text-align-center">
                                         <button class="btn btn-lg text-white btn-warning">
                                             SHOW MORE
                                         </button>
-                                    </div>
+                                    </div> -->
                                 <?php //--------------- PHP ZONE ------------------------
                                 }
                             }
@@ -521,12 +522,13 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                 if( count($closedProjects) > 3){
                                 ?><!-------------------------------------------------->
                                 <!-- HTML ZONE: SHOW MORE PROJECTS -->
-                                    <div id="show-more"></div>
+                                 <!-- Used for pagination / show more ajax (Disabled for now) -->
+                                    <!-- <div id="show-more"></div>
                                     <div  class="d-flex mt-4 justify-content-center text-align-center">
                                         <button class="btn btn-lg text-white btn-warning">
                                             SHOW MORE
                                         </button>
-                                    </div>
+                                    </div> -->
                                 <?php //--------------- PHP ZONE ------------------------
                                 }
                             }
@@ -663,12 +665,13 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                 if( count($closedProjects) > 3){
                                 ?><!-------------------------------------------------->
                                 <!-- HTML ZONE: SHOW MORE PROJECTS -->
-                                    <div id="show-more"></div>
+                                <!-- Used for pagination / show more ajax (Disabled for now) -->
+                                    <!-- <div id="show-more"></div>
                                     <div  class="d-flex mt-4 justify-content-center text-align-center">
                                         <button class="btn btn-lg text-white btn-warning">
                                             SHOW MORE
                                         </button>
-                                    </div>
+                                    </div> -->
                                 <?php //--------------- PHP ZONE ------------------------
                                 }
                             }
@@ -856,11 +859,14 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             }, getDocumentLevel(),  data);
         }
 
-        const reportNoShow = (projectID) => {
-            console.log(projectID);
+        const reportNoShow = (job_order_id) => {
+            // console.log(job_order_id);
+            summonZeSpinner();
             let data={};
-            data['projectID'] = projectID;
-            loadModal("report-worker", modalTypes,()=>{}, getDocumentLevel(),  data);
+            data['job_order_id'] = job_order_id;
+            loadModal("report-worker", modalTypes,()=>{
+                killZeSpinner();
+            }, getDocumentLevel(),  data);
         }
 
         // Disabled for now

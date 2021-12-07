@@ -349,7 +349,7 @@
                 // Case when worker does not show, user can report the worker
                 if($job_order_status_id == 1 && $today!= null && $d != null && $today>$d && $jo_start_time == null){
            ?>
-            <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportNoShow(<?php echo $job_id;?>)">
+            <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportNoShow(<?php echo $job_order_id;?>)">
                     REPORT WORKER
                 </button>
            <?php
