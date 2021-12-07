@@ -34,7 +34,7 @@
                         }
                     ?>
                 >
-                    <?php echo isset($add_arr[$adnx]['complete_address']) ? $add_arr[$adnx]['complete_address'] : $add_arr[$adnx]['street_no'].' '.$add_arr[$adnx]['street_name'];?>
+                    <?php echo isset($add_arr[$adnx]['complete_address']) ? htmlentities($add_arr[$adnx]['complete_address']) : htmlentities($add_arr[$adnx]['street_no']).' '.htmlentities($add_arr[$adnx]['street_name']);?>
                 </option>
             <?php 
                 }
