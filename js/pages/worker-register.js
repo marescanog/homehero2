@@ -842,7 +842,7 @@ const loadServiceArea = () => {
                 // (DEV BUILD UNCOMMENT)
                 // (DEV BUILD UNCOMMENT)
                 // Submit the form (DEV BUILD UNCOMMENT)
-                // save_preferred_cities(formData);
+                save_preferred_cities(formData);
 
                 showLoadingOverlay();
                 // Freeze the form
@@ -850,7 +850,7 @@ const loadServiceArea = () => {
 
                 // (PROD BUILD)
                 // (PROD BUILD UNCOMMENT - CANNOT PROCEED DUE TO CORS)
-                 window.location.href = level+"/pages/worker/register.php"+"?page=4";
+                // window.location.href = level+"/pages/worker/register.php"+"?page=4";
 
             }
             });
