@@ -427,7 +427,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                         <!-- HTML ZONE: PROJECT DISPLAY - ONGOING -->
 
                             <h5 class="jumbotron-h1 mt-lg-3 mt-0 mt-md-3 mt-lg-0">
-                                You have no closed/cancelled projects.
+                                You have no ongoing/pending projects.
                             </h5>
 
                         <?php //--------------- PHP ZONE ------------------------
