@@ -1,8 +1,10 @@
 <?php
     $data = isset($_POST['data']) ? $_POST['data'] : null;
-    $job_order_id = null;
+    $job_order_id = null; 
+    $assigned_to = null;
     if($data != null){
         $job_order_id = isset($_POST['data']['job_order_id']) ? $_POST['data']['job_order_id'] : null;
+        $assigned_to = isset($_POST['data']['assigned_to']) ? $_POST['data']['assigned_to'] : null;
     }
 
     $curl_error = null;
@@ -93,7 +95,7 @@
         <div class="card">
             <div class="card-body">
                 <h6 class="card-subtitle mb-2 text-muted">Worker Name</h6>
-                <p class="card-text">Name</p>
+                <p class="card-text"><?php echo htmlentities($assigned_to);?></p>
                 <h6 class="card-subtitle mb-2 text-danger">Report Issue</h6>
                 <p class="card-text text-danger font-italic">Worker did not show up for scheduled job order.</p>
             </div>

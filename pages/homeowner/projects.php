@@ -859,11 +859,12 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             }, getDocumentLevel(),  data);
         }
 
-        const reportNoShow = (job_order_id) => {
+        const reportNoShow = (job_order_id, assigned_to) => {
             // console.log(job_order_id);
             summonZeSpinner();
             let data={};
             data['job_order_id'] = job_order_id;
+            data['assigned_to'] = assigned_to;
             loadModal("report-worker", modalTypes,()=>{
                 killZeSpinner();
             }, getDocumentLevel(),  data);
@@ -884,11 +885,18 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             loadModal("report-bill", modalTypes,()=>{}, getDocumentLevel(),  data);
         }
 
-        const reportProblem = (projectID) => {
-            console.log(projectID);
+        const reportProblem = (job_order_id, jobPostName, project_type_name, address, assigned_to) => {
+            // console.log(job_order_id);
+            summonZeSpinner();
             let data={};
-            data['projectID'] = projectID;
-            loadModal("report-problem", modalTypes,()=>{}, getDocumentLevel(),  data);
+            data['job_order_id'] = job_order_id;
+            data['job_post_name'] = jobPostName;
+            data['project_type_name'] = project_type_name;
+            data['home_address_label'] = address;
+            data['assigned_to'] = assigned_to;
+            loadModal("report-problem", modalTypes,()=>{
+                killZeSpinner();
+            }, getDocumentLevel(),  data);
         }
 
         const completePayment = (projectID) => {

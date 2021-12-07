@@ -349,7 +349,7 @@
                 // Case when worker does not show, user can report the worker
                 if($job_order_status_id == 1 && $today!= null && $d != null && $today>$d && $jo_start_time == null){
            ?>
-            <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportNoShow(<?php echo $job_order_id;?>)">
+            <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportNoShow(<?php echo $job_order_id.',\''.$assigned_to.'\'';?>)">
                     REPORT WORKER
                 </button>
            <?php
@@ -371,13 +371,13 @@
                     <?php 
                         if( $jo_start_time == null){
                     ?>
-                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="cancelProject(<?php echo $job_id.',\''.$job_title.'\',\''.$project_type.'\',\''.$address.'\',\''.$assigned_to.'\'';?>)">
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="cancelProject(<?php echo $job_order_id.',\''.$job_title.'\',\''.$project_type.'\',\''.$address.'\',\''.$assigned_to.'\'';?>)">
                             CANCEL JOB ORDER
                         </button>
                     <?php 
                         } else {
                     ?>
-                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportProblem(<?php echo $job_id;?>)">
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportProblem(<?php echo $job_order_id.',\''.$job_title.'\',\''.$project_type.'\',\''.$address.'\',\''.$assigned_to.'\'';?>)">
                             REPORT PROBLEM
                         </button>
                     <?php 
