@@ -10,10 +10,16 @@
 <!-- =============================================== -->
 <!--                    MODAL                        -->
 <!-- =============================================== -->
-<div class="modal fade" id="modal"  role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade" id="modal"  role="dialog" aria-labelledby="modalLabel" aria-hidden="true" data-backdrop="static">
     <div id="modal-contents" class="modal-dialog modal-dialog-centered" role="document">
         <?php
 
         ?>
     </div>
 </div>
+<script>
+    // This script clears the modal contents on hide by loading an empty php page.
+    $('#modal').on('hidden.bs.modal', function () {
+        $("#modal-contents").load(modalTypes["clear"]);
+    });
+</script>

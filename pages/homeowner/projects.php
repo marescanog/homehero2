@@ -15,8 +15,8 @@ $currentTab = isset($_GET['tab']) ? $_GET['tab'] : "open"; // used to direct to 
 
 // Curl request to get data to fill projects page
 
- // $url = "http://localhost/slim3homeheroapi/public/homeowner/get-projects"; // DEV
-  $url = "https://slim3api.herokuapp.com//homeowner/get-projects"; // PROD
+  // $url = "http://localhost/slim3homeheroapi/public/homeowner/get-projects"; // DEV
+   $url = "https://slim3api.herokuapp.com//homeowner/get-projects"; // PROD
 
 $headers = array(
     "Authorization: Bearer ".$_SESSION["token"],
@@ -345,18 +345,26 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                     $job_title = $ongoingJobPosts[$p]->job_post_name;
                                     // Grab job status
                                     $job_status = $ongoingJobPosts[$p]->job_post_status_id;
-                                    // Grab job id
-                                    $job_id = $ongoingJobPosts[$p]->id;
-                                    // Grab home_id
-                                    $home_id = $ongoingJobPosts[$p]->home_id;
-                                    // Grab rate_type_id
-                                    $rate_type_id = $ongoingJobPosts[$p]->rate_type_id;
-                                    // Grab job_size_id
-                                    $job_size_id = $ongoingJobPosts[$p]->job_order_size;
+                                    // Grab rate_offer 
+                                    $rate_offer = $ongoingJobPosts[$p]->rate_offer;
+                                    // Grab project type 
+                                    $project_type = $ongoingJobPosts[$p]->project_type;
                                         
                                     $is_rated = null;
                                     $job_order_id = null;
                                     $cancellation_reason = null;
+
+                                    $tab_link = "";
+
+                                    // For edit modal
+                                        // Grab rate_type_id
+                                        $rate_type_id = $ongoingJobPosts[$p]->rate_type_id;
+                                        // Grab job_size_id
+                                        $job_size_id = $ongoingJobPosts[$p]->job_size_id;
+                                        // Grab home_id
+                                        $home_id = $ongoingJobPosts[$p]->home_id;
+                                        // Grab job id
+                                        $job_id = $ongoingJobPosts[$p]->id;
 
                                     include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
                                 }
@@ -458,26 +466,31 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                     // Grab rate_type_id
                                     $rate_type_id =  $ongoingProjects[$p]->rate_type_id;
                                     // Grab job_size_id
-                                    $job_size_id = $ongoingProjects[$p]->job_order_size;
+                                    $job_size_id = $ongoingProjects[$p]->job_size_id;
 
                                     // Grab job_orderid
-                                    $job_order_id = $closedProjects[$p]->job_order_id;
+                                    $job_order_id = $ongoingProjects[$p]->job_order_id;
 
                                     // Grab job order status
                                     $job_order_status_id =  $ongoingProjects[$p]->job_order_status_id;
                                      // Grab assigned to
                                      $assigned_to =  $ongoingProjects[$p]->assigned_to;
 
+                                     $jo_start_time = $ongoingProjects[$p]->date_time_start;
 
+                                    // Grab rate_offer 
+                                    $rate_offer = $ongoingProjects[$p]->rate_offer;
 
-                                    // Check if the date is beyond today's date. Otherwise mark it as expired.
-                                    // echo ($job_status);
+                                    // Grab project type 
+                                    $project_type = $ongoingProjects[$p]->project_type;
 
-                                    // if($job_status != 2){
-                                    //     echo "Not fulfilled";
-                                    // }
-                        
+                                     $today = new \DateTime();
+                                    // Check if the date is beyond today's date & not have job order. Otherwise mark it as expired.
+                                    if(  $job_status != 2 && $today>$d){
+                                        $job_status = 3;
+                                    }
                                     
+                                    $tab_link = "&tab=orders";
 
                                     include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
                                 }
@@ -522,9 +535,9 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
 
 
-                        <!-- ========================== -->
-                        <!-- Closed/ Cancelled display -->
-                        <!-- ========================== -->
+<!-- ========================== -->
+<!-- Closed/ Cancelled display -->
+<!-- ========================== -->
                     <div class="tab-pane fade 
                     <?php 
                         if($currentTab != null){
@@ -582,7 +595,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                     // Grab rate_type_id
                                     $rate_type_id = $closedProjects[$p]->rate_type_id;
                                     // Grab job_size_id
-                                    $job_size_id = $closedProjects[$p]->job_order_size;
+                                    $job_size_id = $closedProjects[$p]->job_size_id;
 
 
                                     // Grab is_rated
@@ -597,17 +610,30 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                      $assigned_to = $closedProjects[$p]->assigned_to;
                                      // Grab bill status
                                      $bill_status_id = $closedProjects[$p]->bill_status_id;
+                                     // Grab project type 
+                                    $project_type = $closedProjects[$p]->project_type;
 
+                                     $today = new \DateTime();
+                                    // Check if the date is beyond today's date & not have job order. Otherwise mark it as expired.
+                                    if(  $job_status != 2 && $today>$d){
+                                        $job_status = 3;
+                                    }
 
-                                    // Check if the date is beyond today's date. Otherwise mark it as expired.
-                                    // echo ($job_status);
+                                    $tab_link = "&tab=closed";
+                  
+                                    // Grab date time completion paid status
+                                    $date_paid = $closedProjects[$p]->date_time_completion_paid;
 
-                                    // if($job_status != 2){
-                                    //     echo "Not fulfilled";
-                                    // }
-                        
-                                    
+                                    // Grab rate_offer 
+                                    $rate_offer = $closedProjects[$p]->rate_offer;
 
+                                    // Grab cancelled_by 
+                                    $cancelled_by = $closedProjects[$p]->cancelled_by;
+                                    // Grab homeowner_id
+                                    $homeowner_id = $closedProjects[$p]->homeowner_id;
+                                    // Grab order_cancellation_reason
+                                    $order_cancellation_reason = $closedProjects[$p]->order_cancellation_reason;
+                                   
                                     include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
                                 }
                                 // Clear values;
@@ -669,5 +695,216 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <?php require_once dirname(__FILE__)."/$level/components/foot-meta.php"; ?>
 <!-- Custom JS Scripts Below -->
     <!-- <script src="../../js/pages/user-projects.js"></script> -->
+    <script>
+        const summonZeSpinner = () => {
+            Swal.fire({
+                title: "",
+                imageUrl: getDocumentLevel()+"/images/svg/Spinner-1s-200px.svg",
+                imageWidth: 200,
+                imageHeight: 200,
+                imageAlt: 'Custom image',
+                showCancelButton: false,
+                showConfirmButton: false,
+                background: 'transparent',
+                allowOutsideClick: false
+            });
+        }
+        const killZeSpinner = () => {
+            swal.close();
+        }
+
+        function resetSelection() {
+            document.getElementById("category").selectedIndex = 0;
+            document.getElementById("categorySelect").selectedIndex = 0;
+        }
+
+        function makeSubmenu(value) {
+            // console.log(value)
+            let cat = document.getElementById("category")
+            let subcat = document.getElementById("categorySelect");
+            subcat.removeAttribute("disabled");
+            subcat.selectedIndex = 0;
+            // reset to d-none for all
+            // $('.A').each((index, element)=>{
+            //     console.log(element)
+            // });
+
+            // A BG-1
+            if( cat.getAttribute("data-prev") == "0"){
+                let className = ".A.BG-"+value
+                $(className).each((index, element)=>{
+                    element.classList.remove("d-none");
+                });
+            } else {
+                //console.log( cat.getAttribute("data-prev"));
+                // disable previous
+                let previous = ".A.BG-"+cat.getAttribute("data-prev");
+                $(previous).each((index, element)=>{
+                    element.classList.add("d-none");
+                });
+
+                let current = ".A.BG-"+value
+                // enable current
+                $(current).each((index, element)=>{
+                    element.classList.remove("d-none");
+                });
+            }
+
+            cat.setAttribute("data-prev", value);
+
+    
+        }
+
+        const getTodayDate = () => {
+            let today = new Date();
+            let dd = today.getDate();
+            let mm = today.getMonth() + 1; //January is 0!
+            let yyyy = today.getFullYear();
+
+            if (dd < 10) {
+            dd = '0' + dd;
+            }
+
+            if (mm < 10) {
+            mm = '0' + mm;
+            } 
+                
+            today = yyyy + '-' + mm + '-' + dd;
+
+            return today;
+        }
+
+// ====================
+// Modal Code & Data
+// ====================
+
+    const changeAddress = (projectID) =>{
+        console.log(`Your current home is ${projectID} and you want to change to a new address.`);
+        let submitButton = document.getElementById("RU-submit-btn")
+
+        // set to load while ajax fetch
+        $("#address-change-content").load("../../components/cards/spinner.php");
+        // disable submit button while fetching
+        submitButton.setAttribute("disabled", "true");
+        submitButton.classList.remove("btn-warning");
+        submitButton.classList.add("btn-secondary");
+
+        // Ajax to get list of addresses
+
+        // // set to load select form with list of addresses
+        // $("#address-change-content").load("../../components/forms/change-add-small.php");
+
+        // // enable submit button
+        // button.removeAttribute("disabled");
+        // submitButton.classList.remove("btn-secondary");
+        // submitButton.classList.add("btn-warning");
+    };
+
+        // DONE UI/UX, lacks ajax, TODO ADD PROJECT TYPE FOR BLANK JOB DESC, disable close on submit
+        const editProject = (projectID, jobPostName, prefSched, jobSize, rateOffer, rateType, description, home_id, address) => {
+            summonZeSpinner();
+            let data={};
+            data['projectID'] = projectID;
+            data['job_post_name'] = jobPostName;
+            data['preferred_date_time'] = prefSched;
+            data['job_size_id'] = jobSize;
+            data['rate_offer'] = rateOffer;
+            data['rate_type_id'] = rateType;
+            data['job_description'] = description;
+            data['home_id'] = home_id;
+            data['home_address_label'] = address;
+            console.log(data);
+            loadModal("edit-project", modalTypes,()=>{
+                killZeSpinner();
+                document.getElementById("date").setAttribute("min", getTodayDate());
+            }, getDocumentLevel(),  data);
+        }
+
+        // DONE UI/UX, lacks ajax, disable close on submit
+        const cancelJobPost = (projectID, jobPostName, project_type_name, address) => {
+            let data={};
+            data['projectID'] = projectID;
+            data['job_post_name'] = jobPostName;
+            data['project_type_name'] = project_type_name;
+            data['home_address_label'] = address;
+            loadModal("cancel-post", modalTypes,()=>{}, getDocumentLevel(),  data);
+        }
+
+        const cancelProject = (projectID, jobPostName, project_type_name, address, assigned_to) => {
+            console.log(projectID);
+            let data={};
+            data['projectID'] = projectID;
+            data['job_post_name'] = jobPostName;
+            data['project_type_name'] = project_type_name;
+            data['home_address_label'] = address;
+            data['assigned_to'] = assigned_to;
+            loadModal("cancel-project", modalTypes,()=>{}, getDocumentLevel(),  data);
+        }
+
+        // DONE UI/UX, lacks ajax, disable close on submit
+        const cancelandRepost = (projectID, date, jobPostName, project_type_name, address) => {
+            console.log(projectID);
+            let data={};
+            data['projectID'] = projectID;
+            data['old_date_time'] = date;
+            data['job_post_name'] = jobPostName;
+            data['project_type_name'] = project_type_name;
+            data['home_address_label'] = address;
+            loadModal("cancel-and-repost", modalTypes,()=>{
+                document.getElementById("date").setAttribute("min", getTodayDate());
+            }, getDocumentLevel(),  data);
+        }
+
+        const reportNoShow = (projectID) => {
+            console.log(projectID);
+            let data={};
+            data['projectID'] = projectID;
+            loadModal("report-worker", modalTypes,()=>{}, getDocumentLevel(),  data);
+        }
+
+        const reportProject = (projectID) => {
+            console.log(projectID);
+            let data={};
+            data['projectID'] = projectID;
+            loadModal("report", modalTypes,()=>{}, getDocumentLevel(),  data);
+        }
+
+        const reportProblem = (projectID) => {
+            console.log(projectID);
+            let data={};
+            data['projectID'] = projectID;
+            loadModal("report-problem", modalTypes,()=>{}, getDocumentLevel(),  data);
+        }
+
+        const completePayment = (projectID) => {
+            console.log(projectID);
+            let data={};
+            data['projectID'] = projectID;
+            loadModal("template", modalTypes,()=>{}, getDocumentLevel(),  data);
+        }
+
+        // DONE UI/UX, lacks ajax, disable close on submit
+        const reschedule = (projectID, date) => {
+            //console.log(projectID);
+            let data={};
+            data['projectID'] = projectID;
+            data['old_date_time'] = date;
+            loadModal("reschedule", modalTypes,()=>{
+                document.getElementById("date").setAttribute("min", getTodayDate());
+            }, getDocumentLevel(),  data);
+        }
+
+        const rateProject = (projectID) => {
+            console.log(projectID);
+            let data={};
+            data['projectID'] = projectID;
+            loadModal("rate", modalTypes,()=>{}, getDocumentLevel(),  data);
+        }
+
+
+
+
+
+    </script>
 </body>
 </html>

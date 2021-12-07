@@ -191,7 +191,7 @@
 
 
 <!-- Map Data -->
-<script src="../../js/helper/city_delimeters.js"></script>
+<!-- <script src="../../js/helper/city_delimeters.js"></script> -->
 <!-- Map Code -->
 <script src="../../js/helper/map.js"></script>
 <!-- Async script executes immediately and must be after any DOM elements used in callback. -->

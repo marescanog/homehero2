@@ -129,3 +129,22 @@ const disable_button_enableModalSpinner = (button, buttonTxt, buttonLoadSpinner)
     buttonTxt.innerHTML = "Loading"
     buttonLoadSpinner.setAttribute("class", "d-inline");
 };
+
+
+// const summonZeSpinner = () => {
+//     Swal.fire({
+//         title: "",
+//         imageUrl: getDocumentLevel()+"/images/svg/Spinner-1s-200px.svg",
+//         imageWidth: 200,
+//         imageHeight: 200,
+//         imageAlt: 'Custom image',
+//         showCancelButton: false,
+//         showConfirmButton: false,
+//         background: 'transparent',
+//         allowOutsideClick: false
+//     });
+// }
+
+// const killZeSpinner = () => {
+//     swal.close();
+// }

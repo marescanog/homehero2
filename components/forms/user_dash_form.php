@@ -1,8 +1,11 @@
 <!-- <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script> -->
-<script
+<!-- <script
   src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"
   integrity="sha256-hlKLmzaRlE8SCJC1Kw8zoUbU8BxA+8kR3gseuKfMjxA="
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous"></script> -->
+
+<script src="../../js/jquery-ui.min.js"></script>
+
 <script>
 $(document).ready(function() {
     // This sections loads a fefault list into the search items

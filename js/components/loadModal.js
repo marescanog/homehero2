@@ -2,6 +2,7 @@
 const docLevelModal = getDocumentLevel();
 
 const modalTypes = {
+    "clear" : docLevelModal+"/components/modals/empty.php",
     "signup" : docLevelModal+"/components/modals/homeowner-register.php",
     "worker-signup" : docLevelModal+"/components/modals/worker-register.php",
     "error" : docLevelModal+"/components/modals/error.php" ,
@@ -14,7 +15,17 @@ const modalTypes = {
     "tempLogin": docLevelModal+"/components/modals/temporary/temp-login.php",
     "SMS-verification":  docLevelModal+"/components/modals/sms-verification.php",
     "SMS-verification-worker":  docLevelModal+"/components/modals/sms-verification-worker.php",
-    "SMS-verification-homeowner":  docLevelModal+"/components/modals/sms-verification.php"
+    "SMS-verification-homeowner":  docLevelModal+"/components/modals/sms-verification.php",
+    "edit-project":  docLevelModal+"/components/modals/ho-edit-project.php",
+    "cancel-project":  docLevelModal+"/components/modals/ho-project-cancel.php",
+    "cancel-post":  docLevelModal+"/components/modals/ho-post-cancel.php",
+    "template": docLevelModal+"/components/modals/temporary/template.php",
+    "cancel-and-repost":  docLevelModal+"/components/modals/ho-project-cancel-and-repost.php",
+    "report-worker":  docLevelModal+"/components/modals/ho-project-report-worker.php",
+    "report-problem":  docLevelModal+"/components/modals/ho-project-report-problem.php",
+    "reschedule":  docLevelModal+"/components/modals/ho-project-reschedule.php",
+    "report":  docLevelModal+"/components/modals/ho-project-report.php",
+    "rate":  docLevelModal+"/components/modals/ho-project-rate.php",
 }
 
 // This function loads the

@@ -11,6 +11,7 @@ $level ="../..";
 $fistName = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest"; // used by header
 $initials = isset($_SESSION["initials"]) ? $_SESSION["initials"] : "GU"; // used by header
 $project_id = isset($_GET["id"]) ? $_GET["id"] : null;
+$tab_link = isset($_GET["tab"]) ? $_GET["tab"] : null;
 
 // redirect back to projects when no project ID is given
 if($project_id == null){
@@ -277,8 +278,32 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                         </a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="<?php echo $level;?>/pages/homeowner/projects.php">
-                            Ongoing
+                        <a href="<?php
+                            if($tab_link == null){
+                                echo $level."/pages/homeowner/projects.php";
+                            } else {
+                                if($tab_link == "orders"){
+                                    echo $level."/pages/homeowner/projects.php?tab=orders";
+                                } else if ($tab_link == "closed"){
+                                    echo $level."/pages/homeowner/projects.php?tab=closed";
+                                } else {
+                                    echo $level."/pages/homeowner/projects.php";
+                                }
+                            }
+                        ?>">
+                            <?php
+                                if($tab_link == null){
+                                    echo "Job Posts";
+                                } else {
+                                    if($tab_link == "orders"){
+                                        echo "Ongoing Projects";
+                                    } else if ($tab_link == "closed"){
+                                        echo "Closed Projects";
+                                    } else {
+                                        echo "Job Posts";
+                                    }
+                                }
+                            ?>
                         </a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">

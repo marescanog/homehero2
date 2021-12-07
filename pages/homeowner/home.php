@@ -17,7 +17,8 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <link rel="stylesheet" href="../../css/headers/header-homeowner.css">
 <link rel="stylesheet" href="../../css/pages/homeowner/homeowner-home.css">
 <link rel="stylesheet" href="../../css/footer.css">
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.3/themes/hot-sneaks/jquery-ui.css" />
+<!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.3/themes/hot-sneaks/jquery-ui.css" /> -->
+<link rel="stylesheet" href="../../css/jquery-ui.css">
 <!-- === Link your custom CSS  pages above here ===-->
 </head>
  <body class="container-fluid m-0 p-0 main-container">  
