@@ -34,7 +34,7 @@
                         }
                     ?>
                 >
-                    <?php echo $add_arr[$adnx]['street_no'].' '.$add_arr[$adnx]['street_name'];?>
+                    <?php echo isset($add_arr[$adnx]['complete_address']) ? $add_arr[$adnx]['complete_address'] : $add_arr[$adnx]['street_no'].' '.$add_arr[$adnx]['street_name'];?>
                 </option>
             <?php 
                 }
