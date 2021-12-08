@@ -297,7 +297,7 @@
                             <?php
                                 if($job_order_status_id == 1 && $today!= null && $d != null && $today>$d && $jo_start_time == null){
                             ?>
-                                <button class="btn btn-danger text-white ml-2" data-toggle="modal" data-target="#modal" onclick="cancelandRepost(<?php echo $job_id.',\''.$pref_sched.'\',\''. $job_title.'\',\''. $project_type.'\',\''.$address.'\'';?>)">
+                                <button class="btn btn-danger text-white ml-2" data-toggle="modal" data-target="#modal" onclick="cancelandRepost(<?php echo $job_order_id.',\''.$pref_sched.'\',\''. addslashes($job_title).'\',\''. addslashes($project_type).'\',\''.addslashes($address).'\'';?>)">
                                     <b>CANCEL & REPOST</b>
                                 </button>
                             <?php

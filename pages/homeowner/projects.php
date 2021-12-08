@@ -922,10 +922,10 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         }
 
         // DONE UI/UX, lacks ajax, disable close on submit
-        const cancelandRepost = (projectID, date, jobPostName, project_type_name, address) => {
-            console.log(projectID);
+        const cancelandRepost = (jobOrderID, date, jobPostName, project_type_name, address) => {
+            console.log(jobOrderID);
             let data={};
-            data['projectID'] = projectID;
+            data['jobOrderID'] = jobOrderID;
             data['old_date_time'] = date;
             data['job_post_name'] = jobPostName;
             data['project_type_name'] = project_type_name;

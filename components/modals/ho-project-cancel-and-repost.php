@@ -1,6 +1,6 @@
 <?php
     $data = isset($_POST['data']) ? $_POST['data'] : null;
-    $projectID = null;
+    $jobOrderID = null;
     $oldSched = null;
     $reformattedDate = null;
     $reformattedTime = null;
@@ -8,7 +8,7 @@
     $ca_rp_job_type = null;
     $ca_rp_job_address = null;
     if($data != null){
-        $projectID = $_POST['data']['projectID'];
+        $jobOrderID = $_POST['data']['jobOrderID'];
         $oldSched = $_POST['data']['old_date_time'];
         $ca_rp_job_title = $_POST['data']['job_post_name'];
         $ca_rp_job_type = $_POST['data']['project_type_name'];
@@ -17,7 +17,7 @@
 ?>
 <div class="modal-content">
     <?php 
-        if($projectID == null || $oldSched == null){
+        if($jobOrderID == null || $oldSched == null){
     ?>
         <div class="modal-header">
             <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
@@ -54,7 +54,7 @@
                 $reformattedTime = $hours.':'.$time[1].' '.$period ;
             }
         ?>
-        <input type="hidden" name="id" value="<?php echo $projectID;?>">
+        <input type="hidden" name="id" value="<?php echo $jobOrderID;?>">
         <div class="card  mb-3">
             <div class="card-body">
                 <h5 class="card-title"><?php 
