@@ -1,4 +1,8 @@
 <?php
+session_start();
+$output = null;
+// curl to get the needed modal information
+
     $data = isset($_POST['data']) ? $_POST['data'] : null;
     $job_order_id = null; 
     $assigned_to = null;
@@ -18,11 +22,16 @@
     $curl_error = null;
     // Check if a report has already been filed
     if($job_order_id !== null){
-        // CHANGELINKDEVPROD
+        // NODEPLOYEDPRODLINK
         // DO A CURL REQUEST TO check if A Report has already been filed
-        // $url = "https://slim3api.herokuapp.com/search-proj"; // PROD
-        $url = "http://localhost/slim3homeheroapi/public/search-proj"; // DEV
+        // $url = ""; // PROD (No current deployed prod route)
+        $url = "http://localhost/slim3homeheroapi/public/homeowner/has-job-issue/".$job_order_id; // DEV
             
+        $headers = array(
+            "Authorization: Bearer ".$_SESSION["token"],
+            'Content-Type: application/json',
+        );
+
         // 1. Initialize
         $ch = curl_init();
 
@@ -36,6 +45,11 @@
             // Type of request = GET
             curl_setopt($ch, CURLOPT_HTTPGET, 1);
 
+            // Set headers for auth
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+
+
             // Execute the request and fetch the response. Check for errors
             $output = curl_exec($ch);
 
@@ -48,9 +62,12 @@
             // $output =  json_decode(json_encode($output), true);
             $output =  json_decode($output);
 
-            $project_types = [];
-            if($output !== null && $output->response != null && $output->response->data != null){
-                $project_types = $output->response->data;
+            $success = "";
+            $support_ticket_info = null;
+            $lastSupportTicketAction = null; //
+            if($output !== null && $output->response != null){
+                $support_ticket_info = isset($output->response->support_ticket_info ) ? $output->response->support_ticket_info  : null;
+                $lastSupportTicketAction = isset($output->response->lastSupportTicketAction) ? $output->response->lastSupportTicketAction : null;
             }
     }
 ?>
@@ -71,6 +88,23 @@
             <span aria-hidden="true" style="font-size:1.5em">&times;</span>
             </button>
         </div>
+
+    <?php 
+        } else if ($output !== null && $output->success == false) {
+    ?>
+
+        <div class="modal-header">
+            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                <div>
+                    <b>500 Server Srror!</b>
+                </div>
+                <p>Please close the modal & Refresh the browser.</p>
+            </div>   
+            <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" style="font-size:1.5em">&times;</span>
+            </button>
+        </div>
+
 
     <?php 
         } else if ($curl_error != null) {
@@ -102,6 +136,20 @@
     <form id="modal-report-problem" type="POST"  name="hoLoginForm">
         <div class="modal-body">
 
+<!-- TEST AREA -->
+
+    <p>
+        <?php 
+            // echo var_dump($output);
+            // echo var_dump($support_ticket_info->job_order_id);
+        ?>
+    </p>
+
+<!-- TEST AREA -->
+    <?php 
+        if ($support_ticket_info == false){
+     ?>
+<!-- If homeowner has not submitted form -start  -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title"><?php echo $rep_job_post_name  ?? ( $rep_project_type_name ?? 'Your project'); ?></h5>
@@ -133,8 +181,48 @@
         </div>
         </div>
     </form>
+<!-- If homeowner has not submitted form -end  -->
+<?php 
+        } else {
+     ?>
+<!-- A SUPPORT TICKET IS ALREADY MADE -start  -->
+        <div class="card">
+            <div class="card-body">
+                <p class="text-danger small-warn">*You have already filed for a support ticket for this job order.</p>
+                <h5 class="card-title mb-2">Support Ticket #<?php echo $support_ticket_info->support_ticket_id == null ? "" : sprintf("%08d", $support_ticket_info->support_ticket_id);?></h5>
+                <h6 class="card-subtitle mt-3 mb-2 text-muted h5"><?php echo $rep_job_post_name  ?? ( $rep_project_type_name ?? 'Your project'); ?></h6>
+                <h6 class="card-subtitle mt-2 mb-2 text-muted">for the address at</h6>
+                <p class="card-text"><?php echo $rep_home_address_label;?></p>
+                <h6 class="card-subtitle mb-2 text-muted">assigned to homehero </h6>
+                <p class="card-text"><?php echo $rep_assigned_to;?></p>
+            </div>
+        </div>
+
+        <div class="card my-4">
+            <div class="card-header">
+                Support Ticket Details
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Status: <?php echo $support_ticket_info->status_id == 1 ? "Pending investigation" : $support_ticket_info->status;?></li>
+                <li class="list-group-item">Last updated on: 
+                    <?php 
+                        $action_date=date_create($lastSupportTicketAction->action_date);
+                        echo date_format($action_date,"D, M d Y, h:i A");
+                    ?></li>
+                <li class="list-group-item">Submitted on: 
+                    <?php 
+                        $created_on=date_create($support_ticket_info->created_on);
+                        echo date_format($created_on,"D, M d Y, h:i A");
+                    ?></li>
+            </ul>
+        </div>
+
+        <button type="button" class="mt-2 btn btn-danger text-white btn-lg w-100" data-dismiss="modal">CLOSE</button>
+
     <?php
-        }
+        } // for check if support ticket exists
+    } // for error handling
     ?>
+<!-- A SUPPORT TICKET IS ALREADY MADE -end  -->
 </div>
 <script src="../../js/components/modal-validation/modal-ho-report-problem.js"></script>
