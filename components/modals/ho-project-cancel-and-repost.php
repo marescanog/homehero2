@@ -8,11 +8,11 @@
     $ca_rp_job_type = null;
     $ca_rp_job_address = null;
     if($data != null){
-        $jobOrderID = $_POST['data']['jobOrderID'];
-        $oldSched = $_POST['data']['old_date_time'];
-        $ca_rp_job_title = $_POST['data']['job_post_name'];
-        $ca_rp_job_type = $_POST['data']['project_type_name'];
-        $ca_rp_job_address = $_POST['data']['home_address_label'];
+        $jobOrderID = isset($_POST['data']['jobOrderID']) ? $_POST['data']['jobOrderID'] : null;
+        $oldSched = isset($_POST['data']['old_date_time']) ? $_POST['data']['old_date_time'] : null;
+        $ca_rp_job_title = isset($_POST['data']['job_post_name']) ? $_POST['data']['job_post_name'] : null;
+        $ca_rp_job_type = isset($_POST['data']['project_type_name']) ? $_POST['data']['project_type_name'] : null;
+        $ca_rp_job_address = isset($_POST['data']['home_address_label']) ? $_POST['data']['home_address_label'] : null;
     }
 ?>
 <div class="modal-content">
