@@ -343,7 +343,7 @@
                             <?php
                                 if($date_paid == null){
                             ?>
-                                <button class="btn btn-success text-white ml-2" data-toggle="modal" data-target="#modal" onclick="completePayment(<?php echo $job_id;?>)">
+                                <button class="btn btn-success text-white ml-2" data-toggle="modal" data-target="#modal" onclick="completePayment(<?php echo $job_order_id;?>)">
                                     <b>COMPLETE PAYMENT</b>
                                 </button>
                             <?php 
@@ -353,7 +353,7 @@
                             <?php
                                 if($isRated != null && $isRated == 0){
                             ?>
-                                <button class="btn btn-outline-success ml-2" style="border: 3px solid #5cb85c" data-toggle="modal" data-target="#modal" onclick="rateProject(<?php echo $job_id;?>)">
+                                <button class="btn btn-outline-success ml-2" style="border: 3px solid #5cb85c" data-toggle="modal" data-target="#modal" onclick="rateProject(<?php echo $job_order_id;?>)">
                                     <b>RATE</b>
                                 </button>
                             <?php 
