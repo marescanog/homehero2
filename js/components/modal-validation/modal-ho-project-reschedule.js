@@ -25,6 +25,13 @@ $("#modal-reschedule-project").validate({
         disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
 
         console.log("RESCHEDULE PROJECT");
+        // format time
+        if(formData["time"].length != 8){
+            formData["time"] = formData["time"]+':00';
+        }
+        if(formData["time"].length > 8){
+            formData["time"] = formData["time"].substring(0,8);;
+        }
         console.log(formData);
     }
 });

@@ -35,6 +35,12 @@
      // must parse because the 's create an error if unescaped
      $job_desc = $job_desc != null ? addslashes($job_desc) : null;
      $job_title = $job_title != null ? addslashes($job_title) : null;
+
+
+    // For billing 
+    $total_price_billed  = $total_price_billed != null ? htmlentities($total_price_billed) : null ;
+    $date_time_completion_paid = $date_time_completion_paid != null ? htmlentities($date_time_completion_paid) : null ;
+    $computedRating = $computedRating != null ? $computedRating : 0;
 ?>
 <div class="card mt-3 mb-4 shadow ">
     <div class="card-header" style="background-color:#FCEBBF;">
@@ -164,7 +170,7 @@
             </div>
         <?php }?>
 <!-- ====================================== -->
-<!-- JOB ORDER STATUSES - TYPE NOT COMPLETE -->
+<!-- JOB ORDER STATUSES  -->
 <!-- ====================================== -->
         <?php if($job_status == 2 && $job_order_status_id  == 1 ){?>
             <div class="d-flex flex-row">
@@ -203,23 +209,45 @@
         <?php }?>
 
 <!-- ====================================== -->
-<!-- PAYMENT DISPLAY - TYPE NOT COMPLETE -->
+<!-- PAYMENT DISPLAY  -->
 <!-- ====================================== -->
-        <!-- <?php if($job_order_status_id == 3){?>
+        <?php if($job_order_status_id == 2 && $total_price_billed != null){?>
             <div class="d-flex flex-row">
                 <div class="gray-icon">
                     <?php
                         include dirname(__FILE__)."/".$level.'/images/svg/payments_black_24dp.svg'; 
                     ?>
                 </div>
-                <p id="descLabel"><b>Total payment:</b> <?php //echo $cancellation_reason ?? ''; ?></p>
+                <p id="descLabel"><b>Total payment:</b> <?php echo $total_price_billed ?? ''; ?></p>
             </div>
-        <?php }?> -->
+            <div class="d-flex flex-row">
+                <div class="gray-icon">
+                    <?php
+                        if($date_time_completion_paid != null){
+                            include dirname(__FILE__)."/".$level.'/images/svg/verified.svg'; 
+                        } else {
+                            include dirname(__FILE__)."/".$level.'/images/svg/pending_black_24dp.svg'; 
+                        }
+                    ?>
+                </div>
+                <p id="descLabel"><b>Status: </b>
+                <?php
+                        $formatted_datepaid=date_create($date_time_completion_paid);
+                        if($date_time_completion_paid != null){
+                           echo 'Paid on '.date_format($formatted_datepaid,"D, M d Y, h:i A"); 
+                        } else {
+                           echo 'Pending payment';
+                        }
+                ?>
+            </p>
+            </div>
+        <?php }?>
+        
 
 <!-- ====================================== -->
-<!-- RATINGS DISPLAY - TYPE NOT COMPLETE -->
+<!-- RATINGS DISPLAY -->
 <!-- ====================================== -->
-        <!-- <?php if($job_order_status_id == 3){?>
+        <?php if($job_order_status_id == 2){?>
             <div class="d-flex flex-row">
                 <div class="gray-icon">
                     <?php
@@ -231,13 +259,13 @@
                      
                         if($isRated != null && $isRated == 1){
                             // compute rating
-                            echo 'Your rated ';
+                            echo 'Your rated '.$computedRating.' stars';
                         } else {
                             echo 'You did not rate this job order.'; 
                         }
                     ?></p>
             </div>
-        <?php }?> -->
+        <?php }?>
     </div>
 
 

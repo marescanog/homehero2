@@ -367,6 +367,12 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                         // Grab job id
                                         $job_id = $ongoingJobPosts[$p]->id;
 
+                                    // For billing undefined variable (This data array has none of these attibutes)
+                                    $isRated = null;
+                                    $total_price_billed  = null ;
+                                    $date_time_completion_paid = null;
+                                    $computedRating = 0;
+
                                     include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
                                 }
                                 // Clear values;
@@ -493,6 +499,12 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                     }
                                     
                                     $tab_link = "&tab=orders";
+
+                                    // For billing undefined variable (This data array has none of these attibutes)
+                                    $isRated = null;
+                                    $total_price_billed  = null ;
+                                    $date_time_completion_paid = null;
+                                    $computedRating = 0;
 
                                     include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
                                 }
@@ -636,6 +648,17 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                     $homeowner_id = $closedProjects[$p]->homeowner_id;
                                     // Grab order_cancellation_reason
                                     $order_cancellation_reason = $closedProjects[$p]->order_cancellation_reason;
+
+                                    // For billing
+                                    $total_price_billed  = $closedProjects[$p]->total_price_billed ?? null ;
+                                    $date_time_completion_paid = $closedProjects[$p]->date_time_completion_paid ?? null;
+                                    $computedRating = 0;
+                                    if($isRated != null){
+                                        $computedRating = ($closedProjects[$p]->overall_quality
+                                                        + $closedProjects[$p]->professionalism
+                                                        + $closedProjects[$p]->reliability
+                                                        + $closedProjects[$p]->punctuality)/4.0;
+                                    }
                                    
                                     include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
                                 }
