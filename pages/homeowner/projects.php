@@ -977,11 +977,13 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         //     loadModal("report", modalTypes,()=>{}, getDocumentLevel(),  data);
         // }
 
-        const reportBill = (job_order_id) => {
+        const reportBill = (job_order_id, $address, $assigned_to) => {
             console.log(job_order_id);
             summonZeSpinner();
             let data={};
             data['job_order_id'] = job_order_id;
+            data['address'] = $address;
+            data['assigned_to'] = $assigned_to;
             loadModal("report-bill", modalTypes,()=>{
                 killZeSpinner();
             }, getDocumentLevel(),  data);
