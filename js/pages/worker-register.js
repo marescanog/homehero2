@@ -188,7 +188,7 @@ const save_SPECIFIC_preferred_workSchedule = (form) => {
             },
             success : function(response) {
                 console.log(response);
-                window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=3";
+                window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=2";
             },
             error: function(response){
                 hideLoadingOverlay();
