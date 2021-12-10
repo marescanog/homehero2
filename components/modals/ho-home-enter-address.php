@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 $output = null;
 
@@ -6,7 +6,7 @@ $output = null;
 
 // CHANGELINKDEVPROD
 // Make curl for the personal inforation pagge information vv
- $url = "http://localhost/slim3homeheroapi/public/populate-address-form"; // DEV
+  $url = "http://localhost/slim3homeheroapi/public/populate-address-form"; // DEV
 // $url = "https://slim3api.herokuapp.com/populate-address-form"; // PROD
 
 $headers = array(
@@ -46,20 +46,6 @@ $ch = curl_init();
     $homeTypes = [];
     $barangays = [];
 
-?><!-------------------------------------------------->
-    <!-- HTML ZONE -->
-
-    <!-- This HTML displays the head of the modal with title and close X button -->
-    <div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title" id="signUpModalLabel">ENTER NEW ADDRESS / CHOOSE EXISTING</h5>
-        <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true" style="font-size:1.5em">&times;</span>
-        </button>
-    </div>
-
-
-    <?php //--------------- PHP ZONE ------------------------
     // ERROR HANDLING 
     if($output === FALSE){
         $curl_error_message = curl_error($ch);
@@ -68,109 +54,14 @@ $ch = curl_init();
     curl_close($ch);
 
     // $output =  json_decode(json_encode($output), true);
-     $output =  json_decode($output);
+    $output =  json_decode($output);
 
-
-    // ERROR HANDLING - Curl Error
-    if($curl_error_message){
-    ?><!-------------------------------------------------->
-    <!-- HTML ZONE : CURL ERROR HANDLING & MESSAGE DISPLAY -->
-        
-        <!-- Displays an Alert containing CURL issues -->
-        <div class="modal-body">
-            <div class="title-2-container alert alert-danger alert-dismissible fade show" role="alert">
-                <!-- TITLE -->
-                <div>
-                    <h5>CURL ERROR</h5>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!-- BODY -->
-                <div>
-                    <?php echo $curl_error_message ; ?>
-                </div>
-            </div>
-        </div>
-
-    <?php //--------------- PHP ZONE ------------------------
-    }
-
-    // ERROR HANDLING - Server Error
-    if(!$curl_error_message &&  is_object($output) && ($output->success == false)){
-    ?><!-------------------------------------------------->
-    <!-- HTML ZONE : CURL ERROR HANDLING & MESSAGE DISPLAY -->
-
-        <!-- Displays an Alert containing Server issues -->
-            <div class="modal-body">
-            <div class="title-2-container alert alert-danger alert-dismissible fade show" role="alert">
-                <!-- TITLE -->
-                <div>
-                    <h5>
-                        <?php
-                         if ($output->response && $output->response->status == 500 ){
-                                echo "SERVER ERROR 500";
-                            } else if ($output->response && $output->response->status == 401 ){
-                                echo "SERVER ERROR 401: NOT FOUND";
-                            } else {
-                                echo "SERVER ERROR";
-                            }
-                        ?>
-                    </h5>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!-- BODY -->
-                <div>
-                    <?php 
-                        if($output->response->status){
-                            echo $output->response->message;
-                        }
-                    ?>
-                </div>
-            </div>
-        </div>
-    <?php //--------------- PHP ZONE ------------------------
-    }
-
-    // ERROR HANDLING - Server Error
-    if($output == null || $output == "" || empty($output)){
-        ?><!-------------------------------------------------->
-        <!-- HTML ZONE : CURL ERROR HANDLING & MESSAGE DISPLAY -->
-    
-            <!-- Displays an Alert containing Server issues -->
-                <div class="modal-body">
-                <div class="title-2-container alert alert-danger alert-dismissible fade show" role="alert">
-                    <!-- TITLE -->
-                    <div>
-                        <h5>
-                            <?php
-                                if($output == null){
-                                    echo "OUTPUT FROM CURL IS NULL";
-                                } else if ($output == "" || empty($output)){
-                                    echo "OUTPUT FROM CURL IS EMPTY";
-                                } else {
-                                    echo "OUTPUT IS UNKNOWN";
-                                }
-                            ?>
-                        </h5>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <!-- BODY -->
-                    <div>
-                        <?php 
-                            if($curl_error_message){
-                                echo $curl_error_message;
-                            }
-                        ?>
-                    </div>
-                </div>
-            </div>
-        <?php //--------------- PHP ZONE ------------------------
-        }
+    // Declare variables to be used in this modal
+    $defaultHome = null;
+    $Addressess = [];
+    $cities = [];
+    $homeTypes = [];
+    $barangays = [];
 
     // Format our data variables for modal use
     if($curl_error_message == null && $output !== null && is_object($output) && $output->response !== null && $output->success){
@@ -181,85 +72,68 @@ $ch = curl_init();
         $barangays = $output->response->barangays;
     }
 
-?>
-    <!-- MODAL BODY DEV -->
-    <?php //--------------- PHP ZONE ------------------------
-        if($mode !== null && $mode == "DEV"){
-    ?> <!-------------------------------------------------->
-    <!-- HTML ZONE -->
-        <div class="modal-body">
-            <h6>Your current session variables</h6>
-            <p>
-                <?php
-                    echo var_dump($_SESSION);
-                ?>
-            </p>
-            <h6>Your curl output</h6>
-            <p>
-                <?php
-                    echo var_dump($output);
-                ?>
-            </p>
+    $current_selected_home_id = isset($_POST["home_id"]) ? $_POST["home_id"] : null;
+     $current_selected_home_id = 16;
+?><div class="modal-content" style="width: auto !important;">
+    <?php
+        if( $output != null && $output->success == false){
+    ?>
+        <div class="modal-header">
+            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                <div>
+                    <b>500 Error</b>
+                </div>
+                <p>Please close the modal & Refresh the browser.</p>
+            </div>   
+            <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" style="font-size:1.5em">&times;</span>
+            </button>
         </div>
-    <?php //--------------- PHP ZONE ------------------------
-    } else {
-    ?><!-------------------------------------------------->
-    <!-- HTML ZONE -->
-    
-    <!-- ======================================================= -->
-    <!-- YOUR MAIN CONTENT -->
-    <!-- ======================================================= -->
-
-    <form id="enterAddress" type="POST" name="modalForm">
-        <div class="modal-body">
-        <!-- Modal body Start -->
+    <?php
+        } else if ( $curl_error_message != null || $output == null) {
+    ?>    
+    <div class="modal-header">
+        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
             <div>
-                <?php //--------------- PHP ZONE ----------------
-                    if(count($Addressess) == 0){
-                        echo "<h6>You have no addresses saved. Save a new Address: </h6>";
-                    } //else {
-                ?><!-------------------------------------------------->
-                <!-- HTML ZONE -->
-
-                <div class="form-group mb-1">
-                <!-- <label for="as">Addressess:</label> -->
-                <!-- <select id="saved-add-select" class="custom-select c">
-                    <option  selected value="">Choose an address</option>
-                        <?php // for($x = 0; $x < count($Addressess); $x++) {?>
-                            <option 
-                                value="<?php// echo $Addressess[$x]->home_id;?>"
-                            >
-                                <?php// echo $Addressess[$x]->street_no." ".$Addressess[$x]->street_name;?>
-                            </option>
-                        <?php 
-                          //  }
-                        ?>
-                </select> -->
-                <!-- <button id="saved-add" class="btn btn-primary mt-2" type="button">
-                    Use Saved Address
-                </button> -->
-
-                <!-- <script>
-                    // const saved_add_This = document.getElementById("saved-add");
-                    // const AddressText2 = document.getElementById("add-address-text");
-                    // const HomeFeild2 = document.getElementById("home_address_field");
-                    // const saved_add_select = document.getElementById("saved-add-select");
-                    // const address_name_label = document.getElementById("address_name_label");
-                    // saved_add_This.addEventListener("click", ()=>{
-                    //     AddressText2.innerText = saved_add_select.options[saved_add_select.selectedIndex].text;
-                    //     HomeFeild2.value = saved_add_select.value;
-                    //     address_name_label.value =  saved_add_select.options[saved_add_select.selectedIndex].text;
-                    //     $("#modal").modal('hide');
-                    // });
-                </script> -->
+                <b>Error loading Edit Modal!</b>
             </div>
-            <?php //--------------- PHP ZONE ----------------
-          //      } // Closing bracket for if else above
-            ?><!-------------------------------------------------->
-            </div>
-             <!-- HTML ZONE -->
+            <p>Please close the modal & Refresh the browser.</p>
+        </div>   
+        <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true" style="font-size:1.5em">&times;</span>
+        </button>
+    </div>
+<?php
+    } else {
+?>
+    <div class="modal-header">
+        <h5 class="modal-title" id="signUpModalLabel">SELECT YOUR ADDRESS</h5>
+        <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true" style="font-size:1.5em">&times;</span>
+        </button>
+    </div>
+    <div name="modalForm">
+    <form id="modal-enter-address" type="POST"  name="hoLoginForm">
+        <div class="modal-body">
+<!-- TEST AREA -->
+    <p class="p-0 m-0"> 
+        <?php 
+            //echo var_dump($output);
+           // echo "</br>";
+           // echo var_dump($output->response);
+            // echo "</br>";
+             // echo var_dump($output->response->allAddress);
+            // echo "</br>";
+            // echo var_dump($output->response->cities);
+            // echo "</br>";
+           //echo var_dump($output->response->barangays);
+           // echo var_dump($_POST);
+        ?>
+    </p>
+<!-- TEST AREA -->
 
-             <div class="form-group">
+<!-- MAIN CONTENT -->
+<div class="form-group">
                 <label for="as">Street No.</label>
                 <input type="text" class="form-control" id="as" placeholder="ex. 5" name="street_no">
             </div>
@@ -381,7 +255,7 @@ $ch = curl_init();
                 </div>
 
 
-
+                <p class="text-white" unselectable="on" class="unselectable">sadsad a asda da saasdadsad adasd a ad as a adadad ad a da da</p>
                 
         <!-- Modal body End -->
         </div>
@@ -395,14 +269,13 @@ $ch = curl_init();
             </button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
+    
     </form>
-
-
-<?php //----------------------------------------------
-}
-?><!-------------------------------------------------->
-
+<?php 
+    }
+?>
 </div>
+
 
 <script>
     $("#enterAddress").validate({
@@ -509,3 +382,4 @@ $ch = curl_init();
     
 
 </script>
+

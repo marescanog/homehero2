@@ -26,7 +26,10 @@ const modalTypes = {
     "reschedule":  docLevelModal+"/components/modals/ho-project-reschedule.php",
     "report":  docLevelModal+"/components/modals/ho-project-report.php",
     "rate":  docLevelModal+"/components/modals/ho-project-rate.php",
-    "report-bill":  docLevelModal+"/components/modals/ho-project-report-bill.php"
+    "report-bill":  docLevelModal+"/components/modals/ho-project-report-bill.php",
+    "home-enter-address": docLevelModal+"/components/modals/ho-home-enter-address.php",
+    "home-your-address": docLevelModal+"/components/modals/ho-home-your-address.php",
+    "home-select-address": docLevelModal+"/components/modals/ho-home-select-address.php"
 }
 
 // This function loads the

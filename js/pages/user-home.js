@@ -6,8 +6,82 @@ $(document).ready(()=>{
     const myform = document.getElementById("form-home");
 
     addAddress.addEventListener("click", ()=>{
-        console.log("click");
-        loadModal("tempAddr",modalTypes, ()=>{}, getDocumentLevel());
+
+        const selectAddress = ()=>{
+            // LOAD SELECT ADDRESS MODAL
+            loadModal("home-select-address",modalTypes, ()=>{
+                const addButton = document.getElementById("add_address");  
+                const chooseButton = document.getElementById("choose"); 
+                const selectButton = document.getElementById("select"); 
+
+                if(selectButton != null && selectButton != undefined){
+                    selectButton.addEventListener("click",()=>{
+                        const AddressText = document.getElementById("add-address-text");
+                        const HomeFeild = document.getElementById("home_address_field");
+                        const selectFeild = document.getElementById("change_address");
+                        const address_name_label2 = document.getElementById("address_name_label");
+                        
+                        HomeFeild.value = selectFeild.value;
+                        let streetname = selectFeild.options[selectFeild.selectedIndex].text.split(",");;
+                        AddressText.innerText = streetname[0];
+                        address_name_label2.value =  streetname[0];
+                        $("#modal").modal('hide');
+                    });
+                }
+
+                if(addButton != null && addButton != undefined){
+                    addButton.addEventListener("click",()=>{
+                        loadModal("tempAddr",modalTypes, ()=>{
+                            // const changeButton = document.getElementById("change");        
+                            // changeButton.addEventListener("click",()=>{
+                            //     console.log("cleck")
+                            // });
+                        }, getDocumentLevel(), obj);
+                    });
+                }
+
+                if(chooseButton != null && chooseButton != undefined){
+                    chooseButton.addEventListener("click",()=>{
+                        const home_id_hidden = document.getElementById("home_number_hidden").value;
+                        const home_address_hidden = document.getElementById("home_address_hidden").value;
+                        const address_name_label2 = document.getElementById("address_name_label");
+
+                        const AddressText = document.getElementById("add-address-text");
+                        const HomeFeild = document.getElementById("home_address_field");
+                         
+          
+                        //AddressText.innerText = home_address_hidden;
+                        HomeFeild.value = home_id_hidden;
+                        AddressText.innerText = home_address_hidden;
+                        address_name_label2.value = home_address_hidden;
+                        // HomeFeild.value = 10;
+                        $("#modal").modal('hide');
+                    });
+                }
+            }, getDocumentLevel(), obj);
+        }
+
+
+        // GET current home Id from selection
+        let home_id = document.getElementById("home_address_field").value;
+        // create an empty object
+        let obj = {};
+        obj['level'] = getDocumentLevel();
+        obj['home_id'] = home_id;
+
+        // If the user has selected an address, display address. Otherwise display form
+        if(home_id == null || home_id == ""){
+            selectAddress();
+        } else {
+            // Your address
+            loadModal("home-your-address",modalTypes, ()=>{
+                const changeButton = document.getElementById("change");        
+                changeButton.addEventListener("click",()=>{
+                    selectAddress();
+                });
+            }, getDocumentLevel(), obj);
+        }
+
         $("#modal").modal("show");
     });
 
