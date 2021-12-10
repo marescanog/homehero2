@@ -123,6 +123,90 @@ const save_preferred_workSchedule = (form) => {
 }
 
 
+const save_SPECIFIC_preferred_workSchedule = (form) => {
+    console.log("proceeeding to next page...");
+    //console.log("Getting the registration session token...");
+    const dataOBJ = getFormDataAsObj(form);
+    // console.log(dataOBJ);
+
+    $.ajaxSetup({cache: false})
+    $.get(getDocumentLevel()+'/auth/get-register-session.php', function (data) {
+        session = data;
+        // console.log(session);
+        const parsedSession = JSON.parse(session);
+        const token = parsedSession['registration_token'];
+
+        // Create new form 
+        const samoka = new FormData();
+
+        // Append 
+         samoka.append('lead_time', dataOBJ["lead_time"]);
+         samoka.append('notice_time', dataOBJ["notice_time"]);
+
+        const DOW = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+        // format start time
+        for(let x = 0;  x < DOW.length; x++){
+            if(dataOBJ["start-time-"+DOW[x]].length != 8){
+                dataOBJ["start-time-"+DOW[x]] = dataOBJ["start-time-"+DOW[x]]+':00';
+            }
+            if(dataOBJ["start-time-"+DOW[x]].length > 8){
+                dataOBJ["start-time-"+DOW[x]] = dataOBJ["start-time-"+DOW[x]].substring(0,8);;
+            }
+            samoka.append('start-time-'+DOW[x], dataOBJ["start-time-"+DOW[x]]);
+        }
+        // format end time
+        for(let x = 0;  x < DOW.length; x++){
+            if(dataOBJ["end-time-"+DOW[x]].length != 8){
+                dataOBJ["end-time-"+DOW[x]] = dataOBJ["end-time-"+DOW[x]]+':00';
+            }
+            if(dataOBJ["end-time-"+DOW[x]].length > 8){
+                dataOBJ["end-time-"+DOW[x]] = dataOBJ["end-time-"+DOW[x]].substring(0,8);;
+            }
+            samoka.append('end-time-'+DOW[x], dataOBJ["end-time-"+DOW[x]]);
+        }
+        // append dayoffs
+        for(let x = 0;  x < DOW.length; x++){
+            samoka.append('dayoff-input-'+DOW[x], dataOBJ["dayoff-input-"+DOW[x]]);
+        }
+
+        console.log(dataOBJ);
+
+        console.log("your token is")
+        console.log(token);
+        console.log(form);
+
+        //  CHANGELINKDEVPROD
+        $.ajax({
+            type : 'POST',
+             url : 'http://localhost/slim3homeheroapi/public/registration/save-specific-schedule', // DEV
+            // url : '', // PROD (No Deployed production link)
+            data : samoka,
+            contentType: false,
+            processData: false,
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            success : function(response) {
+                console.log(response);
+                window.location.href = getDocumentLevel()+"/pages/worker/register.php"+"?page=3";
+            },
+            error: function(response){
+                hideLoadingOverlay();
+                console.log(response);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error on form upload',
+                    text: 'Please try again!',
+                })
+            }
+        });
+
+    });
+}
+
+
+
+
 
 const getRegisterSessionToken_then_uploadForm = (form) => {
     console.log("Getting the registration session token...");
@@ -241,6 +325,10 @@ const uploadForm_withSingleImage = (form, imageForm) => {
     });
 }
 
+// =========================================================
+// =========================================================
+// =========================================================
+// =========================================================
 // =========================================================
 // =========================================================
 // MAIN JS CONTENT HERE ====================================
@@ -489,11 +577,24 @@ const loadSchedule = () => {
         button.addEventListener("click", ()=>{
             //window.location.href = level+"/pages/worker/register.php"+"?page=3";
             $("#schedule-form").validate({
+                ignore: [],
                 submitHandler: function(form, event) { 
                     event.preventDefault();
                     // Freeze the form
                     showLoadingOverlay();
-                    save_preferred_workSchedule(form);
+                    if(edit){
+                        console.log("This is the edit page: You want to save specific schedules");
+
+                        // Format all times
+
+
+
+
+                        save_SPECIFIC_preferred_workSchedule(form);
+                    } else {
+                        console.log("This is the edit page: You want to save general schedules");
+                        save_preferred_workSchedule(form);
+                    }
                     disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
                 }
             });

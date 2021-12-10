@@ -43,6 +43,10 @@ $ch = curl_init();
     $output =  json_decode($output);
 
     $schedule_preference = null;
+    $schedule_data = null;
+    $formatted_sched_data = [];
+
+
 
     // Populate data from curl output
     if($output !== FALSE && $output !== null && $output !== "" && !empty($output)){
@@ -59,6 +63,24 @@ $ch = curl_init();
         } else {
             // Populate Data from DB
             $schedule_preference = $output->response->has_schedule_preference;
+            $schedule_data = $output->response->schedule_data;
+            $objArr = [];
+            foreach ($schedule_data as $value) {
+                array_push(  $objArr, $value);
+            }
+            if($schedule_data != null && $schedule_data != ""){
+                for($x = 1; $x < count($objArr); $x+=3){
+                    $obj = [];
+                    $obj["isDayOff"] =  $objArr[$x];
+                    $obj["start"] =  date("g:i a", strtotime($objArr[$x+1]));
+                    $obj["end"] = date("g:i a", strtotime($objArr[$x+2]));
+                    $obj["sRaw"] = $objArr[$x+1];
+                    $obj["eRaw"] = $objArr[$x+2];
+                    array_push(    $formatted_sched_data, $obj);
+                }
+                // to start sunday, move sunday to front by popping ang unshifting
+                array_unshift($formatted_sched_data, array_pop($formatted_sched_data));
+            }
         }
     }
 
@@ -67,9 +89,9 @@ $ch = curl_init();
 
     // Data for rendering
     $daysOfTheWeek = [
-        "Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"
+        "Sun","Mon", "Tue", "Wed", "Thur", "Fri", "Sat"
     ];
-    $week = isset($_POST["week"]) ? $_POST["week"] : null;
+    $week = isset($_POST["week"]) ? $_POST["week"] : null; // starts sunday
     $isOnEdit = isset($_GET["edit"]) ? $_GET["edit"] : false;
 
 
@@ -105,6 +127,26 @@ $ch = curl_init();
     </div>
 </div>
 
+<div class="row">
+    <p>
+        <?php 
+            // echo var_dump($week);
+            // echo "</br>"; 
+            // echo "</br>"; 
+            // echo "</br>"; 
+            // echo var_dump($schedule_data);
+            // echo "</br>";
+            // echo "</br>"; 
+            // echo "</br>"; 
+            // echo var_dump($obj);
+            // echo "</br>";
+            // echo "</br>"; 
+            // echo "</br>"; 
+            // echo var_dump($formatted_sched_data );
+        ?>
+    </p>
+</div>
+
 
 <div class="card">
   <div class="card-body">
@@ -118,7 +160,18 @@ $ch = curl_init();
         <div class="col-8">
             <p class="text-right">
                 <?php
-                    $dayObj = ($week == null) ? null :  $week[$x];;
+                    // $dayObj = ($week == null) ? null :  $week[$x];;
+                    // if($week != null){
+                    //     if($dayObj["isDayOff"]){
+                    //         echo "Day off";
+                    //     }else{
+                    //         echo $dayObj["start"]." - ".$dayObj["end"];
+                    //     }
+                    // } else {
+                    //     echo "9:00 AM - 5:00 PM";
+                    // }
+
+                    $dayObj = ($formatted_sched_data  == null) ? null :  $formatted_sched_data [$x];
                     if($week != null){
                         if($dayObj["isDayOff"]){
                             echo "Day off";
@@ -128,6 +181,7 @@ $ch = curl_init();
                     } else {
                         echo "9:00 AM - 5:00 PM";
                     }
+                    
                 ?>
             </p>
         </div>
