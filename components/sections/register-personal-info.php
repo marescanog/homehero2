@@ -239,13 +239,14 @@ $ch = curl_init();
                 </select>
             </div>
 
-            <h5 class="card-title card-subtitle-main mt-2">
+            <!-- DISCONTINUED DUE TO LACK OF TIME -->
+            <!-- <h5 class="card-title card-subtitle-main mt-2">
                 Do you have any certifications?
-            </h5>
-            <h6 class="card-subtitle mb-2 text-muted card-subtitle-muted">Include any certificates (e.g. TESDA or diploma ) to increase your chances of job offers. Otherwise skip this step</h6>
-            <div id="certifications">
-                <?php 
-                    for($y = 0; $y < $totalCertificates; $y++){
+            </h5> -->
+            <!-- <h6 class="card-subtitle mb-2 text-muted card-subtitle-muted">Include any certificates (e.g. TESDA or diploma ) to increase your chances of job offers. Otherwise skip this step</h6>
+            <div id="certifications"> -->
+                <!-- <?php 
+                    // for($y = 0; $y < $totalCertificates; $y++){
                 ?>
                     <div>
                         <label for="certificate-1" class="LABEL-THICC-SMOL">
@@ -258,22 +259,22 @@ $ch = curl_init();
                         <select class="custom-select text-left col-10 mt-2" id="certificate_type_1" name="certificate_type_1">
                             <option selected disabled>Choose a certificate type</option>
                             <?php
-                                for($x=0; $x<count($formSelect_certification_type); $x++){
+                                // for($x=0; $x<count($formSelect_certification_type); $x++){
                             ?>
                                 <option 
-                                    value="<?php echo $x+1;?>
+                                    value="<?php //echo $x+1;?>
                                 ">
-                                    <?php echo $formSelect_certification_type[$x];?>
+                                    <?php // echo $formSelect_certification_type[$x];?>
                                 </option>
                             <?php
-                                }
+                                // }
                             ?>
                         </select>
                     </div>
                 <?php 
-                    }
-                ?>
-            </div>
+                    // }
+                ?> -->
+            <!-- </div> -->
 
             <h5 class="card-title card-subtitle-main mt-4">
                 What is your NBI information?
@@ -304,19 +305,24 @@ $ch = curl_init();
                     >
                 </div>
             </div>
+
+
             <?php 
                 if(count($savedFiles) >= 1){
             ?>
-                <div class="d-flex justify-content-between">
-                    <p class="LABEL-THICC-SMOL">
-                        YOUR FILE UPLOAD
-                    </p>
-                    <p class="clicky smol">
-                        Change Image
-                    </p>
+                <div id="file-upload-display">
+                    <div class="d-flex justify-content-between">
+                        <p class="LABEL-THICC-SMOL">
+                            YOUR FILE UPLOAD
+                        </p>
+                        <p id="change-image" class="clicky smol">
+                            Change Image
+                        </p>
+                    </div>
+                    <img src="<?php echo $savedFiles[0]->file_path.$savedFiles[0]->file_name;?>" alt="User's uploaded image" class="img-thumbnail">
+                    <input type="hidden" name="old_file_id" value="<?php echo $savedFiles[0]->id;?>">
                 </div>
-                <img src="<?php echo $savedFiles[0]->file_path.$savedFiles[0]->file_name;?>" alt="User's uploaded image" class="img-thumbnail">
-                <input type="hidden" name="old_file_id" value="<?php echo $savedFiles[0]->id;?>">
+
             <?php 
                 } else {
             ?>
@@ -327,6 +333,7 @@ $ch = curl_init();
                     <label id="label-nbi-file-input"class="custom-file-label lightgray-text" for="nbi_photos">Choose file</label>
                     <input id="nbi-file-input" type="file" class="custom-file-input" name="file" >
                 </div>
+
             <?php
                 }
             ?>

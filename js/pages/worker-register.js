@@ -155,7 +155,7 @@ const uploadForm = (form, session) => {
 
     // Special case if new file has been uploaded
     if(form["file_id"] == "false"){
-        samoka.append('file_id', form["false"]);
+        samoka.append('file_id', form['file_id']);
         samoka.append('file_name', form["file_name"]);
         samoka.append('file_path', form["file_path"]);
     } else {
@@ -241,7 +241,11 @@ const uploadForm_withSingleImage = (form, imageForm) => {
     });
 }
 
-
+// =========================================================
+// =========================================================
+// MAIN JS CONTENT HERE ====================================
+// =========================================================
+// =========================================================
 $(document).ready(()=>{
     // Grab the DOM element
     let page = parseInt(document.getElementById("page").value);
@@ -294,6 +298,25 @@ const loadPersonalInfo = () => {
     data["level"] = level;
 
     $("#body").load(level+"/components/sections/register-personal-info.php", data, ()=>{
+
+        // change image click option
+        const change_image = document.getElementById("change-image");
+        change_image.addEventListener("click", ()=>{
+            console.log("You clicked on the change image option!");
+            $("#file-upload-display").load(level+"/components/forms/change-nbi-image.php", "", ()=>{
+                // nbi file caption change on select
+                const nbi_file_input = document.getElementById("nbi-file-input");
+                if(nbi_file_input != null){
+                    $("#detect-nbi-change").on('change','#nbi-file-input' , function(){ 
+                        const fileName = nbi_file_input.files[0].name;
+                        const label = document.getElementById("label-nbi-file-input");
+                        label.innerText = fileName;
+                    });
+                }
+            });
+        });
+
+
         // nbi file caption change on select
         const nbi_file_input = document.getElementById("nbi-file-input");
         if(nbi_file_input != null){
@@ -397,9 +420,10 @@ const loadPersonalInfo = () => {
                         // Pass to Appropriate function to call API
                         // This api is called when there is no image to upload (No Changes)
                         // it just takes the formData with file_id = "false" and (old_file_id) appended to it.
-                            formData["file_id"] = "false";
+                            formData["file_id"] = "true";
                             // First need to get registration session token from server and pass it into the AUTH header on ajax request
                             getRegisterSessionToken_then_uploadForm(formData);
+
                     } else {
                         // Set necessary data for upload image api call
                         const upload_data = {};
