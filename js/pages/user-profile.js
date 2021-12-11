@@ -14,13 +14,65 @@ $(document).ready(()=>{
 
 
     // Grab Add profile picture hook
+    // CODE FOR IMAGE PREVIEW DISPLAY ALSO
     const addPic = document.getElementById("hook-add-pic");
     // Add event listener for profile pciture hook (Load Modal)
     addPic.addEventListener("click", ()=>{
+        let profilePicSrc = document.getElementById("profile_src").value;
         let obj = {};
         // obj['level'] = level;
-        // obj['data'] = data;
-        loadModal("profile-add-picture", modalTypes, ()=>{}, getDocumentLevel(), obj)
+        obj['profile_src'] = profilePicSrc;
+        loadModal("profile-add-picture", modalTypes, ()=>{
+            // photo file caption change on select, as well as thumbnail
+            const photo_file_input = document.getElementById("photo-file-input");
+            if(photo_file_input != null){
+                photo_file_input.addEventListener("change", function(){
+                    // Code to change the label if the file input group
+                    let fileName = "";
+                    if(photo_file_input.files[0]){
+                        fileName = photo_file_input.files[0].name;
+                    }
+                    const label = document.getElementById("label-photo-file-input");
+                    label.innerText = fileName == "" ? "Choose a File" : fileName;  
+                    // Code to change the thumbnail
+                    const file = this.files[0];
+                    if(file){
+                        const obj = {};
+                        // obj['file'] = file;
+                        $("#change-me").load(getDocumentLevel()+"/components/cards/change-me.php", obj, ()=>{
+                            // console.log("Inside the change me");
+                            // console.log(file);
+                            // Grab the elements inside the change-me.php doc
+                            const previewContainer = document.getElementById("imagePreview");
+                            const previewImage = previewContainer.querySelector(".image-preview__image");
+                            const previewDefaultText = previewContainer.querySelector(".image-preview__default-text"); 
+                            const yourchosen = document.getElementById("your-chosen");
+                            yourchosen.innerText = "Your chosen picture to upload";
+
+                            const reader = new FileReader();
+
+                            previewDefaultText.style.display = null; // Reset CSS Values to default
+                            previewImage.style.display = null; // Reset CSS Values to default
+
+                            reader.addEventListener("load", function(){
+                                previewImage.setAttribute("src", this.result);
+                            });
+
+                            reader.readAsDataURL(file);
+                        });
+                    } else {
+                        const previewContainer = document.getElementById("imagePreview");
+                        const previewImage = previewContainer.querySelector(".image-preview__image");
+                        const previewDefaultText = previewContainer.querySelector(".image-preview__default-text"); 
+                        const yourchosen = document.getElementById("your-chosen");
+                        // When no file is selected and user clicks out of file selection explorer
+                        previewDefaultText.style.display = "block"; // Reset CSS Values to default
+                        previewImage.style.display = "none"; // Reset CSS Values to default
+                        yourchosen.innerText = "No chosen file";
+                    }
+                }); 
+            }
+        }, getDocumentLevel(), obj)
     })
 
 });

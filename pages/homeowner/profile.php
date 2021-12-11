@@ -283,6 +283,13 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                         }
                                     ?>
                                 </div>
+                                <input type="hidden" id="profile_src" value="<?php 
+                                    if($profilePic != false && $profilePic != "false" && $profilePic != null){
+                                        echo $profilePic->file_path;
+                                    } else {
+                                        echo "false";
+                                    }
+                                ?>">
                                 <div class="col-8 col-lg-10 d-flex align-items-center">
                                     <div class="h-100 d-flex flex-column pt-3">
                                         <h2 class="name-font">
@@ -301,7 +308,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                             <b>Edit Name</b>
                                         </p>
                                         <p id="hook-add-pic" class="clicky p-0 m-0" data-toggle="modal" data-target="#modal">
-                                            <b>Add Profile Picture</b>
+                                            <b>Change Profile Picture</b>
                                         </p>
                                     </div>
                                 </div>
