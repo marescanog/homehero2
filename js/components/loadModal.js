@@ -29,7 +29,8 @@ const modalTypes = {
     "report-bill":  docLevelModal+"/components/modals/ho-project-report-bill.php",
     "home-enter-address": docLevelModal+"/components/modals/ho-home-enter-address.php",
     "home-your-address": docLevelModal+"/components/modals/ho-home-your-address.php",
-    "home-select-address": docLevelModal+"/components/modals/ho-home-select-address.php"
+    "home-select-address": docLevelModal+"/components/modals/ho-home-select-address.php",
+    "editAddr" : docLevelModal+"/components/modals/temporary/temp-edit-address.php", 
 }
 
 // This function loads the
