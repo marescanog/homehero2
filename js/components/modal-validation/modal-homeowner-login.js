@@ -47,6 +47,10 @@ $("#modal-login-form").validate({
                 data['first_name'] = response["response"]["first_name"];
                 data['initials'] = response["response"]["initials"];
                 data['role'] = response["response"]["role"];
+                // profile_pic_location
+                data['profile_pic_location'] = response["response"]["profile_pic_location"];
+
+                // console.log(data);
 
                 // console.log("your data token is");
                 // console.log(data);

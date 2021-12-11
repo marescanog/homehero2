@@ -2,7 +2,8 @@
 
 <?php 
     $hasHeader = "header";
-    $profPic = isset($_SESSION["profPic"]) ? $_SESSION["profPic"] : null;
+    $profPic = isset($_SESSION['profile_pic_location']) ? $_SESSION['profile_pic_location'] : false;
+
     // $profPic = "https://randomuser.me/api/portraits/women/90.jpg";
 ?>
 <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top w-100 p-0">
