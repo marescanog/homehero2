@@ -1024,9 +1024,26 @@ const loadReview = () => {
                     }
                 }
             });
-        })
+        });
         back.addEventListener("click", ()=>{
             window.location.href = level+"/pages/worker/register.php"+"?page=3";
-        })
+        });
+
+        // Event listeners for the Edit links
+        const edit_credentials = document.getElementById("edit-credentials");
+        const edit_hours= document.getElementById("edit-hours");
+        const edit_area = document.getElementById("edit-area");
+
+        edit_credentials.addEventListener("click", ()=>{
+            window.location.href = level+"/pages/worker/register.php"+"?page=1";
+        });
+
+        edit_hours.addEventListener("click", ()=>{
+            window.location.href = level+"/pages/worker/register.php"+"?page=2";
+        });
+
+        edit_area.addEventListener("click", ()=>{
+            window.location.href = level+"/pages/worker/register.php"+"?page=3";
+        });
     });
 }
