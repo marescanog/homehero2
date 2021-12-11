@@ -52,7 +52,7 @@ $ch = curl_init();
     <!-- This HTML displays the head of the modal with title and close X button -->
     <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title" id="signUpModalLabel">ENTER NEW ADDRESS / CHOOSE EXISTING</h5>
+        <h5 class="modal-title" id="signUpModalLabel">ENTER NEW ADDRESS</h5>
         <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true" style="font-size:1.5em">&times;</span>
         </button>
@@ -491,7 +491,11 @@ $ch = curl_init();
                     },
                     error: function (response) {
                             console.log(response);
-
+                            Swal.fire({
+                                title: 'An error occurred',
+                                text: 'Please try again',
+                                icon: 'error'
+                            });
                         }
                 });
 
