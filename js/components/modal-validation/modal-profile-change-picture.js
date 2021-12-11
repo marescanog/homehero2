@@ -19,106 +19,143 @@ $("#modal-profile-add-picture").validate({
         const buttonTxt = document.getElementById("RU-submit-btn-txt");
         const buttonLoadSpinner = document.getElementById("RU-submit-btn-load");
         const formData = getFormDataAsObj(form);
-        disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
 
         console.log("UPLOAD PROFILE PICTURE");
+
+        // Set necessary data for upload image api call
+        const upload_data = {};
+        // Note, this setting has been removed from DB
+        // It only exists in this code now
+        upload_data['file_types'] = ["pdf","jpg","jpeg","png"]; // allowed types of file as per DB (in future make ajax call to grab this)
+        upload_data['bucket_name'] = "homehero"; // location in google cloud/ bucket in cloud
+
+        const photo_file_input = document.getElementById("photo-file-input");
+
+        // Create new form for the images
+        const imageForm = new FormData();
+
+        // Append all images to the new form
+        imageForm.append('file', photo_file_input.files[0]);
+        imageForm.append('file_types', JSON.stringify(upload_data['file_types']));
+        imageForm.append('bucket_name', upload_data['bucket_name']);
+
+        // Freeze the form 
+        disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
+
         // console.log(formData);
 
-        // // Ajax to get the bearer token
-        // $.ajaxSetup({cache: false})
-        // $.get(getDocumentLevel()+'/auth/get-register-session.php', function (data) {
-        //     // console.log(data)
-        //     const parsedSession = JSON.parse(data);
-        //     const token = parsedSession['token'];
-        //     console.log(token);
+        console.log("Calling google api...");
 
-        //     console.log(formData);
+        // CHANGELINKDEVPROD
+        // Ajax 3rd party file upload
+        $.ajax({
+            type : 'POST',
+            url : 'http://localhost/IM2/hh-thirdparty/google-cloud-api/upload-single', // DEV
+            // url : 'https://hh-thirdparty.herokuapp.com/google-cloud-api/upload-single', // PROD
+            data : imageForm,
+            contentType: false,
+            processData: false,
+            // headers: {"Content-Type": "application/x-www-form-urlencoded"},
+            success : function(response) {
+                console.log(response);
+                const file_path = response.response.file_location;
+                const file_name = response.response.newFileName;
+                // console.log(file_name);
+                // console.log(file_path);
+                // form['file_name'] = file_name;
+                // form['file_path'] = file_path;
+                // console.log(form);
 
-        //     // Create new form 
-        //     const samoka = new FormData();
+                // Create new form 
+                const samoka = new FormData();
 
-        //     // Append information
-        //     samoka.append('cancellation_reason', formData["cancellation_reason"]);
-        //     let postID = formData["id"];
+                // Append information
+                samoka.append('file_location', file_path);
+                samoka.append('newFileName', file_name );
 
-        //     // Ajax to cancel the post
-        //     $.ajax({
-        //         type: 'POST',
-        //         // url : '', // prod (No prod route deployed)
-        //         url: 'http://localhost/slim3homeheroapi/public/homeowner/cancel-post/'+postID, // dev
-        //         contentType: false,
-        //         processData: false,
-        //         headers: {
-        //             "Authorization": `Bearer ${token}`
-        //         },
-        //         data : samoka,
-        //         success : function(response) {
-        //             console.log("your response after cancelling post is:")
-        //             console.log(response);
+                // Ajax to get the bearer token
+                $.ajaxSetup({cache: false})
+                $.get(getDocumentLevel()+'/auth/get-register-session.php', function (data) {
+                    // console.log(data)
+                    const parsedSession = JSON.parse(data);
+                    const token = parsedSession['token'];
+                    console.log(token);
 
-        //             // Inform user & refresh page
-        //             Swal.fire({
-        //             title: 'Success!',
-        //             text: 'Job Post has been cancelled.',
-        //             icon: 'success'
-        //             }).then( result =>{
-        //                 window.location = getDocumentLevel()+'/pages/homeowner/projects.php';
-        //             });
-        //             // Enable buttons & close Modal
-        //             $('#modal').modal('hide');
+                    // Save the newly uploaded file information into the DB
+                    // Ajax to get list of addresses
+                    $.ajax({
+                        type: 'POST',
+                        // url : '', // prod (No Prod route)
+                        url: 'http://localhost/slim3homeheroapi/public/homeowner/save-profile-pic-location', // dev
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            "Authorization": `Bearer ${token}`
+                        },
+                        data : samoka,
+                        success : function(response) {
+                            console.log("your response after saving your profile pic is:")
+                            console.log(response);
+                            console.log(response["response"]);
 
-        //         },
+                            let dataProf = {};
+                            dataProf['new_profile'] = response["response"];
 
-        //         // START - ON SERVER ERROR OR JWT ERROR
-        //         error: function (response) {
-        //             console.log(response);
-        //             // console.log(response.responseJSON);
-        //             //   console.log(response.responseJSON['message']);
-        //             if(response.responseJSON['success'] == false){
-        //                 let message = response.responseJSON['response']['message'];
-        //                 let JWTisssue = false;
-        //                 if(message != undefined && message != null && message != "" && message.substring(0, 3) == "JWT"){
-        //                     message = "Token expired or not recognized. Please try logging into your account again.";
-        //                     JWTisssue = true;
-        //                 }
-        //                 Swal.fire({
-        //                 title: 'An error occurred',
-        //                 text: message,
-        //                 icon: 'error'
-        //                 }).then((result) => {
-        //                     // logout if token expired
-        //                     if(JWTisssue == true){
-        //                         $.ajax({
-        //                         type : 'GET',
-        //                         url : '../../auth/signout_action.php',
-        //                         success : function(response) {
-        //                             var res = JSON.parse(response);
-        //                             if(res["status"] == 200){
-        //                                 window.location = '../../';
-        //                             }
-        //                         }
-        //                         });
-        //                     } else {
-        //                         // Enable buttons & close Modal
-        //                         $('#modal').modal('hide');
-        //                     }
-        //                 })
-        //             } else {
-        //                 // Inform user
-        //                 Swal.fire({
-        //                 title: 'An error occurred',
-        //                 text: 'Please try again',
-        //                 icon: 'error'
-        //                 });
-        //                 // Enable buttons & close Modal
-        //                 $('#modal').modal('hide');
-        //             }
-        //         }
-        //         // END - ON SERVER ERROR OR JWT ERROR
+                            // Reset the session variable for the profile pic
+                            $.ajax({
+                                type : 'POST',
+                                url : getDocumentLevel()+'/auth/setProfilePic.php',
+                                data : dataProf,
+                                success : function(response) {
+                                    var res = JSON.parse(response);
+                                    // Your response after register-auth is
+                                    console.log(res)
+                                    if(res["status"] == 200){
+                                        // close Modal & reset page
+                                        $('#modal').modal('hide');
+                                        // Unfreeze the form & Rest
+                                        window.location = getDocumentLevel()+'/pages/homeowner/profile.php';
+                                    } else {
+                                        Swal.fire({
+                                            title: 'Error!',
+                                            text: 'Something went wrong! Please try again',
+                                            icon: 'error',
+                                            confirmButtonText: 'ok',
+                                        })
+                                        // Enable buttons & close Modal
+                                        $('#modal').modal('hide');
+                                    }
+                                }
+                            });
 
-        //     }); // inner AJAX close (submit cancel request)
 
-        // }); // outer AJAX close (get session variable)
+
+                        },
+                        error: function (response) {
+                            Swal.fire({
+                                title: 'An error occurred',
+                                text: 'Please try again',
+                                icon: 'error'
+                            });
+                        } // closing for err in ajax
+
+                    }); // Closing bracket for save file path of profile pic into db
+
+                }); // Closing braket for ajax to get bearer token
+
+            },
+            error: function(response){
+                hideLoadingOverlay();
+                console.log(response);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error on form upload',
+                    text: 'Please try again!',
+                })
+            }
+        }); // closing bracket for 3rd party upload in ajax
+
+        
 
     } // submithandler close JQUERY validate
 
