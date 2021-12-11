@@ -389,21 +389,22 @@ const loadPersonalInfo = () => {
 
         // change image click option
         const change_image = document.getElementById("change-image");
-        change_image.addEventListener("click", ()=>{
-            console.log("You clicked on the change image option!");
-            $("#file-upload-display").load(level+"/components/forms/change-nbi-image.php", "", ()=>{
-                // nbi file caption change on select
-                const nbi_file_input = document.getElementById("nbi-file-input");
-                if(nbi_file_input != null){
-                    $("#detect-nbi-change").on('change','#nbi-file-input' , function(){ 
-                        const fileName = nbi_file_input.files[0].name;
-                        const label = document.getElementById("label-nbi-file-input");
-                        label.innerText = fileName;
-                    });
-                }
+        if(change_image != null){
+            change_image.addEventListener("click", ()=>{
+                console.log("You clicked on the change image option!");
+                $("#file-upload-display").load(level+"/components/forms/change-nbi-image.php", "", ()=>{
+                    // nbi file caption change on select
+                    const nbi_file_input = document.getElementById("nbi-file-input");
+                    if(nbi_file_input != null){
+                        $("#detect-nbi-change").on('change','#nbi-file-input' , function(){ 
+                            const fileName = nbi_file_input.files[0].name;
+                            const label = document.getElementById("label-nbi-file-input");
+                            label.innerText = fileName;
+                        });
+                    }
+                });
             });
-        });
-
+        }
 
         // nbi file caption change on select
         const nbi_file_input = document.getElementById("nbi-file-input");
