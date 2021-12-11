@@ -295,6 +295,8 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                                 echo $accInfo == null ? "" : $accInfo->phone_no;
                                             ?>
                                         </h5>
+                                        <input type="hidden" value="<?php echo htmlentities($accInfo->first_name);?>" id="grab-first-name">
+                                        <input type="hidden" value="<?php echo htmlentities($accInfo->last_name);?>" id="grab-last-name">
                                         <p id="hook-edit-name" class="clicky p-0 m-0" data-toggle="modal" data-target="#modal">
                                             <b>Edit Name</b>
                                         </p>

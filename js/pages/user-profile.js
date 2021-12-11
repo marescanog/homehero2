@@ -3,9 +3,12 @@ $(document).ready(()=>{
     const editName = document.getElementById("hook-edit-name");
     // Add event listener for edit name hook (Load modal)
     editName.addEventListener("click", ()=>{
+        let firstName = document.getElementById("grab-first-name").value;
+        let lastName = document.getElementById("grab-last-name").value;
         let obj = {};
         // obj['level'] = level;
-        // obj['data'] = data;
+        obj['first_name'] = firstName;
+        obj['last_name'] = lastName;
         loadModal("profile-edit-name", modalTypes, ()=>{}, getDocumentLevel(), obj)
     })
 
