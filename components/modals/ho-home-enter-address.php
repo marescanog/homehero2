@@ -304,6 +304,11 @@ $ch = curl_init();
         console.log("u press");
         const addressData = getFormDataAsObj(form);
 
+        const button = document.getElementById("PI-submit-btn");
+        const buttonTxt = document.getElementById("PI-submit-btn-txt");
+        const buttonLoadSpinner = document.getElementById("PI-submit-btn-load");
+        const formData = getFormDataAsObj(form);
+        disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
 
         /*
         <p id="add-address-text" class="p-0 m-0 ">
