@@ -286,7 +286,7 @@ $ch = curl_init();
                     <select id="category" 
                         class="custom-select c" 
                         onchange="makeSubmenu(this.value)"                                     
-                        data-prev="0"
+                        data-prev="<?php echo $addrInfo->city_id;?>"
                         name="city_id"
                         >
                         <option value="" selected>Select Your City</option>
@@ -314,7 +314,12 @@ $ch = curl_init();
                             <?php for($x = 0; $x < count($barangays); $x++) {?>
                                 <option 
                                     value="<?php echo $barangays[$x]->id;?>"
-                                    class="A BG-<?php echo $barangays[$x]->city_id;?> d-none"
+                                    class="A BG-<?php echo $barangays[$x]->city_id;?> 
+                                    <?php 
+                                        if($addrInfo->city_id !== $barangays[$x]->city_id){
+                                            echo "d-none";
+                                        }
+                                    ?>"
                                     <?php 
                                         if($barangays[$x]->id == $addrInfo->barangay_id){
                                             echo " selected";
@@ -454,7 +459,7 @@ $ch = curl_init();
     // },
     submitHandler: function(form, event) { 
         event.preventDefault();
-        console.log("u press");
+        console.log("EDIT ADDRESS");
         const addressData = getFormDataAsObj(form);
 
         const button = document.getElementById("PI-submit-btn");
@@ -463,13 +468,6 @@ $ch = curl_init();
         const formData = getFormDataAsObj(form);
         disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
 
-        /*
-        <p id="add-address-text" class="p-0 m-0 ">
-            Add an address
-        </p>
-        <input id="home_address_field" type="hidden" name="home_id" value="">
-        */
-        // On Page Load, The default falback list is 6 items.
 
         $.ajaxSetup({cache: false})
         $.get(getDocumentLevel()+'/auth/get-register-session.php', function (data) {
@@ -496,35 +494,36 @@ $ch = curl_init();
                     // console.log(samoka);
 
 
-                // $.ajax({
-                //     type : 'POST',
-                //      url : "http://localhost/slim3homeheroapi/public/add-address", // Dev
-                //     // url : "", // No Prod Deployed Route
-                //     data : samoka,
-                //         contentType: false,
-                //         processData: false,
-                //         headers: {
-                //             "Authorization": `Bearer ${token}`
-                //         },
-                //     success : function(response) {
-                //         console.log(response.response);
-                //         console.log(response.response.data);
-                //         console.log(response.response.data.home_id);
-                //         //$('#enterAddress')[0].reset();
-                //         const AddressText = document.getElementById("add-address-text");
-                //         const HomeFeild = document.getElementById("home_address_field");
-                //         const address_name_label2 = document.getElementById("address_name_label");
-                //         address_name_label2.value =  addressData["street_name"];
-
-                //         AddressText.innerText = addressData["street_name"];
-                //         HomeFeild.value = response.response.data.home_id;
-                //         $("#modal").modal('hide');
-                //     },
-                //     error: function (response) {
-                //             console.log(response);
-
-                //         }
-                // });
+                $.ajax({
+                    type : 'POST',
+                     url : "http://localhost/slim3homeheroapi/public/homeowner/update-address/"+addressData["home_id"], // Dev
+                    // url : "", // No Prod Deployed Route
+                    data : samoka,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            "Authorization": `Bearer ${token}`
+                        },
+                    success : function(response) {
+                        console.log(response.response);
+                        console.log(response.response.data);
+                        console.log(response.response.data.home_id);
+                        Swal.fire({
+                            title: 'Address Updated!',
+                            icon: 'success'
+                        });
+                        $("#modal").modal('hide');
+                        window.location = getDocumentLevel()+'/pages/homeowner/profile.php?tab=address';
+                    },
+                    error: function (response) {
+                            console.log(response);
+                            Swal.fire({
+                                title: 'An error occurred',
+                                text: 'Please try again',
+                                icon: 'error'
+                            });
+                    }
+                });
 
         });
 
