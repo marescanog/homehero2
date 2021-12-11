@@ -10,7 +10,58 @@ $level ="../..";
 $fistName = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest";
 $initials = isset($_SESSION["initials"]) ? $_SESSION["initials"] : "GU";
 
+// Do a cURL request to get the necessary info
+// NODEPLOYEDPRODLINK
+$url = "http://localhost/slim3homeheroapi/public/homeowner/get-account-summary"; // DEV
+// $url = ""; // PROD (No Deployed Prod Link)
 
+$headers = array(
+    "Authorization: Bearer ".$_SESSION["token"],
+    'Content-Type: application/json',
+);
+
+// 1. Initialize
+$ch = curl_init();
+
+// 2. set options
+    // URL to submit to
+    curl_setopt($ch, CURLOPT_URL, $url);
+
+    // Return output instead of outputting it
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    // Type of request = POST
+    // curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_HTTPGET, 1);
+
+    // Set headers for auth
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    // Execute the request and fetch the response. Check for errors
+    $output = curl_exec($ch);
+
+    $curl_error = null;
+
+    if($output === FALSE){
+        $curl_error = "cURL Error:" . curl_error($ch);
+    }
+
+    curl_close($ch);
+
+    // $output =  json_decode(json_encode($output), true);
+    $output =  json_decode($output);
+
+    $profilePic = false;
+    $accInfo = null;
+    if($output != null && $output->response != null){
+        $accInfo = $output->response->accInfo;
+        $profilePic = $output->response->profilePic;
+    }
+
+
+
+
+// HTML PAGE STARTS HERE BELOW
 require_once dirname(__FILE__)."/$level/components/head-meta.php"; 
 
 ?>
@@ -30,13 +81,77 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     <div class="min-body-height d-flex flex-column justify-content-between <?php echo $hasHeader ?? ""; ?>">
     <!-- === Your Custom Page Content Goes Here below here === -->
 
-    <!-- Main Content -->
+<!-- Main Content Container Start -->
     <div class="container w-100 m-0 p-0 min-body-height h-100 ml-auto mr-auto gray-font d-flex flex-column">
+<!-- TEST AREA -->
+<?php 
+    echo var_dump($output);
+?>
+<!-- TEST AREA -->
+<!-- ERROR HANDLING -->
+<?php 
+    if($output!= null && ($curl_error != null || gettype($output) == "string" || $output->success == false)){
+?>
+<div class="title-2-container alert alert-danger alert-dismissible fade show" role="alert">
+    <div>
+        <h6>
+            <strong>
+                <?php 
+                    if(gettype($output) == "string"){
+                        echo "500: Server Error";
+                    }else if($curl_error != null){
+                        echo "Curl Error!";
+                    } else if ($output->success == false && $output->response != null && $output->response->status == 401){
+                        echo "Token Expired or Wrong Token";
+                    } else {
+                        echo "500: Server Error";
+                    }
+                ?>
+            </strong>
+        </h6>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div>
+        <p>                
+            <?php 
+                if(gettype($output) == "string"){
+                    echo $output;
+                }else if ($output->success == false && $output->response != null && $output->response->status == 401){
+                    echo $output->response->message;
+                } else  {
+                    echo "Something went wrong";
+                }
+            ?>
+        </p>
+    </div>
+</div>
+<?php 
+    } else if ($output == null){
+?>
+    <div class="title-2-container alert alert-danger alert-dismissible fade show" role="alert">
+        <div>
+            <h6>500 Error</h6>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div>
+            <p>Something went wrong</p>
+        </div>
+    </div>
+<?php 
+    }
+?>
+
+<!-- ERROR HANDLING -->
+<!-- Main Content START -->
         <div class="h-100">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mx-2 mx-lg">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item" aria-current="page"><a href="#">Profile</a></li>
+                    <li class="breadcrumb-item" aria-current="page">Profile</li>
                     <!-- <li class="breadcrumb-item active" aria-current="page">Data</li> -->
                 </ol>
             </nav>
@@ -65,15 +180,36 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                         <div class="container">
                             <div class="row mt-3">
                                 <div class="col-4 col-lg-2">
-                                    <div class="avatar-size d-flex justify-content-center align-items-center">
-                                        <h1 class="avatar-font">MD</h1>
-                                    </div>
+                    <!-- Profile Picture -->
+                                    <?php 
+                                        if($profilePic != false){
+                                    ?>
+                                        <div class="avatar-size d-flex justify-content-center align-items-center">
+                                            <img src="<?php echo $profilePic->file_path?>" class="img-fluid avatar-size" alt="Avatar">
+                                        </div>
+                                    <?php 
+                                        } else {
+                                    ?>
+                                        <div class="avatar-size d-flex justify-content-center align-items-center">
+                                            <h1 class="avatar-font"><?php echo $initials;?></h1>
+                                        </div>
+                                    <?php 
+                                        }
+                                    ?>
                                 </div>
                                 <div class="col-8 col-lg-10 d-flex align-items-center">
                                     <div class="h-100 d-flex flex-column pt-3">
-                                        <h2 class="name-font">FirstName LastName</h2>
-                                        <h5 class="number-font">09XXXXXXXXX</h5>
-                                        <p class="clicky p-0 m-0"><b>Edit Info</b></p>
+                                        <h2 class="name-font">
+                                            <?php 
+                                                echo $accInfo == null ? "" : htmlentities($accInfo->first_name).' '.htmlentities($accInfo->last_name);
+                                            ?>
+                                        </h2>
+                                        <h5 class="number-font">
+                                            <?php 
+                                                echo $accInfo == null ? "" : $accInfo->phone_no;
+                                            ?>
+                                        </h5>
+                                        <p class="clicky p-0 m-0"><b>Edit Name</b></p>
                                         <p class="clicky p-0 m-0"><b>Add Profile Picture</b></p>
                                     </div>
                                 </div>
@@ -88,7 +224,9 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">
                                         <b>Joined On:</b>
-                                        Mon-Day-Year
+                                        <?php 
+                                            echo $accInfo->created_on;
+                                        ?>
                                     </li>
                                     <li class="list-group-item">
                                         <b>Total Job Posts Made:</b>
@@ -108,7 +246,12 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                     </li>
                                 </ul>
                             </div>
-                            
+                            <div class="separator"></div>
+                            <div class="container mt-2">
+                                <h6 class="mb-3">Account Security</h6>
+                                <p class="clicky">Change Password</p>
+                                <p class="clicky">Change Phone Number</p>
+                            </div>
                         </div>
                     </div>
 
