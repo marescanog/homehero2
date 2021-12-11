@@ -20,7 +20,7 @@
                     <a class="nav-link dropdown-toggle d-flex justify-content-center align-items-center brownt-text" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <!-- PROFILE PICTURE ON HEADER -->
                         <?php //--------------- PHP ZONE ------------------------
-                            if($profPic != null){
+                            if($profPic != null && $profPic != false && $profPic != "false"){
                         ?> <!-------------------------------------------------->
                         <!-- HTML ZONE -->
     
@@ -71,7 +71,7 @@
                             <a class="nav-link dropdown-toggle d-flex justify-content-center align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <!-- PROFILE PICTURE ON HEADER -->
                                 <?php //--------------- PHP ZONE ------------------------
-                                    if($profPic != null){
+                                    if($profPic != null && $profPic != false && $profPic != "false"){
                                 ?> <!-------------------------------------------------->
                                 <!-- HTML ZONE -->
             
