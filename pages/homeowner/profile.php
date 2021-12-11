@@ -19,6 +19,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <link rel="stylesheet" href="../../css/headers/header-homeowner.css">
 <link rel="stylesheet" href="../../css/footer.css">
 <link rel="stylesheet" href="../../css/pages/homeowner/projects.css">
+<link rel="stylesheet" href="../../css/pages/homeowner/profile.css">
 <!-- === Link your custom CSS  pages above here ===-->
 </head>
 <body class="container-fluid m-0 p-0  w-100 min-body-height">  
@@ -49,31 +50,91 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             </div>
         </div>
         <div class="h-100">
-        <div  id="tabs" class="card-body">
+        <div  id="tabs" class="card-body mb-5">
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <p class="nav-item nav-link active " id="nav-hire-tab" data-toggle="tab" href="#nav-hire" role="tab" aria-controls="nav-hire" aria-selected="true">Account Information</p>
                         <p class="nav-item nav-link" id="nav-work-tab" data-toggle="tab" href="#nav-work" role="tab" aria-controls="nav-work" aria-selected="false">My Addresses</p>
-                        <p class="nav-item nav-link" id="nav-archived-tab" data-toggle="tab" href="#nav-archived" role="tab" aria-controls="nav-archived" aria-selected="false">Activity Summary</p>
+                        <!-- <p class="nav-item nav-link" id="nav-archived-tab" data-toggle="tab" href="#nav-archived" role="tab" aria-controls="nav-archived" aria-selected="false">Activity Summary</p> -->
                     </div>
                 </nav>
                 <div class="tab-content pt-1 pb-2 px-2  px-lg-3" id="nav-tabContent">
+<!-- =================== -->
+<!-- ACCOUNT INFORMATION -->
                     <div class="tab-pane fade show active" id="nav-hire" role="tabpanel" aria-labelledby="nav-hire-tab">
-                        <h6 class="jumbotron-h1 mt-lg-3 mt-0 mt-md-3 mt-lg-0">
-                            You have no account info at this time.
-                        </h6>
+                        <div class="container">
+                            <div class="row mt-3">
+                                <div class="col-4 col-lg-2">
+                                    <div class="avatar-size d-flex justify-content-center align-items-center">
+                                        <h1 class="avatar-font">MD</h1>
+                                    </div>
+                                </div>
+                                <div class="col-8 col-lg-10 d-flex align-items-center">
+                                    <div class="h-100 d-flex flex-column pt-3">
+                                        <h2 class="name-font">FirstName LastName</h2>
+                                        <h5 class="number-font">09XXXXXXXXX</h5>
+                                        <p class="clicky p-0 m-0"><b>Edit Info</b></p>
+                                        <p class="clicky p-0 m-0"><b>Add Profile Picture</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator"></div>
+                        <div class="container">
+                            <div class="card card-width-profile">
+                                <div class="card-header" style="background-color: #FFF9E6">
+                                    <b>Activity Summary</b>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <b>Joined On:</b>
+                                        Mon-Day-Year
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Total Job Posts Made:</b>
+                                        0
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Total Completed Projects:</b>
+                                        0
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Most posted category:</b>
+                                        Plumbing
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Total Cancelled Projects:</b>
+                                        0
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                        </div>
                     </div>
+
+
+<!-- =================== -->
+<!-- ADRESS INFORMATION -->
                     <div class="tab-pane fade" id="nav-work" role="tabpanel" aria-labelledby="nav-work-tab">
-                        <h6 class="jumbotron-h1 mt-lg-3">
-                            You have no addresses at this time.
-                        </h6>
+                        <div class="container mt-3">
+                            <h4>Address List:</h4>
+                            <?php
+                                include dirname(__FILE__)."/".$level.'/components/cards/address-card.php'; 
+                                include dirname(__FILE__)."/".$level.'/components/cards/address-card.php';
+                                include dirname(__FILE__)."/".$level.'/components/cards/address-card.php';
+                                include dirname(__FILE__)."/".$level.'/components/cards/address-card.php';
+                            ?>
+                        </div>
                     </div>
-                    <div class="tab-pane fade" id="nav-archived" role="tabpanel" aria-labelledby="nav-archived-tab">
+
+
+
+                    <!-- <div class="tab-pane fade" id="nav-archived" role="tabpanel" aria-labelledby="nav-archived-tab">
                         <h6 class="jumbotron-h1 mt-lg-3">
                             You have no summary at this time.
                         </h6>
-  
-                    </div>
+                    </div> -->
+
                 </div>
             </div>
 

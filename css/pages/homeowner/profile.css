@@ -1,0 +1,95 @@
+.txt-semi{
+    font-weight: 700;
+}
+
+.gray-font{
+    color: #707070;
+}
+
+.bgc-lightgray{
+    background-color: #FBFBFB;
+}
+
+.min-height{
+    min-height: 32em;
+}
+
+.c-max{
+    max-width: 280px;
+}
+
+@media only screen and (min-width: 992px) {
+    .min-height{
+        min-height: 43em;
+    }
+}
+
+
+
+/*==========================================*/
+/*              ACCOUNT INFO              */
+/*==========================================*/
+
+.avatar-size{
+    width: 80px;
+    height: 80px;
+    background-color: #FFF29F;
+    border-radius: 80px;
+}
+
+.avatar-font {
+    font-size: 2rem;
+}
+
+.name-font{
+    font-size: 1.25rem;
+}
+
+.number-font{
+    font-size: 1rem;
+}
+
+
+@media only screen and (min-width: 992px) {
+    .avatar-size{
+        width: 150px;
+        height: 150px;
+        background-color: #FFF29F;
+        border-radius: 80px;
+    }
+
+    .avatar-font {
+        font-size: 3.5rem;
+    }
+
+    .name-font{
+        font-size: 2rem;
+    }
+
+    .number-font{
+        font-size: 1.25rem;
+    }
+
+    .card-width-profile{
+        width: 50%;
+    }
+    
+
+}
+
+
+
+
+
+
+/*==========================================*/
+/*              DASHBOARD HOME              */
+/*==========================================*/
+
+
+@media only screen and (min-width: 992px) {
+
+
+}
+
+
