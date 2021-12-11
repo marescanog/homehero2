@@ -53,9 +53,17 @@ $ch = curl_init();
 
     $profilePic = false;
     $accInfo = null;
+    $total_job_posts = null;
+    $total_completed_projects = null;
+    $most_posted_category = null;
+    $total_cancelled_projects = null;
     if($output != null && $output->response != null){
         $accInfo = $output->response->accInfo;
         $profilePic = $output->response->profilePic;
+        $total_job_posts = $output->response->total_job_posts;
+        $total_completed_projects = $output->response->total_completed_projects;
+        $most_posted_category = $output->response->most_posted_category;
+        $total_cancelled_projects = $output->response->total_cancelled_projects;
     }
 
 
@@ -225,24 +233,33 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                     <li class="list-group-item">
                                         <b>Joined On:</b>
                                         <?php 
-                                            echo $accInfo->created_on;
+                                            $date_join=date_create($accInfo->created_on);
+                                            echo date_format($date_join,"M d, Y");
                                         ?>
                                     </li>
                                     <li class="list-group-item">
                                         <b>Total Job Posts Made:</b>
-                                        0
+                                        <?php 
+                                            echo $total_job_posts;
+                                        ?>
                                     </li>
                                     <li class="list-group-item">
                                         <b>Total Completed Projects:</b>
-                                        0
+                                        <?php 
+                                            echo $total_completed_projects;
+                                        ?>
                                     </li>
                                     <li class="list-group-item">
-                                        <b>Most posted category:</b>
-                                        Plumbing
+                                        <b>Most posted project category:</b>
+                                        <?php 
+                                            echo $most_posted_category;
+                                        ?>
                                     </li>
                                     <li class="list-group-item">
                                         <b>Total Cancelled Projects:</b>
-                                        0
+                                        <?php 
+                                            echo $total_cancelled_projects;
+                                        ?>
                                     </li>
                                 </ul>
                             </div>
