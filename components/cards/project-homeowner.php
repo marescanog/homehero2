@@ -35,6 +35,12 @@
      // must parse because the 's create an error if unescaped
      $job_desc = $job_desc != null ? addslashes($job_desc) : null;
      $job_title = $job_title != null ? addslashes($job_title) : null;
+
+
+    // For billing 
+    $total_price_billed  = $total_price_billed != null ? htmlentities($total_price_billed) : null ;
+    $date_time_completion_paid = $date_time_completion_paid != null ? htmlentities($date_time_completion_paid) : null ;
+    $computedRating = $computedRating != null ? $computedRating : 0;
 ?>
 <div class="card mt-3 mb-4 shadow ">
     <div class="card-header" style="background-color:#FCEBBF;">
@@ -164,7 +170,7 @@
             </div>
         <?php }?>
 <!-- ====================================== -->
-<!-- JOB ORDER STATUSES - TYPE NOT COMPLETE -->
+<!-- JOB ORDER STATUSES  -->
 <!-- ====================================== -->
         <?php if($job_status == 2 && $job_order_status_id  == 1 ){?>
             <div class="d-flex flex-row">
@@ -203,23 +209,45 @@
         <?php }?>
 
 <!-- ====================================== -->
-<!-- PAYMENT DISPLAY - TYPE NOT COMPLETE -->
+<!-- PAYMENT DISPLAY  -->
 <!-- ====================================== -->
-        <!-- <?php if($job_order_status_id == 3){?>
+        <?php if($job_order_status_id == 2 && $total_price_billed != null){?>
             <div class="d-flex flex-row">
                 <div class="gray-icon">
                     <?php
                         include dirname(__FILE__)."/".$level.'/images/svg/payments_black_24dp.svg'; 
                     ?>
                 </div>
-                <p id="descLabel"><b>Total payment:</b> <?php //echo $cancellation_reason ?? ''; ?></p>
+                <p id="descLabel"><b>Total payment:</b> <?php echo $total_price_billed ?? ''; ?></p>
             </div>
-        <?php }?> -->
+            <div class="d-flex flex-row">
+                <div class="gray-icon">
+                    <?php
+                        if($date_time_completion_paid != null){
+                            include dirname(__FILE__)."/".$level.'/images/svg/verified.svg'; 
+                        } else {
+                            include dirname(__FILE__)."/".$level.'/images/svg/pending_black_24dp.svg'; 
+                        }
+                    ?>
+                </div>
+                <p id="descLabel"><b>Status: </b>
+                <?php
+                        $formatted_datepaid=date_create($date_time_completion_paid);
+                        if($date_time_completion_paid != null){
+                           echo 'Paid on '.date_format($formatted_datepaid,"D, M d Y, h:i A"); 
+                        } else {
+                           echo 'Pending payment';
+                        }
+                ?>
+            </p>
+            </div>
+        <?php }?>
+        
 
 <!-- ====================================== -->
-<!-- RATINGS DISPLAY - TYPE NOT COMPLETE -->
+<!-- RATINGS DISPLAY -->
 <!-- ====================================== -->
-        <!-- <?php if($job_order_status_id == 3){?>
+        <?php if($job_order_status_id == 2){?>
             <div class="d-flex flex-row">
                 <div class="gray-icon">
                     <?php
@@ -231,13 +259,13 @@
                      
                         if($isRated != null && $isRated == 1){
                             // compute rating
-                            echo 'Your rated ';
+                            echo 'Your rated '.$computedRating.' stars';
                         } else {
                             echo 'You did not rate this job order.'; 
                         }
                     ?></p>
             </div>
-        <?php }?> -->
+        <?php }?>
     </div>
 
 
@@ -297,7 +325,7 @@
                             <?php
                                 if($job_order_status_id == 1 && $today!= null && $d != null && $today>$d && $jo_start_time == null){
                             ?>
-                                <button class="btn btn-danger text-white ml-2" data-toggle="modal" data-target="#modal" onclick="cancelandRepost(<?php echo $job_id.',\''.$pref_sched.'\',\''. $job_title.'\',\''. $project_type.'\',\''.$address.'\'';?>)">
+                                <button class="btn btn-danger text-white ml-2" data-toggle="modal" data-target="#modal" onclick="cancelandRepost(<?php echo $job_order_id.',\''.$pref_sched.'\',\''. addslashes($job_title).'\',\''. addslashes($project_type).'\',\''.addslashes($address).'\'';?>)">
                                     <b>CANCEL & REPOST</b>
                                 </button>
                             <?php
@@ -315,7 +343,7 @@
                             <?php
                                 if($date_paid == null){
                             ?>
-                                <button class="btn btn-success text-white ml-2" data-toggle="modal" data-target="#modal" onclick="completePayment(<?php echo $job_id;?>)">
+                                <button class="btn btn-success text-white ml-2" data-toggle="modal" data-target="#modal" onclick="completePayment(<?php echo $job_order_id;?>)">
                                     <b>COMPLETE PAYMENT</b>
                                 </button>
                             <?php 
@@ -325,7 +353,7 @@
                             <?php
                                 if($isRated != null && $isRated == 0){
                             ?>
-                                <button class="btn btn-outline-success ml-2" style="border: 3px solid #5cb85c" data-toggle="modal" data-target="#modal" onclick="rateProject(<?php echo $job_id;?>)">
+                                <button class="btn btn-outline-success ml-2" style="border: 3px solid #5cb85c" data-toggle="modal" data-target="#modal" onclick="rateProject(<?php echo $job_order_id;?>)">
                                     <b>RATE</b>
                                 </button>
                             <?php 
@@ -349,7 +377,7 @@
                 // Case when worker does not show, user can report the worker
                 if($job_order_status_id == 1 && $today!= null && $d != null && $today>$d && $jo_start_time == null){
            ?>
-            <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportNoShow(<?php echo $job_order_id.',\''.$assigned_to.'\'';?>)">
+            <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportNoShow(<?php echo $job_order_id.',\''.addslashes($assigned_to).'\'';?>)">
                     REPORT WORKER
                 </button>
            <?php
@@ -359,7 +387,7 @@
                     // Case when it is still a post
                     if($job_status == 1 && $job_order_status_id == null){
                 ?>
-                    <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="cancelJobPost(<?php echo $job_id.',\''.$job_title.'\',\''.$project_type.'\',\''.$address.'\'';?>)">
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="cancelJobPost(<?php echo $job_id.',\''.addslashes($job_title).'\',\''.$project_type.'\',\''.addslashes($address).'\'';?>)">
                         CANCEL POST
                     </button>
                 <?php 
@@ -371,13 +399,13 @@
                     <?php 
                         if( $jo_start_time == null){
                     ?>
-                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="cancelProject(<?php echo $job_order_id.',\''.$job_title.'\',\''.$project_type.'\',\''.$address.'\',\''.$assigned_to.'\'';?>)">
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="cancelProject(<?php echo $job_order_id.',\''.addslashes(htmlentities($job_title)).'\',\''.addslashes(htmlentities($project_type)).'\',\''.addslashes(htmlentities($address)).'\',\''.addslashes(htmlentities($assigned_to)).'\'';?>)">
                             CANCEL JOB ORDER
                         </button>
                     <?php 
                         } else {
                     ?>
-                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportProblem(<?php echo $job_order_id.',\''.$job_title.'\',\''.$project_type.'\',\''.$address.'\',\''.$assigned_to.'\'';?>)">
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportProblem(<?php echo $job_order_id.',\''.addslashes(htmlentities($job_title)).'\',\''.addslashes(htmlentities($project_type)).'\',\''.addslashes(htmlentities($address)).'\',\''.addslashes(htmlentities($assigned_to)).'\'';?>)">
                             REPORT PROBLEM
                         </button>
                     <?php 
@@ -391,7 +419,7 @@
                     <?php
                         if($job_order_status_id == 2 && $date_paid == null){
                     ?>
-                         <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportBill(<?php echo $job_id;?>)">
+                         <button class="btn btn-danger" data-toggle="modal" data-target="#modal" onclick="reportBill(<?php echo $job_order_id.',\''.addslashes(htmlentities($address)).'\',\''.addslashes($assigned_to).'\'';?>)">
                             DISPUTE BILL
                         </button>
                     <?php 

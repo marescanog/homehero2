@@ -195,3 +195,8 @@
 .star-green{
     color: #5cb85c;
 }
+
+.custom-select.c{
+    border: 1px solid black !important;
+    padding-left: 5px;
+}

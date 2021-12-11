@@ -367,6 +367,12 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                         // Grab job id
                                         $job_id = $ongoingJobPosts[$p]->id;
 
+                                    // For billing undefined variable (This data array has none of these attibutes)
+                                    $isRated = null;
+                                    $total_price_billed  = null ;
+                                    $date_time_completion_paid = null;
+                                    $computedRating = 0;
+
                                     include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
                                 }
                                 // Clear values;
@@ -493,6 +499,12 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                     }
                                     
                                     $tab_link = "&tab=orders";
+
+                                    // For billing undefined variable (This data array has none of these attibutes)
+                                    $isRated = null;
+                                    $total_price_billed  = null ;
+                                    $date_time_completion_paid = null;
+                                    $computedRating = 0;
 
                                     include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
                                 }
@@ -636,6 +648,17 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                     $homeowner_id = $closedProjects[$p]->homeowner_id;
                                     // Grab order_cancellation_reason
                                     $order_cancellation_reason = $closedProjects[$p]->order_cancellation_reason;
+
+                                    // For billing
+                                    $total_price_billed  = $closedProjects[$p]->total_price_billed ?? null ;
+                                    $date_time_completion_paid = $closedProjects[$p]->date_time_completion_paid ?? null;
+                                    $computedRating = 0;
+                                    if($isRated != null){
+                                        $computedRating = ($closedProjects[$p]->overall_quality
+                                                        + $closedProjects[$p]->professionalism
+                                                        + $closedProjects[$p]->reliability
+                                                        + $closedProjects[$p]->punctuality)/4.0;
+                                    }
                                    
                                     include dirname(__FILE__)."/".$level.'/components/cards/project-homeowner.php';
                                 }
@@ -922,10 +945,10 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         }
 
         // DONE UI/UX, lacks ajax, disable close on submit
-        const cancelandRepost = (projectID, date, jobPostName, project_type_name, address) => {
-            console.log(projectID);
+        const cancelandRepost = (jobOrderID, date, jobPostName, project_type_name, address) => {
+            console.log(jobOrderID);
             let data={};
-            data['projectID'] = projectID;
+            data['jobOrderID'] = jobOrderID;
             data['old_date_time'] = date;
             data['job_post_name'] = jobPostName;
             data['project_type_name'] = project_type_name;
@@ -954,11 +977,13 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         //     loadModal("report", modalTypes,()=>{}, getDocumentLevel(),  data);
         // }
 
-        const reportBill = (job_order_id) => {
+        const reportBill = (job_order_id, $address, $assigned_to) => {
             console.log(job_order_id);
             summonZeSpinner();
             let data={};
             data['job_order_id'] = job_order_id;
+            data['address'] = $address;
+            data['assigned_to'] = $assigned_to;
             loadModal("report-bill", modalTypes,()=>{
                 killZeSpinner();
             }, getDocumentLevel(),  data);
@@ -978,12 +1003,104 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             }, getDocumentLevel(),  data);
         }
 
-        const completePayment = (projectID) => {
-            console.log(projectID);
-            let data={};
-            data['projectID'] = projectID;
-            loadModal("template", modalTypes,()=>{}, getDocumentLevel(),  data);
-        }
+        const completePayment = (jobOrderID) => {
+            console.log(jobOrderID);
+
+            summonZeSpinner();
+
+            // NODEPLOYEDPRODLINK
+            // Ajax to get the bearer token
+            $.ajaxSetup({cache: false})
+            $.get(getDocumentLevel()+'/auth/get-register-session.php', function (data) {
+                //console.log(data)
+                const parsedSession = JSON.parse(data);
+                const token = parsedSession['token'];
+                console.log(token);
+
+                // No need to append data, since no data is requested for this route
+
+                $.ajax({
+                    type: 'POST',
+                    // url : '', // prod (no prod link)
+                    url: 'http://localhost/slim3homeheroapi/public/homeowner/confirm-payment/'+jobOrderID, // dev
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    },
+                    // data : none, // no data needed
+                    success : function(response) {
+                        console.log("your response after payment completion is:")
+                        console.log(response);
+
+                        // Inform user & refresh page
+                        Swal.fire({
+                            title: 'Thank You!',
+                            text: 'Job Order has paid!',
+                            icon: 'success'
+                            }).then( result =>{
+                                window.location = getDocumentLevel()+'/pages/homeowner/projects.php?tab=closed';
+                            });
+                            // Enable buttons & close Modal
+                            $('#modal').modal('hide');
+                    },
+
+                    // START - ON SERVER ERROR OR JWT ERROR
+                    error: function (response) {
+                        console.log(response);
+                        console.log(response.responseJSON);
+                        console.log(response.responseJSON['message']);
+                        if(response.responseJSON['success'] == false){
+                            let message = response.responseJSON['response']['message'];
+                            let JWTisssue = false;
+                            if(message != undefined && message != null && message != "" && message.substring(0, 3) == "JWT"){
+                                message = "Token expired or not recognized. Please try logging into your account again.";
+                                JWTisssue = true;
+                            }
+                            Swal.fire({
+                            title: 'An error occurred',
+                            text: message,
+                            icon: 'error'
+                            }).then((result) => {
+                                // logout if token expired
+                                if(JWTisssue == true){
+                                    $.ajax({
+                                    type : 'GET',
+                                    url : '../../auth/signout_action.php',
+                                    success : function(response) {
+                                        var res = JSON.parse(response);
+                                        if(res["status"] == 200){
+                                            window.location = '../../';
+                                        }
+                                    }
+                                    });
+                                } else {
+                                    // Enable buttons & close Modal
+                                    $('#modal').modal('hide');
+                                }
+                            })
+                        } else {
+                            
+                            // Inform user
+                            Swal.fire({
+                            title: 'An error occurred',
+                            text: 'Please try again',
+                            icon: 'error'
+                            });
+                            // Enable buttons & close Modal
+                            $('#modal').modal('hide');
+                        }
+                    }
+                    // END - ON SERVER ERROR OR JWT ERROR
+
+                }); // closing ajax for request to confirm session
+
+            }); // closing for ajax setup get session token
+
+            // Since its only cash-option, no need to create a payment modal to confirm payment
+            // loadModal("template", modalTypes,()=>{}, getDocumentLevel(),  data);
+
+        } // closing for complete payment function
 
         // DONE UI/UX, lacks ajax, disable close on submit
         const reschedule = (projectID, date) => {

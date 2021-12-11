@@ -477,7 +477,14 @@ const load_create_project_form = (
                             text: 'Enter your estimated offer you are willing to pay for the project'
                         });
                     } else {
-                        load_create_project_form(3);
+                        if(proj_desc.trim() == ""){
+                            Swal.fire({
+                                title: 'Please enter your description',
+                                text: 'A project description will help you match up with the right HomeHero worker.'
+                            });
+                        } else {
+                            load_create_project_form(3);
+                        }
                     }
                     
                 })
@@ -607,7 +614,19 @@ const load_create_project_form = (
                                 // console.log(response.response.data);
                                 // console.log(response.response.data.home_id);
                                 $("#modal").modal('hide');
-                                window.location = getDocumentLevel()+'/pages/homeowner/projects.php';
+
+                                // Clear all the feilds
+                                 homeID_DOM.value = "";
+                                 jobSize_DOM.value = "";
+                                 projType_DOM.value = "";
+                                 jobDesc_DOM.value = "";
+                                 rateOffer_DOM.value = "";
+                                 rateType_DOM.value = "";
+                                 projName_DOM.value = "";
+                                 is_exact_sched.value = "";
+                                 timestamp.value = "";
+
+                                 window.location.replace(getDocumentLevel()+'/pages/homeowner/projects.php');
 
                             },
                             error: function (response) {

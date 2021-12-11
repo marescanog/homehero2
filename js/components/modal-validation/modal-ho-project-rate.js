@@ -56,12 +56,110 @@ $("#modal-rate-form").validate({
             complete = false;
         } 
 
+        // If validation is successful, process request
         if(complete) {
             disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
             console.log("RATE ORDER");
             console.log(formData);
-        }
 
-        
-    }
-});
+            // Ajax to get the bearer token
+            $.ajaxSetup({cache: false})
+            $.get(getDocumentLevel()+'/auth/get-register-session.php', function (data) {
+                // console.log(data)
+                const parsedSession = JSON.parse(data);
+                const token = parsedSession['token'];
+                console.log(token);
+
+                // Create new form 
+                const samoka = new FormData();
+
+                // Append information
+                // samoka.append('job_order_id', formData["job_order_id"]);
+                samoka.append('quality', formData["overall_quality"]);
+                samoka.append('professionalism', formData["professionalism"]);
+                samoka.append('punctuality', formData["punctuality"]);
+                samoka.append('reliability', formData["reliability"]);
+                samoka.append('comment', formData["comment"]);
+
+                // Ajax to save rating
+                $.ajax({
+                    type: 'POST',
+                    // url : '', // prod (no live deployed api route)
+                    url: 'http://localhost/slim3homeheroapi/public/homeowner/save-rating/'+formData["job_order_id"], // dev
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    },
+                    data : samoka,
+                    success : function(response) {
+                        // console.log("your response after account login is:")
+                        // console.log(response);
+                        // Inform user & refresh page
+                        Swal.fire({
+                            title: 'Thank you!',
+                            text: 'Your rating has been submitted.',
+                            icon: 'success'
+                            }).then( result =>{
+                                window.location = getDocumentLevel()+'/pages/homeowner/projects.php?tab=closed';
+                            });
+                            // Enable buttons & close Modal
+                            $('#modal').modal('hide');
+                    },
+
+                    // START - ON SERVER ERROR OR JWT ERROR
+                    error: function (response) {
+                        console.log(response);
+                        console.log(response.responseJSON);
+                        console.log(response.responseJSON['message']);
+                        if(response.responseJSON['success'] == false){
+                            let message = response.responseJSON['response']['message'];
+                            let JWTisssue = false;
+                            if(message != undefined && message != null && message != "" && message.substring(0, 3) == "JWT"){
+                                message = "Token expired or not recognized. Please try logging into your account again.";
+                                JWTisssue = true;
+                            }
+                            Swal.fire({
+                            title: 'An error occurred',
+                            text: message,
+                            icon: 'error'
+                            }).then((result) => {
+                                // logout if token expired
+                                if(JWTisssue == true){
+                                    $.ajax({
+                                    type : 'GET',
+                                    url : '../../auth/signout_action.php',
+                                    success : function(response) {
+                                        var res = JSON.parse(response);
+                                        if(res["status"] == 200){
+                                            window.location = '../../';
+                                        }
+                                    }
+                                    });
+                                } else {
+                                    // Enable buttons & close Modal
+                                    $('#modal').modal('hide');
+                                }
+                            })
+                        } else {
+                            // Inform user
+                            Swal.fire({
+                            title: 'An error occurred',
+                            text: 'Please try again',
+                            icon: 'error'
+                            });
+                            // Enable buttons & close Modal
+                            $('#modal').modal('hide');
+                        }
+                    }
+                    // END - ON SERVER ERROR OR JWT ERROR
+
+                }); // closing bracket for ajax request to save rating
+
+            }); // closing bracket for ajax setup bearer token
+
+        } // closing bracket for custom validation stars
+
+    } // closing bracket for submit handler
+
+}) // closing bracket for respect validation 
