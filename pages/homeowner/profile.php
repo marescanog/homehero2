@@ -295,8 +295,12 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                                 echo $accInfo == null ? "" : $accInfo->phone_no;
                                             ?>
                                         </h5>
-                                        <p class="clicky p-0 m-0"><b>Edit Name</b></p>
-                                        <p class="clicky p-0 m-0"><b>Add Profile Picture</b></p>
+                                        <p id="hook-edit-name" class="clicky p-0 m-0" data-toggle="modal" data-target="#modal">
+                                            <b>Edit Name</b>
+                                        </p>
+                                        <p id="hook-add-pic" class="clicky p-0 m-0" data-toggle="modal" data-target="#modal">
+                                            <b>Add Profile Picture</b>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

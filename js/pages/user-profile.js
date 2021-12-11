@@ -1,7 +1,26 @@
-// $(document).ready(()=>{
+$(document).ready(()=>{
+    // Grab edit name hook
+    const editName = document.getElementById("hook-edit-name");
+    // Add event listener for edit name hook (Load modal)
+    editName.addEventListener("click", ()=>{
+        let obj = {};
+        // obj['level'] = level;
+        // obj['data'] = data;
+        loadModal("profile-edit-name", modalTypes, ()=>{}, getDocumentLevel(), obj)
+    })
 
-    
-// });
+
+    // Grab Add profile picture hook
+    const addPic = document.getElementById("hook-add-pic");
+    // Add event listener for profile pciture hook (Load Modal)
+    addPic.addEventListener("click", ()=>{
+        let obj = {};
+        // obj['level'] = level;
+        // obj['data'] = data;
+        loadModal("profile-add-picture", modalTypes, ()=>{}, getDocumentLevel(), obj)
+    })
+
+});
 
 const profile_editAddress = (homeID) =>{
     console.log("You clicked edit address for home "+ homeID);

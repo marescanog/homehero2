@@ -31,6 +31,8 @@ const modalTypes = {
     "home-your-address": docLevelModal+"/components/modals/ho-home-your-address.php",
     "home-select-address": docLevelModal+"/components/modals/ho-home-select-address.php",
     "editAddr" : docLevelModal+"/components/modals/temporary/temp-edit-address.php", 
+    "profile-edit-name" : docLevelModal+"/components/modals/ho-profile-edit-name.php", 
+    "profile-add-picture" : docLevelModal+"/components/modals/ho-profile-add-picture.php", 
 }
 
 // This function loads the
