@@ -253,11 +253,25 @@ const load_create_project_form = (
 
                 // FILL THE DOM WITH THE INFO
                 projectTitleLabel.innerText = project_name.value == "" ? project_side_label : project_name.value;
-                dateLabel.innerText = preferred_date_time.value;
                 jobSizeLabel.innerText = jobSizeArr[job_size_id.value - 1];
                 descLabel.innerText = job_description.value.trim() == "" ? "No description provided" : job_description.value;
                 rateOfferLabel.innerText = "P "+rate_offer.value+" "+rateTypeArr[rate_type_id.value-1];
                 addressLabel.innerText = address_name_label.value;
+                // oldcode
+                // dateLabel.innerText = preferred_date_time.value;
+
+                // New code to format
+                const date1 = new Date(preferred_date_time.value);
+                let date_arr_pref = preferred_date_time.value.split(" ");
+                let time_arr = date_arr_pref[1].split(":");
+                let timeformatted = convertFrom24To12Format(time_arr[0]+":"+time_arr[1]);
+                let day_arr = date_arr_pref[0].split("-");
+                const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                let month = months[day_arr[1]-1];
+                let day = day_arr[2];
+                let dayOfWeek = date1.getDay();
+                var dayOfWeek_arr = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+                dateLabel.innerText = dayOfWeek_arr[dayOfWeek]+", "+month+" "+day+" at "+timeformatted;
 
                 if(job_description.value.trim() == ""){
                     descLabel.classList.add("font-italic");
