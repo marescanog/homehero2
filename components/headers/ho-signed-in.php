@@ -40,8 +40,8 @@
                         <!-- HTML ZONE -->
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="">Profile</a>
-                    <a class="dropdown-item" href="">Settings</a>
+                    <a class="dropdown-item" href="<?php echo $level;?>/pages/homeowner/profile.php">Profile</a>
+                    <a class="dropdown-item" href="<?php echo $level;?>/pages/homeowner/help-center.php">Help Center</a>
                     <div class="dropdown-divider"></div>
                     <a id="logout-link-mobile" class="dropdown-item" >Logout</a>
                     </div>
@@ -64,7 +64,7 @@
                             <a class="nav-link custom-a" href="<?php echo $level;?>/pages/homeowner/projects.php">PROJECTS</a>
                         </li>
                         <li class="nav-item pr-lg-5">
-                            <a class="nav-link custom-a" href="<?php echo $level;?>/pages/homeowner/inbox.php">BROWSE</a>
+                            <a class="nav-link custom-a" href="<?php echo $level;?>/pages/homeowner/browse.php">BROWSE</a>
                         </li>
                         <li id="header-btn-desktop" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex justify-content-center align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -91,8 +91,8 @@
                                 <!-- HTML ZONE -->
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Profile</a>
-                            <a class="dropdown-item" href="#">Help Center</a>
+                            <a class="dropdown-item" href="<?php echo $level;?>/pages/homeowner/profile.php">Profile</a>
+                            <a class="dropdown-item" href="<?php echo $level;?>/pages/homeowner/help-center.php">Help Center</a>
                             <div class="dropdown-divider"></div>
                             <a id="logout-link-desktop" class="dropdown-item" >Logout</a>
                             </div>
