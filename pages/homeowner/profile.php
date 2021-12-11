@@ -10,6 +10,8 @@ $level ="../..";
 $fistName = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest";
 $initials = isset($_SESSION["initials"]) ? $_SESSION["initials"] : "GU";
 
+$currentTab = isset($_GET['tab']) ? $_GET['tab'] : "accInfo"; // used to direct to closed tab
+
 // Do a cURL request to get the necessary info
 // NODEPLOYEDPRODLINK
 $url = "http://localhost/slim3homeheroapi/public/homeowner/get-account-summary"; // DEV
@@ -57,6 +59,7 @@ $ch = curl_init();
     $total_completed_projects = null;
     $most_posted_category = null;
     $total_cancelled_projects = null;
+    $all_addr = [];
     if($output != null && $output->response != null){
         $accInfo = $output->response->accInfo;
         $profilePic = $output->response->profilePic;
@@ -64,6 +67,7 @@ $ch = curl_init();
         $total_completed_projects = $output->response->total_completed_projects;
         $most_posted_category = $output->response->most_posted_category;
         $total_cancelled_projects = $output->response->total_cancelled_projects;
+        $all_addr = $output->response->all_addresses;
     }
 
 
@@ -93,7 +97,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     <div class="container w-100 m-0 p-0 min-body-height h-100 ml-auto mr-auto gray-font d-flex flex-column">
 <!-- TEST AREA -->
 <?php 
-    echo var_dump($output);
+    // echo var_dump($output);
 ?>
 <!-- TEST AREA -->
 <!-- ERROR HANDLING -->
@@ -176,15 +180,89 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         <div  id="tabs" class="card-body mb-5">
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <p class="nav-item nav-link active " id="nav-hire-tab" data-toggle="tab" href="#nav-hire" role="tab" aria-controls="nav-hire" aria-selected="true">Account Information</p>
-                        <p class="nav-item nav-link" id="nav-work-tab" data-toggle="tab" href="#nav-work" role="tab" aria-controls="nav-work" aria-selected="false">My Addresses</p>
+                        <!-- ============= -->
+                        <!-- Acc info Tab -->
+                        <!-- ============= -->
+                        <p class="nav-item nav-link 
+                        <?php 
+                            if($currentTab != null){
+                                switch($currentTab){
+                                    case "address":
+                                    break;
+                                    // case "orders":
+                                    // break;
+                                    default:
+                                        echo "active";
+                                }
+                            } else {
+                                echo "active";
+                            }
+                        ?>" 
+                            id="nav-hire-tab" data-toggle="tab" 
+                            href="#nav-hire" role="tab" aria-controls="nav-hire" 
+                            aria-selected="<?php 
+                            if($currentTab != null){
+                                switch($currentTab){
+                                    case "address":
+                                    break;
+                                    // case "orders":
+                                    // break;
+                                    default:
+                                        echo "true";
+                                }
+                            } else {
+                                echo "true";
+                            }
+                            ?>">
+                            Account Information
+                        </p>
+                        <!-- ============= -->
+                        <!-- My Addr Tab -->
+                        <!-- ============= -->
+                        <p class="nav-item nav-link
+                             <?php 
+                                if($currentTab != null){
+                                    if($currentTab == "address"){
+                                        echo "active";
+                                    }
+                                }
+                            ?>" 
+                            id="nav-work-tab" data-toggle="tab" 
+                            href="#nav-work" role="tab" aria-controls="nav-work" aria-selected="
+                            <?php 
+                                if($currentTab != null){
+                                    if($currentTab == "address"){
+                                        echo "true";
+                                    } else {
+                                        echo "false";
+                                    }
+                                }
+                            ?>">
+                            My Addresses
+                        </p>
                         <!-- <p class="nav-item nav-link" id="nav-archived-tab" data-toggle="tab" href="#nav-archived" role="tab" aria-controls="nav-archived" aria-selected="false">Activity Summary</p> -->
                     </div>
                 </nav>
                 <div class="tab-content pt-1 pb-2 px-2  px-lg-3" id="nav-tabContent">
 <!-- =================== -->
 <!-- ACCOUNT INFORMATION -->
-                    <div class="tab-pane fade show active" id="nav-hire" role="tabpanel" aria-labelledby="nav-hire-tab">
+                    <div class="tab-pane fade                         
+                        <?php 
+                            if($currentTab != null){
+                                switch($currentTab){
+                                    case "address":
+                                    break;
+                                    // case "orders":
+                                    // break;
+                                    default:
+                                        echo " show active";
+                                }
+                            } else {
+                                echo " show active";
+                            }
+                        ?>"
+                        id="nav-hire" role="tabpanel"
+                        aria-labelledby="nav-hire-tab">
                         <div class="container">
                             <div class="row mt-3">
                                 <div class="col-4 col-lg-2">
@@ -275,14 +353,27 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
 <!-- =================== -->
 <!-- ADRESS INFORMATION -->
-                    <div class="tab-pane fade" id="nav-work" role="tabpanel" aria-labelledby="nav-work-tab">
+                    <div class="tab-pane fade                    
+                    <?php 
+                        if($currentTab != null){
+                            if($currentTab == "address"){
+                                echo " show active";
+                            }
+                        }
+                    ?>"  id="nav-work" role="tabpanel" aria-labelledby="nav-work-tab">
                         <div class="container mt-3">
                             <h4>Address List:</h4>
                             <?php
-                                include dirname(__FILE__)."/".$level.'/components/cards/address-card.php'; 
-                                include dirname(__FILE__)."/".$level.'/components/cards/address-card.php';
-                                include dirname(__FILE__)."/".$level.'/components/cards/address-card.php';
-                                include dirname(__FILE__)."/".$level.'/components/cards/address-card.php';
+                                for($x = 0; $x < count($all_addr); $x++){
+                                    $complete_w_city = $all_addr[$x]->complete_address;
+                                    $complete_w_city = explode(",",  $complete_w_city);
+                                    $city = $complete_w_city[2];
+                                    $complete_addr =  $complete_w_city[0].", ".$complete_w_city[1];
+                                    $home_type =  $all_addr[$x]->home_type;
+                                    $home_id =  $all_addr[$x]->home_id;
+                                    $extra_info = $all_addr[$x]->extra_address_info;
+                                    include dirname(__FILE__)."/".$level.'/components/cards/address-card.php';
+                                }
                             ?>
                         </div>
                     </div>
@@ -317,6 +408,6 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     </div>
 <?php require_once dirname(__FILE__)."/$level/components/foot-meta.php"; ?>
 <!-- Custom JS Scripts Below -->
-    <!-- <script src="../../js/pages/user-create-project.js"></script> -->
+    <script src="../../js/pages/user-profile.js"></script>
 </body>
 </html>
