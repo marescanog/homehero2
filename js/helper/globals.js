@@ -65,9 +65,9 @@ const disableForm_displayLoadingButton = (button, buttonTxt, buttonLoadSpinner, 
     }
 };
 
-const enableForm_hideLoadingButton = (button, buttonTxt, buttonLoadSpinner, form) => {
+const enableForm_hideLoadingButton = (button, buttonTxt, buttonLoadSpinner, form, message = "CREATE ACCOUNT") => {
     button.removeAttribute("disabled");
-    buttonTxt.innerHTML = "CREATE ACCOUNT"
+    buttonTxt.innerHTML = message;
     buttonLoadSpinner.setAttribute("class", "d-none");
     form.style.opacity = "1";
 
