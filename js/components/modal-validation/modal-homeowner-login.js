@@ -65,7 +65,7 @@ $("#modal-login-form").validate({
                         // console.log(res)
                         if(res["status"] == 200){
                             // Unfreeze the form & Rest
-                            enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
+                            enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form, "LOGIN");
                             $('#modal-login-form')[0].reset();
                             Swal.fire({
                                 title: 'Phone number verification success!',
@@ -100,7 +100,7 @@ $("#modal-login-form").validate({
                     icon: 'error',
                     confirmButtonText: 'OK'
                 })
-                enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
+                enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form, "LOGIN");
             }
         });
     }

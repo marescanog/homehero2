@@ -141,13 +141,13 @@ $("#SMSVerification").validate({
                             icon: 'error',
                             confirmButtonText: 'OK'
                         })
-                        enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, SMSForm);
+                        enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, SMSForm, "VERIFY ACCOUNT");
                     }
                 });
             },
             error: function (response) {
                 console.log(response);
-                enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, SMSForm);
+                enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, SMSForm, "VERIFY ACCOUNT");
                 // Either Invalid Incorrect PIN or something wrong with API
                 // CLEAN UP - make errorDisplay display a new message "PIN Entered is invalid" instead of SWAL Alert
                 Swal.fire({
