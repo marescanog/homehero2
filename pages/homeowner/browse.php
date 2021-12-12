@@ -19,6 +19,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <link rel="stylesheet" href="../../css/headers/header-homeowner.css">
 <link rel="stylesheet" href="../../css/footer.css">
 <link rel="stylesheet" href="../../css/pages/homeowner/projects.css">
+<link rel="stylesheet" href="../../css/pages/homeowner/browse.css">
 <!-- === Link your custom CSS  pages above here ===-->
 </head>
 <body class="container-fluid m-0 p-0  w-100 min-body-height">  
@@ -51,7 +52,26 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         <div class="h-100">
         <div class="separator"></div>
 
+<div class="container mb-5">
 
+
+<?php 
+    include "$level/components/cards/browse-hero-card.php";
+?>
+
+<?php 
+    include "$level/components/cards/browse-hero-card.php";
+?>
+<?php 
+    include "$level/components/cards/browse-hero-card.php";
+?>
+<?php 
+    include "$level/components/cards/browse-hero-card.php";
+?>
+
+
+
+</div>
 
 
 
