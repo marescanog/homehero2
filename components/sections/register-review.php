@@ -90,7 +90,8 @@
             <h5 class="card-title card-subtitle-main mb-0">
                 Personal Information
             </h5>
-            <p class="clicky smol pt-0 mt-0">Edit Info</p>
+<!-- Edit personal Info (Disabled for now) -->
+            <!-- <p class="clicky smol pt-0 mt-0">Edit Info</p> -->
             <div class="row mt-2">
                 <div class="col-6">
                     <p class="LABEL-THICC-SMOL m-0">
@@ -113,9 +114,10 @@
             <h5 class="card-title card-subtitle-main mb-0">
                 Credentials
             </h5>
-            <p class="clicky smol pt-0 mt-0">Edit Info</p>
+<!-- Edit Credentials -->
+            <p id="edit-credentials" class="clicky smol pt-0 mt-0">Edit Info</p>
             <div class="row mt-3">
-                <div class="col-6">
+                <div class="col-12">
                     <p class="LABEL-THICC-SMOL m-0">
                         SKILLS
                     </p>
@@ -125,7 +127,7 @@
                 </div>
             </div>
             <div class="row mt-3">
-                <div class="col-6">
+                <div class="col-12">
                     <p class="LABEL-THICC-SMOL m-0">
                         SALARY GOAL
                     </p>
@@ -134,16 +136,16 @@
                     </p>
                 </div>
             </div>
-            <div class="row mt-3">
+            <!-- <div class="row mt-3">
                 <div class="col-6">
                     <p class="LABEL-THICC-SMOL m-0">
                         CERTIFICATION/DIPLOMA
                     </p>
                     <p class="m-0">
-                        <?php echo htmlentities($output->response->cert);?>
+                        <?php //echo htmlentities($output->response->cert);?>
                     </p>
                 </div>
-            </div>
+            </div> -->
             <div class="row mt-3">
                 <div class="col-6">
                     <p class="LABEL-THICC-SMOL m-0">
@@ -167,8 +169,44 @@
             <h5 class="card-title card-subtitle-main mt-4 mb-0">
                 Service Hours
             </h5>
-            <p class="clicky smol pt-0 mt-0">Edit Hours</p>
+<!-- Edit Service Hours -->
+            <p id="edit-hours" class="clicky smol pt-0 mt-0">Edit Hours</p>
             <!-- $hasSchedPref -->
+            <?php 
+                // preparation of variables
+                $lead_notice_labels = [
+                    "Anytime"=>"Anytime",
+                    "1"=>"One Day",
+                    "3"=>"3 Days",
+                    "7"=>"1 week",
+                    "14"=>"2 weeks",
+                    "21"=>"3 weeks",
+                    "30"=>"1 month",
+                    "60"=>"2 months"
+                ];
+                $formatted_sched_data = [];
+                if($output != null){
+                    $schedule_data = $output->response->schedule_data;
+                    $objArr = [];
+                    foreach ($schedule_data as $value) {
+                        array_push(  $objArr, $value);
+                    }
+                    if($schedule_data != null && $schedule_data != ""){
+                        for($x = 1; $x < count($objArr); $x+=3){
+                            $obj = [];
+                            $obj["isDayOff"] =  $objArr[$x];
+                            $obj["start"] =  date("g:i a", strtotime($objArr[$x+1]));
+                            $obj["end"] = date("g:i a", strtotime($objArr[$x+2]));
+                            $obj["sRaw"] = $objArr[$x+1];
+                            $obj["eRaw"] = $objArr[$x+2];
+                            array_push(    $formatted_sched_data, $obj);
+                        }
+                        // to start sunday, move sunday to front by popping ang unshifting
+                        array_unshift($formatted_sched_data, array_pop($formatted_sched_data));
+                    }
+                }
+
+            ?>
             <div class="card">
                 <div class="card-body">
                     <?php 
@@ -176,26 +214,27 @@
                             for($x=0; $x<7; $x++ ){
                     ?>
                             <div class="row">
-                                <div class="col-4">
-                                    <p><?php echo $daysOfTheWeek[$x];?></p>
-                                </div>
-                                <div class="col-8">
-                                    <p class="text-center">
-                                        <?php
-                                            $dayObj = ($week == null) ? null :  $week[$x];;
-                                            if($week != null){
-                                                if($dayObj["isDayOff"]){
-                                                    echo "Day off";
-                                                }else{
-                                                    echo $dayObj["start"]." - ".$dayObj["end"];
-                                                }
-                                            } else {
-                                                echo "9:00 AM - 5:00 PM";
-                                            }
-                                        ?>
-                                    </p>
-                                </div>
-                            </div>
+        <div class="col-4">
+            <p><?php echo $daysOfTheWeek[$x];?></p>
+        </div>
+        <div class="col-8">
+            <p class="text-right">
+                <?php 
+                    $dayObj = ($formatted_sched_data  == null) ? null :  $formatted_sched_data [$x];
+                    if($output != null){
+                        if($dayObj["isDayOff"]){
+                            echo "Day off";
+                        }else{
+                            echo $dayObj["start"]." - ".$dayObj["end"];
+                        }
+                    } else {
+                        echo "9:00 AM - 5:00 PM";
+                    }
+                    
+                ?>
+            </p>
+        </div>
+      </div>
                     <?php 
                         }
                       } else {
@@ -215,7 +254,7 @@
                                 BOOKING LEAD TIME
                             </p>
                             <p class="m-0">
-                                <?php echo htmlentities($output->response->booking_lead);?>
+                                <?php echo htmlentities($lead_notice_labels[$output->response->booking_lead]);?>
                             </p>
                         </div>
                         <div class="col-6">
@@ -223,7 +262,7 @@
                                 NOTICE LEAD TIME
                             </p>
                             <p class="m-0">
-                                <?php echo htmlentities($output->response->notice_lead);?>
+                                <?php echo htmlentities($lead_notice_labels[$output->response->notice_lead]);?>
                             </p>
                         </div>
                     </div>
@@ -234,9 +273,10 @@
             <h5 class="card-title card-subtitle-main mt-4 mb-0">
                 Service Area
             </h5>
-            <p class="clicky smol pt-0 mt-0">Edit Area</p>
+<!-- Edit service area -->
+            <p id="edit-area" class="clicky smol pt-0 mt-0">Edit Area</p>
             <div class="row mt-3">
-                <div class="col-6">
+                <div class="col-12">
                     <p class="LABEL-THICC-SMOL m-0">
                         CITIES
                     </p>

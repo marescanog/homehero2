@@ -13,6 +13,7 @@
     $firstName = isset($_POST['first_name']) ? $_POST['first_name'] : null;
     $initials = isset($_POST['initials']) ? $_POST['initials'] : null;
     $role = isset($_POST['role']) ? $_POST['role'] : null;
+    $profilePicture = isset($_POST['profile_pic_location']) ? $_POST['profile_pic_location'] : false;
 
     // Check if the user has a registration token set
     if($token == null || $userType == null){
@@ -29,6 +30,7 @@
         $_SESSION['first_name'] = $firstName;
         $_SESSION['initials'] = $initials;
         $_SESSION['role'] = $role;
+        $_SESSION['profile_pic_location'] = $profilePicture;
 
         $retVal = "Verified user token";
         $status = 200;

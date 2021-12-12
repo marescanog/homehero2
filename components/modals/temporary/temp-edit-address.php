@@ -1,13 +1,14 @@
 <?php
 session_start();
 $output = null;
-
+$home_id = isset($_POST['data']['home_id']) ? $_POST['data']['home_id'] : null;
 // curl to get the needed modal information
 
-// CHANGELINKDEVPROD
+// NODEPLOYEDPRODLINK
 // Make curl for the personal inforation pagge information vv
- $url = "http://localhost/slim3homeheroapi/public/populate-address-form"; // DEV
-// $url = "https://slim3api.herokuapp.com/populate-address-form"; // PROD
+//  $url = "http://localhost/slim3homeheroapi/public/populate-address-form"; // DEV - OLD ROUTE
+$url = "http://localhost/slim3homeheroapi/public/homeowner/populate-edit-address/".$home_id; // DEV - NEW ROUTE specifically for populating form including single address data
+// $url = ""; // NO PROD ROUTE
 
 $headers = array(
     "Authorization: Bearer ".$_SESSION["token"],
@@ -40,11 +41,12 @@ $ch = curl_init();
     $curl_error_message = null;
 
     // Declare variables to be used in this modal
-    $defaultHome = null;
-    $Addressess = [];
+    // $defaultHome = null;
+    // $Addressess = [];
     $cities = [];
     $homeTypes = [];
     $barangays = [];
+    $addrInfo = [];
 
 ?><!-------------------------------------------------->
     <!-- HTML ZONE -->
@@ -52,7 +54,7 @@ $ch = curl_init();
     <!-- This HTML displays the head of the modal with title and close X button -->
     <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title" id="signUpModalLabel">ENTER NEW ADDRESS</h5>
+        <h5 class="modal-title" id="signUpModalLabel">EDIT ADDRESS</h5>
         <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true" style="font-size:1.5em">&times;</span>
         </button>
@@ -174,11 +176,12 @@ $ch = curl_init();
 
     // Format our data variables for modal use
     if($curl_error_message == null && $output !== null && is_object($output) && $output->response !== null && $output->success){
-        $defaultHome = $output->response->defaultHome;
-        $Addressess = $output->response->allAddress;
+        // $defaultHome = $output->response->defaultHome;
+        // $Addressess = $output->response->allAddress;
         $cities = $output->response->cities;
         $homeTypes = $output->response->hometype;
         $barangays = $output->response->barangays;
+        $addrInfo = $output->response->home_addr;
     }
 
 ?>
@@ -215,9 +218,9 @@ $ch = curl_init();
         <!-- Modal body Start -->
             <div>
                 <?php //--------------- PHP ZONE ----------------
-                    if(count($Addressess) == 0){
-                        echo "<h6>You have no addresses saved. Save a new Address: </h6>";
-                    } //else {
+                    // if(count($Addressess) == 0){
+                    //     // echo "<h6>You have no addresses saved. Save a new Address: </h6>";
+                    // } //else {
                 ?><!-------------------------------------------------->
                 <!-- HTML ZONE -->
 
@@ -258,15 +261,24 @@ $ch = curl_init();
             ?><!-------------------------------------------------->
             </div>
              <!-- HTML ZONE -->
+             <input type="hidden" name="home_id" value="<?php echo $addrInfo->id;?>">
 
              <div class="form-group">
                 <label for="as">Street No.</label>
-                <input type="text" class="form-control" id="as" placeholder="ex. 5" name="street_no">
+                <input type="text" class="form-control" id="as" placeholder="ex. 5" name="street_no"
+                    value="<?php 
+                            echo $addrInfo->street_no;
+                        ?>"
+                >
             </div>
 
             <div class="form-group">
                 <label for="as">Street Name:</label>
-                <input type="text" class="form-control" id="as" placeholder="ex. Green road" name="street_name">
+                <input type="text" class="form-control" id="as" placeholder="ex. Green road" name="street_name"
+                        value="<?php 
+                            echo htmlentities($addrInfo->street_name);
+                        ?>"
+                >
             </div>
 
             <div class="form-group">
@@ -274,13 +286,18 @@ $ch = curl_init();
                     <select id="category" 
                         class="custom-select c" 
                         onchange="makeSubmenu(this.value)"                                     
-                        data-prev="0"
+                        data-prev="<?php echo $addrInfo->city_id;?>"
                         name="city_id"
                         >
                         <option value="" selected>Select Your City</option>
                             <?php for($x = 0; $x < count($cities); $x++) {?>
                                 <option 
                                     value="<?php echo $cities[$x]->id;?>"
+                                    <?php 
+                                        if($cities[$x]->id == $addrInfo->city_id){
+                                            echo " selected";
+                                        }
+                                    ?>
                                 >
                                     <?php echo $cities[$x]->city_name;?>
                                 </option>
@@ -292,13 +309,23 @@ $ch = curl_init();
 
             <div class="form-group" onload="resetSelection()">
                     <label for="as">Barangay:</label>
-                    <select id="categorySelect" class="custom-select c" disabled name="barangay_id">
+                    <select id="categorySelect" class="custom-select c" name="barangay_id">
                         <option value="" selected>Select Your Barangay</option>
                             <?php for($x = 0; $x < count($barangays); $x++) {?>
                                 <option 
                                     value="<?php echo $barangays[$x]->id;?>"
-                                    class="A BG-<?php echo $barangays[$x]->city_id;?> d-none"
-                                >
+                                    class="A BG-<?php echo $barangays[$x]->city_id;?> 
+                                    <?php 
+                                        if($addrInfo->city_id !== $barangays[$x]->city_id){
+                                            echo "d-none";
+                                        }
+                                    ?>"
+                                    <?php 
+                                        if($barangays[$x]->id == $addrInfo->barangay_id){
+                                            echo " selected";
+                                        }
+                                    ?>
+                                    >
                                     <?php echo $barangays[$x]->barangay_name;?>
                                 </option>
                             <?php 
@@ -316,7 +343,6 @@ $ch = curl_init();
                             console.log(value)
                             let cat = document.getElementById("category")
                             let subcat = document.getElementById("categorySelect");
-                            subcat.removeAttribute("disabled");
                             subcat.selectedIndex = 0;
                             // reset to d-none for all
                             // $('.A').each((index, element)=>{
@@ -365,6 +391,11 @@ $ch = curl_init();
                             <?php for($x = 0; $x < count($homeTypes); $x++) {?>
                                 <option 
                                     value="<?php echo $homeTypes[$x]->id;?>"
+                                    <?php 
+                                        if($homeTypes[$x]->id == $addrInfo->home_type){
+                                            echo " selected";
+                                        }
+                                    ?>
                                 >
                                     <?php echo $homeTypes[$x]->home_type_name;?>
                                 </option>
@@ -377,7 +408,7 @@ $ch = curl_init();
 
                 <div class="form-group">
                     <label for="extra_address_info">Additional Address information</label>
-                    <textarea class="form-control" id="extra_address_info" name="extra_address_info" rows="3"></textarea>
+                    <textarea class="form-control" id="extra_address_info" name="extra_address_info" rows="3"><?php echo trim(htmlentities($addrInfo->extra_address_info));?></textarea>
                 </div>
 
 
@@ -428,17 +459,15 @@ $ch = curl_init();
     // },
     submitHandler: function(form, event) { 
         event.preventDefault();
-        console.log("u press");
+        console.log("EDIT ADDRESS");
         const addressData = getFormDataAsObj(form);
 
+        const button = document.getElementById("PI-submit-btn");
+        const buttonTxt = document.getElementById("PI-submit-btn-txt");
+        const buttonLoadSpinner = document.getElementById("PI-submit-btn-load");
+        const formData = getFormDataAsObj(form);
+        disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
 
-        /*
-        <p id="add-address-text" class="p-0 m-0 ">
-            Add an address
-        </p>
-        <input id="home_address_field" type="hidden" name="home_id" value="">
-        */
-        // On Page Load, The default falback list is 6 items.
 
         $.ajaxSetup({cache: false})
         $.get(getDocumentLevel()+'/auth/get-register-session.php', function (data) {
@@ -467,8 +496,8 @@ $ch = curl_init();
 
                 $.ajax({
                     type : 'POST',
-                     url : "http://localhost/slim3homeheroapi/public/add-address", // Dev
-                    // url : "https://slim3api.herokuapp.com/add-address",
+                     url : "http://localhost/slim3homeheroapi/public/homeowner/update-address/"+addressData["home_id"], // Dev
+                    // url : "", // No Prod Deployed Route
                     data : samoka,
                         contentType: false,
                         processData: false,
@@ -479,15 +508,12 @@ $ch = curl_init();
                         console.log(response.response);
                         console.log(response.response.data);
                         console.log(response.response.data.home_id);
-                        //$('#enterAddress')[0].reset();
-                        const AddressText = document.getElementById("add-address-text");
-                        const HomeFeild = document.getElementById("home_address_field");
-                        const address_name_label2 = document.getElementById("address_name_label");
-                        address_name_label2.value =  addressData["street_name"];
-
-                        AddressText.innerText = addressData["street_name"];
-                        HomeFeild.value = response.response.data.home_id;
+                        Swal.fire({
+                            title: 'Address Updated!',
+                            icon: 'success'
+                        });
                         $("#modal").modal('hide');
+                        window.location = getDocumentLevel()+'/pages/homeowner/profile.php?tab=address';
                     },
                     error: function (response) {
                             console.log(response);
@@ -496,7 +522,7 @@ $ch = curl_init();
                                 text: 'Please try again',
                                 icon: 'error'
                             });
-                        }
+                    }
                 });
 
         });

@@ -25,7 +25,7 @@
                             <a class="nav-link custom-a" href="<?php echo $level;?>/">HIRE</a>
                         </li>
                         <li class="nav-item pr-lg-5">
-                            <a class="nav-link custom-a" href="<?php echo $level;?>/pages/Help.php">HELP</a>
+                            <a class="nav-link custom-a" href="<?php echo $level;?>/pages/explore/FAQ.php">FAQ</a>
                         </li>
                         <li class="nav-item pr-lg-5">
                             <a id="RU-signup" class="nav-link custom-a" type="button" data-toggle="modal" data-target="#modal">REGISTER</a>

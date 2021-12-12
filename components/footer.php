@@ -25,20 +25,31 @@
                             </div>
                             <div class="collapse text-white d-lg-flex" id="one" data-parent="#accordion">
                                 <ul class="list-unstyled">
+                                    
+                                    <!-- <li>
+                                        <a href="<?php echo $level;?>/pages/worker/" class="text-white footer-a">Become a HomeHero</a>
+                                    </li> -->
+                                    <?php 
+                                        // require_once dirname(__FILE__)."/$level/components/headers/user.php";
+                                        if(!isset($_SESSION["token"])){
+                                    ?>
+                                            <a href="<?php echo $level;?>/pages/worker/" class="text-white footer-a">Become a HomeHero</a>
+                                    <?php
+                                        } 
+                                    ?>
+
+
                                     <li>
-                                        <a href="#!" class="text-white footer-a">Become a HomeHero</a>
+                                        <a href="<?php echo $level;?>/pages/explore/cities.php" class="text-white footer-a">All Cities</a>
                                     </li>
                                     <li>
-                                        <a href="#!" class="text-white footer-a">Services by City</a>
+                                        <a href="<?php echo $level;?>/pages/explore/services.php" class="text-white footer-a">All Services</a>
                                     </li>
-                                    <li>
-                                        <a href="#!" class="text-white footer-a">All Services</a>
-                                    </li>
-                                    <li>
+                                    <!-- <li>
                                         <a href="#!" class="text-white footer-a">Hire a Home Hero</a>
-                                    </li>
+                                    </li> -->
                                     <li>
-                                        <a href="#!" class="text-white footer-a">Help</a>
+                                        <a href="<?php echo $level;?>/pages/explore/FAQ.php" class="text-white footer-a">FAQ</a>
                                     </li>
                                 </ul>
                             </div>
@@ -55,20 +66,20 @@
                             <div class="collapse text-white d-lg-flex" id="two" data-parent="#accordion">
                             <ul class="list-unstyled">
                                     <li>
-                                        <a href="#!" class="text-white footer-a">About Us</a>
+                                        <a href="<?php echo $level;?>/pages/explore/about-us.php" class="text-white footer-a">About Us</a>
                                     </li>
                                     <li>
-                                        <a href="#!" class="text-white footer-a">Careers</a>
+                                        <a href="<?php echo $level;?>/pages/explore/careers.php" class="text-white footer-a">Careers</a>
                                     </li>
                                     <li>
-                                        <a href="#!" class="text-white footer-a">Privacy Policy</a>
+                                        <a href="<?php echo $level;?>/pages/explore/privacy-policy.php" class="text-white footer-a">Privacy Policy</a>
                                     </li>
                                     <li>
-                                        <a href="#!" class="text-white footer-a">Terms and Conditions</a>
+                                        <a href="<?php echo $level;?>/pages/explore/terms-and-conditions.php" class="text-white footer-a">Terms and Conditions</a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a href="#!" class="text-white footer-a">FAQ</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>
@@ -100,7 +111,7 @@
             </div>
 
             <div class="col-lg-3 col-md-12">
-                <div class="text-white h6 footer-heading mb-0">
+                <!-- <div class="text-white h6 footer-heading mb-0">
                     GENERAL INQUIRIES
                 </div>
                 <div class="mt-3">
@@ -108,7 +119,7 @@
                         <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
                     </div>
                     <button type="button" class="btn btn btn-outline-warning text-light">Submit</button>
-                </div>
+                </div> -->
             </div>
 
         </div>

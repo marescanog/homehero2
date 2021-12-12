@@ -87,6 +87,9 @@ $ch = curl_init();
     $assigned_worker =  null;
     $date_time_start =  null;
     $date_time_closed =  null;
+    $cancelled_by =  null;
+    $jo_cancellation_reason =  null;
+    $jo_ho_id =  null;
 
     $bill_id =  null;
     $bill_status =  null;
@@ -121,6 +124,9 @@ $ch = curl_init();
             $assigned_worker =  $singleJobOrder->assigned_worker;
             $date_time_start =  $singleJobOrder->date_time_start;
             $date_time_closed =  $singleJobOrder->date_time_closed;
+            $cancelled_by =  $singleJobOrder->cancelled_by;
+            $jo_cancellation_reason =  $singleJobOrder->order_cancellation_reason;
+            $jo_ho_id =  $singleJobOrder->homeowner_id;
         }
 
         if($singleBill != false){
@@ -143,7 +149,11 @@ $ch = curl_init();
         }
     }
 
-
+    $d = null;
+    $today = new \DateTime();
+    if($schedule !== null){
+        $d = new DateTime($schedule);
+    }
 
 // HTML STARTS HERE
 require_once dirname(__FILE__)."/$level/components/head-meta.php"; 
@@ -319,7 +329,8 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                     </h1>
                 </div>
                 <div class="sidelink">
-                    <p class="mt-3 mr-3 mr-lg-0 text-danger">CANCEL</p>
+                    <!-- Disbled for now -->
+                    <!-- <p class="mt-3 mr-3 mr-lg-0 text-danger">CANCEL</p> -->
                 </div>
             </div>
         </div>
@@ -354,13 +365,29 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                     <!-- DYNAMIC BACKGROUND COLOR CHANGE BASED ON STATUS-->
                     <li class="list-group-item d-flex flex-row justify-content-between"
                         style="background-color:<?php 
+                            //echo "rgba(0,0,0,.04)";
                             if ($status != null){
                                 switch($status){
                                     case 1: // Active
-                                        echo "#FCEBBF";
+                                        // echo "#FCEBBF";
+                                        if($date_time_closed == null && $today!= null && $d != null && $today>$d){
+                                            echo "#ffe6e6";
+                                        } else {
+                                            echo "#FCEBBF";
+                                        }
                                         break;
                                     case 2: // Filled
-                                        echo $date_time_closed == null ? "#d9f2d9" : "rgba(0,0,0,.04)";
+                                        // echo $date_time_closed == null ? "#d9f2d9" : "rgba(0,0,0,.04)";
+                                        if($cancelled_by != null){
+                                            echo "#ffe6e6";
+                                        } else {
+                                            // echo $date_time_closed == null ? "#d9f2d9" : "rgba(0,0,0,.04)";
+                                            if($date_time_closed == null && $today!= null && $d != null && $today>$d && $date_time_start == null){
+                                                echo "#ffe6e6";
+                                            } else {
+                                                echo "#d9f2d9";
+                                            }
+                                        }
                                         break;
                                     case 3: // Expired
                                         echo "#e0e0eb";
@@ -381,23 +408,23 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                         </h5>
                         <!-- If the job post has not been filled, cancelled yet, we can edit. If expired we can re-post -->
                         <?php 
-                            if ($status != null){
-                                switch($status){
-                                    case 1: // Active
-                                        echo "<p class='mb-0 clicky'><b>EDIT</b></p>";
-                                        break;
-                                    case 2: // Filled
-                                        break;
-                                    case 3: // Expired
-                                        echo "<p class='mb-0 clicky'><b>RE-POST</b></p>";
-                                        break;
-                                    case 4: // Cancelled
-                                        echo "<p class='mb-0 clicky'><b>DISPUTE</b></p>";
-                                        break;
-                                    default: 
-                                        echo "rgba(0,0,0,.04)";
-                                }
-                            }
+                            // if ($status != null){
+                            //     switch($status){
+                            //         case 1: // Active
+                            //             echo "<p class='mb-0 clicky'><b>EDIT</b></p>";
+                            //             break;
+                            //         case 2: // Filled
+                            //             break;
+                            //         case 3: // Expired
+                            //             echo "<p class='mb-0 clicky'><b>RE-POST</b></p>";
+                            //             break;
+                            //         case 4: // Cancelled
+                            //             echo "<p class='mb-0 clicky'><b>DISPUTE</b></p>";
+                            //             break;
+                            //         default: 
+                            //             echo "rgba(0,0,0,.04)";
+                            //     }
+                            // }
                         ?>                        
                     </li>
 
@@ -406,7 +433,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                     <span class="<?php  
                         switch($status){
                             case 2: // Filled
-                                echo "text-success font-weight-bold";
+                                echo $cancelled_by == null ? ($today>$d && $date_time_start == null ? "text-danger font-weight-bold" : "text-success font-weight-bold") : "text-danger font-weight-bold";
                                 break;
                             case 3: // Expired
                                 echo "text-danger font-weight-bold";
@@ -416,14 +443,34 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                 break;
                         }
                     ?>">
-                        <?php 
+                        <?php                             
                             if ($status != null){
                                 switch($status){
                                     case 1: // Active
-                                        echo "Ongoing - No worker assigned";
+                                        if($date_time_closed == null && $today!= null && $d != null && $today>$d){
+                                            echo "Expired";
+                                        } else {
+                                            echo "Ongoing - No worker assigned";
+                                        }
+                                        
                                         break;
                                     case 2: // Filled
-                                        echo "Assigned to Homehero ".htmlentities($assigned_worker);
+                                        if($cancelled_by != null) {
+                                            $canceller = $jo_ho_id == $cancelled_by ? "You" : $assigned_worker;
+                                            echo "Cancelled by ".$canceller ." - Assigned to Homehero ".htmlentities($assigned_worker);
+                                        }else {
+                                            if($singleBill == false){
+                                                if($date_time_closed == null && $today!= null && $d != null && $today>$d && $date_time_start == null){
+                                                    echo "Past Schedule - Assigned to Homehero ".htmlentities($assigned_worker);
+                                                } else {
+                                                    echo "Assigned to Homehero ".htmlentities($assigned_worker);
+                                                }
+                                                // echo "Assigned to Homehero ".htmlentities($assigned_worker);
+                                            } else {
+                                                echo "Completed by Homehero ".htmlentities($assigned_worker);
+                                            }
+                                            
+                                        }
                                         break;
                                     case 3: // Expired
                                         echo "EXPIRED";
@@ -437,7 +484,10 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                     </span>
                     </li>
                     <li class="list-group-item"><b class="mr-1">Schedule: </b>
-                    <?php echo $schedule == null ? "" : htmlentities($schedule);?>
+                    <?php 
+                        $d_sched=date_create($schedule);
+                        echo $schedule == null ? "" : htmlentities(date_format( $d_sched,"D, M d Y, h:i A"));
+                    ?>
                     </li>
                     <li class="list-group-item"><b class="mr-1">Address: </b>
                         <?php echo $address == null ? "" : htmlentities($address);?>
@@ -463,13 +513,19 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                         if( $singleJobOrder !== false){
                     ?>
                         <li class="list-group-item"><b class="mr-1">Date Booked: </b>
-                            <?php echo $assigned_on == null ? "" : htmlentities($assigned_on);?>
+                            <?php 
+                                $d_booked=date_create($assigned_on);
+                                echo $assigned_on == null ? "" : htmlentities(date_format($d_booked,"D, M d Y, h:i A"));
+                            ?>
                         </li>
                     <?php 
                         } else if ($status == 4){
                     ?>
                         <li class="list-group-item"><b class="mr-1">Date Cancelled: </b>
-                            <?php echo $date_time_closed == null ? "" : htmlentities($date_time_closed);?>
+                            <?php 
+                                $d_post_cancelled=date_create($date_time_closed);
+                                echo $date_time_closed == null ? "" : htmlentities(date_format($d_post_cancelled,"D, M d Y, h:i A"));
+                            ?>
                         </li>
                         
                     <?php
@@ -509,7 +565,10 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                         echo $job_order_id == null ? "" : sprintf("%08d", $job_order_id);
                     ?></li>
                     <li class="list-group-item"><b>Assigned On:</b>
-                        <?php echo $assigned_on == null ? "" : htmlentities($assigned_on);?>
+                        <?php 
+                            $d_j_assigned_on=date_create($assigned_on);
+                            echo $assigned_on == null ? "" : htmlentities(date_format($d_j_assigned_on,"D, M d Y, h:i A"));
+                        ?>
                     </li>
                     <li class="list-group-item"><b>Assigned Worker:</b>
                          <?php echo $assigned_worker == null ? "" : htmlentities($assigned_worker);?>
@@ -518,20 +577,47 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                         if($date_time_start !== null){
                     ?>
                         <li class="list-group-item"><b>Date & Time Started:</b>
-                            <?php echo $date_time_start == null ? "" : htmlentities($date_time_start);?>
+                            <?php 
+                                $d_j_time_start=date_create($date_time_start);
+                                echo $date_time_start == null ? "" : htmlentities(date_format($d_j_time_start,"D, M d Y, h:i A"));
+                            ?>
                         </li>
                     <?php
                         }
                     ?>
-                                        <?php
-                        if($date_time_closed !== null){
+                    <?php
+                        if($date_time_closed !== null || $date_time_start !== null){
                     ?>
-                        <li class="list-group-item"><b>Date & Time Completed:</b>
-                            <?php echo $date_time_closed == null ? "" : htmlentities($date_time_closed);?>
+                        <li class="list-group-item"><b>Date & Time <?php echo $cancelled_by != null ? "Cancelled" : "Completed"?>:</b>
+                            <?php 
+                                $d_j_closed=date_create($date_time_closed);
+                                echo $date_time_closed == null ? "In Progress" : htmlentities(date_format($d_j_closed,"D, M d Y, h:i A"));
+                            ?>
                         </li>
                     <?php
                         }
                     ?>
+
+                    <?php
+                        if($jo_cancellation_reason !== null){
+                    ?>
+                        <li class="list-group-item"><b>Cancellation reason:</b>
+                            <?php echo $jo_cancellation_reason == null ? "" : htmlentities($jo_cancellation_reason);?>
+                        </li>
+                    <?php
+                        }
+                    ?>
+
+                    <?php
+                        if($today>$d  && $date_time_start == null){
+                    ?>
+                        <li class="list-group-item"><b>Status:</b>
+                            <?php echo "This worker has not started the job order and it is now past the preferred schedule time";?>
+                        </li>
+                    <?php
+                        }
+                    ?>
+
                 </ul>
             </div>
         <?php 
@@ -559,10 +645,16 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                         <?php echo $bill_status == null ? "" : htmlentities($bill_status);?>
                     </li>
                     <li class="list-group-item"><b>Billed On:</b>
-                        <?php echo $bill_on == null ? "" : htmlentities($bill_on);?>
+                        <?php 
+                            $d_b_billed_on=date_create($bill_on);
+                            echo $bill_on == null ? "" : htmlentities(date_format($d_b_billed_on,"D, M d Y, h:i A"));
+                        ?>
                     </li>
                     <li class="list-group-item"><b>Paid On:</b> 
-                        <?php echo $bill_pay_complete_date == null ? "" : htmlentities($bill_pay_complete_date);?>
+                        <?php 
+                            $d_b_paid_on=date_create($bill_pay_complete_date);
+                            echo $bill_pay_complete_date == null ? "Pending Payment" : htmlentities(date_format($d_b_paid_on,"D, M d Y, h:i A"));
+                        ?>
                     </li>
                     <li class="list-group-item"><b>Total Price Billed:</b>
                         <?php echo  $bill_total_price_billed == null ? "" : htmlentities( $bill_total_price_billed);?>
@@ -585,7 +677,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
             <h4 class="mb-4 mt-2 mx-2">Your Rating & Review</h4>
             <div class="card cardigan shadow-sm mb-3">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><b>Overall Rating</b>
+                    <li class="list-group-item"><b>Overall Rating:</b>
                         <?php echo $computedRating == null ? "" : htmlentities($computedRating);?>
                     </li>
                     <li class="list-group-item"><b>Overall Quality:</b>
@@ -604,7 +696,10 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                         <?php echo $comment == null ? "" : htmlentities($comment);?>
                     </li>
                     <li class="list-group-item"><b>Rated On:</b> 
-                        <?php echo $created_on == null ? "" : htmlentities($created_on);?>
+                        <?php 
+                            $d_r_rated_on=date_create($created_on);
+                            echo $created_on == null ? "" : date_format($d_r_rated_on,"D, M d Y, h:i A");
+                        ?>
                     </li>
                 </ul>
             </div>
@@ -619,7 +714,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
         <!-- No need for recommendation when job has been cancelled, expired or filled -->
         <?php 
             if( $output->response){ 
-                if($singleJobOrder == false && $status !== null && $status !== 3 && $status !== 4){
+                if($singleJobOrder == false && $status !== null && $status != 3 && $status != 4 && $today!= null && $d != null && $today<$d && $cancelled_by == null){
         ?>
             <div class="separator yellow"></div>
             <h4 class="yellow mb-5">Recommended HomeHeroes</h4>

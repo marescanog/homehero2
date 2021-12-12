@@ -47,6 +47,10 @@ $("#modal-login-form").validate({
                 data['first_name'] = response["response"]["first_name"];
                 data['initials'] = response["response"]["initials"];
                 data['role'] = response["response"]["role"];
+                // profile_pic_location
+                data['profile_pic_location'] = response["response"]["profile_pic_location"];
+
+                // console.log(data);
 
                 // console.log("your data token is");
                 // console.log(data);
@@ -61,7 +65,7 @@ $("#modal-login-form").validate({
                         // console.log(res)
                         if(res["status"] == 200){
                             // Unfreeze the form & Rest
-                            enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
+                            enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form, "LOGIN");
                             $('#modal-login-form')[0].reset();
                             Swal.fire({
                                 title: 'Phone number verification success!',
@@ -96,7 +100,7 @@ $("#modal-login-form").validate({
                     icon: 'error',
                     confirmButtonText: 'OK'
                 })
-                enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
+                enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form, "LOGIN");
             }
         });
     }
