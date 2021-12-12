@@ -1,4 +1,75 @@
 $(document).ready(()=>{
+    // Validate Change Password form
+    $("#profile-change-password").validate({
+        rules: {
+            current_pass:{
+                required: true,
+            },
+            new_pass:{
+                required: true,
+            },
+            confirm_pass:{
+                required: true,
+                equalTo : "#new_pass"
+            }
+        },
+        messages: {
+            current_pass:{
+                required: "Please enter your current password",
+            },
+            new_pass:{
+                required: "Please enter a new password",
+            },
+            confirm_pass:{
+                required: "Please confirm your new password",
+                equalTo : "This field must match entered password"
+            }
+        },
+        submitHandler: function(form, event) { 
+            event.preventDefault();
+            const button = document.getElementById("CPs-submit-btn");
+            const buttonTxt = document.getElementById("CPs-submit-btn-txt");
+            const buttonLoadSpinner = document.getElementById("CPs-submit-btn-load");
+            const formData = getFormDataAsObj(form);
+            disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
+        }
+    }); //JQUERY Validator Close
+    
+
+
+    $("#profile-change-phone").validate({
+        rules: {
+            phone:{
+                required: true,
+                phonePH: true
+            },
+            phone_pass:{
+                required: true,
+            }
+        },
+        messages: {
+            phone:{
+                required: "Please enter your new number",
+            },
+            phone_pass:{
+                required: "Please enter your password",
+            }
+        },
+        submitHandler: function(form, event) { 
+            event.preventDefault();
+            const button = document.getElementById("CPn-submit-btn");
+            const buttonTxt = document.getElementById("CPn-submit-btn-txt");
+            const buttonLoadSpinner = document.getElementById("CPn-submit-btn-load");
+            const formData = getFormDataAsObj(form);
+            disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
+        }
+    }); //JQUERY Validator Close
+
+
+
+
+
+
     // Grab edit name hook
     const editName = document.getElementById("hook-edit-name");
     // Add event listener for edit name hook (Load modal)

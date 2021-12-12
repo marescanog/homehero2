@@ -354,11 +354,56 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                     </li>
                                 </ul>
                             </div>
+
+                            <!-- ACCOUNT SETTINGS -->
                             <div class="separator"></div>
-                            <div class="container mt-2">
-                                <h6 class="mb-3">Account Security</h6>
-                                <p class="clicky">Change Password</p>
-                                <p class="clicky">Change Phone Number</p>
+                            <div class="container pt-3 ">
+                                <h5 class="mb-3">Account Settings</h5>
+                                <h6 class="pt-2">Change password</h6>
+                                <form id="profile-change-password" class="pt-2 card-width-profile pl-3">
+                                    <div class="form-group pt-3">
+                                        <label for="current_pass">Current Password</label>
+                                        <input type="password" class="form-control" id="current_pass" placeholder="Password" name="current_pass">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="new_pass">New Password</label>
+                                        <input type="password" class="form-control" id="new_pass" name="new_pass" placeholder="Password" minlength="8">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="confirm_pass">Confirm Password</label>
+                                        <input type="password" class="form-control" id="confirm_pass" name="confirm_pass" placeholder="Password">
+                                    </div>
+                                    <button id="CPs-submit-btn"  type="submit" value="Submit"  class="btn btn-warning text-white font-weight-bold mb-3 mt-3 btn-lg">
+                                            <span id="CPs-submit-btn-txt">CHANGE</span>
+                                            <div id="CPs-submit-btn-load" class="d-none">
+                                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!-- CHANGE PHONE NUMBER -->
+                            <div class="separator pt-3"></div>
+                            <div class="container mb-5">
+                                <form id="profile-change-phone" class="pt-2 card-width-profile pl-3">
+                                        <h6 class="mb-3 pt-2">Change phone number</h6>
+                                        <div class="form-group pt-3">
+                                            <label for="phone">New Phone Number</label>
+                                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phone_pass">Password</label>
+                                            <input type="password" class="form-control" id="phone_pass" name="phone_pass" placeholder="Password">
+                                        </div>
+                                        <button id="CPn-submit-btn"  type="submit" value="Submit"  class="btn btn-warning text-white font-weight-bold mb-3 mt-3 btn-lg">
+                                                <span id="CPn-submit-btn-txt">SAVE</span>
+                                                <div id="CPn-submit-btn-load" class="d-none">
+                                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                        </button>
+                                </form>
                             </div>
                         </div>
                     </div>
