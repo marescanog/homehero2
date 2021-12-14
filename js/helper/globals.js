@@ -178,3 +178,19 @@ const redirect_to_worker_register_modal = () => {
 const redirect_to_worker_login_modal = () => {
     loadModal("worker-login",modalTypes,()=>{},getDocumentLevel());
 }
+
+const summon_forgotpass_homeowner = () => {
+    Swal.fire({
+        icon: 'info',
+        title: 'Forgot password',
+        text: 'Please contact homeowner@support.com for further assistance with password retrieval',
+      })
+}
+
+const summon_forgotpass_worker = () => {
+    Swal.fire({
+        icon: 'info',
+        title: 'Forgot password',
+        text: 'Please contact homehero@support.com for further assistance with password retrieval',
+      })
+}
