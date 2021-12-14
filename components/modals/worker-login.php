@@ -27,9 +27,9 @@
                     <label for="HOLpassword" class="font-weight-bold" style="color: #707070;font-size: 14px; text-align: center;">PASSWORD</label>
                     <input type="password" class="form-control mt-0 mb-0" id="HOLps" name="password" placeholder="at least 6 characters" autocomplete require minlength="6">
                   </div>
-                  <a class="mt-0 mb-2" href="#" style="font-size:0.8em;">
+                  <span class="mt-0 mb-2 cclicky" style="font-size:0.8em;" onclick="summon_forgotpass_worker()">
                     Forgot password?
-                    </a> 
+                    </span> 
                   <br>
                   <button id="LU-submit-btn" type="button" class="btn btn-warning text-white font-weight-bold w-100 mb-3 mt-2" >
                   <span id="LU-submit-btn-txt">CONTINUE</span>
@@ -39,10 +39,10 @@
                     </button>
                   <div class="text-center" style="font-size:0.8em;">
                         <p id="su">
-                          Dont have an account? <a href="#">Sign-up</a>
+                          Dont have an account? <span class="cclicky" onclick="redirect_to_worker_register_modal()">Sign-up</span>
                           <br>
                           
-                          Registered as a hero? <a href="#">Log in</a> the Homeowner's Portal.
+                          Registered as a hero? <span class="cclicky" onclick="redirect_to_homeonwer_login_modal()">Log in</span> the Homeowner's Portal.
                       </p>
                   </div>
                 </form>
