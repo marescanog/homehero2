@@ -16,6 +16,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
 <!-- Add your custom CSS above -->
 </head>
  <body class="container-fluid m-0 p-0 main-container">  
+     <!-- Note, the header is loading up the loadModal function -->
     <!-- Add your Header NavBar here-->
     <?php 
         require_once dirname(__FILE__).'/components/headers/user.php'; 
