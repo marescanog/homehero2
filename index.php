@@ -58,10 +58,14 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                                 </h1>
                                 <div class="mt-0 mt-md-3 mt-lg-5">
                                     <?php 
-                                        $jumb_id = "jumbo-search";
-                                        include './components/forms/jumbo_card_form.php';
-                                        $jumb_id = null;
+                                        // Discontinued for now 
+                                        // $jumb_id = "jumbo-search";
+                                        // include './components/forms/jumbo_card_form.php';
+                                        // $jumb_id = null;
                                     ?>
+                                    <button id="button_jumbo_signup" class="btn-lg btn-warning text-white" style="font-family:Nunito" data-toggle="modal" data-target="#modal">
+                                        <b>SIGN UP NOW!</b>
+                                    </button>
                                 </div>
                                 
                             </div>
@@ -72,12 +76,16 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                                 </h1>
                                 <div class="mt-0 mt-md-3 mt-lg-5">
                                     <?php 
-                                    $jumb_id = "jumbo-register";
-                                    $jumb_placeholder = "What is your occupation?";
-                                    $jumb_button_text = "REGISTER";
-                                    include './components/forms/jumbo_card_form.php';
-                                    $jumb_id=null;
+                                        // discontinued for now 
+                                        // $jumb_id = "jumbo-register";
+                                        // $jumb_placeholder = "What is your occupation?";
+                                        // $jumb_button_text = "REGISTER";
+                                        // include './components/forms/jumbo_card_form.php';
+                                        // $jumb_id=null;
                                     ?>
+                                    <button id="button_jumbo_register" class="btn-lg btn-warning text-white" style="font-family:Nunito" data-toggle="modal" data-target="#modal">
+                                        <b>REGISTER AS WORKER</b>
+                                    </button>
                                  </div>
                             </div>
                         </div>
@@ -88,8 +96,17 @@ require_once dirname(__FILE__).'/components/head-meta.php';
 
     </div>
 
-    <!-- Popular Posting -->
-    <?php   require_once dirname(__FILE__).'/components/sections/popular-posting.php'; ?>
+
+    <!-- Replacement for the  popular posting and feature heroes-->
+    <div style="background-color:#EDEDED; height: 50vh;" class="d-flex justify-content-center align-items-center">
+        <div style="max-width:600px;">
+            <h4 class="text-center"><i>Homehero is a web application that allows homeowners to connect with workers based on their needs and location.</i></h4>
+        </div> 
+    </div>
+
+    <!-- Discontinued for now -->
+    <!-- Popular Posting & Feature heroes-->
+    <?php  // require_once dirname(__FILE__).'/components/sections/popular-posting.php'; ?>
 
     <!-- =============================================== -->
     <!-- HOW IT WORKS -->
@@ -169,8 +186,9 @@ require_once dirname(__FILE__).'/components/head-meta.php';
         </div>
     </div> -->
 
-    <!-- Testimony -->
-    <?php   require_once dirname(__FILE__).'/components/sections/featured-heroes.php'; ?>
+    <!-- Discontinued for now -->
+    <!-- Featured Heroes -->
+    <?php  // require_once dirname(__FILE__).'/components/sections/featured-heroes.php'; ?>
 
    
  
@@ -188,7 +206,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                                 <img class="img-fluid" src="./images/pages/landing/CTABottomHomeowner.jpg" alt="Homeowner using the Homehero app">
                             </div>
                             <div class="CTA-button-container">
-                                <button class="btn btn-warning btn-lg text-white font-weight-bold w-100 mb-2">
+                                <button id="button_cta_signup"  class="btn btn-warning btn-lg text-white font-weight-bold w-100 mb-2" data-toggle="modal" data-target="#modal">
                                     Sign Up
                                 </button>
                                 <p>Get your FREE online account and start looking for a Hero to help with your home.</p>
@@ -201,7 +219,7 @@ require_once dirname(__FILE__).'/components/head-meta.php';
                                 <img class="img-fluid" src="./images/pages/landing/CTABottomWorker.jpg" alt="Worker using the Homehero app">
                             </div>
                             <div class="CTA-button-container">
-                                <button class="btn btn-warning btn-lg text-white font-weight-bold w-100 mb-2"">
+                                <button id="button_cta_register" class="btn btn-warning btn-lg text-white font-weight-bold w-100 mb-2" data-toggle="modal" data-target="#modal">
                                     Become a HomeHero
                                 </button>
                                 <p>Register as a HomeHero and easily be able to find and connect to clients.</p>
