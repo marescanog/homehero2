@@ -161,7 +161,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                 <img class="img-fluid" src="../../images/pages/landing/CTABottomWorker.jpg" alt="Worker using the Homehero app">
                             </div>
                             <div class="CTA-button-container">
-                                <button class="btn btn-warning btn-lg text-white font-weight-bold w-100 mb-2"">
+                                <button  data-toggle="modal" data-target="#modal" id="button_worker_cta_register" class="btn btn-warning btn-lg text-white font-weight-bold w-100 mb-2"">
                                     Become a HomeHero
                                 </button>
                                 <p>Register as a HomeHero and easily be able to find and connect to clients.</p>
@@ -174,7 +174,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                 <img class="img-fluid" src="../../images/pages/landing/CTABottomHomeowner.jpg" alt="Homeowner using the Homehero app">
                             </div>
                             <div class="CTA-button-container">
-                                <button class="btn btn-warning btn-lg text-white font-weight-bold w-100 mb-2">
+                                <button  data-toggle="modal" data-target="#modal" id="button_homeowner_cta_register"class="btn btn-warning btn-lg text-white font-weight-bold w-100 mb-2">
                                     Sign Up
                                 </button>
                                 <p>Get your FREE online account and start looking for a Hero to help with your home.</p>
@@ -203,9 +203,17 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 <script>
 
     const button_worker_jombotron_register = document.getElementById("button_worker_jombotron_register");
-
+    const button_homeowner_cta_register = document.getElementById("button_homeowner_cta_register");
+    const button_worker_cta_register = document.getElementById("button_worker_cta_register");
     // Assign the load modals for each appropriate button
     button_worker_jombotron_register.addEventListener("click", ()=>{
+        loadModal("worker-signup",modalTypes,()=>{},getDocumentLevel());
+    });
+    button_homeowner_cta_register.addEventListener("click", ()=>{
+        loadModal("signup",modalTypes,()=>{},getDocumentLevel());
+    });
+
+    button_worker_cta_register.addEventListener("click", ()=>{
         loadModal("worker-signup",modalTypes,()=>{},getDocumentLevel());
     });
 
