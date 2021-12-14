@@ -390,7 +390,7 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
                                         <h6 class="mb-3 pt-2">Change phone number</h6>
                                         <div class="form-group pt-3">
                                             <label for="phone">New Phone Number</label>
-                                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Password">
+                                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="09XXXXXXXXX">
                                         </div>
                                         <div class="form-group">
                                             <label for="phone_pass">Password</label>

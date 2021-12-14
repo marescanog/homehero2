@@ -102,7 +102,8 @@ $(document).ready(()=>{
     }); //JQUERY Validator Close
     
 
-
+// =============================================
+// CHANGE PHONE NUMBER
     $("#profile-change-phone").validate({
         rules: {
             phone:{
@@ -128,13 +129,133 @@ $(document).ready(()=>{
             const buttonLoadSpinner = document.getElementById("CPn-submit-btn-load");
             const formData = getFormDataAsObj(form);
             disableForm_displayLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
-        }
+
+            // Ajax request to get the header then ajax request to verify pass and phone, after that loadModal for SMS verification, if SMS is verified then proceed with change of number
+
+            // Ajax to get the bearer token
+            $.ajaxSetup({cache: false})
+            $.get(getDocumentLevel()+'/auth/get-register-session.php', function (data) {
+                // console.log(data)
+                const parsedSession = JSON.parse(data);
+                const token = parsedSession['token'];
+                console.log(token);
+                console.log(formData);
+
+                // Create new form 
+                const samoka = new FormData();
+
+                // // Append information
+                samoka.append('phone', formData["phone"]);
+                samoka.append('phone_pass', formData["phone_pass"]);
+
+                // Ajax to verify phone number and password
+                $.ajax({
+                    type: 'POST',
+                    // url : '', // prod No current deployed prod route
+                    url: 'http://localhost/slim3homeheroapi/public/homeowner/change-phone-verify', // dev
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    },
+                    data : samoka,
+                    success : function(response) {
+                        console.log("your response after account login is:")
+                        console.log(response);
+
+                        const dataToPassToSMSModal = {};
+                        dataToPassToSMSModal["phone"] = formData["phone"];
+
+                        // console.log("your data to pass to the SMS Modal");
+                        // console.log(dataToPassToSMSModal);
+                        const dataToPassToSMSGeneration = {};
+                        dataToPassToSMSGeneration["phone"] = formData["phone"];
+
+// Ajax to get the messagebord ID
+// CHANGELINKDEVPROD
+// Before passing, we call api to generate an SMS code. If the number is inavlid, we display the error
+// message here, otherwise if valid proceed to show SMS modal
+$.ajax({
+    type: "POST",
+    // url : 'https://slim3api.herokuapp.com//auth/generate-SMS-dummy', // PROD-DUMMY
+        url: 'http://localhost/slim3homeheroapi/public/auth/generate-SMS-dummy', // DEV-DUMMY,
+    //url : 'https://slim3api.herokuapp.com/auth/verify-password', // PROD-API
+    // url: 'http://localhost/slim3homeheroapi/public/auth/verify-password', // DEV-API,
+    data: dataToPassToSMSGeneration,
+    success: function(response){
+
+        // Enable forms
+        enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form);
+
+        // If it is a success, then SMS was generated successfully
+        // console.log(response['response']['data']['messagebird_id']);
+        // grab the messagebird id and add it to the dataToPassToSMSModal
+        dataToPassToSMSModal["messagebird_id"] = response['response']['data']['messagebird_id'];
+
+        // pass the complete form data into the load modal
+        
+        loadModal("change-phone-sms", modalTypes, ()=>{}, getDocumentLevel(), dataToPassToSMSModal);
+        $('#modal').modal('show');
+        // HERE IS WHERE THE AJAX CODE STOPS AND STARTS BACK UP
+        // IN THE modal-homeowner-profile-sms-change-number.js modal
+        // that is the JS file that handles the acceptance of the PIN code
+        //  If the pin is correct, we proceed to change the phone number of user
+    },
+    error: function (response) {
+        console.log(response);
+        // Either Invalid phone number or something wrong with API
+        Swal.fire({
+            title: 'Invalid phone number!',
+            text: "Please try entering a valid phone number",
+            icon: 'error',
+            confirmButtonText: 'Try a different number'
+        })
+    }
+});
+                        // Old code, 
+                        // // Open the Modal Pop Up for SMS
+                        // let obj = {};
+                        // obj['phone'] = formData["phone"];
+                        // obj['messagebird_id'] = "1";
+                        // loadModal("change-phone-sms", modalTypes, ()=>{}, getDocumentLevel(), obj);
+                        // $('#modal').modal('show');
+
+                    },
+
+                    error: function (response) {
+                        console.log(response);
+                        let res = response.responseJSON.response;
+
+                        console.log(res);
+                        if(res?.status == 400){
+                            Swal.fire({
+                                title: 'Error: Bad Request',
+                                text: res?.message,
+                                icon: 'error'
+                            });
+                        } else {
+                            Swal.fire({
+                                title: res=="There is a user associated with this phone number"?"Phone Number Taken":'An error occurred',
+                                text: res=="There is a user associated with this phone number"?res:'Please try again',
+                                icon: 'error'
+                            });
+                        }
+                        enableForm_hideLoadingButton(button, buttonTxt, buttonLoadSpinner, form, "SAVE");
+                    }
+                }); // close for phone number and password verify
+
+            }); // close for bearer token ajax
+
+        } // submit handler close
+
     }); //JQUERY Validator Close
 
 
 
 
 
+// =============================================
+// CHANGE NAME
 
     // Grab edit name hook
     const editName = document.getElementById("hook-edit-name");
@@ -149,6 +270,9 @@ $(document).ready(()=>{
         loadModal("profile-edit-name", modalTypes, ()=>{}, getDocumentLevel(), obj)
     })
 
+
+// =============================================
+// CHANGE PROFILE PICTURE
 
     // Grab Add profile picture hook
     // CODE FOR IMAGE PREVIEW DISPLAY ALSO
@@ -214,6 +338,12 @@ $(document).ready(()=>{
 
 });
 
+
+
+
+// =============================================
+// EDIT ADDRESS
+
 const profile_editAddress = (homeID) =>{
     console.log("You clicked edit address for home "+ homeID);
     // Load Modal for Edit Address
@@ -222,6 +352,10 @@ const profile_editAddress = (homeID) =>{
     // obj['data'] = data;
     loadModal("editAddr", modalTypes, ()=>{}, getDocumentLevel(), obj);
 }
+
+
+
+
 
 const profile_deleteAddress = (homeID) =>{
     console.log("You clicked delete address for home "+ homeID);
