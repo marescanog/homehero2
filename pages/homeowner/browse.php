@@ -138,6 +138,8 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
 
         $skill_list = $workers[$wIndx]->skillset_info == null ? null : $workers[$wIndx]->skillset_info;
 
+        $profile_pic = $workers[$wIndx]->profile_pic == false ? false : $workers[$wIndx]->profile_pic;
+
         include "$level/components/cards/browse-hero-card.php";
     }
 ?>

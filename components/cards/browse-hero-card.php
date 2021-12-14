@@ -3,9 +3,22 @@
   <div class="card-body">
     <div class="row">
         <div class="p-0 m-0 col-3 col-lg-2">
+        <?php
+            if($profile_pic == null || $profile_pic == false || $profile_pic == "false"){
+        ?>
             <div class="avatar d-flex justify-content-center align-items-center">
                 <h2><?php echo $winitials;?></h2>
             </div>
+        <?php
+            } else {
+        ?>
+            <div class="avatar d-flex justify-content-center align-items-center">
+                <img src="<?php echo $profile_pic;?>" alt="worker's profile pic" class="img-fluid">
+            </div>
+        <?php
+            }
+        ?>          
+
         </div>
         <div class="p-0 m-0 col-6 col-lg-5">
             <div class="d-flex flex-column pt-lg-3">
