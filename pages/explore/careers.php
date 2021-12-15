@@ -20,6 +20,8 @@ require_once dirname(__FILE__)."/$level/components/head-meta.php";
     .jumbotron {
     background-image: url("../../images/pages/careers/jumbotron.png");
     background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
     }
 </style>
 </head>
